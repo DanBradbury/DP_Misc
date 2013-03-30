@@ -1,0 +1,104 @@
+; actccid.INF
+;
+; ActivCard USB Reader V2
+;
+; INF file for Windows 2000/XP
+;
+; Copyright (c) 2001-2003, ActivCard
+
+[Version]
+Signature="$CHICAGO$"
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%Mfg%
+CatalogFile=actccid.cat
+DriverVer=12/05/2003,4.22.00.01
+
+[ControlFlags]
+ExcludeFromSelect=USB\VID_09C3&PID_0008
+
+[Manufacturer]
+%Mfg% = Models
+
+[ClassInstall32]
+AddReg=AddClassReg
+
+[Models]
+%PCSC_CCID% = PCSC_CCID,USB\VID_09C3&PID_0008
+
+
+[SourceDisksNames]
+1 = %Floppy_Description%,,,""
+
+[SourceDisksFiles]
+actccid.sys=1
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+PCSC_CCID.NTCopyFiles = 10,system32\drivers ; WINDOWS\SYSTEM32\DRIVERS
+
+[AddClassReg]
+HKR,,,0,%ClassName%
+HKR,,NoInstallClass,,1
+HKR,,Installer32,,"winscard.dll,ClassInstall32"
+HKR,,Icon,,-25
+HKLM,"\Software\Microsoft\Cryptography\Calais\Readers",,,
+
+[PCSC_CCID.NTCopyFiles]
+actccid.sys
+
+[PCSC_CCID.AddReg]
+HKR,,ShortProviderName,0,%ShortProviderName%
+HKR,,ReaderName,0,%PCSC_CCID%
+HKLM, Software\Microsoft\Cryptography\Calais\Readers,,,
+HKLM, System\CurrentControlSet\Services\SCardSvr,Start,0x00010001,2
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,DLLName,0,wlnotify.dll
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Logon,0,SCardStartCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Logoff,0,SCardStopCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Lock,0,SCardSuspendCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Unlock,0,SCardResumeCertProp
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Enabled,0x00010001,1
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Impersonate,0x00010001,1
+HKLM, SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify\ScCertProp,Asynchronous,0x00010001,1
+; Configurable F and D values
+;HKR,, FValue , 0x00010001, 1
+;HKR,, DValue , 0x00010001, 1
+
+[PCSC_CCID.AddReg.HW]
+HKR,, SelectiveSuspend , 0x00010001, 1
+HKR,, WaitWakeEnabled , 0x00010001, 1
+HKR,, IdleTime , 0x00010001, 5
+
+
+[PCSC_CCID.NT]
+CopyFiles= PCSC_CCID.NTCopyFiles
+AddReg= PCSC_CCID.AddReg
+
+[PCSC_CCID.NT.HW]
+AddReg = PCSC_CCID.AddReg.HW
+
+[PCSC_CCID.NT.Services]
+AddService = actccid,0x00000002,PCSC_CCID_Service_Inst,PCSC_CCID_EventLog_Inst
+
+[PCSC_CCID_Service_Inst]
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\actccid.sys
+DisplayName     = %PCSC_CCID%
+AddReg= PCSC_CCID.AddReg
+
+[PCSC_CCID_EventLog_Inst]
+AddReg=PCSC_CCID.AddEventLogReg
+
+[PCSC_CCID.AddEventLogReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\actccid.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+[Strings]
+Mfg = "ActivCard"
+ShortProviderName = "ActivCard"
+Floppy_Description = ""
+PCSC_CCID="ActivCard USB Reader V2"
+ClassName="Smart Card Readers"

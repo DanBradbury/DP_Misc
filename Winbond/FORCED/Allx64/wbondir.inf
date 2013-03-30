@@ -1,0 +1,130 @@
+;
+; INF file for installing the Winbond Consumer IR Port Driver
+;
+;
+; Copyright 2007 Winbond Electronics Corporation
+;
+;
+;
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%WINBOND%
+DriverVer=03/20/2007,7.0.65.1002
+CatalogFile=wbondir.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,\i386
+
+[SourceDisksNames.amd64]
+1 = %DiskId1%,,,\amd64
+
+[SourceDisksNames.ia64]
+1 = %DiskId1%,,,\ia64
+
+[SourceDisksFiles]
+wbondir.sys  = 1,,
+
+[Manufacturer]
+%StdMfg%=Standard,NTx86, NTia64, NTamd64
+
+[Standard]
+%wbondir.DeviceDesc%=wbondir_Device, ACPI\WEC1022
+
+[Standard.NTx86]
+%wbondir.DeviceDesc%=wbondir_Device, ACPI\WEC1022
+
+[Standard.NTia64]
+%wbondir.DeviceDesc%=wbondir_Device, ACPI\WEC1022
+
+[Standard.NTamd64]
+%wbondir.DeviceDesc%=wbondir_Device, ACPI\WEC1022
+
+
+[wbondir_Device.NT]
+CopyFiles=Drivers_Dir
+
+
+[wbondir_Device.NT.HW]
+AddReg=wbondir_Device.NT.AddReg
+
+[wbondir_Device.NT.AddReg]                            
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+[Drivers_Dir]
+wbondir.sys
+
+;-------------- Service installation
+[wbondir_Device.NT.Services]
+AddService = wbondir,%SPSVCINST_ASSOCSERVICE%, wbondir_Service_Inst
+
+; -------------- wbondir driver install sections
+[wbondir_Service_Inst]
+DisplayName    = %wbondir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\wbondir.sys
+LoadOrderGroup = Extended Base
+AddReg         = wbondir_service.AddRegistry
+
+[wbondir_service.AddRegistry]
+;
+; Default the "time needed after carrier change" to 100millisec 
+; 
+HKR,,"CarrierChangeResetTime",0x00010001, 100
+
+; Active power Key (set to NOCLOBBER)
+HKR,"PowerKey","PowerKey",0x00000003,\
+   0x02, 0x50, 0x50, 0x5a, 0x55, 0x56, 0xa0, \
+   0x5a, 0x55, 0x55, 0x39, 0xa9, 0xff, 0xff, \
+   0xff, 0xff, 0xf0, 0xff, 0xff, 0xff, 0xff, \
+   0xff
+
+; RC6 power key
+HKR,"PowerKey","PowerKeyRC6",0x00000001,\
+   0x02, 0x50, 0x50, 0x5a, 0x55, 0x56, 0xa0, \
+   0x5a, 0x55, 0x55, 0x39, 0xa9, 0xff, 0xff, \
+   0xff, 0xff, 0xf0, 0xff, 0xff, 0xff, 0xff, \
+   0xff
+
+; RC5 power key
+HKR,"PowerKey","PowerKeyRC5",0x00000001,\
+   0x00, 0x00, 0x0c, 0x10, 0x00, 0x00, 0x00, \
+   0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0x1f, \
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+   0x00
+
+; NEC power key
+HKR,"PowerKey","PowerKeyNEC",0x00000001,\
+   0x01, 0x00, 0x20, 0xdf, 0x10, 0xef, 0x00, \
+   0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, \
+   0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, \
+   0x00
+
+;
+;--- wbondir_Device Coinstaller installation ------
+;
+[wbondir_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[IR_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010008, "CIRCoInst.dll,IRCoInstaller"
+
+[IR_CoInstaller_CopyFiles]
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+WINBOND = "Winbond Electronics Corporation"
+StdMfg  = "Winbond Electronics Corporation"
+DiskId1 = "Winbond CIR Installation Disk #1"
+wbondir.DeviceDesc = "Winbond CIR Transceiver"
+wbondir.SVCDESC = "Winbond CIR Transceiver"
+

@@ -1,0 +1,128 @@
+;/*++
+;
+;Copyright (c) 2007 ZTEIC DESIGN CO.,LTD. All rights Reserved
+;
+;Module Name:
+;
+;    TCM.INF
+;
+;--*/
+
+
+[Version] 
+Signature = "$Windows NT$" 
+Class=System
+ClassGUID={4d36e97d-e325-11ce-bfc1-08002be10318} 
+Provider=%ZTEIC% 
+CatalogFile.ntx86=tcm.sys.cat
+CatalogFile.ntamd64=tcm64.sys.cat
+DriverVer= 05/04/2009,2.1.5.04
+
+[DestinationDirs] 
+TCM.Files.amd64_12 = 12 
+TCM.Files.x86_12 = 12 
+
+[SourceDisksNames.x86]
+0=%Desc_x860%
+
+[SourceDisksNames.amd64]
+0=%Desc_amd640%
+
+
+[SourceDisksFiles.x86]
+tcm.sys=0,i386, 
+
+[SourceDisksFiles.amd64]
+tcm.sys=0,amd64, 
+
+
+[Manufacturer] 
+%ZTEIC%=ZTEIC,NTamd64,NTx86
+
+[ZTEIC]
+%TCMDesc%=TCM_Inst,*ZIC0101
+
+[ZTEIC.NTamd64]
+%TCMDesc%=TCM_Inst.ntamd64,*ZIC0101
+
+[ZTEIC.NTx86]
+%TCMDesc%=TCM_Inst.ntx86,*ZIC0101
+
+[TCM_Inst.ntx86] 
+CopyFiles = TCM.Files.x86_12 
+AddReg = TCM.AddReg.x86 
+
+
+[TCM_Inst.ntx86.Services] 
+AddService = tcm,0x00000002,TCM_Service_Instx86, 
+
+[TCM_Service_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_NORMAL% 
+ServiceBinary = %12%\tcm.sys 
+
+
+[TCM.AddReg.x86] 
+; AutoPlay Entries 
+HKLM, Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\DeviceGroups\, DeviceGroup, , 
+; End AutoPlay Entries 
+
+[TCM.Files.x86_12] 
+tcm.sys
+
+[TCM_Inst.ntamd64] 
+
+CopyFiles = TCM.Files.amd64_12 
+
+AddReg = TCM.AddReg.amd64 
+
+[TCM_Inst.ntamd64.Services] 
+AddService = tcm,0x00000002,TCM_Service_Instamd64, 
+
+[TCM_Service_Instamd64] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType =   %SERVICE_DEMAND_START% 
+ErrorControl =     %SERVICE_ERROR_IGNORE% 
+ServiceBinary =  %12%\tcm.sys 
+
+
+[TCM.AddReg.amd64] 
+; AutoPlay Entries 
+HKLM, Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\DeviceGroups\, DeviceGroup, , 
+; End AutoPlay Entries 
+[TCM.Files.amd64_12] 
+tcm.sys
+
+[TCM_EventLog_Inst] 
+AddReg = TCM_EventLog_Inst.AddReg 
+ 
+[TCM_EventLog_Inst.AddReg] 
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll" 
+HKR,,TypesSupported,%REG_DWORD%,7
+
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+ZTEIC= "ZTEIC DESIGN CO.,LTD" 
+Desc_x860= "Trusted Cryptography Module" 
+Desc_amd640= "Trusted Cryptography Module" 
+TCMDesc= "Trusted Cryptography Module" 
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 

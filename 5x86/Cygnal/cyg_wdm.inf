@@ -1,0 +1,154 @@
+;*****************************************************************************
+;
+; Name:  cyg_wdm.inf
+;
+; Function:
+;	Install the CP2101 USB to UART Bridge Controller (WDM) on Win9x
+;
+; Copyright (c) 1997-2003 MCCI
+;
+; $Id: lower9x.inf,v 1.17 2003/08/08 16:46:36 greg Exp $
+;
+; MCCI is a registered trademark of Moore Computer Consultants, Inc
+;
+; NOTICE: This software is licensed, not sold.  Any modification of this
+; inf file to change the reference to an operating system or to change the
+; reference to a device is not permitted unless authorized in writing by
+; Moore Computer Consultants, Inc..
+;
+;*****************************************************************************
+
+[Version]
+signature="$CHICAGO$"
+Class=USB
+ClassGuid={36FC9E60-c465-11cf-8056-444553540000}
+Provider=%Provider%
+DriverVer=10/16/2003, 4.16.0.2702
+CatalogFile=cyg_ser.cat
+
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+;-----------------------------------------------------------------------------
+;   Change A:\ to source drive (or omit to always (?) be prompted)
+;-----------------------------------------------------------------------------
+[SourceDisksNames]
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+;	having the tagfile non-null seems to help...
+1=%DiskString%,"cyg_ser.sys",,
+
+[SourceDisksFiles]
+; filename = diskid[,[ subdir][, size]]
+cyg_ser.sys = 1
+cyg_cr.sys = 1
+cyg_vcr.vxd = 1
+cyg_cm95.sys = 1
+cyg_cmnt.sys = 1
+cyg_comm.vxd = 1
+cyg_vcd.vxd = 1
+cyg_vxd.inf = 1
+
+;-----------------------------------------------------------------------------
+; Specify target paths...
+;-----------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir          = 11                    ; LDID_SYS
+CopyFiles               = 11                    ; system
+CopyFiles.W95		= 11			; system (for VXDs)
+CopyFiles.sys           = 11                    ; where .sys files go.
+CopyFiles.W95.sys       = 11                    ; where .sys files go.
+CopyFiles.W95.inf       = 17,other              ; INF Directory\other.
+
+;-----------------------------------------------------------------------------
+; Table of Contents
+;-----------------------------------------------------------------------------
+[Manufacturer]
+%Cygnal%=Cygnal
+
+;-----------------------------------------------------------------------------
+; Device-by-device entries
+;-----------------------------------------------------------------------------
+[Cygnal]
+%Cygnal.Comm.Desc% = Cygnal.Install, USB\VID_10C4&PID_EA60&MI_00&OS_9X
+
+;-----------------------------------------------------------------------------
+; Installation instructions
+;-----------------------------------------------------------------------------
+
+[Cygnal.Install]
+AddReg		= Cygnal.AddReg,Cygnal.W95.AddReg,Cygnal.W95.AddReg.CRGuid
+CopyFiles	= CopyFiles, CopyFiles.W95, CopyFiles.sys, CopyFiles.W95.sys, CopyFiles.W95.Inf
+DriverVer=10/16/2003, 4.16.0.2702
+
+;-----------------------------------------------------------------------------
+;  Registry
+;-----------------------------------------------------------------------------
+
+; common registry entries 
+[Cygnal.AddReg]
+HKR,,NTMPDriver,,cyg_ser.sys
+HKR,,CRUpperDescription,,%UpperDescription%
+HKR,,RateLimitPurgeMS, 0x10001, 0x64, 0x00, 0x00, 0x00
+HKR,,OverrideDefaultPortSettings, 0x10001, 01,00,00,00
+HKR,,InitialBaudRate, 0x10001, 00,C2,01,00                      ;115200 initial baud rate
+HKR,,InitialLineControl,, "8N1"                                 ;8-bits, No parity, 1 stop bit
+
+; only for Win95....
+[Cygnal.W95.AddReg]
+HKR,,DevLoader,,*ntkern
+
+[Cygnal.W95.Addreg.CRGuid]
+HKR,,CRGuid,,{E4768D57-352E-4495-880C-056A7CB34611}
+
+;-----------------------------------------------------------------------------
+;  Copy lists
+;-----------------------------------------------------------------------------
+[CopyFiles]
+
+[CopyFiles.W95]
+cyg_vcr.vxd
+cyg_comm.vxd
+cyg_vcd.vxd
+
+[CopyFiles.sys]
+cyg_ser.sys
+cyg_cr.sys
+
+[CopyFiles.W95.sys]
+cyg_cm.sys,cyg_cm95.sys
+cyg_cm95.sys
+cyg_cmnt.sys
+
+[Copyfiles.W95.inf]
+cyg_vxd.inf
+
+
+;-----------------------------------------------------------------------------
+; STRINGS
+;-----------------------------------------------------------------------------
+[Strings]
+
+;BEGIN ENG - US English Strings
+Provider = "Cygnal Integrated Products, Inc."
+Cygnal = "Cygnal Integrated Products, Inc."
+DiskString = "CP2101 USB to UART Bridge Controller Drivers"
+
+Cygnal.Comm.Desc = "CP2101 USB to UART Bridge Controller"
+UpperDescription = "CP2101 USB to UART Bridge Controller"
+
+CustomerDataPath = "CP2101 USB to UART Bridge Controller"
+DriverSet = "CP2101 USB to UART Bridge Controller Driver Set"
+UninstallFile = "CYG_Uninstall.exe"
+McciOptions = "Uninstallable"
+
+
+;END ENG - US English Strings
+
+
+;-----------------------------------------------------------------------------
+; The following are symbolic constants which don't change per locale.
+;-----------------------------------------------------------------------------
+
+
+;*** end of file ***

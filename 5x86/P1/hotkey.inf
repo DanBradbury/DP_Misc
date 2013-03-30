@@ -1,0 +1,119 @@
+;/*++
+;
+;Copyright (c) 2006 Matsushita Electric Industrial Co.,Ltd.
+;
+;Module Name:
+;
+;    HOTKEY.INF
+;
+;Abstract:
+;    INF file for installing hotkey device drivers.
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%PRODUCT_COMPANY%
+DriverVer=11/14/2006,10.0.10.1
+CatalogFile=hotkey.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; System32\drivers
+
+;*****************************************
+; Hotkey Device  Install Section
+;*****************************************
+
+[Manufacturer]
+%PRODUCT_COMPANY%=Standard,NTamd64
+
+[Standard.NTamd64]
+; DisplayName                   Section           DeviceId
+; -----------                   -------           --------
+%PRODUCT_DESC% = HOTKEY_Install.NTamd64, *MAT0019
+
+[Standard]
+; DisplayName                   Section           DeviceId
+; -----------                   -------           --------
+%PRODUCT_DESC% = HOTKEY_Install.NT, *MAT0019
+
+[HOTKEY_Install.NTamd64]
+CopyFiles=HOTKEY_Install.NTamd64.Copy
+
+[HOTKEY_Install.NT]
+CopyFiles=HOTKEY_Install.NT.Copy
+
+[HOTKEY_Install.NT.Copy]
+hotkey.sys,,,2
+
+[HOTKEY_Install.NTamd64.Copy]
+hotkey.sys,,,2
+
+;-------------- Service installation
+
+[HOTKEY_Install.NT.Services]
+AddService=HOTKEY, 0x00000002, HOTKEY_Service_Inst
+
+[HOTKEY_Install.NTamd64.Services]
+AddService=HOTKEY, 0x00000002, HOTKEY_Service_Inst
+
+[HOTKEY_Service_Inst]
+DisplayName    = %PRODUCT_SYSDISPNAME%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\hotkey.sys
+LoadOrderGroup = Base
+
+[SourceDisksNames]
+1 = %SOURCEDISK_DESC%
+
+[SourceDisksFiles.x86]
+HOTKEY.SYS = 1
+
+[SourceDisksFiles.amd64]
+HOTKEY.SYS = 1, "amd64"
+
+;
+;--- Hotkey_Device WDF Coinstaller installation ------
+;
+[DestinationDirs]
+Hotkey_Device_CoInstaller_CopyFiles = 11
+
+[HOTKEY_Install.NT.CoInstallers]
+AddReg=Hotkey_Device_CoInstaller_AddReg
+CopyFiles=Hotkey_Device_CoInstaller_CopyFiles
+
+[HOTKEY_Install.NTamd64.CoInstallers]
+AddReg=Hotkey_Device_CoInstaller_AddReg
+CopyFiles=Hotkey_Device_CoInstaller_CopyFiles
+
+[Hotkey_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01001.dll,WdfCoInstaller"
+
+[Hotkey_Device_CoInstaller_CopyFiles]
+wdfcoinstaller01001.dll
+
+[SourceDisksFiles.x86]
+wdfcoinstaller01001.dll = 1 ; make sure the number matches with SourceDisksNames
+
+[SourceDisksFiles.amd64]
+wdfcoinstaller01001.dll = 1, "amd64" ; make sure the number matches with SourceDisksNames
+
+[HOTKEY_Install.NT.Wdf]
+KmdfService = hotkey, hotkey_wdfsect
+
+[HOTKEY_Install.NTamd64.Wdf]
+KmdfService = hotkey, hotkey_wdfsect
+
+[hotkey_wdfsect]
+KmdfLibraryVersion = 1.0
+
+
+[Strings]
+PRODUCT_COMPANY     = "Panasonic"
+PRODUCT_DESC        = "Hotkey Driver for Panasonic PC"
+PRODUCT_SYSDISPNAME = "Panasonic Hotkey Driver"
+SOURCEDISK_DESC     = "Panasonic Hotkey Driver Disk #1"

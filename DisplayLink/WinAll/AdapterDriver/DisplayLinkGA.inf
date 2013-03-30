@@ -1,0 +1,83 @@
+; DisplayLinkGA.inf
+;
+; Installation inf for the DisplayLink Graphics Adapter driver.
+;
+; Copyright (c) 2003 - 2010 DisplayLink Corp.
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%DISPLAYLINK%
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Class=Display
+DriverVer=09/22/2011,6.12.10.0601
+CatalogFile="DisplayLinkGA.cat"
+
+[DestinationDirs]
+DefaultDestDir  = 11
+NGA.Miniport    = 12
+NGA.Display     = 11
+
+[Manufacturer]
+%DISPLAYLINK% = NGA.Mfg
+
+[NGA.Mfg]
+%DRIVER% = NGA, DisplayLink_Graphics_Adapter
+
+[NGA]
+CopyFiles = NGA.Miniport,NGA.Display
+
+[NGA.Miniport]
+DisplayLinkGAport.sys
+
+[NGA.Display]
+DisplayLinkGAdisp.dll
+
+[NGA.Services]
+AddService = DisplayLinkGA,0x00000002,NGA_Service_Inst,NGA_EventLog_Inst
+
+[NGA_Service_Inst]
+ServiceType = 1
+StartType = 3
+ErrorControl = 0
+LoadOrderGroup = video
+ServiceBinary = %12%\DisplayLinkGAport.sys
+
+[NGA_EventLog_Inst]
+AddReg = NGA_EventLog_AddReg
+
+[NGA_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\DisplayLinkGAport.sys"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+[NGA.SoftwareSettings]
+AddReg = NGA_SoftwareDeviceSettings
+
+[NGA_SoftwareDeviceSettings]
+HKR,,InstalledDisplayDrivers,%REG_MULTI_SZ%,DisplayLinkGAdisp
+HKR,,VgaCompatible,%REG_DWORD%,0
+HKR,,Attach.ToDesktop,%REG_DWORD%,1
+HKR,,VideoDebugLevel,%REG_DWORD%,0
+HKR,,CapabilityOverride,%REG_DWORD%,4
+;HKR,,MaxResolution,%REG_DWORD%,0x05000400
+;HKR,,NumViews,%REG_DWORD%,1
+
+[SourceDisksNames]
+1 = %DISKID%,,,""
+
+[SourceDisksFiles]
+DisplayLinkGAport.sys = 1
+DisplayLinkGAdisp.dll = 1
+
+[Strings]
+REG_SZ          = 0x00000000
+REG_MULTI_SZ    = 0x00010000
+REG_EXPAND_SZ   = 0x00020000
+REG_BINARY      = 0x00000001
+REG_DWORD       = 0x00010001
+
+DISKID  = "DisplayLink Graphics Adapter Installation Disk"
+DISPLAYLINK = "DisplayLink Corp."
+
+; Name displayed in UI
+DRIVER  = "DisplayLink Graphics Adapter"

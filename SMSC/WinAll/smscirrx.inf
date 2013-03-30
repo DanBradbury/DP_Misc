@@ -1,0 +1,109 @@
+;/*++
+;    INF file for installing the SMSC CIRCC2 receive only device
+; Copyright (c) 1996-2007 SMSC
+;
+;--*/
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%SMSC%
+CatalogFile=smscirrx.cat
+DriverVer = 02/02/2007, 6.1.6000.0
+
+[DestinationDirs]
+DefaultDestDir = 12
+IR_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+smscirrx.sys  = 1,,
+CIRCoInst.dll = 1,,
+
+[Manufacturer]
+%StdMfg%=Standard
+
+[Standard]
+%smscir.DeviceDesc%=smscir_Device, *SMCB0C2
+
+[smscir_Device.NT]
+CopyFiles=Drivers_Dir
+
+[smscir_Device.NT.HW]
+AddReg=smscir_Device.NT.AddReg
+
+[smscir_Device.NT.AddReg]                            
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+[Drivers_Dir]
+smscirrx.sys
+
+;-------------- Service installation
+[smscir_Device.NT.Services]
+AddService = smscirrx,%SPSVCINST_ASSOCSERVICE%, smscir_Service_Inst
+
+; -------------- smscir driver install sections
+[smscir_Service_Inst]
+DisplayName    = %smscir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\smscirrx.sys
+LoadOrderGroup = Extended Base
+AddReg         = smscir_Device.NT.AddReg.Services
+
+
+[smscir_Device.NT.AddReg.Services]
+; Active power Key (set to NOCLOBBER)
+HKR,"PowerKey","PowerKey",0x00000003,\
+   0x2b, 0x2b, 0x80, 0x0f, 0x00, 0x03, 0x0c, \
+   0x04, 0x80, 0x0c, 0x00, 0x00, 0xff, 0x00, \
+   0x00, 0x00, 0x00
+
+; RC6 power key
+HKR,"PowerKey","PowerKeyRC6",0x00000001,\
+   0x2b, 0x2b, 0x80, 0x0f, 0x00, 0x03, 0x0c, \
+   0x04, 0x80, 0x0c, 0x00, 0x00, 0xff, 0x00, \
+   0x00, 0x00, 0x00
+
+; RC5 power key
+HKR,"PowerKey","PowerKeyRC5",0x00000001,\
+   0x2b, 0x58, 0x00, 0x00, 0x00, 0x02, 0xf0, \
+   0x0c, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, \
+   0x00, 0x00, 0x00
+
+; NEC power key
+HKR,"PowerKey","PowerKeyNEC",0x00000001,\
+   0x29, 0x37, 0x45, 0xba, 0x12, 0x80, 0x00, \
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+   0x00, 0x00, 0x00
+
+;
+;--- smscir_Device Coinstaller installation ------
+;
+[smscir_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[IR_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010008, "CIRCoInst.dll,IRCoInstaller"
+
+[IR_CoInstaller_CopyFiles]
+CIRCoInst.dll
+
+[smscir_Device.NT.WdfSection]
+USE_WDF_DYNAMIC
+COMPONENTS = WdfDynam
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+
+SMSC = "SMSC"
+StdMfg = "SMSC CIR Rx Devices"
+DiskId1 = "SMSC CIR Rx Install Disk"
+smscir.DeviceDesc = "SMSC CIR Receive"
+smscir.SVCDESC = "SMSC CIR Receive"
+

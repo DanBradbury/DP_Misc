@@ -1,0 +1,126 @@
+13.03.4
+-------
++ Добавлены драйверы JMicron HP OHCI Compliant IEEE 1394 Host Controller 1.00.25.03
++ Добавлены драйверы Broadcom GPS GNSS Geolocation 19.14.8401.4
++ Добавлены драйверы ITE Tech. Infrared Adapters 1.02.0000.0
+* Обновлены драйверы Silicon Labs USB to UART Bridge 6.6.1.0
+* Обновлены драйверы Logitech Gaming Software 8.45.88
+
+
+13.03.3
+-------
+* Обновлены драйверы ActivCard Virtual PC/SC Device 1.0.9.0
+
+
+13.03.2
+-------
++ Добавлены драйверы TN33_NFC SmartCard Reader 32.3.3.3
++ Добавлены драйверы ASIX USB-Infrared Adapter 1.3.1.0
++ Добавлены драйверы WayTech Pro Gaming Keyboard 1.0
++ Добавлены драйверы Foxconn OLED keyboard 1.0.7.0
+* Обновлены драйверы Dell ControlVault 2.3.24.1437
+
+
+13.03.1
+-------
+* Обновлены драйверы Logitech SetPoint 6.52
+
+
+13.02.4
+-------
+* Обновлены драйверы Microsoft Mouse Keyboard Center 2.1.177 (9.3)
+* Обновлены драйверы Wacom 6.35W3 (2.1.0.1)
+
+
+13.02.3
+-------
++ Добавлены драйверы Logitech GamePanel SideShow 2.02.094.0
++ Добавлены драйверы Logitech SideShow 3.03.107.0
+
+
+13.02.2
+-------
++ Добавлены драйверы Waytech Zalman ZM-GM1 USB Gaming Mouse 1.00.00
++ Добавлены драйверы Fintek HID CIR Device/eHome Transceiver 6.0.6000.16385
+* Обновлены драйверы SMSC HID CIR Consumer IR 5.3.2600.3
+* Обновлены драйверы DisplayLink 7.1M1 (7.1.45135)
+* Обновлены драйверы Steel Series Engine 2.7.3015
+* Обновлены драйверы Wacom 1.1.1.5
+
+
+13.01.5
+-------
++ Добавлены драйверы Razer DeathAdder Mouse 1.0.5.0
+* Перенос части драйверов в новый пакет DP_Biometric
+
+
+13.01.4
+-------
++ Добавлены драйверы для мышей фирмы Razer
++ Добавлены драйверы UFSx Device USB 3.01.05
++ Добавлены драйверы RIFF BOX Control Port 1.0
++ Добавлены драйверы Universal Cable разных фирм
++ Добавлены драйверы для всех сенсоров фирмы AuthenTec
++ Добавлен драйвер NSC Infrared Device 6.0.6001.18000
+
+
+13.01.3
+-------
++ Добавлены драйверы ASIX PCI Multi-IO Controller 2.0.2.0
+
+
+13.01.2
+-------
++ Добавлены драйверы HS 3d Sensor1394 v9001.9007.9000.9502
+
+
+13.01.1
+-------
++ Добавлены драйверы VScom PCI Driver Software 3.3.0.12 XP
++ Добавлены драйверы Razer StarCraft II 1.04 Driver v6.2.9200.16384
+* Обновлены драйверы DisplayLink 7.1
+
+
+13.00.4
+-------
+* Введен системный маркер для отображения драйверов в окне установки оболочек
+
+
+13.00.3
+-------
++ Добавлены драйверы SMSC CIR Receive 6.1.6000.0
+
+
+13.00.2
+-------
+* Обновлен драйвер Logitech SetPoint 6.51
+
+
+13.00.1
+-------
+* Обновлен драйвер Realtek RTL2832U IRHID 8664.001.0613.2011
+
+
+13.00.0
+-------
+* Каталогизация драйверов по вендорам и удаление дубликатов
+
+
+12.12.4
+-------
+* Обновлен драйвер Jmicron JMB38X 1.00.25.03
+- Драйвер Lenovo Power Management перенесен в пак Notebook
+
+
+12.12.3
+-------
++ Добавлены драйверы Steel Series Engine 2.6.2760
++ Добавлены драйверы Logitech Gaming Software 8.40.83
++ Добавлены драйверы Realtek RTU7305 UWB Radio Control 6.1101.0706.2009
++ Добавлены драйверы Realtek RTL2832 Infrared Remote Receiver v8664.001.1019.2010
+
+
+12.12.2
+-------
++ Добавлен драйвер VScom PCI 3.3.0.12
+* Исправлено определение HWID PNP0303

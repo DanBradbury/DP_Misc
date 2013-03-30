@@ -1,0 +1,98 @@
+; Copyright: (c) 2012 Razer USA Ltd. All rights reserved
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Keyboard
+ClassGuid   = {4D36E96B-E325-11CE-BFC1-08002BE10318}
+Provider    = %Razer%
+DriverVer=10/18/2012,6.2.9200.16384
+CatalogFile = RzSynKbd.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+Razer_CoInstaller_CopyFiles = 11
+
+[Manufacturer]
+%Razer%=Standard,NTAMD64
+
+[Standard]
+%Razer0019.DeviceDesc%=Razer, HID\Vid_1532&Pid_0019&MI_01&Col01
+%Razer001A.DeviceDesc%=Razer, HID\Vid_1532&Pid_001A&MI_00
+%Razer0022.DeviceDesc%=Razer, HID\Vid_1532&Pid_0022&MI_01
+%Razer0023.DeviceDesc%=Razer, HID\Vid_1532&Pid_0023&MI_00
+%Razer010F.DeviceDesc%=Razer, HID\Vid_1532&Pid_010F&MI_00
+%Razer0111.DeviceDesc%=Razer, HID\Vid_1532&Pid_0111&MI_00
+
+[Standard.NTAMD64]
+%Razer0019.DeviceDesc%=Razer, HID\Vid_1532&Pid_0019&MI_01&Col01
+%Razer001A.DeviceDesc%=Razer, HID\Vid_1532&Pid_001A&MI_00
+%Razer0022.DeviceDesc%=Razer, HID\Vid_1532&Pid_0022&MI_01
+%Razer0023.DeviceDesc%=Razer, HID\Vid_1532&Pid_0023&MI_00
+%Razer010F.DeviceDesc%=Razer, HID\Vid_1532&Pid_010F&MI_00
+%Razer0111.DeviceDesc%=Razer, HID\Vid_1532&Pid_0111&MI_00
+
+[Razer.NT]  
+Include = keyboard.inf
+Needs = HID_Keyboard_Inst.NT
+CopyFiles = Razer.NT.Copy
+
+[Razer.NT.Copy]
+RzSynapse.sys
+
+[Razer.NT.HW]
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT.HW
+AddReg = Razer.NT.HW.AddReg
+
+[Razer.NT.HW.AddReg]  
+HKR,,"UpperFilters",0x00010000,"RzSynapse"
+;; FILE_DEVICE_SECURE                         
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+; SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GRGWGX;;;BA)(A;;GRGWGX;;;WD)(A;;GRGWGX;;;RC)"
+
+[Razer.NT.Services]
+AddService      = RzSynapse,, Razer_Service_Inst 
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT.Services
+
+[Razer_Service_Inst]
+DisplayName     = %Razer.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\RzSynapse.sys                            
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+RzSynapse.sys    = 1,,
+WdfCoInstaller01009.dll=1
+
+[Razer.NT.CoInstallers]
+AddReg          = Razer_CoInstaller_AddReg
+CopyFiles       = Razer_CoInstaller_CopyFiles
+
+[Razer_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[Razer_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[Razer.NT.Wdf]
+KmdfService              = RzSynapse,  RzSynapse_wdfsect
+
+[RzSynapse_wdfsect]
+KmdfLibraryVersion       = 1.9
+
+[Strings]
+Razer                    = "Razer USA Ltd"
+DiskId1                  = "Razer Installer"
+Razer.SvcDesc            = "Razer Driver"
+Razer0019.DeviceDesc     = "Razer Spectre"
+Razer001A.DeviceDesc     = "Razer Marauder"
+Razer0022.DeviceDesc     = "Razer TRON Mouse"
+Razer0023.DeviceDesc     = "Razer TRON Keyboard"
+Razer010F.DeviceDesc     = "Razer Anansi"
+Razer0111.DeviceDesc     = "Razer Nostromo"

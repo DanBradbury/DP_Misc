@@ -1,0 +1,171 @@
+;*****************************************************************************
+;
+; cyg_bus.inf   -- Install the Cygnal USB Composite Device drivers
+;
+; Copyright (c) 1997-2003 by MCCI 
+;
+; $Id: cdcbus.inf,v 1.10 2003/07/29 02:07:57 greg Exp $
+;
+; MCCI is a registered trademark of Moore Computer Consultants, Inc.
+;
+; NOTICE: This software is licensed, not sold.  Any modification of this
+; inf file to change the reference to an operating system or to change the
+; reference to a device is not permitted unless authorized in writing by
+; Moore Computer Consultants, Inc..
+;
+;*****************************************************************************
+
+[version]
+signature="$CHICAGO$"
+Class=USB
+ClassGuid={36FC9E60-c465-11cf-8056-444553540000}
+Provider=%Provider%
+DriverVer=10/16/2003, 4.16.0.2702
+CatalogFile=cyg_bus.cat
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+;-----------------------------------------------------------------------------
+; Specify target paths...
+;-----------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir                  = 11                    ; LDID_SYS
+CygnalWdm.W95.CopyFiles       = 11                    ; LDID_SYS
+CygnalWdm.NT.CopyFiles        = 12                    ; system32\drivers
+PropPages.CopyFiles             = 11                    ; system
+
+;-----------------------------------------------------------------------------
+; Specify the install disks.  A bit unwieldy during development.
+;-----------------------------------------------------------------------------
+[SourceDisksNames]
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+1=%DiskString%,"cyg_bus.sys",,
+
+[SourceDisksFiles]
+; filename = diskid[, [subdir] [, size]]
+cyg_bus.sys = 1
+cyg_wh95.sys = 1
+cyg_whnt.sys = 1
+
+;-----------------------------------------------------------------------------
+; Table of Contents:  manufacturer, then devices.
+;-----------------------------------------------------------------------------
+[Manufacturer]
+%Cygnal%=Cygnal
+
+;-----------------------------------------------------------------------------
+; The devices
+;-----------------------------------------------------------------------------
+[Cygnal]
+%Cygnal.CdcBus.Desc% = CygnalWdm.Install, USB\VID_10C4&PID_EA60
+
+;-----------------------------------------------------------------------------
+; How to install them:  On W9x, the [section] name is used directly.
+; On NT, the system first tries [section.NT], then [section].
+;-----------------------------------------------------------------------------
+
+;-----------------------------------------------------------------------------
+; Diagnostics Files CopyFiles List Section
+;-----------------------------------------------------------------------------
+[Cygnal.CopyFiles]
+
+;-----------------------------------------------------------------------------
+; XXX when we have a property page DLL, add it to the following section.
+;-----------------------------------------------------------------------------
+[PropPages.CopyFiles]
+
+;-----------------------------------------------------------------------------
+;       How to install the WDM driver on W95/W98
+;-----------------------------------------------------------------------------
+[CygnalWdm.Install]
+DriverVer=10/16/2003, 4.16.0.2702
+CopyFiles       = CygnalWdm.W95.CopyFiles, Cygnal.CopyFiles, PropPages.CopyFiles
+AddReg          = CygnalWdm.AddReg, CygnalWdm.W95.AddReg
+
+;-----------------------------------------------------------------------------
+;       How to install the WDM driver on NT
+;-----------------------------------------------------------------------------
+[CygnalWdm.Install.NT]
+DriverVer=10/16/2003, 4.16.0.2702
+CopyFiles       = CygnalWdm.NT.CopyFiles
+AddReg          = CygnalWdm.AddReg, CygnalWdm.NT.AddReg
+
+;-----------------------------------------------------------------------------
+;       How to start the WDM driver on NT
+;-----------------------------------------------------------------------------
+[CygnalWdm.Install.NT.Services]
+AddService      = cyg_bus, 2, CygnalWdm.AddService
+
+[CygnalWdm.AddService]
+DisplayName             = %Cygnal.Service.Desc%
+ServiceType             = 1     ; SERVICE_KERNEL_DRIVER
+StartType               = 3     ; SERVICE_DEMAND_START
+ErrorControl            = 1     ; SERVICE_ERROR_NORMAL
+ServiceBinary           = %12%\cyg_bus.sys
+LoadOrderGroup          = Base
+
+;-----------------------------------------------------------------------------
+;       WDM registry entries (all platforms)
+;-----------------------------------------------------------------------------
+[CygnalWdm.AddReg]
+
+
+;-----------------------------------------------------------------------------
+;       WDM registry entries (W95/98) (including how to start the driver)
+;-----------------------------------------------------------------------------
+[CygnalWdm.W95.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,cyg_bus.sys
+
+;-----------------------------------------------------------------------------
+;       WDM registry entries (NT only)
+;-----------------------------------------------------------------------------
+[CygnalWdm.NT.AddReg]
+
+;-----------------------------------------------------------------------------
+;       The WDM copy list for Win95 -- different because things go in
+;       different places.  Also, we probably need to rename drivers 
+;       during the install.
+;-----------------------------------------------------------------------------
+[CygnalWdm.W95.CopyFiles]
+cyg_bus.sys
+cyg_wh.sys,cyg_wh95.sys
+cyg_wh95.sys
+cyg_whnt.sys
+
+;-----------------------------------------------------------------------------
+;       The WDM copy list for NT -- different because things go in
+;       different places.
+;-----------------------------------------------------------------------------
+[CygnalWdm.NT.CopyFiles]
+cyg_bus.sys
+cyg_wh.sys,cyg_whnt.sys
+cyg_whnt.sys
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+
+;BEGIN ENG - US English Strings
+Provider = "Cygnal Integrated Products, Inc."
+Cygnal = "Cygnal Integrated Products, Inc."
+DiskString = "Cygnal USB Composite Device Installation disk"
+
+Cygnal.CdcBus.Desc = "Cygnal USB Composite Device"
+Cygnal.Service.Desc = "Cygnal USB Composite Device driver (WDM)"
+
+CustomerDataPath = "CP2101 USB to UART Bridge Controller"
+DriverSet = "CP2101 USB to UART Bridge Controller Software"
+UninstallFile = "CYG_Uninstall.exe"
+McciOptions = "Uninstallable"
+
+
+;END ENG - US English Strings
+
+;-----------------------------------------------------------------------------
+; Following are symbolic constants which don't change per locale.
+;-----------------------------------------------------------------------------
+
+;*** end of file ***

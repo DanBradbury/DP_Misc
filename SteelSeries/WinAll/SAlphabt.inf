@@ -1,0 +1,202 @@
+;
+;
+;Copyright (c) 2009-2012 SteelSeries Corporation All rights Reserved
+;
+;Module Name:
+;
+;    SAlphaBT.INF
+;
+;Abstract:
+;    INF file for installing HID SteelSeries devices
+;
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%STEEL%
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Class=HIDClass
+DriverVer=10/15/2012, 2.2.0003.3
+CatalogFile=SAlphaBT.cat
+
+[DestinationDirs]
+DefaultDestDir   = 12
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%STEEL%   = SALPHAMDEV,ntx86,ntia64,ntamd64
+
+[SALPHAMDEV]
+%DeviceDescBth% = SAlphamBth,BTHENUM\{00001124-0000-1000-8000-00805f9b34fb}_VID&00021038_PID&1412
+
+[SALPHAMDEV.ntx86]
+%DeviceDescBth% = SAlphamBth,BTHENUM\{00001124-0000-1000-8000-00805f9b34fb}_VID&00021038_PID&1412
+
+[SALPHAMDEV.ntamd64]
+%DeviceDescBth% = SAlphamBth,BTHENUM\{00001124-0000-1000-8000-00805f9b34fb}_VID&00021038_PID&1412
+
+[SALPHAMDEV.ntia64]
+%DeviceDescBth% = SAlphamBth,BTHENUM\{00001124-0000-1000-8000-00805f9b34fb}_VID&00021038_PID&1412
+
+[Controlflags]
+
+;
+; General installation section
+;
+
+;-----------------------------------------------------------------
+
+[SAlphamBth.ntx86]
+; perform port related actions from hidbth.inf
+Include=hidbth.inf
+Needs=HIDBTH_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamBth.CopyFiles.ntx86
+AddReg = SAlphamBth.AddReg
+DelReg = SAlphamBth.DelReg
+
+[SAlphamBth.ntamd64]
+; perform port related actions from hidbth.inf
+Include=hidbth.inf
+Needs=HIDBTH_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamBth.CopyFiles.ntamd64
+AddReg = SAlphamBth.AddReg
+DelReg = SAlphamBth.DelReg
+
+
+[SAlphamBth.ntia64]
+; perform port related actions from hidbth.inf
+Include=hidbth.inf
+Needs=HIDBTH_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamBth.CopyFiles.ntia64
+AddReg = SAlphamBth.AddReg
+DelReg = SAlphamBth.DelReg
+
+[SAlphamBth.CopyFiles.ntx86]
+SAlphabt.sys
+
+[SAlphamBth.CopyFiles.ntamd64]
+SAlphabt64.sys
+
+[SAlphamBth.CopyFiles.ntia64]
+SAlphabt64i.sys
+
+[SAlphamBth.AddReg]
+
+[SAlphamBth.DelReg]
+
+;
+; Service Installation
+;
+
+[SAlphamBth.ntx86.Services]
+AddService = SAlphamBth,  , SAlphamBth_Service_Inst.ntx86
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.Services
+
+[SAlphamBth.ntamd64.Services]
+AddService = SAlphamBth,  , SAlphamBth_Service_Inst.ntamd64
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.Services
+
+[SAlphamBth.ntia64.Services]
+AddService = SAlphamBth,  , SAlphamBth_Service_Inst.ntia64
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.Services
+
+[SAlphamBth.ntx86.HW]
+; Add the device lower filter
+AddReg = SAlphamBth.HW.AddReg
+
+; run the directives need by the port driver
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.HW
+
+[SAlphamBth.ntamd64.HW]
+; Add the device lower filter
+AddReg = SAlphamBth.HW.AddReg
+
+; run the directives need by the port driver
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.HW
+
+[SAlphamBth.ntia64.HW]
+; Add the device lower filter
+AddReg = SAlphamBth.HW.AddReg
+
+; run the directives need by the port driver
+Include=hidbth.inf
+Needs=HIDBTH_Inst.NT.HW
+
+[SAlphamBth_Service_Inst.ntx86]
+DisplayName    = %SvcDescBth%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlphabt.sys
+
+[SAlphamBth_Service_Inst.ntamd64]
+DisplayName    = %SvcDescBth%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlphabt64.sys
+
+[SAlphamBth_Service_Inst.ntia64]
+DisplayName    = %SvcDescBth%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlphabt64i.sys
+
+[SAlphamBth.HW.AddReg]
+HKR,,"LowerFilters",0x00010000,"SAlphamBth"
+
+;-----------------------------------------------------------------
+
+;
+; Source files
+;
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+SAlphabt.sys = 1,,
+SAlphabt64.sys = 1,,
+SAlphabt64i.sys = 1,,
+
+[Strings]
+
+;
+; Non-Localizable Strings
+;
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+;
+; Localizable Strings
+;
+
+;-----------------------------------------------------------------
+
+STEEL = "SteelSeries"
+DiskId1 = "SteelSeries BlueTooth HID Device Installation Disk #1"
+DeviceDescBth = "SteelSeries BlueTooth HID Device"
+SvcDescBth = "SteelBTHIDSvc"

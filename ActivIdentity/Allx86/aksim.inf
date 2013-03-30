@@ -1,0 +1,134 @@
+; AKSIM.INF
+; Copyright (C) 2006-10 by ActivIdentity
+; All rights reserved
+
+[Version]
+Signature=$CHICAGO$
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%MFGNAME%
+CatalogFile=Aksim.cat
+DriverVer=12/13/2010,1.0.9.0
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+DriverCopyFiles=10,System32\Drivers
+CoCopyINF.CopyFiles = 11
+
+[SourceDisksFiles]
+aksim.sys=1,,
+aksins.dll=1
+akspg.dll = 1,,
+aksbus.sys = 1
+akspcsc.sys = 1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+%DESCRIPTION%=ak_sim,USB\VID_09C3&PID_0014
+%DESCRIPTION1%=usb_reader,USB\VID_09C3&PID_0015
+%DESCRIPTION2%=ak_disp,USB\VID_09C3&PID_0017
+
+;------------------------------------------------------------------------------
+; *** ActivKey Sim
+;------------------------------------------------------------------------------
+[ak_sim.NT]
+CopyFiles=DriverCopyFiles
+CopyINF  = akspcsc.inf,aksbus.inf
+
+[ak_sim.NT.HW]
+AddReg = ak_sim.AddReg.HW
+
+[ak_sim.NT.CoInstallers]
+AddReg    = CoCopyINF.AddReg
+CopyFiles = CoCopyINF.CopyFiles
+
+[ak_sim.NT.Services]
+AddService=AKSIM,2,DriverService
+
+[ak_sim.AddReg.HW]
+;reg-root, [subkey], [value-entry-name], [flags]        , [value]
+HKR,,"VendorName",,%MFGNAME%
+HKR,,"IfdType",, "ActivKey Sim"
+HKR,,"DMode",0x00010001,0
+
+;------------------------------------------------------------------------------
+; *** USB SmartCard Reader
+;------------------------------------------------------------------------------
+
+[usb_reader.NT]
+CopyFiles= DriverCopyFiles
+CopyINF  = akspcsc.inf,aksbus.inf
+
+[usb_reader.NT.HW]
+AddReg = usb_reader.AddReg.HW
+
+[usb_reader.NT.CoInstallers]
+AddReg    = CoCopyINF.AddReg
+CopyFiles = CoCopyINF.CopyFiles
+
+[usb_reader.NT.Services]
+AddService=AKSIM,2,DriverService
+
+[usb_reader.AddReg.HW]
+HKR,,"VendorName",,%MFGNAME%
+HKR,,"IfdType",, "USB Reader V4"
+
+; ****
+;------------------------------------------------------------------------------
+; *** ActivKey Display
+;------------------------------------------------------------------------------
+[ak_disp.NT]
+CopyFiles=DriverCopyFiles
+CopyINF  = akspcsc.inf,aksbus.inf
+
+[ak_disp.NT.HW]
+AddReg = ak_disp.AddReg.HW
+
+[ak_disp.NT.CoInstallers]
+AddReg    = CoCopyINF.AddReg
+CopyFiles = CoCopyINF.CopyFiles
+
+[ak_disp.NT.Services]
+AddService=AKSIM,2,DriverService
+
+[ak_disp.AddReg.HW]
+;reg-root, [subkey], [value-entry-name], [flags]        , [value]
+HKR,,"VendorName",,%MFGNAME%
+HKR,,"IfdType",, "ActivKey Display"
+HKR,,"DMode",0x00010001,0
+
+
+[DriverCopyFiles]
+aksim.sys,,,2
+aksbus.sys,,,2
+akspcsc.sys,,,2
+
+[CoCopyINF.AddReg]
+HKR,,CoInstallers32,0x10000,"aksins.DLL,CoCopyINF"
+
+[CoCopyINF.CopyFiles]
+aksins.dll,,,0x10
+akspg.dll
+
+[DriverService]
+DisplayName     = %DESCRIPTION%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary = %10%\system32\drivers\aksim.sys
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+
+[Strings]
+MFGNAME="ActivIdentity"
+INSTDISK="ActivIdentity Installation Disk"
+DESCRIPTION="ActivKey Sim"
+DESCRIPTION1="USB Reader V4"
+DESCRIPTION2="ActivKey Display"

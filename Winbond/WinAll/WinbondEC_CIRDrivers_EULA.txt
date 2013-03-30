@@ -1,0 +1,114 @@
+                   Advanced PC Software License
+ 
+Please read the following license agreement.  If you accept all terms of the
+agreement, continue with the installation. If you decline, the terms of
+agreement do not install the software.
+
+LICENSE AGREEMENT FOR WINBOND ELECTRONICS CORPORATION Advanced PC
+Embedded Controllers CIR Microsoft(R) Windows(R)-based Drivers
+ 
+IMPORTANT -- READ CAREFULLY: This Winbond Electronics Corporation (“WINBOND”) License
+Agreement ("LICENSE") is a legal agreement between you (either an individual or
+a single entity) and WINBOND for the WINBOND software product identified above,
+which includes computer software and associated electronic or "online"
+documentation (together, the "SOFTWARE PRODUCT"). By downloading, installing,
+copying, or otherwise using the SOFTWARE PRODUCT, you agree to be bound by the
+terms of this LICENSE. If you do not agree to the terms of this LICENSE, you are
+not authorized to use the SOFTWARE PRODUCT.
+
+SOFTWARE PRODUCT LICENSE All title and copyrights in and to the SOFTWARE PRODUCT
+are owned by WINBOND or its suppliers. The SOFTWARE PRODUCT is protected by
+copyright laws and international copyright treaties, as well as other
+intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not
+sold.
+
+1. GRANT OF LICENSE. Subject to the licensing restrictions set forth in
+   Section 2, this LICENSE grants you the following rights: WINBOND grants to
+   you a non-exclusive, royalty-free, worldwide, perpetual license to use,
+   copy, load and distribute SOFTWARE PRODUCT in object code form.
+
+2. LICENSING RESTRICTIONS. All licenses set forth in Section 1 are subject to
+   the following restrictions:
+
+a. SOFTWARE PRODUCT may only be used with, or distributed for use with 
+   WINBOND devices. In no event shall any portion of SOFTWARE PRODUCT be 
+   used with products other than WINBOND devices.
+
+b. WINBOND copyright notices shall be maintained in the SOFTWARE PRODUCT to
+   indicate WINBOND's original authorship and ownership of SOFTWARE PRODUCT.
+
+c. SOFTWARE PRODUCT is licensed "as is" and without technical support as set
+   forth in Section 3; SOFTWARE PRODUCT is provided with restricted rights as 
+   set forth in Section 4; SOFTWARE PRODUCT is subject to United States export
+   restrictions as set forth in Section 5; and the license granted in Section 1
+   shall terminate immediately upon breach of this LICENSE by you as set forth
+   in Section 6.
+
+d. SOFTWARE PRODUCT shall not be used or distributed with life support devices
+   or systems; SOFTWARE PRODUCT shall not be used to design, develop, or
+   manufacture life support devices or systems.
+
+f. All rights not expressly granted to you are reserved by WINBOND. 
+   The LICENSE does not include licensing rights to any WINBOND trademark.
+
+3. NO WARRANTY. WINBOND does not warrant that SOFTWARE PRODUCT is free from
+   program errors, or that WINBOND or you will be able to correct any such
+   errors.  SOFTWARE PRODUCT AND ANY RELATED NON-MANDATORY TECHNICAL SUPPORT
+   IS PROVIDED BY WINBOND "AS IS" WITHOUT WARRANTY OR REPRESENTATION OF ANY
+   KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE and ANY
+   WARRANTY REGARDING INTELLECTUAL PROPERTY INFRINGEMENT. WINBOND SHALL NOT BE
+   LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, OR SPECIAL
+   DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF
+   BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR
+   OTHER PECUNIARY LOSS) ARISING UNDER THIS LICENSE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGES.  WINBOND'S MAXIMUM TOTAL LIABILITY UNDER THIS
+   LICENSE SHALL NOT EXCEED THE AMOUNT, IF ANY, PAID BY YOU FOR SOFTWARE
+   PRODUCT. BECAUSE SOME STATES AND JURISDICTIONS DO NOT ALLOW THE EXCLUSION
+   OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE
+   ABOVE LIMITATION MAY NOT APPLY TO YOU.
+
+4. U.S. GOVERNMENT RESTRICTED RIGHTS. The SOFTWARE PRODUCT is provided with
+   RESTRICTED RIGHTS. Use, duplication, or disclosure by the Government is
+   subject to restrictions as set forth in subparagraph (c)(1)(ii) of the
+   Rights in Technical Data and Computer Software clause at DFARS 252.227-7013
+   or subparagraphs (c)(1) and (2) of the Commercial Computer
+   Software-Restricted Rights at 48 CFR 52.227-19, as applicable. Manufacturer
+   is Winbond Electronics Corporation, No. 4, Creation Rd., III Science-Based 
+   Industrial Park, Hsinchu, Taiwan, R.O.C 
+
+5. EXPORT RESTRICTIONS. You shall adhere to all applicable United States
+   laws, regulations and rules relating to the export of technical data to any
+   proscribed country listed in such applicable laws, regulations and rules
+   unless properly authorized. The obligations under this Section shall
+   survive any termination of this LICENSE.
+
+6. TERM AND TERMINATION
+
+a. You may terminate this LICENSE at any time by destroying all copies of the
+   SOFTWARE PRODUCT, SOFTWARE PRODUCT derivatives and related documentation.
+
+b. Without prejudice to any other rights, WINBOND may terminate this LICENSE
+   if you fail to comply with any provision of this LICENSE. Upon termination,
+   all rights granted under this LICENSE shall cease and you must destroy all
+   copies of the SOFTWARE PRODUCT and related documentation.
+
+7. GENERAL
+
+a. This LICENSE shall be governed by the laws of the Republic of China,
+   without regard to or application of conflicts of law rules or principles.
+   The invalidity or unenforceability of a provision of this Agreement shall
+   not affect the validity or enforceability of the remaining provisions of
+   this Agreement; however, if in WINBOND's opinion deletion of any provisions
+   of the LICENSE by operation of this Section unreasonably compromises the 
+   rights or liabilities of WINBOND or its licensors, WINBOND reserves the
+   right to terminate the LICENSE.
+
+b. This LICENSE constitutes the entire agreement, written or verbal,
+   between you and WINBOND with respect to the SOFTWARE PRODUCT. This LICENSE
+   may not be amended except in writing signed by you and a duly authorized
+   WINBOND representative. The failure of WINBOND to enforce any right
+   resulting from breach of any provision of this LICENSE by you or your
+   sublicensee shall not be deemed a waiver of any right relating to a
+   subsequent breach of such provision or of any other right hereunder.
+

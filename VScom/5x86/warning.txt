@@ -1,0 +1,20 @@
+NOTE
+
+- First try to deinstall the card(s) with the "device manager"
+- If this doesn`t operate, use this tool
+
+DISCLAIMER
+
+Vision Systems GmbH doesn't take any warranty for any damages
+to the registry or file system, i. e. for unintentionally
+deleted registry keys or files. Such problems can result from
+inconsistent registry, manual changes or erroneous uninstallation
+programs.
+
+Checking the option "Confirm finalizing uninstall" will list
+all changes to be made to the registry and file system, and ask
+the user for confirmation. If you're unsure please use this option.
+Program files:
+- vsclean.exe -> program
+- warning.txt -> this note
+- TEMPDIRECTORY\vsclean.log -> test results

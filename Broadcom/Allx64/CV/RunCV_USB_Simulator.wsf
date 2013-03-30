@@ -1,0 +1,320 @@
+<PACKAGE>
+
+<COMMENT>
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+This test script creates a simulated USB 2.0 loopback device and plugs
+it into the root hub of a simulated EHCI controller. 
+
+If you haven't done so already then you must create a simulated EHCI
+controller before running this script. You can do this by running the
+following from a CMD window:
+
+    "\Program Files\dsf\softehci\softehcicfg.exe" /install
+
+To run this script open a CMD window and type:
+
+    cscript RunCV_USB_Simulator.wsf
+
+The loopback device will prompt you to indicate whether it should
+operate in polled or event mode. After that it will begin simulation
+and prompt you as to whether it should terminate simulation. At that
+point you can open another command window and run the rwbulk.exe WDK
+sample program 1 or more times to send I/O to the device. When the
+simulation terminates the script will unplug the loopback device from
+the root hub.
+
+Note: if the operating system prompts you for a driver for the
+loopback device you should direct it to install the bulkusb.sys sample
+driver from the WDK.
+
+</COMMENT>
+
+<JOB id=RunCV_USB_Simulator>
+<REFERENCE OBJECT="DSF.DSF"/>
+<REFERENCE OBJECT="SOFTUSB.SoftUSBDevice"/>
+<SCRIPT LANGUAGE="VBScript">
+
+Option Explicit
+
+const IID_IDSFBus        = "{E927C266-5364-449E-AE52-D6A782AFDA9C}" 
+const IID_ISoftUSBDevice = "{9AC61697-81AE-459A-8629-BF5D5A838519}"
+
+WriteLine "RunCV_USB_Simulator.wsf starting"
+
+WriteLine "Enumerating simulated devices to look for a simulated EHCI controller"
+Dim CtrlrDev : Set CtrlrDev = EnumSimulatedDevices(IID_IDSFBus)
+
+If CtrlrDev Is Nothing Then
+    Error "Could not find simulated a EHCI controller. Did you remember to run softehcicfg.exe /install?"
+End If
+
+Dim CV_Dev    : Set CV_Dev = WScript.CreateObject("CV_Simulator.CV_Device", "CV_DeviceEvent_")
+Dim LoopbackDSFDev : Set LoopbackDSFDev = CV_Dev.DSFDevice
+Dim LoopbackUSBDev : Set LoopbackUSBDev = LoopbackDSFDev.Object(IID_ISoftUSBDevice)
+
+SetEndpointDiagnostics LoopbackUSBDev
+
+WriteLine "Connecting simulated loopback device to simulated EHCI controller"
+Dim DSF : Set DSF = CreateObject("DSF.DSF")
+Dim Bus : Set Bus = DSF.HotPlug(LoopbackDSFDev, "USB2.0")
+
+
+'WriteLine "Select either Polled(P) or Event(E) Processing"
+'Dim EventType : EventType = WScript.StdIn.ReadLine()
+'
+'If (EventType = "P") or (EventType = "p") Then
+'    WriteLine "Calling CV_Dev.DoPolled_CV_Operation to start polled loopback simulation."
+'Else
+'    WriteLine "Calling CV_Dev.StartEventProcessing to start event-driven loopback simulation."
+'End If
+'WriteLine "After the device enumerates open another CMD window and run rwbulk.exe to send it I/O."
+'WriteLine "Press 't' + Enter at any time to terminate the simulation."
+'
+'
+'If (EventType = "P") or (EventType = "p") Then
+'    CV_Dev.DoPolled_CV_Operation(100)
+'Else
+'    CV_Dev.StartEventProcessing
+'End If
+
+
+WriteLine "Calling CV_Dev.DoPolled_CV_Operation to start polled loopback simulation. PERIOD=32ms"
+
+CV_Dev.DoPolled_CV_Operation(32)
+
+' The next line of code will run after the function
+' CV_DeviceEvent_ContinueToPoll or CV_DeviceEvent_ContinueEventProcessing
+' returns False. The function is an event handler and it is invoked from
+' the loopback device in its main loop in order to determine when to
+' terminate the simulation.
+
+PromptAndWaitForEnterKey "Simulation processing terminated. Press enter to unplug loopback device."
+Bus.UnPlug LoopbackDSFDev
+
+PromptAndWaitForEnterKey "Loopback device unplugged. Press enter to terminate script"
+LoopbackUSBDev.Destroy
+
+WriteLine "RunCV_USB_Simulator.wsf completed"
+WScript.Quit 0
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Function CV_DeviceEvent_ContinueToPoll
+'
+' This event handler is called from the loopback device in its main
+' loop when it operates in event-driven mode. If this event handler returns
+' False the loopback device will terminate the simulation. The function 
+' calls CV_Device.AreKeystrokesWaiting to determine whether there are
+' any keystrokes awaiting processing and if so reads them out and checks for 
+' a line starting with 't'. If found, it returns False to terminate the 
+' simulation.
+'/////////////////////////////////////////////////////////////////////////////
+Function CV_DeviceEvent_ContinueToPoll()
+
+    If CV_Dev.AreKeystrokesWaiting() Then
+        Dim Ans : Ans = WScript.StdIn.ReadLine()
+        If (Ans = "T") Or (Ans = "t") Then
+            WriteLine "CV_DeviceEvent_ContinueToPoll terminating simulation at user request."
+            CV_DeviceEvent_ContinueToPoll = False
+        Else
+            CV_DeviceEvent_ContinueToPoll = True
+        End If
+    Else
+        CV_DeviceEvent_ContinueToPoll = True
+    End If
+
+End Function
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Function CV_DeviceEvent_ContinueEventProcessing
+'
+' This event handler is called from the loopback device in its main
+' loop when it operates in event-driven mode. If this event handler returns
+' False the loopback device will terminate the simulation. The function 
+' calls CV_Device.AreKeystrokesWaiting to determine whether there are
+' any keystrokes awaiting processing and if so reads them out and checks for 
+' a line starting with 't'. If found, it returns False to terminate the 
+' simulation.
+'/////////////////////////////////////////////////////////////////////////////
+Function CV_DeviceEvent_ContinueEventProcessing()
+
+    If CV_Dev.AreKeystrokesWaiting() Then
+        Dim Ans : Ans = WScript.StdIn.ReadLine()
+        If (Ans = "T") Or (Ans = "t") Then
+            WriteLine "CV_DeviceEvent_ContinueEventProcessing terminating simulation at user request."
+            CV_DeviceEvent_ContinueEventProcessing = False
+        Else
+            CV_DeviceEvent_ContinueEventProcessing = True
+        End If
+    Else
+        CV_DeviceEvent_ContinueEventProcessing = True
+    End If
+
+End Function
+
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Sub PromptAndWaitForEnterKey
+'
+' This routine displays the specified text and then waits for the user
+' to press Enter
+'/////////////////////////////////////////////////////////////////////////////
+Private Sub PromptAndWaitForEnterKey(text)
+    Write text
+    Dim x : x = WScript.StdIn.ReadLine()
+End Sub
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Sub SetEndpointDiagnostics
+'
+' This routine sets a diagnostic property on all the endpoints in the
+' specified simulated USB device so that you can see all transfers to and 
+' from the device when running under a kernel debugger. This routine will 
+' write information to the console describing every congiguration, interface,
+' and endpoint that it finds.
+'/////////////////////////////////////////////////////////////////////////////
+Private Sub SetEndpointDiagnostics(USBDevice)
+
+    const SOFTUSBENDPOINT_OBJECTFLAGS                     = 100
+    const SOFTUSBENDPOINT_DONOTTRACETRANSFERS             = &H00000000
+    const SOFTUSBENDPOINT_TRACETRANSFERINPUT              = &H00000001
+    const SOFTUSBENDPOINT_TRACETRANSFEROUPUT              = &H00000002
+    const SOFTUSBENDPOINT_TRACETRANSFERINPUTANDOUPUT      = &H00000003
+
+    Dim Config    : Set Config    = Nothing
+    Dim Interface : Set Interface = Nothing
+    Dim Endpoint  : Set Endpoint  = Nothing
+
+    Dim CtlFlags   : CtlFlags   = SOFTUSBENDPOINT_TRACETRANSFERINPUTANDOUPUT
+    Dim OtherFlags : OtherFlags = SOFTUSBENDPOINT_TRACETRANSFERINPUTANDOUPUT
+    Dim FlagsType  : FlagsType  = SOFTUSBENDPOINT_OBJECTFLAGS
+    Dim EPNum :  EPNum = 0 
+    Dim EPDir :  EPDir = 0
+    Dim EPType : EPType = 0
+    
+    USBDevice.Endpoint0.SetObjectFlags FlagsType, CtlFlags
+    
+    For Each Config In USBDevice.Configurations
+
+        WriteLine "Setting endpoint diagnostics for configuration " & Config.ConfigurationValue
+
+        For Each Interface In Config.Interfaces
+
+            WriteLine "    Setting endpoint diagnostics for interface " & Interface.InterfaceNumber & " alternate " & Interface.AlternateSetting
+
+            For Each Endpoint In Interface.Endpoints
+
+                EPNum = Endpoint.EndpointAddress And &H0F
+                EPDir = Endpoint.EndpointAddress And &H80
+                If EPDir = 0 Then
+                    EPDir = "OUT"
+                Else
+                    EPDir = "IN"
+                End If
+
+                EPType = Endpoint.Attributes And &H03
+                Select Case EPType
+                    Case 0:
+                        EPType = "Control"
+
+                    Case 1:
+                        EPType = "Isoch"
+
+                    Case 2:
+                        EPType = "Bulk"
+
+                    Case 3:
+                        EPType = "Interrupt"
+                End Select
+
+                WriteLine "        Endpoint.SetObjectFlags for " & EPType & " " & EPDir & " endpoint " & Hex(EPNum)
+                Endpoint.SetObjectFlags FlagsType, OtherFlags
+
+            Next
+
+        Next
+
+    Next
+
+End Sub
+
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Function EnumSimulatedDevices
+'
+' This function searches the collection of simulated devices
+' referenced by DSF.Devices for a device that exposes an ancillary
+' object from DSFDevice.Object with the specified GUID. If found it returns the
+' DSFDevice object otherwise it returns Nothing.
+'/////////////////////////////////////////////////////////////////////////////
+Private Function EnumSimulatedDevices(SearchObjectGUID)
+
+    Dim DevSought : Set DevSought = Nothing
+    Dim Dev       : Set Dev = Nothing
+    Dim DSF       : Set DSF = CreateObject("DSF.DSF")
+    Dim ObjSought : Set ObjSought = Nothing
+
+    For Each Dev in DSF.Devices
+        If Dev.HasObject(SearchObjectGUID) Then
+            Set ObjSought = Dev.Object(SearchObjectGUID)
+            If Not ObjSought Is Nothing Then
+                Set DevSought = Dev
+                Exit For
+            End If
+        End If
+    Next
+
+    Set EnumSimulatedDevices = DevSought
+
+End Function
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Sub WriteLine
+'
+' This routine writes the specified text to the console followed by a
+' newline.
+'/////////////////////////////////////////////////////////////////////////////
+Private Sub WriteLine(Text)
+
+    WScript.StdOut.WriteLine text
+
+End Sub
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Sub Write
+'
+' This routine writes the specified text to the console
+'/////////////////////////////////////////////////////////////////////////////
+Private Sub Write(Text)
+
+    WScript.StdOut.Write text
+
+End Sub
+
+
+
+'/////////////////////////////////////////////////////////////////////////////
+' Sub Error
+'
+' This routine writes the specified text to the console and
+' terminates the script
+'/////////////////////////////////////////////////////////////////////////////
+Private Sub Error(msg)
+    WriteLine "Script terminating due to error"
+    WriteLine msg
+    WScript.Quit 1
+End Sub
+
+
+
+
+</SCRIPT>
+</JOB>
+</PACKAGE>

@@ -1,0 +1,103 @@
+; UFS2XX.INF
+; Copyright (c) 2000-2007 SarasSoft.
+;
+; UFSx Device installation for Windows 2000, XP, Server 2003, Vista (x86 and x64).
+;
+
+[Version]
+Signature="$Windows NT$"
+DriverPackageType=PlugAndPlay
+DriverPackageDisplayName=%DESC%
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%Manufacturer%
+CatalogFile=UFS2XX.cat
+DriverVer=10/03/2007,3.01.05
+
+[SourceDisksNames]
+1=%DriversDisk%,,,
+
+[SourceDisksFiles]
+UFS2XX.sys = 1,x32
+UFS2XX.dll = 1,x32
+
+[SourceDisksFiles.x64]
+UFS2XX.sys = 1,x64
+UFS2XX.dll = 1,x32
+UFS2XX64.dll = 1,x64
+
+[DestinationDirs]
+UFS2XX.NT.Copy = 10,system32\drivers
+UFS2XX.NT.Copy2 = 10,system32
+UFS2XX.NTx64.Copy = 10,system32\drivers
+UFS2XX.NTx64.Copy2 = 10,system32
+UFS2XX.NTx64.Copy3 = 10,syswow64
+
+[Manufacturer]
+%Manufacturer%=Ufs2Hw,NTx64
+
+[Ufs2Hw]
+%USB\VID_0888&PID_5508.DeviceDesc%=UFS2XX.NT,USB\VID_0888&PID_5508
+
+[Ufs2Hw.NTx64]
+%USB\VID_0888&PID_5508.DeviceDesc%=UFS2XX.NTx64,USB\VID_0888&PID_5508
+
+[ControlFlags]
+ExcludeFromSelect=USB\VID_0888&PID_5508
+
+[UFS2XX.NT]
+CopyFiles=UFS2XX.NT.Copy,UFS2XX.NT.Copy2
+AddReg=UFS2XX.NT.AddReg
+
+[UFS2XX.NTx64]
+CopyFiles=UFS2XX.NTx64.Copy,UFS2XX.NTx64.Copy2,UFS2XX.NTx64.Copy3
+AddReg=UFS2XX.NT.AddReg
+
+[UFS2XX.NT.Services]
+AddService = UFS2XX, 0x00000002, UFS2XX.NT.AddService
+
+[UFS2XX.NTx64.Services]
+AddService = UFS2XX, 0x00000002, UFS2XX.NT.AddService
+
+[UFS2XX.NT.AddService]
+DisplayName = %SvcDesc%
+ServiceType = 1 ; SERVICE_KERNEL_DRIVER
+StartType = 3 ; SERVICE_DEMAND_START
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\UFS2XX.sys
+LoadOrderGroup = Base
+AddReg = UFS2XX.NT.AddService.AddReg
+
+[UFS2XX.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,UFS2XX.sys
+
+[UFS2XX.NT.Copy]
+UFS2XX.sys
+
+[UFS2XX.NT.Copy2]
+UFS2XX.dll
+
+[UFS2XX.NTx64.Copy]
+UFS2XX.sys
+
+[UFS2XX.NTx64.Copy2]
+UFS2XX.dll
+UFS2XX64.dll
+
+[UFS2XX.NTx64.Copy3]
+UFS2XX.dll
+
+[UFS2XX.NT.HW]
+AddReg=UFS2XX.NT.HW.AddReg
+
+[UFS2XX.NT.HW.AddReg]
+HKR,,"ConfigData",0x00010001,0
+
+[Strings]
+Manufacturer="SarasSoft"
+DESC="UFSx Driver Package"
+DriversDisk="UFSx Device USB Drivers Disk"
+USB\VID_0888&PID_5508.DeviceDesc="UFSx Device, (c) SarasSoft"
+SvcDesc="UFS2XX.SYS UFS2 device driver"
+ClassName="USB"

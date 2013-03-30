@@ -1,0 +1,93 @@
+; Copyright: (c) 2012 Razer USA Ltd. All rights reserved
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Mouse
+ClassGuid   = {4D36E96F-E325-11CE-BFC1-08002BE10318}
+Provider    = %Razer%
+DriverVer=12/06/2012,6.2.9200.16384
+CatalogFile = mamba2.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+Razer_CoInstaller_CopyFiles = 11
+
+[Manufacturer]
+%Razer%=Standard,NTx86
+
+[Standard]
+%Razer000A.DeviceDesc%=Razer, HID\Vid_1532&Pid_000A&MI_00
+%Razer000F.DeviceDesc%=Razer, HID\Vid_1532&Pid_000F&MI_00
+%Razer0024.DeviceDesc%=Razer, HID\Vid_1532&Pid_0024&MI_00
+%Razer0025.DeviceDesc%=Razer, HID\Vid_1532&Pid_0025&MI_00
+
+[Standard.NTx86]
+%Razer000A.DeviceDesc%=Razer, HID\Vid_1532&Pid_000A&MI_00
+%Razer000F.DeviceDesc%=Razer, HID\Vid_1532&Pid_000F&MI_00
+%Razer0024.DeviceDesc%=Razer, HID\Vid_1532&Pid_0024&MI_00
+%Razer0025.DeviceDesc%=Razer, HID\Vid_1532&Pid_0025&MI_00
+
+[Razer.NT]  
+Include = MSMOUSE.INF
+Needs = HID_Mouse_Inst.NT
+CopyFiles = Razer.NT.Copy
+
+[Razer.NT.Copy]
+mamba2.sys
+
+[Razer.NT.HW]
+Include=msmouse.inf
+Needs=HID_Mouse_Inst.NT.HW
+AddReg = Razer.NT.HW.AddReg
+
+[Razer.NT.HW.AddReg]  
+HKR,,"UpperFilters",0x00010000,"mamba2"
+;; FILE_DEVICE_SECURE                         
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+; SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GRGWGX;;;BA)(A;;GRGWGX;;;WD)(A;;GRGWGX;;;RC)"
+
+[Razer.NT.Services]
+AddService      = mamba2,, Razer_Service_Inst 
+Include=msmouse.inf
+Needs=HID_Mouse_Inst.NT.Services
+
+[Razer_Service_Inst]
+DisplayName     = %Razer.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\mamba2.sys                            
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+mamba2.sys    = 1,,
+WdfCoInstaller01009.dll=1
+
+[Razer.NT.CoInstallers]
+AddReg          = Razer_CoInstaller_AddReg
+CopyFiles       = Razer_CoInstaller_CopyFiles
+
+[Razer_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[Razer_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[Razer.NT.Wdf]
+KmdfService              = mamba2,  mamba2_wdfsect
+
+[mamba2_wdfsect]
+KmdfLibraryVersion       = 1.9
+
+[Strings]
+Razer                    = "Razer USA Ltd"
+DiskId1                  = "Razer Installer"
+Razer.SvcDesc            = "Razer Mamba Driver"
+
+Razer000A.DeviceDesc     = "Razer Mamba"
+Razer000F.DeviceDesc     = "Razer Mamba Dock"
+Razer0024.DeviceDesc     = "Razer Mamba"
+Razer0025.DeviceDesc     = "Razer Mamba Dock"

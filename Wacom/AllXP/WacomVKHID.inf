@@ -1,0 +1,93 @@
+; wacomvkhid.INF
+; Installation inf for wacomvkhid.sys
+; Copyright (c) 2007 Wacom Technology
+
+[Version]
+signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745A17A0-74D3-11D0-B6FE-00A0C90F57DA}
+Provider=%WACOM%
+CatalogFile=wacomvkhid.cat
+DriverVer=02/15/2007,1.01.0000.0
+
+[SourceDisksNames]
+1=%Diskname%
+
+[SourceDisksFiles]
+wacomvkhid.sys = 1
+
+[DestinationDirs]
+wacomvkhid.CopyFiles = 12
+
+[Manufacturer]
+%WACOM% = WACOM,NTamd64
+
+[WACOM]
+%WacomVKHid%      = wacomvkhid, ROOT\WACOMVKHID
+%WacomVKOut%      = wacomvkOut, HID\WACOMVKHID&Col01
+
+[WACOM.NTamd64]
+%WacomVKHid%      = WacomVKHid, ROOT\WACOMVKHID
+%WacomVKOut%      = wacomvkOut, HID\WACOMVKHID&Col01
+
+[WacomVKHid.NT]
+CopyFiles = WacomVKHid.CopyFiles
+
+[WacomVKHid.NT.Services]
+AddService = WacomVKHid,0x00000002,WacomVKHid_Service_Inst,
+
+[WacomVKHid.NT.HW]
+AddReg = WacomVKHid.AddReg
+
+[WacomVKHid.CopyFiles]
+WacomVKHid.sys
+
+[WacomVKHid_Service_Inst]
+DisplayName   = %WacomVKHid.Desc%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_IGNORE%
+ServiceBinary = %12%\WacomVKHid.sys
+
+[WacomVKHid.AddReg]
+
+[WacomVKOut.NT]
+AddReg = WacomVKHid.AddReg
+
+[WacomVKOut.NT.HW]
+AddReg = WacomVKOut.Security
+
+[WacomVKOut.Security]
+HKR,,DeviceCharacteristics,0x10001,0x100
+HKR,,Security,,%Security%
+
+
+;================================================================
+[Strings]
+;  *******Localizable Strings*******
+WACOM          = "Wacom"
+WacomVKHid      = "Virtual Keyboard Driver"
+WacomVKOut      = "Virtual Keyboard Interface"
+WacomVKHid.Desc = "Virtual Keyboard Driver"
+Diskname       = "Wacom Installer"
+Security	= "D:P(A;;GA;;;SY)"
+
+;  *******Non Localizable Strings*******
+SERVICE_BOOT_START   = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START   = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED     = 0x4
+
+SERVICE_KERNEL_DRIVER = 0x1
+
+SERVICE_ERROR_IGNORE   = 0x0
+SERVICE_ERROR_NORMAL   = 0x1
+SERVICE_ERROR_SEVERE   = 0x2
+SERVICE_ERROR_CRITICAL = 0x3
+
+REG_EXPAND_SZ = 0x00020000
+REG_DWORD     = 0x00010001
+REG_MULTI_SZ  = 0x00010000
+REG_BINARY    = 0x00000001
+REG_SZ        = 0x00000000

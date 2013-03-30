@@ -1,0 +1,99 @@
+;
+;
+;Copyright (c) 2009-2012 SteelSeries Corporation All rights Reserved
+;
+;Module Name:
+;
+;    SteelBus.INF
+;
+;Abstract:
+;    INF file for installing SteelBus enumerator driver
+;
+;
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%STEEL%
+DriverVer=12/03/2012, 2.3.0001.8
+CatalogFile=SteelBus.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+SteelBus.sys  = 1,,
+SteelBus64.sys  = 1,,
+
+;*****************************************
+; SteelBus Install Section
+;*****************************************
+
+[Manufacturer]
+%STEEL%=SteelBus,ntx86,ntamd64
+
+[SteelBus]
+%DeviceDesc%=SteelBus_Device, root\steelbusdrv
+
+[SteelBus.ntx86]
+%DeviceDesc%=SteelBus_Device, root\steelbusdrv
+
+[SteelBus.ntamd64]
+%DeviceDesc%=SteelBus_Device, root\steelbusdrv
+
+[SteelBus_Device.ntx86]
+CopyFiles=Drivers_Dir.ntx86
+
+[SteelBus_Device.ntamd64]
+CopyFiles=Drivers_Dir.ntamd64
+
+[Drivers_Dir.ntx86]
+SteelBus.sys
+
+[Drivers_Dir.ntamd64]
+SteelBus64.sys
+
+[SteelBus_Device.ntx86.HW]
+AddReg=SteelBus_Device.HW.AddReg
+
+[SteelBus_Device.ntamd64.HW]
+AddReg=SteelBus_Device.HW.AddReg
+
+[SteelBus_Device.HW.AddReg]                            
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)(A;;GA;;;WD)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+
+;-------------- Service installation
+[SteelBus_Device.ntx86.Services]
+AddService = busenum,%SPSVCINST_ASSOCSERVICE%, busenum_Service_Inst.ntx86
+
+[SteelBus_Device.ntamd64.Services]
+AddService = busenum,%SPSVCINST_ASSOCSERVICE%, busenum_Service_Inst.ntamd64
+
+; -------------- busenum driver install sections
+[busenum_Service_Inst.ntx86]
+DisplayName    = %SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SteelBus.sys
+LoadOrderGroup = Extended Base
+
+[busenum_Service_Inst.ntamd64]
+DisplayName    = %SvcDesc%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SteelBus64.sys
+LoadOrderGroup = Extended Base
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+STEEL = "SteelSeries"
+DiskId1 = "SteelBus Installation Disk #1"
+DeviceDesc = "SteelSeries Universal Bus Enumerator"
+SvcDesc = "SteelBusSvc"

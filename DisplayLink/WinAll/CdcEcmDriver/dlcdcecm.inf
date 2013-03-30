@@ -1,0 +1,426 @@
+
+;
+; dlcdcecm.inf -- Install the DisplayLink USB Network Adapter drivers
+;
+; Copyright (c) 2011-2012 DisplayLink (UK) Ltd.
+;
+; DisplayLink USB CDC ECM Driver setup information file
+;
+
+;******************************************************************************
+; Version Section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+; 11/22/2012,1.40.0.0
+DriverVer=12/06/2012,7.1.43935.0
+Provider=%S_Provider%
+CatalogFile=%S_DriverName%.cat
+
+Class=net
+ClassGUID={4d36e972-e325-11ce-bfc1-08002be10318}
+
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Models, ntamd64
+
+
+;******************************************************************************
+; Models Section
+;------------------------------------------------------------------------------
+[_Models]
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4300&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4301&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4302&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4303&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4304&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4305&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4306&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4307&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4308&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4309&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4310&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4311&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4312&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4313&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4314&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4315&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4316&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4317&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4318&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4319&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4320&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4321&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4322&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4323&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4324&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4325&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4326&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4327&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4328&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4329&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4330&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4331&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4332&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4333&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4334&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4335&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4336&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4337&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4338&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4339&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4340&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4341&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4342&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4343&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4344&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4345&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4346&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4347&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4348&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4349&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4350&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4351&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4352&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4353&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4354&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4355&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4356&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4357&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4358&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4359&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C300&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C301&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C302&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C303&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C304&MI_05
+
+
+[_Models.ntamd64]
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4300&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4301&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4302&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4303&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4304&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4305&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4306&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4307&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4308&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4309&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_430F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4310&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4311&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4312&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4313&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4314&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4315&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4316&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4317&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4318&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4319&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_431F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4320&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4321&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4322&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4323&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4324&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4325&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4326&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4327&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4328&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4329&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_432F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4330&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4331&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4332&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4333&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4334&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4335&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4336&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4337&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4338&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4339&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_433F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4340&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4341&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4342&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4343&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4344&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4345&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4346&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4347&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4348&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4349&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_434F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4350&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4351&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4352&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4353&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4354&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4355&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4356&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4357&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4358&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_4359&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435A&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435B&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435C&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435D&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435E&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_435F&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C300&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C301&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C302&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C303&MI_05
+%S_DeviceDesc%=_Install,USB\VID_17E9&PID_C304&MI_05
+
+
+;******************************************************************************
+; Control Flags Sections
+;------------------------------------------------------------------------------
+[ControlFlags]
+ExcludeFromSelect=*
+
+
+;******************************************************************************
+; Install Sections
+;------------------------------------------------------------------------------
+[_Install.NT]
+; NCF_PHYSICAL + NCF_HAS_UI
+Characteristics = 0x84
+; bus type = PnP Bus: 15
+BusType         = 15
+AddReg = _AddReg_SW
+CopyFiles=_CopyFiles_sys
+
+[_Install.ntamd64]
+; NCF_PHYSICAL + NCF_HAS_UI
+Characteristics = 0x84
+; bus type = PnP Bus: 15
+BusType         = 15
+AddReg = _AddReg_SW
+CopyFiles=_CopyFiles_sys
+
+[_Install.NT.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService, _EventLog
+
+[_Install.ntamd64.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService, _EventLog
+
+[_AddService]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; MANUAL
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\%S_DriverName%.sys
+AddReg=_AddReg_Service
+
+[_EventLog]
+AddReg=_EventLog_AddReg
+
+[_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%S_DriverName%.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+;******************************************************************************
+; Registry sections
+;------------------------------------------------------------------------------
+[_AddReg_SW]
+HKR, Ndi,               Service,        0, %S_ServiceName%
+HKR, Ndi\Interfaces,    UpperRange,     0, "ndis5"
+HKR, Ndi\Interfaces,    LowerRange,     0, "ethernet"
+
+; turn of the power management feature
+; HKR,,PnPCapabilities,%REG_DWORD%, 0x38
+HKR,,RxBuffers,%REG_DWORD%, 10
+HKR,,TxBuffers,%REG_DWORD%, 10
+
+; use this if the device does not report an MAC address
+; the device overwrites this value
+;HKR,,NetworkAddress,%REG_SZ%, "AEDE48020100"
+; set the default media state, 0 is disconnected, 1 is connected
+HKR,,DefaultMediaState,%REG_DWORD%, 0
+
+; set this key to one of the device ned a one byte termination instead of 
+; a zero length packet
+HKR,,OneByteTermination,%REG_DWORD%, 0
+
+; the configuration index for the device
+; the Linux gadget may expose the ECM interface on index 1
+HKR,,ConfigurationIndex,%REG_DWORD%, 0
+
+; set this to 1 to force the driver to send a clear feature endpoint halt on start
+HKR,,SendClearEpHaltOnStart,%REG_DWORD%, 0
+
+; when the device supports Ehternet statistics this time interval is used 
+; to read the statistics from the device
+; To solve bandwidth the statistics is read, only,  when the PC request it.
+HKR,,StatisticsUpdateInterval,%REG_DWORD%, 5000
+
+HKR,,VendorDescription,%REG_SZ%, %S_VendorDescription%
+
+; in units of 100 bps
+HKR,,DefaultLinkSpeed,%REG_DWORD%,1000000
+
+HKR,,VlanEnabled,%REG_DWORD%, 1
+
+; Network Address
+HKR, Ndi\params\NetworkAddress,      		ParamDesc,     0, "MAC address"
+HKR, Ndi\params\NetworkAddress,      		Default,       0, ""
+HKR, Ndi\params\NetworkAddress,      		type,          0, "edit"
+HKR, NDI\params\NetworkAddress,      		LimitText,     0, "12"
+HKR, NDI\params\NetworkAddress,      		UpperCase,     0, "1"
+HKR, NDI\params\NetworkAddress,      		optional,      0, "1"
+HKR, PROSetNdi\NdiExt\params\NetworkAddress,MiniHelp,  0, "Enter a MAC address to overwrite the hardware address."
+
+; VLAN ID
+HKR, Ndi\params\VlanID,                 ParamDesc,     0, "VLAN ID"
+HKR, Ndi\params\VlanID,     						default,       0, "0"
+HKR, Ndi\params\VlanID,     						type,          0, "long"
+HKR, Ndi\params\VlanID,     						min,           0, "0"
+HKR, Ndi\params\VlanID,     						max,           0, "4094"
+HKR, Ndi\params\VlanID,     						step,          0, "1"
+HKR, Ndi\params\VlanID,     						base,          0, "10"
+
+; Wake On Lan
+HKR, Ndi\params\WakeOnLan,      				ParamDesc,     0, "Wake on LAN"
+HKR, Ndi\params\WakeOnLan,      				default,       0, "2"
+HKR, Ndi\params\WakeOnLan,      				type,          0, "enum"
+HKR, Ndi\params\WakeOnLan\enum,   			"0",					 0, "Wake on LAN disabled"
+HKR, Ndi\params\WakeOnLan\enum,   			"1",					 0, "Link up"
+HKR, Ndi\params\WakeOnLan\enum,   			"2",					 0, "Magic packet"
+HKR, Ndi\params\WakeOnLan\enum,   			"3",					 0, "Link up and Magic packet"
+
+[_AddReg_Service]
+HKR,Parameters,,,
+
+
+;******************************************************************************
+; Copy file sections
+;------------------------------------------------------------------------------
+[_CopyFiles_sys]
+dlcdcecm.sys,,,0x00000004
+
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 12  ; %windir%\system32\drivers
+_CopyFiles_sys = 12
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames.x86]
+1=%S_DiskName%,,,\x86
+
+[SourceDisksNames.amd64]
+1=%S_DiskName%,,,\x64
+
+[SourceDisksFiles.x86]
+dlcdcecm.sys=1
+
+[SourceDisksFiles.amd64]
+dlcdcecm.sys=1
+
+;******************************************************************************
+; Strings
+;------------------------------------------------------------------------------
+[Strings]
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+
+
+;
+; Localizable Strings
+;
+; provider
+S_Provider="DisplayLink Corp."
+S_Mfg="DisplayLink"
+
+
+S_VendorDescription="DisplayLink USB Gigabit Network Adapter"
+
+; disk name
+S_DiskName="DisplayLink USB Gigabit Network Adapter driver disk"
+
+; device description
+S_DeviceDesc="DisplayLink USB Gigabit Network Adapter"
+
+; driver name
+S_DriverName="dlcdcecm"
+
+; service name
+S_ServiceName="dlcdcecm"
+
+
+
+;;;;;;;;;;;;;;;;;;;;;; EOF ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

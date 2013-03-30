@@ -1,0 +1,87 @@
+; Copyright: (c) 2012 Razer USA Ltd. All rights reserved
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Mouse
+ClassGuid   = {4D36E96F-E325-11CE-BFC1-08002BE10318}
+Provider    = %Razer%
+DriverVer=12/06/2012,6.2.9200.16384
+CatalogFile = lachesis35g.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+Razer_CoInstaller_CopyFiles = 11
+
+[Manufacturer]
+%Razer%=Standard,NTAMD64
+
+[Standard]
+%Razer000C.DeviceDesc%=Razer, HID\Vid_1532&Pid_000C&MI_00
+%Razer001E.DeviceDesc%=Razer, HID\Vid_1532&Pid_001E&MI_00
+
+[Standard.NTAMD64]
+%Razer000C.DeviceDesc%=Razer, HID\Vid_1532&Pid_000C&MI_00
+%Razer001E.DeviceDesc%=Razer, HID\Vid_1532&Pid_001E&MI_00
+
+[Razer.NT]  
+Include = MSMOUSE.INF
+Needs = HID_Mouse_Inst.NT
+CopyFiles = Razer.NT.Copy
+
+[Razer.NT.Copy]
+lachesis35g.sys
+
+[Razer.NT.HW]
+Include=msmouse.inf
+Needs=HID_Mouse_Inst.NT.HW
+AddReg = Razer.NT.HW.AddReg
+
+[Razer.NT.HW.AddReg]  
+HKR,,"UpperFilters",0x00010000,"lachesis35g"
+;; FILE_DEVICE_SECURE                         
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+; SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GRGWGX;;;BA)(A;;GRGWGX;;;WD)(A;;GRGWGX;;;RC)"
+
+[Razer.NT.Services]
+AddService      = lachesis35g,, Razer_Service_Inst 
+Include=msmouse.inf
+Needs=HID_Mouse_Inst.NT.Services
+
+[Razer_Service_Inst]
+DisplayName     = %Razer.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\lachesis35g.sys                            
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+lachesis35g.sys    = 1,,
+WdfCoInstaller01009.dll=1
+
+[Razer.NT.CoInstallers]
+AddReg          = Razer_CoInstaller_AddReg
+CopyFiles       = Razer_CoInstaller_CopyFiles
+
+[Razer_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[Razer_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[Razer.NT.Wdf]
+KmdfService              = lachesis35g,  lachesis35g_wdfsect
+
+[lachesis35g_wdfsect]
+KmdfLibraryVersion       = 1.9
+
+[Strings]
+Razer                    = "Razer USA Ltd"
+DiskId1                  = "Razer Installer"
+Razer.SvcDesc            = "Razer Lachesis 5600 Driver"
+
+Razer000C.DeviceDesc     = "Razer Lachesis"
+Razer001E.DeviceDesc     = "Razer Lachesis 5600"

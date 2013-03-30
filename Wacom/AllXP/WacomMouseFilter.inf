@@ -1,0 +1,85 @@
+; wacommousefilter.inf
+; Installation inf for wacommousefilter.sys
+; (c) Copyright 2005 - 2006 Wacom Technology
+
+[Version]
+Signature="$Windows NT$"
+Class=Mouse
+ClassGUID={4D36E96F-E325-11CE-BFC1-08002BE10318}
+Provider=%WACOM%
+CatalogFile=wacommousefilter.cat
+DriverVer=02/15/2007,1.02.0002.0
+
+[SourceDisksNames]
+1=%Diskname%
+
+[SourceDisksFiles]
+wacommousefilter.sys = 1
+
+[DestinationDirs]
+wacommousefilter.CopyFiles = 12
+
+[Manufacturer]
+%WACOM% = WACOM,NTamd64
+
+[WACOM]
+%WacFilter% = wacommousefilter, HID\WACOMVIRTUALHID&Col03
+
+[WACOM.NTamd64]
+%WacFilter% = wacommousefilter, HID\WACOMVIRTUALHID&Col03
+
+[wacommousefilter.NT]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT
+CopyFiles = wacommousefilter.CopyFiles
+
+[wacommousefilter.NT.Services]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.Services
+AddService = wacommousefilter, ,wacommousefilter_Service_Inst
+
+[wacommousefilter.NT.HW]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.HW
+AddReg = wacommousefilter.AddReg
+
+[wacommousefilter.CopyFiles]
+wacommousefilter.sys
+
+[wacommousefilter_Service_Inst]
+DisplayName    = %WacFilter.Desc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_IGNORE%
+LoadOrderGroup = Pointer Port
+ServiceBinary  = %12%\wacommousefilter.sys
+
+[wacommousefilter.AddReg]
+HKR,,"UpperFilters",0x00010000,"wacommousefilter"
+
+[Strings]
+;  *******Localizable Strings*******
+WACOM          = "Wacom Technology"
+WacFilter      = "Wacom Mouse"
+WacFilter.Desc = "Wacom Mouse Filter Driver"
+Diskname="Wacom Installer"
+
+;  *******Non Localizable Strings*******
+SERVICE_BOOT_START   = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START   = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED     = 0x4
+
+SERVICE_KERNEL_DRIVER = 0x1
+
+SERVICE_ERROR_IGNORE   = 0x0
+SERVICE_ERROR_NORMAL   = 0x1
+SERVICE_ERROR_SEVERE   = 0x2
+SERVICE_ERROR_CRITICAL = 0x3
+
+REG_EXPAND_SZ = 0x00020000
+REG_DWORD     = 0x00010001
+REG_MULTI_SZ  = 0x00010000
+REG_BINARY    = 0x00000001
+REG_SZ        = 0x00000000

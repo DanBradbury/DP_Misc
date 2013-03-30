@@ -1,0 +1,147 @@
+;*****************************************************************************
+;
+; Name:  cyg_w2k.inf
+;
+; Function:
+;	Install the CP2101 USB to UART Bridge Controller (WDM) on Win2000
+;
+; Copyright (c) 1997-2003 MCCI
+;
+; MCCI is a registered trademark of Moore Computer Consultants, Inc
+;
+; NOTICE: This software is licensed, not sold.  Any modification of this
+; inf file to change the reference to an operating system or to change the
+; reference to a device is not permitted unless authorized in writing by
+; Moore Computer Consultants, Inc.
+;
+;*****************************************************************************
+
+[Version]
+signature="$WINDOWS NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%Provider%
+DriverVer=10/16/2003, 4.16.0.2702
+CatalogFile=cyg_ser.cat
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[SourceDisksNames]
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+1=%DiskString%,"cyg_ser.sys",,
+
+[SourceDisksFiles]
+; filename = diskid[,[ subdir][, size]]
+cyg_ser.sys = 1
+cyg_cmnt.sys = 1
+
+;-----------------------------------------------------------------------------
+; Specify target paths...
+;-----------------------------------------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir = 12                    ; system32\drivers
+CopyFiles = 12                         ; system32\drivers
+CopyFiles.Win2K = 12                   ;
+
+;-----------------------------------------------------------------------------
+; Table of Contents
+;-----------------------------------------------------------------------------
+[Manufacturer]
+%Cygnal%=Cygnal
+
+;-----------------------------------------------------------------------------
+; Device-by-device entries
+;-----------------------------------------------------------------------------
+[Cygnal]
+%Cygnal.Comm.Desc% = Cygnal.Install, USB\VID_10C4&PID_EA60&MI_00&OS_NT
+
+;-----------------------------------------------------------------------------
+; Installation instructions
+;-----------------------------------------------------------------------------
+
+[Cygnal.Install.nt]
+AddReg		= Cygnal.AddReg,Cygnal.NT.AddReg
+CopyFiles	= CopyFiles, CopyFiles.Win2K
+
+;-----------------------------------------------------------------------------
+;  Registry
+;-----------------------------------------------------------------------------
+
+; common registry entries 
+[Cygnal.AddReg]
+HKR,,NTMPDriver,,cyg_ser.sys
+HKR,,RateLimitPurgeMS, 0x10001, 0x64, 0x00, 0x00, 0x00
+HKR,,OverrideDefaultPortSettings, 0x10001, 01,00,00,00
+HKR,,InitialBaudRate, 0x10001, 00,C2,01,00                      ;115200 initial baud rate
+HKR,,InitialLineControl,, "8N1"                                 ;8-bits, No parity, 1 stop bit
+
+
+
+; only for NT...
+[Cygnal.NT.AddReg]
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+;-----------------------------------------------------------------------------
+;  Copy lists
+;-----------------------------------------------------------------------------
+[CopyFiles]
+
+[CopyFiles.Win2K]
+cyg_ser.sys
+cyg_cm.sys,cyg_cmnt.sys
+cyg_cmnt.sys
+
+
+;-----------------------------------------------------------------------------
+;  NT Services installation
+;-----------------------------------------------------------------------------
+
+[Cygnal.Install.NT.Services]
+AddService = cyg_ser, 0x00000002, Cygnal.Install.AddService
+
+
+[Cygnal.Install.AddService]
+DisplayName	= %Cygnal.Service.Name%
+Description	= %Cygnal.Service.Desc%
+ServiceType	= 1			;%SERVICE_KERNEL_DRIVER%
+StartType	= 3			;%SERVICE_DEMAND_START%
+ErrorControl	= 1			;%SERVICE_ERROR_NORMAL%	
+ServiceBinary	= %12%\cyg_ser.sys
+
+
+
+;-----------------------------------------------------------------------------
+; STRINGS
+;-----------------------------------------------------------------------------
+[Strings]
+
+;<<localize the following>>
+
+;BEGIN ENG - US English Strings
+
+Provider = "Cygnal Integrated Products, Inc."
+Cygnal = "Cygnal Integrated Products, Inc."
+DiskString = "CP2101 USB to UART Bridge Controller Drivers"
+
+Cygnal.Comm.Desc = "CP2101 USB to UART Bridge Controller"
+Cygnal.Service.Name = "CP2101 USB to UART Bridge Controller Drivers"
+Cygnal.Service.Desc = "CP2101 USB to UART Bridge Controller Drivers"
+
+
+CustomerDataPath = "CP2101 USB to UART Bridge Controller"
+DriverSet = "CP2101 USB to UART Bridge Controller Driver Set"
+UninstallFile = "CYG_Uninstall.exe"
+McciOptions = "Uninstallable"
+
+
+;END ENG - US English Strings
+
+;-----------------------------------------------------------------------------
+; The following are symbolic constants which don't change per locale.
+;-----------------------------------------------------------------------------
+
+
+;*** end of file ***

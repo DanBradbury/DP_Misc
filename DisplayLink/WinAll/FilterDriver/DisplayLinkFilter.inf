@@ -1,0 +1,106 @@
+;
+; DisplayLinkFilter.inf
+;
+; Installation inf for the DisplayLink Filter driver.
+;
+; Copyright (c) 2003 - 2009 DisplayLink Corp.
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%DISPLAYLINK%
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Class=Display
+DriverVer=04/05/2011,5.6.31777.0
+CatalogFile="DisplayLinkFilter.cat"
+
+
+[Manufacturer]
+%DISPLAYLINK% = DLFilter_Models, ntx86
+
+[DLFilter_Models.ntx86]
+%DRIVER% = DLFilterInstall.ntx86, DisplayLink_Filter
+
+
+;
+; Install section
+;
+
+[DLFilterInstall.ntx86]
+CopyFiles = DLFilter.Files
+AddReg    = DLFilter.Reg
+
+[DLFilterInstall.ntx86.Services]
+AddService = DisplayLinkFilter,,DLFilter.Service_Install
+
+[DefaultInstall.ntx86]
+Needs=DLFilterInstall.ntx86
+
+[DefaultInstall.ntx86.Services]
+Needs = DLFilterInstall.ntx86.Services
+
+
+[DefaultUninstall.ntx86]
+DelFiles  = DLFilter.Files
+DelReg    = DLFilter.Reg
+
+[DefaultUninstall.ntx86.Services]
+DelService = DisplayLinkFilter,0x200
+
+
+;
+; File installation
+;
+
+[DestinationDirs]
+DefaultDestDir       = 12 ; %SYSTEMROOT%\SYSTEM32
+DLFilter.Files       = 12
+DLFilter.Files64     = 12
+
+[SourceDisksNames]
+1 = %DISKID%,,,""
+
+[DLFilter.Files]
+DisplayLinkFilter.sys
+
+[SourceDisksFiles]
+DisplayLinkFilter.sys = 1
+DisplayLinkFilter64.sys = 1
+
+
+;
+; Service installation
+;
+
+
+[DLFilter.Service_Install]
+ServiceType = 1
+StartType = 3
+ErrorControl = 0
+LoadOrderGroup = video
+ServiceBinary = %12%\DisplayLinkFilter.sys
+
+
+;
+; UpperFilter
+;
+
+[DLFilter.Reg]
+HKLM, %DISPLAYCLASS_ROOT%, UpperFilters, 0x00010008, DisplayLinkFilter
+
+; 
+
+[Strings]
+REG_SZ          = 0x00000000
+REG_MULTI_SZ    = 0x00010000
+REG_EXPAND_SZ   = 0x00020000
+REG_BINARY      = 0x00000001
+REG_DWORD       = 0x00010001
+
+DISKID  = "DisplayLink Filter Adapter Installation Disk"
+DISPLAYLINK = "DisplayLink Corp."
+
+; Name displayed in UI
+DRIVER  = "DisplayLink Filter"
+
+DISPLAYCLASS_ROOT = "System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}"

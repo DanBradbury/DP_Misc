@@ -1,0 +1,161 @@
+;----------------------------------------------------------------------------------------;
+;                                                                                        ;
+; Copyright (c) 2007 by Winbond Electronics Corporation                                  ;
+; All rights reserved.                                                                   ;
+;                                                                                        ;
+; File Contents:                                                                         ;                                                                                        
+;     winbondhidcir.inf                                                                  ;
+;                                                                                        ;
+; Project:                                                                               ; 
+;     Winbond HID CIR Driver                                                             ;
+;                                                                                        ;
+;----------------------------------------------------------------------------------------;
+
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%VENDOR%
+CatalogFile=winbondhidcir.cat
+DriverVer=07/10/2007,7.1.64.1011
+
+
+
+[SourceDisksFiles]
+winbondhidcir.sys = 99
+hidshim.sys = 99
+
+
+[SourceDisksNames.x86]
+99 = %DISK_NAME%,,,\i386
+
+[SourceDisksNames.ia64]
+99 = %DISK_NAME%,,,\ia64
+
+[SourceDisksNames.amd64]
+99 = %DISK_NAME%,,,\amd64
+
+
+[DestinationDirs]
+CopyFilesSYS = 12
+
+[Manufacturer]
+%VENDOR%=Vendor, NTx86, NTia64, NTamd64
+
+; For Win2K
+[Vendor]
+%HidMini%    = HidMini.Inst, ACPI\WEC1023
+
+; For XP and later
+[Vendor.NTx86]
+%HidMini%    = HidMini.Inst, ACPI\WEC1023
+
+[Vendor.NTia64]
+%HidMini%    = HidMini.Inst, ACPI\WEC1023
+
+[Vendor.NTamd64]
+%HidMini%    = HidMini.Inst, ACPI\WEC1023
+
+;===============================================================
+;   HidMini (Root Enumerated Hid Device) install section
+;===============================================================
+[HidMini.Inst.NT]
+CopyFiles = CopyFilesSYS
+LogConfig      = WPC876xL_config
+
+[HidMini.Inst.NT.HW]
+AddReg = HidMini_Parameters.AddReg 
+
+[HidMini.Inst.NT.Services]
+AddService = winbondhidcir,0x00000002,winbondhidcir_Service_Inst,
+AddService = hidshim,, HidShim_Service_Inst
+
+
+[CopyFilesSYS]
+winbondhidcir.sys
+hidshim.sys
+
+
+[HidMini_Parameters.AddReg]
+HKR,,"UpperFilters",0x00010000,"hidshim"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Media Center\Remote Controls","HID\WinbondHidIrDevice&Col04",0x00000000,""
+
+[winbondhidcir_Service_Inst]
+DisplayName    = %HidMini%
+ServiceType    = %SERVICE_KERNEL_DRIVER% 
+StartType      = %SERVICE_DEMAND_START% 
+ErrorControl   = %SERVICE_ERROR_IGNORE% 
+ServiceBinary  = %12%\winbondhidcir.sys 
+
+
+; -------------- devlower Driver install section
+[HidShim_Service_Inst]
+DisplayName    = %HIDSHIM.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\hidshim.sys
+LoadOrderGroup = PNP Filter
+
+
+;================================================================
+;--- WDF Coinstaller installation ------
+;
+[DestinationDirs]
+HidMini.Inst_CoInstaller_CopyFiles = 11
+
+[HidMini.Inst.NT.CoInstallers]
+AddReg=HidMini.Inst_CoInstaller_AddReg
+CopyFiles=HidMini.Inst_CoInstaller_CopyFiles
+
+[HidMini.Inst_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01005.dll,WdfCoInstaller"
+
+[HidMini.Inst_CoInstaller_CopyFiles]
+wdfcoinstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=99 ; make sure the number matches with SourceDisksNames
+
+[HidMini.Inst.NT.Wdf]
+KmdfService = winbondhidcir, winbondhidcir_wdfsect
+[winbondhidcir_wdfsect]
+KmdfLibraryVersion = 1.5
+
+
+;================================================================
+
+[WPC876xL_config]
+ConfigPriority=NORMAL
+IRQConfig=3,4,5,6,7,9,10,11,12,14,15,17,18,19,20,21,22,23,24  ; IR Port IRQ
+IOConfig=20@100-FFFF%FFFFE                      ; MSWC Host registers
+
+
+[Strings] 
+;  *******Localizable Strings******* 
+VENDOR         = "Winbond Electronics Corporation" 
+HidMini        = "Winbond HID CIR Receiver" 
+HidDevice      = "Winbond HID CIR Receiver Device" 
+DISK_NAME      = "Winbond HID CIR Receiver Device Install Disk"
+HIDSHIM.SVCDESC= "Service for HID-KMDF Shim layer"
+
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START     = 0x0 
+SERVICE_SYSTEM_START   = 0x1 
+SERVICE_AUTO_START     = 0x2 
+SERVICE_DEMAND_START   = 0x3 
+SERVICE_DISABLED       = 0x4 
+
+SERVICE_KERNEL_DRIVER  = 0x1 
+SERVICE_ERROR_IGNORE   = 0x0 
+SERVICE_ERROR_NORMAL   = 0x1 
+SERVICE_ERROR_SEVERE   = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ          = 0x00020000 
+REG_DWORD              = 0x00010001 
+REG_MULTI_SZ           = 0x00010000
+REG_BINARY             = 0x00000001
+REG_SZ                 = 0x00000000

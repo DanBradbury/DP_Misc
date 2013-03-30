@@ -1,0 +1,105 @@
+; wacmultitouch.inf
+; Installation inf for winusb driver that attaches to bulk endpoint
+; (c) Copyright 2012 Wacom Technology
+
+[Version]
+Signature = "$Windows NT$"
+Class = WacomMultitouch
+ClassGuid={6d3963a7-0f27-4d42-a63b-671f74fbddc9}
+Provider = %WacMT.Provider%
+CatalogFile=wacmultitouch.cat
+DriverVer=11/27/2012,1.0.2.0
+
+; ================== Class section ==================
+
+[ClassInstall32]
+Addreg=WacMT_AddReg
+
+[WacMT_AddReg]
+HKR,,,0,%WacMT.ClassName%
+HKR,,Icon,,-1
+
+; ========== Manufacturer/Models sections ===========
+
+[Manufacturer]
+%WacMT.Manufacturer% = WacMT_WinUSB,NTx86,NTamd64
+
+[WacMT_WinUSB.NTx86]
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_00F6&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_005D&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_005E&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_0309&MI_00
+
+[WacMT_WinUSB.NTamd64]
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_00F6&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_005D&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_005E&MI_00
+%WacMT.DeviceDesc%=WacMT.Install, USB\VID_056A&PID_0309&MI_00
+
+; =================== Installation ===================
+;[1]
+[WacMT.Install]
+Include=winusb.inf
+Needs=WINUSB.NT
+
+;[2]
+[WacMT.Install.Services]
+Include=winusb.inf
+AddService=WinUSB,0x00000002,WinUSB_ServiceInstall
+
+;[3]
+[WinUSB_ServiceInstall]
+DisplayName     = %WinUSB_SvcDesc%
+ServiceType     = 1
+StartType       = 3
+ErrorControl    = 1
+ServiceBinary   = %12%\WinUSB.sys
+
+;[4]
+[WacMT.Install.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+[WinUSB_Install]
+KmdfLibraryVersion=1.9
+
+;[5]
+[WacMT.Install.HW]
+AddReg=Dev_AddReg
+
+[Dev_AddReg]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{103b887c-f5b0-46a6-856a-10cba7460490}"
+
+;[6]
+[WacMT.Install.CoInstallers]
+AddReg=CoInstallers_AddReg
+CopyFiles=CoInstallers_CopyFiles
+
+[CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WdfCoInstaller01009.dll,WdfCoInstaller","WinUSBCoInstaller2.dll"
+
+[CoInstallers_CopyFiles]
+WinUSBCoInstaller2.dll
+WdfCoInstaller01009.dll
+
+[DestinationDirs]
+CoInstallers_CopyFiles=11
+
+; ================= Source Media Section =====================
+;[7]
+
+[SourceDisksNames]
+1 = %DISK_NAME%
+
+[SourceDisksFiles]
+WinUSBCoInstaller2.dll=1
+WdfCoInstaller01009.dll=1
+
+; =================== Strings ===================
+
+[Strings]
+WacMT.Provider="Wacom Co Ltd."
+WacMT.Manufacturer="Wacom Co Ltd."
+WacMT.DeviceDesc="Wacom multitouch monitor"
+WinUSB_SvcDesc="Wacom Multitouch Monitor"
+DISK_NAME="Drivers"
+WacMT.ClassName="Wacom Multitouch"

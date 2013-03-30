@@ -1,0 +1,138 @@
+; wisdpen.INF
+; Copyright (c) 2004-2009 Wacom Technology
+
+[version]
+signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%WAC%
+CatalogFile.NT=wisdpen.cat
+DriverVer=05/22/2009,3.0.1.3
+ 
+[SourceDisksNames]
+1=%DiskName%
+
+[SourceDisksFiles]
+wisdpen.sys=1
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[DestinationDirs]
+DefaultDestDir              =11     ;LDID_SYS
+WacomPenInst.NT.Copy        =12     ;LDID_DRIVERS
+WacomTouchInst.NT.Copy        =12     ;LDID_DRIVERS
+
+; Drivers
+;----------------------------------------------------------
+[Manufacturer]
+%WAC%=Wacom, NTamd64
+
+[Wacom]
+%ACPI\WACF004.DeviceDesc%   =WacomPenInst,ACPI\WACF004
+%ACPI\WACF005.DeviceDesc%   =WacomPenInst,ACPI\WACF005,ACPI\WACF006
+%ACPI\WACF007.DeviceDesc%   =WacomPenInst,ACPI\WACF007,ACPI\FUJ02E5
+%ACPI\WACF008.DualTouch%    =WacomTouchInst,ACPI\WACF008
+%ACPI\WACF009.DualTouch%    =WacomTouchInst,ACPI\WACF009
+%ACPI\WACF00A.DeviceDesc%   =WacomTouchInst,ACPI\WACF00A
+%ACPI\WACF00B.DeviceDesc%   =WacomTouchInst,ACPI\WACF00B
+%ACPI\WACF00C.DeviceDesc%   =WacomTouchInst,ACPI\WACF00C,ACPI\FUJ02E7
+
+[Wacom.NTamd64]
+%ACPI\WACF004.DeviceDesc%   =WacomPenInst,ACPI\WACF004
+%ACPI\WACF005.DeviceDesc%   =WacomPenInst,ACPI\WACF005,ACPI\WACF006
+%ACPI\WACF007.DeviceDesc%   =WacomPenInst,ACPI\WACF007,ACPI\FUJ02E5
+%ACPI\WACF008.DualTouch%    =WacomTouchInst,ACPI\WACF008
+%ACPI\WACF009.DualTouch%    =WacomTouchInst,ACPI\WACF009
+%ACPI\WACF00A.DeviceDesc%   =WacomTouchInst,ACPI\WACF00A
+%ACPI\WACF00B.DeviceDesc%   =WacomTouchInst,ACPI\WACF00B
+%ACPI\WACF00C.DeviceDesc%   =WacomTouchInst,ACPI\WACF00C,ACPI\FUJ02E7
+
+[SerialInst.NT.HW.AddReg]
+HKR,,"LowerFilters",0x00010000,"serial"
+HKR,,"MultiportDevice",0x00010001,0
+
+[WacomPenInst.NT]
+CopyFiles                   =WacomPenInst.NT.Copy
+[WacomTouchInst.NT]
+CopyFiles                   =WacomTouchInst.NT.Copy
+
+[WacomPenInst.NT.Copy]
+wisdpen.sys
+[WacomTouchInst.NT.Copy]
+wisdpen.sys
+
+[WacomPenInst.NT.HW]
+AddReg                      =SerialInst.NT.HW.AddReg
+[WacomTouchInst.NT.HW]
+AddReg                      =SerialInst.NT.HW.AddReg
+
+[WacomPenInst.NT.Services]
+AddService                  =wisdpen,0x00000002,WacomPenServiceInst,WacomEventLogInst
+AddService                  =Serial,,SerialServiceInst, SerialEventLogInst
+[WacomTouchInst.NT.Services]
+AddService                  =wisdpen,0x00000002,WacomTouchServiceInst,WacomEventLogInst
+AddService                  =Serial,,SerialServiceInst, SerialEventLogInst
+
+[WacomEventLogInst]
+AddReg                      =WacomEventLogAddReg
+
+[WacomEventLogAddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\wisdpen.sys"
+HKR,,TypesSupported,0x00010001,7
+
+; -------------- Wacom Pen Driver install section
+[WacomPenServiceInst]
+DisplayName    = %WacomISDPen.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ;
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\wisdpen.sys
+LoadOrderGroup = Extended Base
+; -------------- Wacom Touch Driver install section
+[WacomTouchServiceInst]
+DisplayName    = %WacomISDPen.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ;
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\wisdpen.sys
+LoadOrderGroup = Extended Base
+AddReg         = WacomTouchAddReg
+
+[WacomTouchAddReg]
+HKR,Prefs,UseTouchRate,0x00010001,1
+
+; -------------- Serial Port Driver install sections
+[SerialServiceInst]
+DisplayName    = %Serial.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\serial.sys
+LoadOrderGroup = Extended base
+
+[SerialEventLogInst]
+AddReg         = SerialEventLogAddReg
+
+[SerialEventLogAddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\serial.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+; User readable strings
+;----------------------------------------------------------
+[Strings]
+WAC= "Wacom"
+ACPI\PNP0501.DeviceDesc="Wacom Penabled Serial MiniDriver"
+ACPI\WACF004.DeviceDesc="Wacom Penabled MiniDriver"
+ACPI\WACF005.DeviceDesc="Wacom Penabled MiniDriver"
+ACPI\WACF007.DeviceDesc="Wacom Penabled MiniDriver"
+ACPI\WACF008.DualTouch="Wacom Penabled Dual Touch"
+ACPI\WACF009.DualTouch="Wacom Penabled Dual Touch"
+ACPI\WACF00A.DeviceDesc="Wacom Penabled Dual Touch"
+ACPI\WACF00B.DeviceDesc="Wacom Penabled Dual Touch"
+ACPI\WACF00C.DeviceDesc="Wacom Two Finger Touch"
+WacomISDPen.SVCDESC="Wacom Penabled MiniDriver"
+Serial.SVCDESC="Serial Port Driver"
+DiskName="Wacom Penabled Installer"
+

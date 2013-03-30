@@ -1,0 +1,128 @@
+; EMSC.inf
+; 
+; Compal Common Driver
+; install information file.
+;
+; (C) Copyright 2007 Compal Electronics, INC.
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%CPL%
+CatalogFile=EMSC.cat
+DriverVer=08/28/2009, 1.0.0.2
+
+[DestinationDirs]
+EMSC.CopyFiles = 10,system32\drivers
+EMSCNT.CopyFiles = 12
+
+[Manufacturer]
+%CPL%=COMPAL, NTamd64
+
+[ControlFlags]
+ExcludeFromSelect = *CPL0002
+
+[COMPAL]
+%*CPL0002.DeviceDesc%=EMSC,*CPL0002
+
+[COMPAL.NTamd64]
+%*CPL0002.DeviceDesc%=EMSC,*CPL0002
+
+[SourceDisksNames]
+1=%INST_DISK_NAME%
+
+[SourceDisksFiles]
+EMSC.SYS = 1
+WdfCoinstaller01009.dll=1,,
+
+[EMSC]
+AddReg=EMSC.AddReg
+CopyFiles=EMSC.CopyFiles
+
+[EMSC.NTX86]
+CopyFiles=EMSC.CopyFiles
+
+
+
+
+
+[EMSC.HW]
+Addreg=EMSCHW.AddReg
+
+[EMSCHW.AddReg]
+HKR,,ConfigFlags,1,00,00,00,00
+
+[EMSC.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,EMSC.SYS
+HKR,,EnumPropPages,,"sysclass.dll,EnumPropPages"
+
+
+[EMSC.NT]
+AddReg=EMSC.AddReg
+CopyFiles=EMSCNT.CopyFiles
+
+[EMSC.NT.HW]
+AddReg=EMSC.NT.AddReg
+
+
+[EMSC.NT.AddReg] 
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GA;;;BA)(A;;GA;;;WD)(A;;GA;;;RC)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+[EMSC.NT.Services]
+AddService=EMSC,2,EMSC_Service_Inst
+
+
+[EMSC.NTX86]
+AddReg=EMSC.AddReg
+CopyFiles=EMSCNT.CopyFiles
+
+[EMSC.NTX86.HW]
+AddReg=EMSC.NT.AddReg
+
+
+[EMSC.NTX86.Services]
+AddService=EMSC,2,EMSC_Service_Inst
+
+[EMSC_Service_Inst]
+DisplayName    = %EMSC.SvcDesc%
+ServiceType    = 1
+StartType      = 0
+ErrorControl   = 1
+ServiceBinary  = %12%\EMSC.SYS
+
+[EMSC.CopyFiles]
+EMSC.sys
+
+[EMSCNT.CopyFiles]
+EMSC.sys
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  WDF Coinstaller installation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[EMSC.NTX86.CoInstallers]
+AddReg=EMSC_CoInstaller_AddReg
+CopyFiles=EMSC_CoInstaller_CopyFiles
+
+[EMSC_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoinstaller01009.dll,WdfCoInstaller"
+
+[EMSC_CoInstaller_CopyFiles]
+WdfCoinstaller01009.dll
+
+[EMSC.NTX86.Wdf]
+KmdfService = EMSC, EMSC_wdfsect
+[EMSC_wdfsect]
+KmdfLibraryVersion = 1.0
+
+
+
+[strings]
+CPL                  = "COMPAL"
+*CPL0002.DeviceDesc  = "Embedded System Control"
+EMSC.SvcDesc        = "Embedded System Control"
+INST_DISK_NAME="Embedded System Control"

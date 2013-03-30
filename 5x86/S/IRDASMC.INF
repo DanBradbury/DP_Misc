@@ -1,0 +1,699 @@
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; File:  IRDASMC.INF
+;
+; INF to install SmcIrda.Sys NDIS 5.0 Miniport for SMC IrCC
+; on Windows 2000 and Windows XP
+;
+; Copyright 1997 - 2005 SMSC.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; 04/11/05 (RL)
+; Updated for V.5.1.3600.8.
+;
+; Added support for Tx timer.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; 12/09/04 (TR)
+; Updated for V.5.1.3600.7.
+;
+; Added support for custom property sheet values.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; 11/11/04 (TR)
+; Updated for V.5.1.3600.6.
+;
+; FIFO size is now detected on startup.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; 06/03/03 (JG)
+; Updated for V.5.1.3600.4.
+;
+; Added a new reg key StuffFifo for Ali chipset.
+;
+; From this version, the PnP IDs are defined as below
+; SMCF010 Golden HW with AUTO detect transceriver.
+; SMCF01x Intel chipset with specific transceivers.
+; SMCF02x SiS/VIA chipset with specific transceivers.
+; SMCF030 Reserved.
+; SMCF04x Ali chipset with specific transceivers.
+;    Where x in PnP IDs is suitable for all cases above
+;	x = 0 Auto detect;
+;       x = 1 HP / Agilent;
+;	x = 2 IBM;
+;	x = 3 SHARP;
+;	x = 4 VISHAY.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; 12/11/02 (yo)
+; INF only update for V.5.1.3600.3.
+;
+; SMCF010 is golden HW.
+; SMCF020 device has SiS/VIA chipset, adds RxForceDrq reg key.
+; SMCF030 forces HP transceiver and gives a user no other choice.
+; SMCF031 forces IBM transceiver and gives a user no other choice.
+; SMCF032 forces SHARP transceiver and gives a user no other choice.
+; SMCF033 forces VISHAY transceiver and gives a user no other choice.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; yo v3600  3/13/2002
+; EVB portion was removed.
+; NEC PnP installation was added.
+;	Note that both SMC & NEC installation shares services section
+;	because multiple services can not have the same binary as 
+;	ServiceBinary according to ChkInf tool from DDK.
+; Win9x directives (DeviceID, MaxInstance) were removed.
+; WinXp directive (NCF_HAS_UI) was added.
+; Coinstaller directive was deleted.
+; DelFiles section was not used and was deleted.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+
+[version]
+CatalogFile=irdasmc.cat
+;LayoutFile=layout.inf ; should only use this if installing as part of OS
+signature="$Windows NT$"
+Class       = Infrared
+ClassGUID   = {6bdd1fc5-810f-11d0-BEC7-08002BE2092F}
+provider=%strSMC%
+DriverVer=03/12/2006, 5.1.3600.9
+
+[DestinationDirs]
+DefaultDestDir=12                       ; %windir%\system32\drivers
+SysCopyFiles=12
+
+[Manufacturer]
+;x86 device sections
+%strSMC%=SMC_IRCC
+%strNEC%=NEC_IRCC
+
+[ControlFlags]
+ExcludeFromSelect=*SMCF010
+ExcludeFromSelect=*SMCF011
+ExcludeFromSelect=*SMCF012
+ExcludeFromSelect=*SMCF013
+ExcludeFromSelect=*SMCF014
+ExcludeFromSelect=*SMCF020
+ExcludeFromSelect=*SMCF021
+ExcludeFromSelect=*SMCF022
+ExcludeFromSelect=*SMCF023
+ExcludeFromSelect=*SMCF024
+ExcludeFromSelect=*SMCF030
+ExcludeFromSelect=*SMCF040
+ExcludeFromSelect=*SMCF041
+ExcludeFromSelect=*SMCF042
+ExcludeFromSelect=*SMCF043
+ExcludeFromSelect=*SMCF044
+ExcludeFromSelect=*NEC9151
+
+[SMC_IRCC]
+%*SMCF010.DeviceDesc%=*SMCF010.ndi, *SMCF010
+%*SMCF011.DeviceDesc%=*SMCF011.ndi, *SMCF011
+%*SMCF012.DeviceDesc%=*SMCF012.ndi, *SMCF012
+%*SMCF013.DeviceDesc%=*SMCF013.ndi, *SMCF013
+%*SMCF014.DeviceDesc%=*SMCF014.ndi, *SMCF014
+%*SMCF020.DeviceDesc%=*SMCF020.ndi, *SMCF020
+%*SMCF021.DeviceDesc%=*SMCF021.ndi, *SMCF021
+%*SMCF022.DeviceDesc%=*SMCF022.ndi, *SMCF022
+%*SMCF023.DeviceDesc%=*SMCF023.ndi, *SMCF023
+%*SMCF024.DeviceDesc%=*SMCF024.ndi, *SMCF024
+%*SMCF030.DeviceDesc%=*SMCF030.ndi, *SMCF030
+%*SMCF040.DeviceDesc%=*SMCF040.ndi, *SMCF040
+%*SMCF041.DeviceDesc%=*SMCF041.ndi, *SMCF041
+%*SMCF042.DeviceDesc%=*SMCF042.ndi, *SMCF042
+%*SMCF043.DeviceDesc%=*SMCF043.ndi, *SMCF043
+%*SMCF044.DeviceDesc%=*SMCF044.ndi, *SMCF044
+
+[NEC_IRCC]
+%*NEC9151.DeviceDesc%=*NEC9151.ndi, *NEC9151
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       SMCF0xx Block
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[*SMCF010.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,AUTODETECT.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF011.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,*SMCF0x1.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF012.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,*SMCF0x2.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF013.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,*SMCF0x3.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF014.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,*SMCF0x4.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF020.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,RxForceDrq.ndi.reg,AUTODETECT.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF021.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,RxForceDrq.ndi.reg,*SMCF0x1.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF022.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,RxForceDrq.ndi.reg,*SMCF0x2.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF023.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,RxForceDrq.ndi.reg,*SMCF0x3.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF024.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,RxForceDrq.ndi.reg,*SMCF0x4.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF030.ndi]		; Keep compitable with *SMCF041
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,*SMCF0x1.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF040.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,AUTODETECT.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF041.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,*SMCF0x1.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF042.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,*SMCF0x2.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF043.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,*SMCF0x3.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+[*SMCF044.ndi]
+DelReg=SMC_DelReg
+AddReg=*SMCF0xx.ndi.reg,*SMCF0xx.ndi.param,StuffFifo.ndi.reg,*SMCF0x4.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Add Registry Section for Install
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       SMCF0xx	-- common for all PnP ID
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0xx.ndi.reg]
+HKR,Ndi,Service,0,"SMCIRDA"
+HKR,Ndi\Interfaces,DefUpper,0,"ndisirda"
+HKR,Ndi\Interfaces,UpperRange,0,"ndisirda"
+HKR,Ndi\Interfaces,DefLower,0,"nolower"
+HKR,Ndi\Interfaces,LowerRange,0,"nolower"
+HKR,Ndi,BoardType,0,"3"
+HKR,Ndi,RequiredAll,0,"MS_IrDA"
+
+;
+; This is the text that shows in the display area at the bottom
+; of the Network dialog when this Adapter is selected in the
+; scrolling window above.
+;
+HKR,Ndi,HelpText,,%strSmcIrdaHelp%
+
+[SMC_DelReg]
+HKR,,EnumPropPages32
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Special section for SMCF02x
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[RxForceDrq.ndi.reg]
+;
+;    SiS & VIA DMAC Options
+;
+;	RxForceDrq:    Any TRUE value enables Force Drq when RX is enabled.
+;
+HKR,,RxForceDrq,0,"1"    ; Only for SiS & VIA chipset.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Special section for SMCF04x
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[StuffFifo.ndi.reg]
+;
+;    Ali Chipset
+;
+;	StuffFifo:    Stuff the FIFO using PIO prior to init the DMA.
+;
+HKR,,StuffFifo,0,"1"    ; Only for Ali chipset.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Parameters Section -- part of AddReg on Install
+;       Key values are adjustable on ADVANCED Property Sheet
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;
+;   Infrared Transceiver Selection
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Do auto detection and give user choice
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[AUTODETECT.ndi.param]
+;   If AUTO [default], then driver will auto-detect at initialization,
+;   which will produce a single spurious Tx pulse if Agilent/Sharp.
+;   This key can be used to prevent this from happening, if desired.
+;
+HKR,Ndi\params\RxSel,ParamDesc,,%strRXSEL%
+HKR,Ndi\params\RxSel,default,,"0"
+HKR,Ndi\params\RxSel,type,,enum
+HKR,Ndi\params\RxSel\enum,"0",,%strRXSEL_0%
+HKR,Ndi\params\RxSel\enum,"1",,%strRXSEL_1%
+HKR,Ndi\params\RxSel\enum,"2",,%strRXSEL_2%
+HKR,Ndi\params\RxSel\enum,"3",,%strRXSEL_3%
+HKR,Ndi\params\RxSel\enum,"4",,%strRXSEL_4%
+HKR,,RxSel,,"0" ; For some reason defaults are not being picked up.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Force Agilent
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0x1.ndi.param]
+;
+;   For SMCF0x1, just add RxSel reg and select Agilent.
+;
+HKR,,RxSel,,"2" ; force Agilent.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Force IBM
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0x2.ndi.param]
+;
+;   Infrared Transceiver Selection
+;
+;   For SMCF0x2, just add RxSel reg and select IBM.
+;
+HKR,,RxSel,,"1" ; force IBM.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Force SHARP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0x3.ndi.param]
+;
+;   For SMCF0x3, just add RxSel reg and select SHARP.
+;
+HKR,,RxSel,,"3" ; force SHARP.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Force VISHAY
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0x4.ndi.param]
+;
+;   For SMCF0x4, just add RxSel reg and select VISHAY.
+;
+HKR,,RxSel,,"4" ; force VISHAY.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       SMCF0xx	-- common for all PnP ID
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF0xx.ndi.param]
+;
+;    IrDA Minimum Turnaround Time (value in microseconds)
+;
+HKR,Ndi\params\MinTurnTime,ParamDesc,,%strIRDATURNTIME%
+HKR,Ndi\params\MinTurnTime,default,,"1000"
+HKR,Ndi\params\MinTurnTime,type,,enum
+HKR,Ndi\params\MinTurnTime\enum,"500",,%strMinTurnTime_500%
+HKR,Ndi\params\MinTurnTime\enum,"1000",,%strMinTurnTime_1000%
+HKR,Ndi\params\MinTurnTime\enum,"5000",,%strMinTurnTime_5000%
+HKR,Ndi\params\MinTurnTime\enum,"10000",,%strMinTurnTime_10000%
+HKR,,MinTurnTime,,"1000" ; For some reason defaults are not being picked up.
+
+;
+;       Maximum Speed
+;
+HKR,Ndi\params\MaxSpeed,ParamDesc,,%strMAXSPEED%
+HKR,Ndi\params\MaxSpeed,flag,1,20,00,00,00
+HKR,Ndi\params\MaxSpeed,default,,"8"
+HKR,Ndi\params\MaxSpeed,type,,enum
+HKR,Ndi\params\MaxSpeed\enum,"1",,%strMaxSpeed_1%
+HKR,Ndi\params\MaxSpeed\enum,"2",,%strMaxSpeed_2%
+HKR,Ndi\params\MaxSpeed\enum,"3",,%strMaxSpeed_3%
+HKR,Ndi\params\MaxSpeed\enum,"4",,%strMaxSpeed_4%
+HKR,Ndi\params\MaxSpeed\enum,"5",,%strMaxSpeed_5%
+HKR,Ndi\params\MaxSpeed\enum,"6",,%strMaxSpeed_6%
+HKR,Ndi\params\MaxSpeed\enum,"7",,%strMaxSpeed_7%
+HKR,Ndi\params\MaxSpeed\enum,"8",,%strMaxSpeed_8%
+HKR,,MaxSpeed,,"8" ; For some reason defaults are not being picked up.
+
+;
+;    IrDA Speed enables
+;
+;       bit=1 enables corresponding speed, 1FF is all speeds [default])
+;
+;       d0 =  2400     d4 =   57600     d8 = 4000000
+;       d1 =  9600     d5 =  115200
+;       d2 = 19200     d6 =  576000
+;       d3 = 38400     d7 = 1152000
+;
+;       Note:  Miniport will always enable 9600,
+;               no matter what this key says
+;
+HKR,,SpeedEnable,,"1FF" ; For some reason defaults are not being picked up.
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       NEC9151 Block
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[*NEC9151.ndi]
+DelReg=NEC_DelReg
+AddReg=*NEC9151.ndi.reg,*NEC9151.ndi.param
+BusType=14              ; ISAPNP Bus
+Characteristics = 0x84	; NCF_PHYSICAL, NCF_HAS_UI
+CopyFiles=SysCopyFiles
+DriverVer=03/12/2006, 5.1.3600.9
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Add Registry Section for Install
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*NEC9151.ndi.reg]
+;HKR,Ndi,Service,0,"NECIRDA"
+HKR,Ndi,Service,0,"SMCIRDA"
+HKR,Ndi\Interfaces,DefUpper,0,"ndisirda"
+HKR,Ndi\Interfaces,UpperRange,0,"ndisirda"
+HKR,Ndi\Interfaces,DefLower,0,"nolower"
+HKR,Ndi\Interfaces,LowerRange,0,"nolower"
+HKR,Ndi,BoardType,0,"3"
+HKR,Ndi,RequiredAll,0,"MS_IrDA"
+
+;
+; This is the text that shows in the display area at the bottom
+; of the Network dialog when this Adapter is selected in the
+; scrolling window above.
+;
+HKR,Ndi,HelpText,,%strNECIrdaHelp%
+
+[NEC_DelReg]
+HKR,,EnumPropPages32
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Parameters Section -- part of AddReg on Install
+;       Key values are adjustable on ADVANCED Property Sheet
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*NEC9151.ndi.param]
+;
+;   Infrared Transceiver Selection
+;
+;   If AUTO [default], then driver will auto-detect at initialization,
+;   which will produce a single spurious Tx pulse if Agilent/Sharp.
+;   This key can be used to prevent this from happening, if desired.
+;
+HKR,Ndi\params\RxSel,ParamDesc,,%strRXSEL%
+HKR,Ndi\params\RxSel,default,,"0"
+HKR,Ndi\params\RxSel,type,,enum
+HKR,Ndi\params\RxSel\enum,"0",,%strRXSEL_0%
+HKR,Ndi\params\RxSel\enum,"1",,%strRXSEL_1%
+HKR,Ndi\params\RxSel\enum,"2",,%strRXSEL_2%
+HKR,Ndi\params\RxSel\enum,"3",,%strRXSEL_3%
+HKR,Ndi\params\RxSel\enum,"4",,%strRXSEL_4%
+HKR,,RxSel,,"0" ; For some reason defaults are not being picked up.
+
+;
+;    IrDA Minimum Turnaround Time (value in microseconds)
+;
+HKR,Ndi\params\MinTurnTime,ParamDesc,,%strIRDATURNTIME%
+HKR,Ndi\params\MinTurnTime,default,,"1000"
+HKR,Ndi\params\MinTurnTime,type,,enum
+HKR,Ndi\params\MinTurnTime\enum,"500",,%strMinTurnTime_500%
+HKR,Ndi\params\MinTurnTime\enum,"1000",,%strMinTurnTime_1000%
+HKR,Ndi\params\MinTurnTime\enum,"5000",,%strMinTurnTime_5000%
+HKR,Ndi\params\MinTurnTime\enum,"10000",,%strMinTurnTime_10000%
+HKR,,MinTurnTime,,"1000" ; For some reason defaults are not being picked up.
+
+;
+;       Maximum Speed
+;
+HKR,Ndi\params\MaxSpeed,ParamDesc,,%strMAXSPEED%
+HKR,Ndi\params\MaxSpeed,flag,1,20,00,00,00
+HKR,Ndi\params\MaxSpeed,default,,"8"
+HKR,Ndi\params\MaxSpeed,type,,enum
+HKR,Ndi\params\MaxSpeed\enum,"1",,%strMaxSpeed_1%
+HKR,Ndi\params\MaxSpeed\enum,"2",,%strMaxSpeed_2%
+HKR,Ndi\params\MaxSpeed\enum,"3",,%strMaxSpeed_3%
+HKR,Ndi\params\MaxSpeed\enum,"4",,%strMaxSpeed_4%
+HKR,Ndi\params\MaxSpeed\enum,"5",,%strMaxSpeed_5%
+HKR,Ndi\params\MaxSpeed\enum,"6",,%strMaxSpeed_6%
+HKR,Ndi\params\MaxSpeed\enum,"7",,%strMaxSpeed_7%
+HKR,Ndi\params\MaxSpeed\enum,"8",,%strMaxSpeed_8%
+HKR,,MaxSpeed,,"8" ; For some reason defaults are not being picked up.
+
+;
+;    IrDA Speed enables
+;
+;       bit=1 enables corresponding speed, 1FF is all speeds [default])
+;
+;       d0 =  2400     d4 =   57600     d8 = 4000000
+;       d1 =  9600     d5 =  115200
+;       d2 = 19200     d6 =  576000
+;       d3 = 38400     d7 = 1152000
+;
+;       Note:  Miniport will always enable 9600,
+;               no matter what this key says
+;
+HKR,,SpeedEnable,,"1FF" ; For some reason defaults are not being picked up.
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Services Section
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[*SMCF010.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF011.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF012.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF013.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF014.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF020.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF021.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF022.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF023.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF024.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF030.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF040.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF041.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF042.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF043.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[*SMCF044.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+
+[*NEC9151.ndi.Services]
+AddService=SMCIRDA,2,SMCIRDA.AddService, common.EventLog
+
+[SMCIRDA.AddService]
+DisplayName=%*SMCF0xx.ServiceDesc%
+ServiceType=1                   ; SERVICE_KERNEL_DRIVER
+StartType=3                     ; SERVICE_DEMAND_START
+ErrorControl=1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary=%12%\smcirda.sys  ; where the driver is
+				; Note: the same bin can not be used 
+				; in multiple services
+LoadOrderGroup=NDIS
+
+[common.EventLog]
+AddReg=common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\netevent.dll;%%SystemRoot%%\System32\Drivers\SmcIrda.Sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       File/Directory Sections
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[SysCopyFiles]
+smcirda.sys,,,2 ; Do not skip file
+
+; SourceDisksNames not required if installing as part of OS
+[SourceDisksNames]
+;1=%strDiskName%,%fileTagFile%,
+1=%strDiskName%,,,
+
+; Specifies the location of each file referencing the 
+; [SourceDisksNames] section
+[SourceDisksFiles]
+smcirda.sys = 1
+; smcirda.inf = 1
+; irdasmc.cat=1		; required by WHQL in case of Win9x 
+			; not to have, required by ChkInf in case of Win2K or later
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;       Localizable Strings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[strings]
+strSMC="SMSC"
+*SMCF010.DeviceDesc="SMSC IrCC - Fast Infrared Port"       ; GOLDEN
+*SMCF011.DeviceDesc="SMSC IrCC - Fast Infrared Port (1a)"  ; Intel cs + Agilent IR
+*SMCF012.DeviceDesc="SMSC IrCC - Fast Infrared Port (1i)"  ; Intel cs + IBM IR
+*SMCF013.DeviceDesc="SMSC IrCC - Fast Infrared Port (1s)"  ; Intel cs + SHARP IR
+*SMCF014.DeviceDesc="SMSC IrCC - Fast Infrared Port (1v)"  ; Intel cs + Vishay IR
+*SMCF020.DeviceDesc="SMSC IrCC - Fast Infrared Port (20)"  ; SiS/VIA cs Auto detect
+*SMCF021.DeviceDesc="SMSC IrCC - Fast Infrared Port (2a)"  ; SiS/VIA cs + Agilent IR
+*SMCF022.DeviceDesc="SMSC IrCC - Fast Infrared Port (2i)"  ; SiS/VIA cs + IBM IR
+*SMCF023.DeviceDesc="SMSC IrCC - Fast Infrared Port (2s)"  ; SiS/VIA cs + SHARP IR
+*SMCF024.DeviceDesc="SMSC IrCC - Fast Infrared Port (2v)"  ; SiS/VIA cs + Vishay IR
+*SMCF030.DeviceDesc="SMSC IrCC - Fast Infrared Port (Ta)"  ; Reserved
+*SMCF040.DeviceDesc="SMSC IrCC - Fast Infrared Port (40)"  ; ALi cs Auto detect
+*SMCF041.DeviceDesc="SMSC IrCC - Fast Infrared Port (4a)"  ; ALi cs + Agilent IR
+*SMCF042.DeviceDesc="SMSC IrCC - Fast Infrared Port (4i)"  ; ALi cs + IBM IR
+*SMCF043.DeviceDesc="SMSC IrCC - Fast Infrared Port (4s)"  ; ALi cs + SHARP IR
+*SMCF044.DeviceDesc="SMSC IrCC - Fast Infrared Port (4v)"  ; ALi cs + Vishay IR
+*SMCF0xx.ServiceDesc="SMSC IrCC Miniport Device Driver"
+strSmcIrdaHelp="The SMSC IrCC Device permits wireless communication with other devices conforming to IrDA standards using invisible infrared light."
+
+strNEC="NEC"
+*NEC9151.DeviceDesc="NEC IrCC - Fast Infrared Port"
+; *NEC9151.ServiceDesc="NEC IrCC Miniport Device Driver"
+strNECIrdaHelp="The NEC IrCC Device permits wireless communication with other devices conforming to IrDA standards using invisible infrared light."
+
+strDiskName="SMSC IR_NDIS"
+fileTagFile="SmcIrda.Tag"	; is this still used?
+
+strRXSEL="Infrared Transceiver Type"
+strIRDATURNTIME="Min. Turn-Around Time"
+strMAXSPEED="Speed Limit"
+
+strRXSEL_0="AUTO [Default]"
+strRXSEL_1="IBM / Infineon / Temic"
+strRXSEL_2="HP"
+strRXSEL_3="Sharp"
+strRXSEL_4="VISHAY Telefunken"
+
+strMinTurnTime_500=" 0.5 mS"
+strMinTurnTime_1000=" 1.0 mS [Default]"
+strMinTurnTime_5000=" 5.0 mS"
+strMinTurnTime_10000="10.0 mS"
+
+strMaxSpeed_1="   9.6 kbps"
+strMaxSpeed_2="  19.2 kbps"
+strMaxSpeed_3="  38.4 kbps"
+strMaxSpeed_4="  57.6 kbps"
+strMaxSpeed_5=" 115.2 kbps"
+strMaxSpeed_6=" 576   kbps"
+strMaxSpeed_7="1.152 Mbps"
+strMaxSpeed_8="4 Mbps"
+
+V_CLASSNAME="Infrared Adapters"

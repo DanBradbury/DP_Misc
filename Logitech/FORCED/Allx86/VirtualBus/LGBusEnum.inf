@@ -1,0 +1,67 @@
+;; LGBusEnum.inf
+;; Logitech Virtual Bus Enumerator INF file
+;;
+;; Part of Logitech Gaming Software
+;;
+;; Copyright 2001-2009 Logitech. All rights reserved.
+
+[Version]
+Signature="$CHICAGO$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%Vendor%
+DriverVer=11/23/2009, 3.04.131.0
+CatalogFile=LGBusEnum.cat
+
+[SourceDisksNames]
+55=%DiskDesc%,,,
+
+[SourceDisksFiles]
+LGBusEnum.sys=55
+
+[DestinationDirs]
+DefaultDestDir = 12
+Drivers_Dir = 12
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%StdMfg%=Standard
+
+[Standard]
+%LogiVirtualBus.DeviceDesc%=LogiVirtualBus_Device, root\LogiGamePanelVirtualBus
+
+[LogiVirtualBus_Device]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+LGBusEnum.sys
+
+[LogiVirtualBus_Device.Services]
+AddService = LGBusEnum, 0x00000002, Virtual_Bus_Enum_Service_Inst
+
+[Virtual_Bus_Enum_Service_Inst]
+DisplayName    = %LGBusEnum.SVCDESC%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START 
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\LGBusEnum.sys
+LoadOrderGroup = Extended Base
+
+
+[Strings]
+Vendor = "Logitech"
+DiskDesc="Logitech GamePanel Software"
+StdMfg = "(Standard system devices)"
+
+LogiVirtualBus.DeviceDesc = "Logitech GamePanel Virtual Bus Enumerator"
+LGBusEnum.SVCDESC = "Logitech GamePanel Virtual Bus Enumerator Driver"
+
+[Strings.0411]
+Vendor = "Logicool"
+DiskDesc="Logicool GamePanel Software"
+StdMfg = "(Standard system devices)"
+
+LogiVirtualBus.DeviceDesc = "Logicool GamePanel Virtual Bus Enumerator"
+LGBusEnum.SVCDESC = "Logicool GamePanel Virtual Bus Enumerator Driver"

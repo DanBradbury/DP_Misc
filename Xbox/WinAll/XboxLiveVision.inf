@@ -1,0 +1,63 @@
+;                       c:\dev.inf
+; 
+;        Created by GenINF. 
+; 
+; (c) Copyright 2006 Microsoft 
+;
+;     Xbox Live Vision Camera     
+ 
+ 
+ 
+[Version] 
+Signature = "$CHICAGO$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000} 
+Provider=%Xbox% 
+DriverVer= 10/19/2007,1.02
+CatalogFile=delta.cat
+
+
+[DestinationDirs] 
+
+
+[Manufacturer] 
+%MSFT%=MSFT, NTamd64, NT.6.0, NTamd64.6.0
+
+[MSFT]
+%InterfaceDescriptor%= CompositeDevice,USB\VID_045e&PID_0294
+%SecurityDescription%=Nullx,USB\VID_045e&PID_0294&MI_02
+
+[MSFT.NTamd64]
+%InterfaceDescriptor%= CompositeDevice,USB\VID_045e&PID_0294
+%SecurityDescription%=Nullx,USB\VID_045e&PID_0294&MI_02
+
+[MSFT.NT.6.0]
+%InterfaceDescriptor%= CompositeDevice,USB\VID_045e&PID_0294
+%SecurityDescription%=Nullx,USB\VID_045e&PID_0294&MI_02
+
+[MSFT.NTamd64.6.0]
+%InterfaceDescriptor%= CompositeDevice,USB\VID_045e&PID_0294
+%SecurityDescription%=Nullx,USB\VID_045e&PID_0294&MI_02
+
+[NullX]
+
+[NullX.Services]
+AddService= ,0x00000002
+
+[CompositeDevice]
+Include=Usb.INF
+Needs=Composite.Dev.NT
+
+[CompositeDevice.Services]
+Include=Usb.INF
+Needs=Composite.Dev.NT.Services
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+MSFT= "Microsoft" 
+Xbox= "Xbox Peripherals"
+SecurityDescription= "Microsoft Xbox 360 Live Vision Security Method 3"
+InterfaceDescriptor= "Microsoft Xbox 360 Live Vision Camera"
+
+

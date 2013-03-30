@@ -1,0 +1,87 @@
+;
+; Copyright (c) 2006 ActivCard (All rights reserved)
+;
+;Module Name:
+;
+;    AKPCSC.INF
+;
+;Abstract:
+;    INF file for installing virtual pc/sc device drivers
+;
+;--*/
+[Version]
+Signature="$CHICAGO$"
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%MSFT%
+DriverVer=09/12/2006,1.0.4.0
+CatalogFile=akpcsc.cat
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+Pcsc_Device.NT.Copy=10,System32\Drivers
+
+;*****************************************
+; Pcsc Device  Install Section
+;*****************************************
+
+[Manufacturer]
+%MSFT%=Standard
+
+[Standard]
+; DisplayName       		Section           DeviceId
+; -----------       		-------           --------
+%PcscDevice.DeviceDesc%=Pcsc_Device, SmartCardReader\pcsc
+
+; ================= INSTALL 98 ================= 
+
+[Pcsc_Device]
+CopyFiles=Pcsc_Device.NT.Copy
+AddReg=Pcsc_Device.AddReg
+
+[Pcsc_Device.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,akpcsc.sys
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; ================= INSTALL NT ================= 
+
+[Pcsc_Device.NT]
+CopyFiles=Pcsc_Device.NT.Copy
+AddReg = Pcsc_Device.AddReg.NT
+
+[Pcsc_Device.NT.Copy]
+akpcsc.sys
+
+;-------------- Service installation
+
+[Pcsc_Device.AddReg.NT]
+;reg-root, [subkey], [value-entry-name], [flags]        , [value]
+HKLM, System\CurrentControlSet\Services\SCardSvr,Start,0x00010001,2
+
+[Pcsc_Device.NT.Services]
+AddService = akpcsc, %SPSVCINST_ASSOCSERVICE%, Pcsc_Service_Inst
+
+[Pcsc_Service_Inst]
+DisplayName    = %Pcsc.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\akpcsc.sys
+LoadOrderGroup = Extended Base
+
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+akPcsc.sys  = 1,,
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+MSFT = "ActivCard"
+DiskId1 = "Virtual PC/SC Device Installation Disk #1"
+PcscDevice.DeviceDesc = "ActivCard Virtual PC/SC"
+Pcsc.SVCDESC = "ActivCard Virtual PC/SC Device Driver"

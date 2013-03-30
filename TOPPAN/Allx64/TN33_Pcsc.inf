@@ -1,0 +1,98 @@
+; TN33_Pcsc.inf
+; Installation inf for the TN33_Pcsc
+;
+; Copyright (C) 2009 TOPPAN FORMS CO.,LTD. All rights reserved.
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class       = SmartCardReader
+ClassGuid   = {50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%TN%
+DriverVer=06/17/2010,32.3.3.3
+CatalogFile=TN33_Pcsc.cat
+
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[Manufacturer]
+%StdMfg%=Standard,NTx86,NTamd64
+
+; For Win2K
+[Standard]
+; DisplayName                   Section           DeviceId
+; -----------                   -------           --------
+%SmartCardDevice.DeviceDesc%=SmartCard_Device, {3AD8E9DD-2BEA-48d1-925A-22BAD43974C9}\PCSConNFCBus
+
+; For XP and later (For x86)
+[Standard.NTx86]
+%SmartCardDevice.DeviceDesc%=SmartCard_Device, {3AD8E9DD-2BEA-48d1-925A-22BAD43974C9}\PCSConNFCBus
+
+; For XP and later (For x64)
+[Standard.NTamd64]
+%SmartCardDevice.DeviceDesc%=SmartCard_Device, {3AD8E9DD-2BEA-48d1-925A-22BAD43974C9}\PCSConNFCBus
+
+[SmartCard_Device.NT]
+CopyFiles=SmartCard_Device.NT.Copy
+
+[SmartCard_Device.NT.Copy]
+TN33_Pcsc.sys
+
+[SmartCard_Device.NT.HW]
+
+;-------------- Service installation
+
+[SmartCard_Device.NT.Services]
+AddService = TN33wdffeatured, %SPSVCINST_ASSOCSERVICE%, wdffeatured_Service_Inst
+
+[wdffeatured_Service_Inst]
+DisplayName    = %SmartCard.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\TN33_Pcsc.sys
+LoadOrderGroup = Extended Base
+
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+TN33_Pcsc.sys  = 1,,
+
+;
+;--- SmartCard_Device Coinstaller installation ------
+;
+[DestinationDirs]
+SmartCard_Device_CoInstaller_CopyFiles = 11
+
+[SmartCard_Device.NT.CoInstallers]
+AddReg=SmartCard_Device_CoInstaller_AddReg
+CopyFiles=SmartCard_Device_CoInstaller_CopyFiles
+
+[SmartCard_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01009.dll,WdfCoInstaller"
+
+[SmartCard_Device_CoInstaller_CopyFiles]
+wdfcoinstaller01009.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+[SmartCard_Device.NT.Wdf]
+KmdfService = TN33wdffeatured, wdffeatured_wdfsect
+
+[wdffeatured_wdfsect]
+KmdfLibraryVersion = 1.9
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TN = "TOPPAN FORMS CO.,LTD."
+StdMfg = "TOPPAN FORMS CO.,LTD."
+ClassName = "SmartCard"
+DiskId1 = "SmartCard Device Installation Disk #1"
+SmartCardDevice.DeviceDesc = "TN33_NFC based PCSC SmartCard Reader"
+SmartCard.SVCDESC = "TN33_NFC based PCSC Device"

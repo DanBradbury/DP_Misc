@@ -1,0 +1,87 @@
+;Copyright (c) Todos Data System AB\0
+
+[Version]
+Signature="$Windows NT$"
+Provider=%Todos%
+Class=SmartCardReader
+ClassGUID={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+DriverVer=01/22/2007,3.3.0.0
+CatalogFile=AgmIIusb.cat
+DriverPackageDisplayName=%Desc%
+DriverPackageType=PlugAndPlay
+
+[DestinationDirs]
+AgmUsb_Files_Driver = 12
+
+[AGMII.Install.CopyFiles]
+AgmIIusb.sys,,,2
+
+[ControlFlags]
+ExcludeFromSelect=USB\VID_0B0C&PID_0009
+
+
+[Manufacturer]
+%MfgName%=AGMII.Model,NTamd64,NTia64
+
+[AGMII.Model]
+%DeviceDesc%=AGMII.Install, USB\VID_0B0C&PID_0009
+
+[AGMII.Model.NTamd64]
+%DeviceDesc%=AGMII.Install.NTamd64, USB\VID_0B0C&PID_0009
+
+[AGMII.Model.NTia64]
+%DeviceDesc%=AGMII.Install.NTia64, USB\VID_0B0C&PID_0009
+
+[AGMII.Install.NT]
+Addreg=TodosAgmII_AddReg_NT
+CopyFiles=AgmUsb_Files_Driver
+
+[AGMII.Install.NTamd64]
+Addreg=TodosAgmII_AddReg_NT
+CopyFiles=AgmUsb_Files_Driver
+
+[AGMII.Install.NTia64]
+Addreg=TodosAgmII_AddReg_NT
+CopyFiles=AgmUsb_Files_Driver
+
+[TodosAgmII_AddReg_NT]
+HKLM, Software\Microsoft\Cryptography\Calais\Readers,,,
+HKLM, System\CurrentControlSet\Services\SCardSvr,Start,0x00010001,2
+
+[AGMII.Install.NT.Services]
+Addservice = TodosAgmII, 0x00000002, TodosAgmII_Service
+
+[AGMII.Install.NTamd64.Services]
+Addservice = TodosAgmII, 0x00000002, TodosAgmII_Service
+
+[AGMII.Install.NTia64.Services]
+Addservice = TodosAgmII, 0x00000002, TodosAgmII_Service
+
+[TodosAgmII_Service]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\AgmIIusb.sys
+
+; --------- Files ----------------------
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+
+[AgmUsb_Files_Driver]
+AgmIIusb.sys,,,2
+
+[SourceDisksFiles]
+AgmIIusb.sys = 1,,
+
+[SourceDisksNames]
+1 = %DiskDecription% ,,,
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+Todos="Todos Data System AB"
+MfgName="Todos Data System AB"
+DeviceDesc="Argos Mini II"
+Desc="Smartcard Reader Argos Mini II"
+SvcDesc=="Driver for Todos Argos Mini II"
+DiskDecription = "Todos Argos Mini II Installation Disk"

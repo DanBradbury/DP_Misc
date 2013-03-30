@@ -1,0 +1,512 @@
+ RzSynapse
+
+ Timestamp is 507fc62a (Thu Oct 18 17:04:42 2012)
+
+ Preferred load address is 0000000000010000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00023cd4H .text                   CODE
+ 0001:00023ce0 00000e0eH .text$s                 CODE
+ 0002:00000000 00000078H .idata$5                DATA
+ 0002:00000080 000007aaH .rdata                  DATA
+ 0002:0000082c 00000061H .rdata$debug            DATA
+ 0002:00000890 00000cf4H .xdata                  DATA
+ 0003:00000000 00000470H .data                   DATA
+ 0003:00000470 00000010H .kmdfclassbind$a        DATA
+ 0003:00000480 00000008H .kmdfclassbind$c        DATA
+ 0003:00000488 00000008H .kmdfclassbind$d        DATA
+ 0003:00000490 00000010H .kmdftypeinit$a         DATA
+ 0003:000004a0 00000008H .kmdftypeinit$c         DATA
+ 0003:000004c0 00000ec8H .bss                    DATA
+ 0004:00000000 00000d50H .pdata                  DATA
+ 0005:00000000 0000029eH PAGE                    CODE
+ 0006:00000000 000001b9H INIT                    CODE
+ 0006:000001bc 00000028H .idata$2                CODE
+ 0006:000001e4 00000014H .idata$3                CODE
+ 0006:000001f8 00000078H .idata$4                CODE
+ 0006:00000270 00000108H .idata$6                CODE
+ 0007:00000000 00000058H .rsrc$01                DATA
+ 0007:00000060 00000340H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0000:00000000       ___safe_se_handler_count   0000000000000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   0000000000000000     <absolute>
+ 0000:00000000       __ImageBase                0000000000010000     <linker-defined>
+ 0001:00000008       FilterEvtIoInternalDeviceControl 0000000000011008 f   filter.obj
+ 0001:0000023c       FilterEvtCanceledOnQueue   000000000001123c f   filter.obj
+ 0001:00000258       FilterEvtIoDeviceControl   0000000000011258 f   filter.obj
+ 0001:0000032c       Platform25ProtocolSupport_Initialize 000000000001132c f   platform25protocolsupport.obj
+ 0001:00000498       Platform25_SetFeature      0000000000011498 f   platform25protocolsupport.obj
+ 0001:000005dc       Platform25_SetFeatureUsingWorkItem 00000000000115dc f   platform25protocolsupport.obj
+ 0001:00000850       Platform25_TimerCallbackFunction 0000000000011850 f   platform25protocolsupport.obj
+ 0001:00000888       Platform25_WorkItemCallbackFunction 0000000000011888 f   platform25protocolsupport.obj
+ 0001:000009a0       Platform25_SetFeatureInternal 00000000000119a0 f   platform25protocolsupport.obj
+ 0001:00000b44       Platform25_GetFeatureInternal 0000000000011b44 f   platform25protocolsupport.obj
+ 0001:00000ce8       Platform25_CommandQueueWorkItemCallbackFunction 0000000000011ce8 f   platform25protocolsupport.obj
+ 0001:00000dec       Platform25_ExecuteQueue    0000000000011dec f   platform25protocolsupport.obj
+ 0001:00000e68       Platform25_TriggerNextQueuedCommand 0000000000011e68 f   platform25protocolsupport.obj
+ 0001:00000ed8       Platform25ProtocolSerializer_Initialize 0000000000011ed8 f   platform25protocolserializer.obj
+ 0001:00001130       Platform25ProtocolSerializer_SerializeSetFeature 0000000000012130 f   platform25protocolserializer.obj
+ 0001:00001258       Platform25ProtocolSerializer_SerializeGetFeature 0000000000012258 f   platform25protocolserializer.obj
+ 0001:000013e8       Platform25ProtocolSerializer_ProcessNextSetFeature 00000000000123e8 f   platform25protocolserializer.obj
+ 0001:0000152c       Platform25ProtocolSerializer_TimerCallbackFunction 000000000001252c f   platform25protocolserializer.obj
+ 0001:00001564       Platform25ProtocolSerializer_WorkItemCallbackFunction 0000000000012564 f   platform25protocolserializer.obj
+ 0001:0000161c       Platform25ProtocolSerializer_EvtIoQueueState_ReadyNotify 000000000001261c f   platform25protocolserializer.obj
+ 0001:00001670       RtlUnicodeStringCopy       0000000000012670 f i propertystore.obj
+ 0001:00001784       RtlUnicodeStringPrintf     0000000000012784 f i propertystore.obj
+ 0001:00001828       PropertyStore_Initialize   0000000000012828 f   propertystore.obj
+ 0001:0000193c       PropertyStore_GetValue     000000000001293c f   propertystore.obj
+ 0001:00001bbc       PropertyStore_SetValue     0000000000012bbc f   propertystore.obj
+ 0001:00001dc8       RzHextoWStr                0000000000012dc8 f   registryreader.obj
+ 0001:00001e04       RzGUIDtoWStrForSubProfile  0000000000012e04 f   registryreader.obj
+ 0001:00002114       RzGUIDtoWStr               0000000000013114 f   registryreader.obj
+ 0001:00002278       RegistryReader_ReadSettings 0000000000013278 f   registryreader.obj
+ 0001:000022b4       RegistryReader_ReadMacros  00000000000132b4 f   registryreader.obj
+ 0001:000025bc       RegistryReader_ReadMacroData 00000000000135bc f   registryreader.obj
+ 0001:000027e8       RegistryReader_CreateWorkItem 00000000000137e8 f   registryreader.obj
+ 0001:000029a4       RegistryReader_WorkItemCallbackFunction 00000000000139a4 f   registryreader.obj
+ 0001:00002ab0       RegistryReader_TimerCallbackFunction 0000000000013ab0 f   registryreader.obj
+ 0001:00002ae8       RegistryReader_ReadKeyMappings 0000000000013ae8 f   registryreader.obj
+ 0001:00002d28       RegistryReader_ReadKeyMapping 0000000000013d28 f   registryreader.obj
+ 0001:00002e08       RegistryReader_ReadButtonMappings 0000000000013e08 f   registryreader.obj
+ 0001:00003048       RegistryReader_ReadButtonMapping 0000000000014048 f   registryreader.obj
+ 0001:00003128       RegistryReader_ReadSettingsInternal 0000000000014128 f   registryreader.obj
+ 0001:000034ec       RegistryReader_GetKeyInformation 00000000000144ec f   registryreader.obj
+ 0001:00003630       MouseFilter_Initialize     0000000000014630 f   mousefilter.obj
+ 0001:000036b8       MouseFilter_HookMouse      00000000000146b8 f   mousefilter.obj
+ 0001:00003788       MouseFilter_ServiceCallback 0000000000014788 f   mousefilter.obj
+ 0001:0000391c       MouseFilter_SendMouseEvent 000000000001491c f   mousefilter.obj
+ 0001:00003980       KeyboardFilter_Initialize  0000000000014980 f   keyboardfilter.obj
+ 0001:00003a04       KeyboardFilter_HookKeyboard 0000000000014a04 f   keyboardfilter.obj
+ 0001:00003ad4       KeyboardFilter_ServiceCallback 0000000000014ad4 f   keyboardfilter.obj
+ 0001:00003cfc       KeyboardFilter_SendKeyboardEvent 0000000000014cfc f   keyboardfilter.obj
+ 0001:00004000       MacroEngine_Initialize     0000000000015000 f   macroengine.obj
+ 0001:0000412c       MacroEngine_ExecuteMacroElementCollection 000000000001512c f   macroengine.obj
+ 0001:0000418c       MacroEngine_ExecuteMacroElementCollection_RepeatIndefinitely 000000000001518c f   macroengine.obj
+ 0001:000041ec       MacroEngine_StopMacroElementCollection 00000000000151ec f   macroengine.obj
+ 0001:000042dc       MacroEngine_StopAllMacros  00000000000152dc f   macroengine.obj
+ 0001:000043b0       MacroEngine_ExecuteMacroWorkItem 00000000000153b0 f   macroengine.obj
+ 0001:00004424       MacroWorkItemCallbackFunction 0000000000015424 f   macroengine.obj
+ 0001:00004a70       MacroTimerCallbackFunction 0000000000015a70 f   macroengine.obj
+ 0001:00004aa8       MacroEngine_SendJoystickEvent 0000000000015aa8 f   macroengine.obj
+ 0001:00004afc       MacroEngine_SendKeyboardEvent_Keyboard 0000000000015afc f   macroengine.obj
+ 0001:00004b48       MacroEngine_SendKeyboardEvent 0000000000015b48 f   macroengine.obj
+ 0001:00004b94       MacroEngine_SetExecutionType 0000000000015b94 f   macroengine.obj
+ 0001:00004bec       MacroEngine_SendKeyboardKey 0000000000015bec f   macroengine.obj
+ 0001:00004c30       MacroEngine_ProcessTypematicDelay 0000000000015c30 f   macroengine.obj
+ 0001:00004d04       MacroCreator_MacroElementCollection_Create 0000000000015d04 f   macrocreator.obj
+ 0001:00004d64       MacroCreator_MacroElementCollection_AddMouseEvent 0000000000015d64 f   macrocreator.obj
+ 0001:00004e9c       MacroCreator_MacroElementCollection_AddKeyboardEvent 0000000000015e9c f   macrocreator.obj
+ 0001:00004ff4       MacroCreator_MacroElementCollection_AddDelayEvent 0000000000015ff4 f   macrocreator.obj
+ 0001:00005068       MacroCreator_MacroElementCollection_AddTypematicDelayEvent 0000000000016068 f   macrocreator.obj
+ 0001:0000515c       MacroCreator_MacroElementCollection_AddSingleDelayEvent 000000000001615c f   macrocreator.obj
+ 0001:00005228       MacroCreator_MacroElementCollection_AddLedStateToggleEvent 0000000000016228 f   macrocreator.obj
+ 0001:000052e4       MacroCreator_MacroElementCollection_AddLedBrightCycleEvent 00000000000162e4 f   macrocreator.obj
+ 0001:000053a0       MacroCreator_MacroElementCollection_AddDpiStageUpEvent 00000000000163a0 f   macrocreator.obj
+ 0001:00005450       MacroCreator_MacroElementCollection_AddDpiStageDownEvent 0000000000016450 f   macrocreator.obj
+ 0001:00005500       MacroCreator_MacroElementCollection_AddDpiOtfsUpEvent 0000000000016500 f   macrocreator.obj
+ 0001:000055b0       MacroCreator_MacroElementCollection_AddDpiOtfsDownEvent 00000000000165b0 f   macrocreator.obj
+ 0001:00005660       MacroCreator_Typematic_GetLastKey 0000000000016660 f   macrocreator.obj
+ 0001:00005710       MacroCreator_Typematic_LastKeyIsPauseKey 0000000000016710 f   macrocreator.obj
+ 0001:000057c4       MacroCreator_MacroElementCollection_AddButtonTempDpiEvent 00000000000167c4 f   macrocreator.obj
+ 0001:000058a8       MacroCreator_MacroElementCollection_AddButtonRestoreFromTempDpiEvent 00000000000168a8 f   macrocreator.obj
+ 0001:00005958       MacroCreator_MacroElementCollection_AddJoyStickEvent 0000000000016958 f   macrocreator.obj
+ 0001:00005aa4       MacroManager_Initialize    0000000000016aa4 f   macromanager.obj
+ 0001:00005b3c       MacroManager_DeleteAllMacros 0000000000016b3c f   macromanager.obj
+ 0001:00005cc0       MacroManager_CreateMacro   0000000000016cc0 f   macromanager.obj
+ 0001:00005ea4       MacroManager_ExecuteMacro_RepeatNTimes 0000000000016ea4 f   macromanager.obj
+ 0001:00005f38       MacroManager_ExecuteMacro_RepeatIndefinitely 0000000000016f38 f   macromanager.obj
+ 0001:00005f74       MacroManager_StopMacro     0000000000016f74 f   macromanager.obj
+ 0001:00005fb0       MacroManager_IsCurrentlyExecuting 0000000000016fb0 f   macromanager.obj
+ 0001:00005fec       MacroManager_GetMacroElementCollection 0000000000016fec f   macromanager.obj
+ 0001:000060ec       MacroWorkItemManager_GetWorkItem 00000000000170ec f   macroworkitemmanager.obj
+ 0001:00006260       MacroWorkItemManager_FlagWorkItemAsAvailable 0000000000017260 f   macroworkitemmanager.obj
+ 0001:000062e0       MacroWorkItemManager_CreateMacroWorkItem 00000000000172e0 f   macroworkitemmanager.obj
+ 0001:000064d4       MacroWorkItemManager_IsCurrentlyExecuting 00000000000174d4 f   macroworkitemmanager.obj
+ 0001:000065ec       ButtonMapper_Initialize    00000000000175ec f   buttonmapper.obj
+ 0001:000066d8       ButtonMapper_SetMappingUsingRegistryData 00000000000176d8 f   buttonmapper.obj
+ 0001:00006bdc       ButtonMapper_SetMapping_CreateMapping 0000000000017bdc f   buttonmapper.obj
+ 0001:00006cf8       ButtonMapper_ProcessMouseMapping 0000000000017cf8 f   buttonmapper.obj
+ 0001:00006f48       ButtonMapper_ProcessMouseMappingInternal 0000000000017f48 f   buttonmapper.obj
+ 0001:00007ea4       ButtonMapper_ClearMapping  0000000000018ea4 f   buttonmapper.obj
+ 0001:00007f7c       ButtonMapper_GetButtonDefinition 0000000000018f7c f   buttonmapper.obj
+ 0001:0000800c       ButtonMapper_IsButtonDown  000000000001900c f   buttonmapper.obj
+ 0001:0000805c       ButtonMapper_SendMouseButton 000000000001905c f   buttonmapper.obj
+ 0001:0000818c       ButtonMapper_TempDpi_SetMappingUsingRegistryData 000000000001918c f   buttonmapper.obj
+ 0001:000082e8       ButtonMapper_ChangeSubProfileToID 00000000000192e8 f   buttonmapper.obj
+ 0001:00008408       KeyMapper_HardwareDependentFeature 0000000000019408 f   keymapper.obj
+ 0001:00008a3c       KeyMapper_Initialize       0000000000019a3c f   keymapper.obj
+ 0001:00008b10       KeyMapper_SetMappingUsingRegistryData 0000000000019b10 f   keymapper.obj
+ 0001:00009048       KeyMapper_SetMapping_CreateMapping 000000000001a048 f   keymapper.obj
+ 0001:00009164       KeyMapper_ClearMapping     000000000001a164 f   keymapper.obj
+ 0001:00009240       KeyMapper_ProcessKeyboardMapping 000000000001a240 f   keymapper.obj
+ 0001:000092a0       KeyMapper_ProcessKeyboardMappingInternal 000000000001a2a0 f   keymapper.obj
+ 0001:0000a05c       KeyMapper_ProcessRazerMode 000000000001b05c f   keymapper.obj
+ 0001:0000a3bc       KeyMapper_RazerMode_ProcessAssigning 000000000001b3bc f   keymapper.obj
+ 0001:0000a548       KeyMapper_OtfsMacro_ResetStateMachine 000000000001b548 f   keymapper.obj
+ 0001:0000a5b0       KeyMapper_TempDpi_SetMappingUsingRegistryData 000000000001b5b0 f   keymapper.obj
+ 0001:0000a720       KeyMapper_ChangeSubProfileToID 000000000001b720 f   keymapper.obj
+ 0001:0000a840       ControlDevice_Create       000000000001b840 f   controldevice.obj
+ 0001:0000ab5c       ControlDevice_EvtIoDeviceControl 000000000001bb5c f   controldevice.obj
+ 0001:0000b61c       ControlDevice_EvtFileClose 000000000001c61c f   controldevice.obj
+ 0001:0000b67c       ModeController_SetMode     000000000001c67c f   modecontroller.obj
+ 0001:0000b87c       ModeController_GetMode     000000000001c87c f   modecontroller.obj
+ 0001:0000b984       KeyboardRedirector_Initialize 000000000001c984 f   keyboardredirector.obj
+ 0001:0000ba14       KeyboardRedirector_SetKeyboardRedirection 000000000001ca14 f   keyboardredirector.obj
+ 0001:0000bb34       KeyboardRedirector_GetKeyboardRedirection 000000000001cb34 f   keyboardredirector.obj
+ 0001:0000bc20       KeyboardRedirector_TriggerEvent 000000000001cc20 f   keyboardredirector.obj
+ 0001:0000bd48       DeviceManager_AddDevice    000000000001cd48 f   devicemanager.obj
+ 0001:0000c118       DeviceManager_RemoveDevice 000000000001d118 f   devicemanager.obj
+ 0001:0000c408       DeviceManager_RegisterAsMouseDevice 000000000001d408 f   devicemanager.obj
+ 0001:0000c5ac       DeviceManager_RegisterAsKeyboardDevice 000000000001d5ac f   devicemanager.obj
+ 0001:0000c754       DeviceManager_CreateControlDevice 000000000001d754 f   devicemanager.obj
+ 0001:0000c84c       DeviceManager_CreateControlDeviceInternal 000000000001d84c f   devicemanager.obj
+ 0001:0000ca7c       DeviceManager_GetMasterDevice 000000000001da7c f   devicemanager.obj
+ 0001:0000cb10       DeviceManager_GetMouseDevice 000000000001db10 f   devicemanager.obj
+ 0001:0000cba4       DeviceManager_GetKeyboardDevice 000000000001dba4 f   devicemanager.obj
+ 0001:0000cc38       DeviceManager_GetPidFromHardwareIdString 000000000001dc38 f   devicemanager.obj
+ 0001:0000cd34       DeviceManager_GetPid       000000000001dd34 f   devicemanager.obj
+ 0001:0000cd68       DeviceManager_GetHardwareGuid 000000000001dd68 f   devicemanager.obj
+ 0001:0000cec8       DeviceManager_IsPaired     000000000001dec8 f   devicemanager.obj
+ 0001:0000cf18       MouseController_Initialize 000000000001df18 f   mousecontroller.obj
+ 0001:0000d040       RzSendReport               000000000001e040 f   mousecontroller.obj
+ 0001:0000d100       ModeController_SetFWMode   000000000001e100 f   mousecontroller.obj
+ 0001:0000d1b0       MouseController_SetLedToDeviceInternal 000000000001e1b0 f   mousecontroller.obj
+ 0001:0000d280       MouseController_Led_SetEffect 000000000001e280 f   mousecontroller.obj
+ 0001:0000d348       MouseController_Led_Blink_SetParams 000000000001e348 f   mousecontroller.obj
+ 0001:0000d408       MouseController_SetDpiToDevice 000000000001e408 f   mousecontroller.obj
+ 0001:0000d4f4       MouseController_PollingRate_SetPollingPeriod 000000000001e4f4 f   mousecontroller.obj
+ 0001:0000d5b0       rzinfo_gethwinfo           000000000001e5b0 f   rzinfo.obj
+ 0001:0000ee90       RzInfo_Exit                000000000001fe90 f   rzinfo.obj
+ 0001:0000f13c       RzInfo_Get                 000000000002013c f   rzinfo.obj
+ 0001:0000f23c       RestoreDevice              000000000002023c f   rzdevice.obj
+ 0001:0000f4e8       SaveDevice                 00000000000204e8 f   rzdevice.obj
+ 0001:0000f728       RzDevice_CBFunction        0000000000020728 f   rzdevice.obj
+ 0001:0000f7c0       RzDevice_SaveWork          00000000000207c0 f   rzdevice.obj
+ 0001:0000f8a0       RzDevice_Init              00000000000208a0 f   rzdevice.obj
+ 0001:0000fa48       RzDevice_Set               0000000000020a48 f   rzdevice.obj
+ 0001:000109e0       RzDevice_Get               00000000000219e0 f   rzdevice.obj
+ 0001:00010da0       RzDevice_GetHandle         0000000000021da0 f   rzdevice.obj
+ 0001:00010de4       RzDevice_GetActiveProfile  0000000000021de4 f   rzdevice.obj
+ 0001:00010e5c       RestoreProfile             0000000000021e5c f   rzprofile.obj
+ 0001:000111c8       RestoreProfileEx           00000000000221c8 f   rzprofile.obj
+ 0001:00011618       SaveProfileEx              0000000000022618 f   rzprofile.obj
+ 0001:00011818       SaveProfile                0000000000022818 f   rzprofile.obj
+ 0001:00011aec       clearkeyandbuttonregistry  0000000000022aec f   rzprofile.obj
+ 0001:00011d10       RzProfile_Init             0000000000022d10 f   rzprofile.obj
+ 0001:00012150       RzProfile_Set_SubProfile   0000000000023150 f   rzprofile.obj
+ 0001:00012d20       RzProfile_Set              0000000000023d20 f   rzprofile.obj
+ 0001:00013724       RzProfile_Get_SubProfile   0000000000024724 f   rzprofile.obj
+ 0001:000139e8       RzProfile_Get              00000000000249e8 f   rzprofile.obj
+ 0001:00013f50       RzProfile_SaveProfileEx    0000000000024f50 f   rzprofile.obj
+ 0001:00014040       RzProfile_CBFunction_SaveProfileEx 0000000000025040 f   rzprofile.obj
+ 0001:00014128       RzSubProfile_Init          0000000000025128 f   rzsubprofile.obj
+ 0001:00014444       RzSubProfile_RestoreSubProfileAll 0000000000025444 f   rzsubprofile.obj
+ 0001:00014504       RzSubProfile_RestoreSubProfile 0000000000025504 f   rzsubprofile.obj
+ 0001:00014b08       RzSubProfile_Set           0000000000025b08 f   rzsubprofile.obj
+ 0001:00014d90       RzSubProfile_Get           0000000000025d90 f   rzsubprofile.obj
+ 0001:00014fe8       clearkeyandbuttonregistryForSubProfile 0000000000025fe8 f   rzsubprofile.obj
+ 0001:0001545c       RzSubProfile_SaveSubProfile 000000000002645c f   rzsubprofile.obj
+ 0001:00015a30       RestoreLed                 0000000000026a30 f   rzled.obj
+ 0001:00015cec       RestoreLedColor            0000000000026cec f   rzled.obj
+ 0001:00015fa8       RestoreLedBright           0000000000026fa8 f   rzled.obj
+ 0001:00016260       SaveLed                    0000000000027260 f   rzled.obj
+ 0001:00016460       SaveLedColor               0000000000027460 f   rzled.obj
+ 0001:00016690       SaveLedBright              0000000000027690 f   rzled.obj
+ 0001:000168c0       RzLed_Init                 00000000000278c0 f   rzled.obj
+ 0001:00017158       RzLed_Set                  0000000000028158 f   rzled.obj
+ 0001:00018a4c       RzLed_Get                  0000000000029a4c f   rzled.obj
+ 0001:00018c80       RestoreDPI                 0000000000029c80 f   rzdpi.obj
+ 0001:00018f34       SaveDPI                    0000000000029f34 f   rzdpi.obj
+ 0001:00019134       RzDPI_Init                 000000000002a134 f   rzdpi.obj
+ 0001:00019338       RzDPI_Set                  000000000002a338 f   rzdpi.obj
+ 0001:00019cc8       RzDPI_Get                  000000000002acc8 f   rzdpi.obj
+ 0001:00019dd0       RzDPI_SetTempDPI           000000000002add0 f   rzdpi.obj
+ 0001:00019e54       RestoreSensitivityScaler   000000000002ae54 f   rzsensitivityscaler.obj
+ 0001:0001a108       SaveSensitivityScaler      000000000002b108 f   rzsensitivityscaler.obj
+ 0001:0001a308       RzSensitivityScaler_getactiveprofile 000000000002b308 f   rzsensitivityscaler.obj
+ 0001:0001a308       rzdpi_getactiveprofile     000000000002b308 f   rzdpi.obj
+ 0001:0001a308       rzled_getactiveprofile     000000000002b308 f   rzled.obj
+ 0001:0001a364       RzSensitivityScaler_Init   000000000002b364 f   rzsensitivityscaler.obj
+ 0001:0001a500       RzSensitivityScaler_Set    000000000002b500 f   rzsensitivityscaler.obj
+ 0001:0001ad38       RzSensitivityScaler_Get    000000000002bd38 f   rzsensitivityscaler.obj
+ 0001:0001ae40       RzSensitivityScaler_GetScale 000000000002be40 f   rzsensitivityscaler.obj
+ 0001:0001aed8       RestoreStage               000000000002bed8 f   rzstage.obj
+ 0001:0001b18c       SaveStage                  000000000002c18c f   rzstage.obj
+ 0001:0001b38c       RzStage_Init               000000000002c38c f   rzstage.obj
+ 0001:0001b598       RzStage_Set                000000000002c598 f   rzstage.obj
+ 0001:0001b814       RzStage_Get                000000000002c814 f   rzstage.obj
+ 0001:0001b8d0       CvrtHexToByte              000000000002c8d0 f   rzbindata.obj
+ 0001:0001b948       RestoreBinData             000000000002c948 f   rzbindata.obj
+ 0001:0001c03c       SaveBinData                000000000002d03c f   rzbindata.obj
+ 0001:0001c1e0       RzBinData_Init             000000000002d1e0 f   rzbindata.obj
+ 0001:0001c2cc       RzBinData_Exit             000000000002d2cc f   rzbindata.obj
+ 0001:0001c390       RzBinData_Set              000000000002d390 f   rzbindata.obj
+ 0001:0001c998       RzBinData_Get              000000000002d998 f   rzbindata.obj
+ 0001:0001cc6c       RzReg_Open                 000000000002dc6c f   rzregistry.obj
+ 0001:0001ce10       RzReg_Set                  000000000002de10 f   rzregistry.obj
+ 0001:0001cf1c       RzReg_Get                  000000000002df1c f   rzregistry.obj
+ 0001:0001d074       EventManager_RegisterEvent 000000000002e074 f   eventmanager.obj
+ 0001:0001d1b4       EventManager_TriggerEvent  000000000002e1b4 f   eventmanager.obj
+ 0001:0001d328       EventManager_TriggerEvent_Dpi 000000000002e328 f   eventmanager.obj
+ 0001:0001d470       EventManager_TriggerEvent_SensitivityScaler 000000000002e470 f   eventmanager.obj
+ 0001:0001d5b8       EventManager_TriggerEvent_MacroRecording_Start 000000000002e5b8 f   eventmanager.obj
+ 0001:0001d6f4       EventManager_TriggerEvent_MacroRecording_Stop 000000000002e6f4 f   eventmanager.obj
+ 0001:0001d830       EventManager_TriggerEvent_MacroRecording_Cancel 000000000002e830 f   eventmanager.obj
+ 0001:0001d96c       EventManager_TriggerEvent_MacroRecording_AssignButton 000000000002e96c f   eventmanager.obj
+ 0001:0001dab8       EventManager_TriggerEvent_ActiveProfile 000000000002eab8 f   eventmanager.obj
+ 0001:0001dc00       EventManager_TriggerEvent_Application 000000000002ec00 f   eventmanager.obj
+ 0001:0001dd48       EventManager_RegisterFileObject 000000000002ed48 f   eventmanager.obj
+ 0001:0001de8c       EventManager_UnregisterFileObject 000000000002ee8c f   eventmanager.obj
+ 0001:0001e010       EventManager_TriggerEvent_ActiveSubProfile 000000000002f010 f   eventmanager.obj
+ 0001:0001e158       OtfsAccumulator_Initialize 000000000002f158 f   otfsaccumulator.obj
+ 0001:0001e3b0       OtfsAccumulator_TimerCallbackFunction 000000000002f3b0 f   otfsaccumulator.obj
+ 0001:0001e490       OtfsAccumulator_GetNextDpi 000000000002f490 f   otfsaccumulator.obj
+ 0001:0001e604       OtfsAccumulator_WorkItemCallbackFunction 000000000002f604 f   otfsaccumulator.obj
+ 0001:0001e674       RzHwDependent_Init         000000000002f674 f   rzhwdependent.obj
+ 0001:0001ebe0       RzHwDependent_SetSensitivity 000000000002fbe0 f   rzhwdependent.obj
+ 0001:0001ecd4       RzHwDependent_GetSensitivity 000000000002fcd4 f   rzhwdependent.obj
+ 0001:0001ed9c       RzHwDependent_SetDpiToDevice 000000000002fd9c f   rzhwdependent.obj
+ 0001:0001ee40       RzHwDependent_TriggerEvent_Sensitivity 000000000002fe40 f   rzhwdependent.obj
+ 0001:0001ee8c       RzHwDependent_ProcessKeyMapping 000000000002fe8c f   rzhwdependent.obj
+ 0001:0001ef78       RzHwDependent_Nostromo_ProcessKeyPartOfDiagonalMapping 000000000002ff78 f   rzhwdependent.obj
+ 0001:0001f0dc       RzHwDependent_Nostromo_ProcessKeyMapping 00000000000300dc f   rzhwdependent.obj
+ 0001:0001f2a0       RzHwDependent_Anansi_ProcessKeyMapping 00000000000302a0 f   rzhwdependent.obj
+ 0001:0001f418       RzHwDependent_Anansi_ProcessKeyLighting 0000000000030418 f   rzhwdependent.obj
+ 0001:0001f898       SensitivityScaler_Initialize 0000000000030898 f   sensitivityscaler.obj
+ 0001:0001f938       SensitivityScaler_Enable   0000000000030938 f   sensitivityscaler.obj
+ 0001:0001f998       SensitivityScaler_Scale    0000000000030998 f   sensitivityscaler.obj
+ 0001:0001fb14       SensitivityScaler_SetScale 0000000000030b14 f   sensitivityscaler.obj
+ 0001:0001fb90       OtfMacro_Initialize        0000000000030b90 f   otfmacro.obj
+ 0001:0001fcb8       OtfMacro_Initialize_CreateWorkItem 0000000000030cb8 f   otfmacro.obj
+ 0001:0001fe84       OtfMacro_GetData           0000000000030e84 f   otfmacro.obj
+ 0001:0001fed4       OtfMacro_WorkItemCallbackFunction 0000000000030ed4 f   otfmacro.obj
+ 0001:00020014       OTfMacro_TimerCallbackFunction 0000000000031014 f   otfmacro.obj
+ 0001:00020014       DeviceMonitor_TimerCallbackFunction 0000000000031014 f   devicemonitor.obj
+ 0001:00020044       KeyBlocker_Initialize      0000000000031044 f   keyblocker.obj
+ 0001:00020168       KeyBlocker_GetData         0000000000031168 f   keyblocker.obj
+ 0001:000201a8       KeyBlocker_BlockOnce       00000000000311a8 f   keyblocker.obj
+ 0001:000202d4       RtlStringCbPrintfW         00000000000312d4 f i powermanagement.obj
+ 0001:00020344       PowerManagement_Initialize 0000000000031344 f   powermanagement.obj
+ 0001:0002054c       PowerManagement_GetData    000000000003154c f   powermanagement.obj
+ 0001:0002058c       PowerManagement_EnforceSettingsToDevice 000000000003158c f   powermanagement.obj
+ 0001:0002083c       PollingRate_Initialize     000000000003183c f   pollingrate.obj
+ 0001:00020a44       PollingRate_GetData        0000000000031a44 f   pollingrate.obj
+ 0001:00020a84       PollingRate_GetPollingRate 0000000000031a84 f   pollingrate.obj
+ 0001:00020af8       TempDpi_Initialize         0000000000031af8 f   tempdpi.obj
+ 0001:00020b30       TempDpi_MacroEngine_DoTempDPIRestore 0000000000031b30 f   tempdpi.obj
+ 0001:00020c18       DeviceMonitor_Initialize   0000000000031c18 f   devicemonitor.obj
+ 0001:00020ec0       DeviceMonitor_GetData      0000000000031ec0 f   devicemonitor.obj
+ 0001:00020f08       DeviceMonitor_MarkAsActive 0000000000031f08 f   devicemonitor.obj
+ 0001:00020f8c       DeviceMonitor_WorkItemCallbackFunction 0000000000031f8c f   devicemonitor.obj
+ 0001:00020fec       DeviceMonitor_IsActive_IoctlHandler 0000000000031fec f   devicemonitor.obj
+ 0001:000210d0       SynchronizeColor_Initialize 00000000000320d0 f   synchronizecolor.obj
+ 0001:000216bc       SynchronizeColor_GetSynchronizeColor 00000000000326bc f   synchronizecolor.obj
+ 0001:0002171c       SynchronizeColor_QueueWorkItem 000000000003271c f   synchronizecolor.obj
+ 0001:000218f0       SynchronizeColor_WorkItemCallbackFunction 00000000000328f0 f   synchronizecolor.obj
+ 0001:00021b7c       Joystick_Initialize        0000000000032b7c f   joystickcontroller.obj
+ 0001:00021ce4       JoystickSendReport         0000000000032ce4 f   joystickcontroller.obj
+ 0001:00021f54       Joystick_SetData           0000000000032f54 f   joystickcontroller.obj
+ 0001:00022594       Joystick_TimerFunction     0000000000033594 f   joystickcontroller.obj
+ 0001:000225a0       Joystick_SendKeyboardEvent 00000000000335a0 f   joystickcontroller.obj
+ 0001:000225ec       Joystick_KBDetectDiagonal  00000000000335ec f   joystickcontroller.obj
+ 0001:00023440       __security_check_cookie    0000000000034440 f   BufferOverflowK:amdsecgs.obj
+ 0001:00023468       __report_gsfailure         0000000000034468 f   BufferOverflowK:gs_report.obj
+ 0001:00023498       ?FxStubDriverUnloadCommon@@YAXXZ 0000000000034498 f   WdfDriverEntry:stub.obj
+ 0001:000234cc       FxStubDriverMiniportUnload 00000000000344cc f   WdfDriverEntry:stub.obj
+ 0001:000234d8       FxStubDriverUnload         00000000000344d8 f   WdfDriverEntry:stub.obj
+ 0001:00023508       FxDriverEntryWorker        0000000000034508 f   WdfDriverEntry:stub.obj
+ 0001:00023630       FxDriverEntry              0000000000034630 f   WdfDriverEntry:stub.obj
+ 0001:00023660       ?FxStubUnbindClasses@@YAXPEAU_WDF_BIND_INFO@@@Z 0000000000034660 f   WdfDriverEntry:classbind.obj
+ 0001:000236e0       ?FxStubBindClasses@@YAJPEAU_WDF_BIND_INFO@@@Z 00000000000346e0 f   WdfDriverEntry:classbind.obj
+ 0001:0002376c       ?FxStubInitTypes@@YAXXZ    000000000003476c f   WdfDriverEntry:inittypes.obj
+ 0001:000237e0       memset                     00000000000347e0 f   ntstrsafe:memset.obj
+ 0001:000238d0       __GSHandlerCheckCommon     00000000000348d0 f   ntstrsafe:gshandler.obj
+ 0001:0002393c       __GSHandlerCheck           000000000003493c f   ntstrsafe:gshandler.obj
+ 0001:00023960       WdfVersionUnbind           0000000000034960 f   WdfLdr:WDFLDR.SYS
+ 0001:0002396c       WdfVersionBind             000000000003496c f   WdfLdr:WDFLDR.SYS
+ 0001:00023978       WdfVersionBindClass        0000000000034978 f   WdfLdr:WDFLDR.SYS
+ 0001:00023984       WdfVersionUnbindClass      0000000000034984 f   WdfLdr:WDFLDR.SYS
+ 0001:000239a0       memcpy                     00000000000349a0 f   ntoskrnl:memcpy.obj
+ 0001:000239a0       memmove                    00000000000349a0     ntoskrnl:memcpy.obj
+ 0001:00023ce0       ??_C@_1HC@ICHLECNP@?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX?$AA?$CF?$AA0?$AA2?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX@FNODOBFM@ 0000000000034ce0     propertystore.obj
+ 0001:00023d60       ??_C@_1EC@EKJEPHLF@?$AA?2?$AAR?$AAe?$AAg?$AAi?$AAs?$AAt?$AAr?$AAy?$AA?2?$AAM?$AAa?$AAc?$AAh?$AAi?$AAn?$AAe?$AA?2?$AAS?$AAo?$AAf?$AAt?$AAw?$AAa?$AAr?$AAe?$AA?2?$AAR?$AAa?$AAz?$AAe?$AAr@FNODOBFM@ 0000000000034d60     registryreader.obj
+ 0001:00023db0       ??_C@_1O@DPHNLKJG@?$AAM?$AAa?$AAc?$AAr?$AAo?$AAs?$AA?$AA@FNODOBFM@ 0000000000034db0     registryreader.obj
+ 0001:00023dc0       ??_C@_19IEEMEPMH@?$AAD?$AAa?$AAt?$AAa?$AA?$AA@FNODOBFM@ 0000000000034dc0     registryreader.obj
+ 0001:00023dd0       ??_C@_15NCCOGFKM@?$AAI?$AAd?$AA?$AA@FNODOBFM@ 0000000000034dd0     registryreader.obj
+ 0001:00023de0       ??_C@_19OJGLFOCE@?$AAK?$AAE?$AAY?$AAS?$AA?$AA@FNODOBFM@ 0000000000034de0     registryreader.obj
+ 0001:00023df0       ??_C@_1BA@IKOHJOJD@?$AAB?$AAU?$AAT?$AAT?$AAO?$AAN?$AAS?$AA?$AA@FNODOBFM@ 0000000000034df0     registryreader.obj
+ 0001:00023e00       ??_C@_1CG@PJBHALOE@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAR?$AAa?$AAz?$AAe?$AAr?$AA_?$AA?$CF?$AA0?$AA4?$AAx?$AA?$AA@FNODOBFM@ 0000000000034e00     devicemanager.obj
+ 0001:00023e30       ??_C@_1CO@POBFFJLA@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAR?$AAa?$AAz?$AAe?$AAr?$AA_?$AA?$CF?$AA0?$AA4?$AAx?$AA?$AA@FNODOBFM@ 0000000000034e30     devicemanager.obj
+ 0001:00023e60       ??_C@_19GKMOPIOJ@?$AAP?$AAi?$AAd?$AA_?$AA?$AA@FNODOBFM@ 0000000000034e60     devicemanager.obj
+ 0001:00023e70       ??_C@_19JEBEJPIJ@?$AAP?$AAI?$AAD?$AA_?$AA?$AA@FNODOBFM@ 0000000000034e70     devicemanager.obj
+ 0001:00023e80       ??_C@_1EM@CAGKADKK@?$AA?2?$AAR?$AAe?$AAg?$AAi?$AAs?$AAt?$AAr?$AAy?$AA?2?$AAM?$AAa?$AAc?$AAh?$AAi?$AAn?$AAe?$AA?2?$AAS?$AAo?$AAf?$AAt?$AAw?$AAa?$AAr?$AAe?$AA?2?$AAR?$AAa?$AAz?$AAe?$AAr@FNODOBFM@ 0000000000034e80     rzinfo.obj
+ 0001:00023ed0       ??_C@_1HC@CHHJGBPE@?$AA?$CF?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX?$AA?$CF?$AA0?$AA2?$AAX?$AA?9?$AA?$CF@FNODOBFM@ 0000000000034ed0     rzinfo.obj
+ 0001:00023f50       ??_C@_1O@HAMLNBEA@?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?$AA@FNODOBFM@ 0000000000034f50     rzdevice.obj
+ 0001:00023f60       ??_C@_1BA@GNAGJDKI@?$AA?2?$AAM?$AAa?$AAc?$AAr?$AAo?$AAs?$AA?$AA@FNODOBFM@ 0000000000034f60     rzdevice.obj
+ 0001:00023f70       ??_C@_1BE@KMOJBBEK@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?$AA@FNODOBFM@ 0000000000034f70     rzdevice.obj
+ 0001:00023f90       ??_C@_1GM@MMDEBDNH@?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX?$AA?$CF?$AA0?$AA2?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX@FNODOBFM@ 0000000000034f90     rzdevice.obj
+ 0001:00024000       ??_C@_1BM@DJBNDKFA@?$AAA?$AAc?$AAt?$AAi?$AAv?$AAe?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AA?$AA@FNODOBFM@ 0000000000035000     rzdevice.obj
+ 0001:00024020       ??_C@_1IK@KMGEPCP@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035020     rzdevice.obj
+ 0001:000240b0       ??_C@_1JA@KJAFHPED@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 00000000000350b0     rzdevice.obj
+ 0001:00024140       ??_C@_1IA@GKIMFFOH@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035140     rzdevice.obj
+ 0001:000241c0       ??_C@_1BA@OKEJPPOI@?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AA?$AA@FNODOBFM@ 00000000000351c0     rzprofile.obj
+ 0001:000241d0       ??_C@_1BG@OFNPECKF@?$AA?$CF?$AAs?$AA?2?$AAB?$AAU?$AAT?$AAT?$AAO?$AAN?$AAS?$AA?$AA@FNODOBFM@ 00000000000351d0     rzprofile.obj
+ 0001:000241f0       ??_C@_1BA@CEEDFKHP@?$AA?$CF?$AAs?$AA?2?$AAK?$AAE?$AAY?$AAS?$AA?$AA@FNODOBFM@ 00000000000351f0     rzprofile.obj
+ 0001:00024200       ??_C@_1BE@DNCJLBLM@?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAE?$AAx?$AA?$AA@FNODOBFM@ 0000000000035200     rzprofile.obj
+ 0001:00024220       ??_C@_1JI@DMBOOEGJ@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035220     rzprofile.obj
+ 0001:000242c0       ??_C@_1CC@OOIBAMEA@?$AAA?$AAc?$AAt?$AAi?$AAv?$AAe?$AAS?$AAu?$AAb?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AA?$AA@FNODOBFM@ 00000000000352c0     rzprofile.obj
+ 0001:000242f0       ??_C@_07MCAEODGB@Default?$AA@FNODOBFM@ 00000000000352f0     rzprofile.obj
+ 0001:00024300       ??_C@_07EELFDIBP@Profile?$AA@FNODOBFM@ 0000000000035300     rzprofile.obj
+ 0001:00024310       ??_C@_1BBE@JEPKOLEL@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035310     rzprofile.obj
+ 0001:00024430       ??_C@_1BAO@GADFCMEB@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035430     rzprofile.obj
+ 0001:00024540       ??_C@_1BAE@MLKBBFIC@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035540     rzprofile.obj
+ 0001:00024650       ??_C@_0P@CIDCAGIN@Default?5Keymap?$AA@FNODOBFM@ 0000000000035650     rzsubprofile.obj
+ 0001:00024660       ??_C@_08CBNNOOBL@Keymap?51?$AA@FNODOBFM@ 0000000000035660     rzsubprofile.obj
+ 0001:00024670       ??_C@_08KPALNNI@Keymap?52?$AA@FNODOBFM@ 0000000000035670     rzsubprofile.obj
+ 0001:00024680       ??_C@_08BDOLIMJJ@Keymap?53?$AA@FNODOBFM@ 0000000000035680     rzsubprofile.obj
+ 0001:00024690       ??_C@_08FMKKBKFO@Keymap?54?$AA@FNODOBFM@ 0000000000035690     rzsubprofile.obj
+ 0001:000246a0       ??_C@_08EFLBCLBP@Keymap?55?$AA@FNODOBFM@ 00000000000356a0     rzsubprofile.obj
+ 0001:000246b0       ??_C@_08GOJMHINM@Keymap?56?$AA@FNODOBFM@ 00000000000356b0     rzsubprofile.obj
+ 0001:000246c0       ??_C@_08HHIHEJJN@Keymap?57?$AA@FNODOBFM@ 00000000000356c0     rzsubprofile.obj
+ 0001:000246d0       ??_C@_08PABPFFFC@Keymap?58?$AA@FNODOBFM@ 00000000000356d0     rzsubprofile.obj
+ 0001:000246e0       ??_C@_1JK@JCIDHKIL@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 00000000000356e0     rzsubprofile.obj
+ 0001:00024780       ??_C@_1BAG@OFLDGFJJ@?$AA?2?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AAs?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2@FNODOBFM@ 0000000000035780     rzsubprofile.obj
+ 0001:00024890       ??_C@_1BG@PCENOJGP@?$AAS?$AAu?$AAb?$AAP?$AAr?$AAo?$AAf?$AAi?$AAl?$AAe?$AA?$AA@FNODOBFM@ 0000000000035890     rzsubprofile.obj
+ 0001:000248b0       ??_C@_17IJCAJIJ@?$AAL?$AAe?$AAd?$AA?$AA@FNODOBFM@ 00000000000358b0     rzled.obj
+ 0001:000248c0       ??_C@_1BC@DADIDDOK@?$AAL?$AAe?$AAd?$AAC?$AAo?$AAl?$AAo?$AAr?$AA?$AA@FNODOBFM@ 00000000000358c0     rzled.obj
+ 0001:000248e0       ??_C@_1BM@CPLBANKI@?$AAL?$AAe?$AAd?$AAB?$AAr?$AAi?$AAg?$AAh?$AAt?$AAn?$AAe?$AAs?$AAs?$AA?$AA@FNODOBFM@ 00000000000358e0     rzled.obj
+ 0001:00024900       ??_C@_17NNJIPDMB@?$AAD?$AAP?$AAI?$AA?$AA@FNODOBFM@ 0000000000035900     rzdpi.obj
+ 0001:00024910       ??_C@_1CE@NNKDMLDM@?$AAS?$AAe?$AAn?$AAs?$AAi?$AAt?$AAi?$AAv?$AAi?$AAt?$AAy?$AAS?$AAc?$AAa?$AAl?$AAe?$AAr?$AA?$AA@FNODOBFM@ 0000000000035910     rzsensitivityscaler.obj
+ 0001:00024940       ??_C@_1M@DFCFAMHI@?$AAS?$AAt?$AAa?$AAg?$AAe?$AA?$AA@FNODOBFM@ 0000000000035940     rzstage.obj
+ 0001:00024950       ??_C@_1BC@MGDJOIFE@?$AA?2?$AAA?$AAp?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?$AA@FNODOBFM@ 0000000000035950     rzbindata.obj
+ 0001:00024970       ??_C@_1HO@LLAFGCOL@?$AA?2?$AAA?$AAp?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?2?$AA?$HL?$AA?$CF?$AA0?$AA8?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA4?$AAl?$AAX?$AA?9?$AA?$CF?$AA0?$AA2?$AAX@FNODOBFM@ 0000000000035970     rzbindata.obj
+ 0001:000249f0       ??_C@_19LJDFFCJJ@?$AA?$CF?$AAs?$AA?$CF?$AAs?$AA?$AA@FNODOBFM@ 00000000000359f0     rzregistry.obj
+ 0001:00024a00       ??_C@_1LI@IKMPHEKP@?$AA?2?$AAR?$AAe?$AAg?$AAi?$AAs?$AAt?$AAr?$AAy?$AA?2?$AAM?$AAa?$AAc?$AAh?$AAi?$AAn?$AAe?$AA?2?$AAS?$AAo?$AAf?$AAt?$AAw?$AAa?$AAr?$AAe?$AA?2?$AAR?$AAa?$AAz?$AAe?$AAr@FNODOBFM@ 0000000000035a00     powermanagement.obj
+ 0001:00024ac0       ??_C@_1CO@OEMPAMAE@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAR?$AAz?$AAJ?$AAo?$AAy?$AA_?$AA?$CF?$AA0?$AA4?$AAx?$AA?$AA@FNODOBFM@ 0000000000035ac0     joystickcontroller.obj
+ 0002:00000000       __imp_WdfVersionBindClass  0000000000036000     WdfLdr:WDFLDR.SYS
+ 0002:00000008       __imp_WdfVersionBind       0000000000036008     WdfLdr:WDFLDR.SYS
+ 0002:00000010       __imp_WdfVersionUnbind     0000000000036010     WdfLdr:WDFLDR.SYS
+ 0002:00000018       __imp_WdfVersionUnbindClass 0000000000036018     WdfLdr:WDFLDR.SYS
+ 0002:00000020       \177WDFLDR_NULL_THUNK_DATA 0000000000036020     WdfLdr:WDFLDR.SYS
+ 0002:00000028       __imp_ZwQueryKey           0000000000036028     ntoskrnl:ntoskrnl.exe
+ 0002:00000030       __imp_wcsstr               0000000000036030     ntoskrnl:ntoskrnl.exe
+ 0002:00000038       __imp_swprintf             0000000000036038     ntoskrnl:ntoskrnl.exe
+ 0002:00000040       __imp_ZwEnumerateKey       0000000000036040     ntoskrnl:ntoskrnl.exe
+ 0002:00000048       __imp_KeBugCheckEx         0000000000036048     ntoskrnl:ntoskrnl.exe
+ 0002:00000050       __imp_RtlCopyUnicodeString 0000000000036050     wdmsec:ntoskrnl.exe
+ 0002:00000058       __imp_ZwEnumerateValueKey  0000000000036058     ntoskrnl:ntoskrnl.exe
+ 0002:00000060       __imp_RtlInitUnicodeString 0000000000036060     ntoskrnl:ntoskrnl.exe
+ 0002:00000068       __imp__vsnwprintf          0000000000036068     ntoskrnl:ntoskrnl.exe
+ 0002:00000070       \177ntoskrnl_NULL_THUNK_DATA 0000000000036070     ntoskrnl:ntoskrnl.exe
+ 0002:000000a0       ??_C@_1BI@BJCKEEDJ@?$AAK?$AAm?$AAd?$AAf?$AAL?$AAi?$AAb?$AAr?$AAa?$AAr?$AAy?$AA?$AA@ 00000000000360a0     WdfDriverEntry:stub.obj
+ 0002:000000c0       SDDL_DEVOBJ_KERNEL_ONLY_buffer 00000000000360c0     wdmsec:iosddl.obj
+ 0002:000000c8       SDDL_DEVOBJ_KERNEL_ONLY    00000000000360c8     wdmsec:iosddl.obj
+ 0002:000000d8       SDDL_DEVOBJ_SYS_ALL_buffer 00000000000360d8     wdmsec:iosddl.obj
+ 0002:000000f8       SDDL_DEVOBJ_SYS_ALL        00000000000360f8     wdmsec:iosddl.obj
+ 0002:00000108       SDDL_DEVOBJ_SYS_ALL_ADM_ALL_buffer 0000000000036108     wdmsec:iosddl.obj
+ 0002:00000140       SDDL_DEVOBJ_SYS_ALL_ADM_ALL 0000000000036140     wdmsec:iosddl.obj
+ 0002:00000150       SDDL_DEVOBJ_SYS_ALL_ADM_RX_buffer 0000000000036150     wdmsec:iosddl.obj
+ 0002:00000190       SDDL_DEVOBJ_SYS_ALL_ADM_RX 0000000000036190     wdmsec:iosddl.obj
+ 0002:000001a0       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_buffer 00000000000361a0     wdmsec:iosddl.obj
+ 0002:000001f8       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R 00000000000361f8     wdmsec:iosddl.obj
+ 0002:00000210       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_RES_R_buffer 0000000000036210     wdmsec:iosddl.obj
+ 0002:00000280       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_RES_R 0000000000036280     wdmsec:iosddl.obj
+ 0002:00000290       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RW_RES_R_buffer 0000000000036290     wdmsec:iosddl.obj
+ 0002:00000308       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RW_RES_R 0000000000036308     wdmsec:iosddl.obj
+ 0002:00000320       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX_buffer 0000000000036320     wdmsec:iosddl.obj
+ 0002:000003a0       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX 00000000000363a0     wdmsec:iosddl.obj
+ 0002:000003b0       __lookuptable              00000000000363b0     ntstrsafe:output.obj
+ 0002:00000410       ??_C@_0BF@FELFFAOB@MACROTIMER_EXTENSION?$AA@ 0000000000036410     filter.obj
+ 0002:00000428       ??_C@_0BI@CFGMLOIO@MACROWORKITEM_EXTENSION?$AA@ 0000000000036428     filter.obj
+ 0002:00000440       ??_C@_0BG@BHLCMCCL@FILE_OBJECT_EXTENSION?$AA@ 0000000000036440     filter.obj
+ 0002:00000458       ??_C@_0BB@NKONJEOC@FILTER_EXTENSION?$AA@ 0000000000036458     filter.obj
+ 0002:00000470       ??_C@_0M@NAJJHCKA@DRIVER_DATA?$AA@ 0000000000036470     filter.obj
+ 0002:00000480       ??_C@_0CC@KGAMDOHM@P25COMMANDQUEUEWORKITEM_EXTENSIO@ 0000000000036480     platform25protocolsupport.obj
+ 0002:000004a8       ??_C@_0BD@MCFBGACO@P25TIMER_EXTENSION?$AA@ 00000000000364a8     platform25protocolsupport.obj
+ 0002:000004c0       ??_C@_0BG@MHLOHPPH@P25WORKITEM_EXTENSION?$AA@ 00000000000364c0     platform25protocolsupport.obj
+ 0002:000004d8       ??_C@_0BN@JCALFHCK@P25SERIALIZERTIMER_EXTENSION?$AA@ 00000000000364d8     platform25protocolserializer.obj
+ 0002:000004f8       ??_C@_0CA@NLAOMPKF@P25SERIALIZERWORKITEM_EXTENSION?$AA@ 00000000000364f8     platform25protocolserializer.obj
+ 0002:00000518       PKEY_PowerManagement_CriticalLevel 0000000000036518     propertykeys.obj
+ 0002:00000530       PKEY_PowerManagement_MaxLedBrightness 0000000000036530     propertykeys.obj
+ 0002:00000548       PKEY_PowerManagement_TimeToSleep 0000000000036548     propertykeys.obj
+ 0002:00000560       PKEY_PollingRate           0000000000036560     propertykeys.obj
+ 0002:00000578       PKEY_SynchronizeColor      0000000000036578     propertykeys.obj
+ 0002:00000590       ??_C@_0BO@FDLLOGIF@REGISTRYREADERTIMER_EXTENSION?$AA@ 0000000000036590     registryreader.obj
+ 0002:000005b0       ??_C@_0CB@DPJFPJEM@REGISTRYREADERWORKITEM_EXTENSION@ 00000000000365b0     registryreader.obj
+ 0002:000005d8       ??_C@_0BI@PPIGACEH@CONTROLDEVICE_EXTENSION?$AA@ 00000000000365d8     controldevice.obj
+ 0002:000005f0       g_PROFILEID_DEFAULT        00000000000365f0     rzprofile.obj
+ 0002:00000600       g_SUBPROFILEID_LIST        0000000000036600     rzprofile.obj
+ 0002:00000690       g_Device_DefProfile        0000000000036690     rzdevice.obj
+ 0002:000006a0       gGuid_VID_1532_PID_0015    00000000000366a0     devicemanager.obj
+ 0002:000006b0       gGuid_VID_1532_PID_010D    00000000000366b0     devicemanager.obj
+ 0002:000006c0       gGuid_VID_1532_PID_010E    00000000000366c0     devicemanager.obj
+ 0002:000006d0       gGuid_VID_1532_PID_0020    00000000000366d0     devicemanager.obj
+ 0002:000006e0       gGuid_VID_1532_PID_0110    00000000000366e0     devicemanager.obj
+ 0002:000006f0       gGuid_VID_1532_PID_0019    00000000000366f0     devicemanager.obj
+ 0002:00000700       gGuid_VID_1532_PID_001A    0000000000036700     devicemanager.obj
+ 0002:00000710       gGuid_VID_1532_PID_0022    0000000000036710     devicemanager.obj
+ 0002:00000720       gGuid_VID_1532_PID_0023    0000000000036720     devicemanager.obj
+ 0002:00000730       gGuid_VID_1532_PID_010F    0000000000036730     devicemanager.obj
+ 0002:00000740       gGuid_VID_1532_PID_0026    0000000000036740     devicemanager.obj
+ 0002:00000750       gGuid_VID_1532_PID_0027    0000000000036750     devicemanager.obj
+ 0002:00000760       gGuid_VID_1532_PID_0111    0000000000036760     devicemanager.obj
+ 0002:00000770       gGuid_VID_1532_PID_0113    0000000000036770     devicemanager.obj
+ 0002:00000780       ??_C@_0BH@LNABHAOM@RZDEVICEWORK_EXTENSION?$AA@ 0000000000036780     rzdevice.obj
+ 0002:00000798       ??_C@_0BI@EEEKMEGC@RZPROFILEWORK_EXTENSION?$AA@ 0000000000036798     rzprofile.obj
+ 0002:000007b0       ??_C@_0CC@DODPGIAJ@OTFSACCUMULATORWORKITEM_EXTENSIO@ 00000000000367b0     otfsaccumulator.obj
+ 0002:000007d8       ??_C@_0BP@ELHDJILE@OTFSACCUMULATORTIMER_EXTENSION?$AA@ 00000000000367d8     otfsaccumulator.obj
+ 0002:000007f8       ??_C@_0BG@CKHFHAPN@OtfMacro_WorkItemData?$AA@ 00000000000367f8     otfmacro.obj
+ 0002:00000810       ??_C@_0BK@GKMLIOEC@SynchronizeColor_WorkData?$AA@ 0000000000036810     synchronizecolor.obj
+ 0003:00000000       HotPatchBuffer             0000000000038000     hotpatch.obj
+ 0003:00000100       __security_cookie          0000000000038100     BufferOverflowK:gs_support.obj
+ 0003:00000108       __security_cookie_complement 0000000000038108     BufferOverflowK:gs_support.obj
+ 0003:00000140       _fltused                   0000000000038140     ntstrsafe:stubs.obj
+ 0003:00000144       _ldused                    0000000000038144     ntstrsafe:stubs.obj
+ 0003:00000148       __mb_cur_max               0000000000038148     ntstrsafe:nlsdata1.obj
+ 0003:0000014c       __decimal_point            000000000003814c     ntstrsafe:nlsdata1.obj
+ 0003:00000150       __decimal_point_length     0000000000038150     ntstrsafe:nlsdata1.obj
+ 0003:00000158       _WDF_DRIVER_DATA_TYPE_INFO 0000000000038158     filter.obj
+ 0003:00000180       _WDF_FILTER_EXTENSION_TYPE_INFO 0000000000038180     filter.obj
+ 0003:000001a8       _WDF_FILE_OBJECT_EXTENSION_TYPE_INFO 00000000000381a8     filter.obj
+ 0003:000001d0       _WDF_MACROWORKITEM_EXTENSION_TYPE_INFO 00000000000381d0     filter.obj
+ 0003:000001f8       _WDF_MACROTIMER_EXTENSION_TYPE_INFO 00000000000381f8     filter.obj
+ 0003:00000220       _WDF_P25WORKITEM_EXTENSION_TYPE_INFO 0000000000038220     platform25protocolsupport.obj
+ 0003:00000248       _WDF_P25TIMER_EXTENSION_TYPE_INFO 0000000000038248     platform25protocolsupport.obj
+ 0003:00000270       _WDF_P25COMMANDQUEUEWORKITEM_EXTENSION_TYPE_INFO 0000000000038270     platform25protocolsupport.obj
+ 0003:00000298       _WDF_P25SERIALIZERWORKITEM_EXTENSION_TYPE_INFO 0000000000038298     platform25protocolserializer.obj
+ 0003:000002c0       _WDF_P25SERIALIZERTIMER_EXTENSION_TYPE_INFO 00000000000382c0     platform25protocolserializer.obj
+ 0003:000002e8       _WDF_REGISTRYREADERWORKITEM_EXTENSION_TYPE_INFO 00000000000382e8     registryreader.obj
+ 0003:00000310       _WDF_REGISTRYREADERTIMER_EXTENSION_TYPE_INFO 0000000000038310     registryreader.obj
+ 0003:00000338       _WDF_CONTROLDEVICE_EXTENSION_TYPE_INFO 0000000000038338     controldevice.obj
+ 0003:00000360       _WDF_RZDEVICEWORK_EXTENSION_TYPE_INFO 0000000000038360     rzdevice.obj
+ 0003:00000388       _WDF_RZPROFILEWORK_EXTENSION_TYPE_INFO 0000000000038388     rzprofile.obj
+ 0003:000003c0       g_LedMapTable              00000000000383c0     rzled.obj
+ 0003:000003d0       _WDF_OTFSACCUMULATORTIMER_EXTENSION_TYPE_INFO 00000000000383d0     otfsaccumulator.obj
+ 0003:000003f8       _WDF_OTFSACCUMULATORWORKITEM_EXTENSION_TYPE_INFO 00000000000383f8     otfsaccumulator.obj
+ 0003:00000420       _WDF_OtfMacro_WorkItemData_TYPE_INFO 0000000000038420     otfmacro.obj
+ 0003:00000448       _WDF_SynchronizeColor_WorkData_TYPE_INFO 0000000000038448     synchronizecolor.obj
+ 0003:00000470       ?__KMDF_CLASS_BIND_START@@3U_MARKER_TYPE@@A 0000000000038470     WdfDriverEntry:classbind.obj
+ 0003:00000480       ?__KMDF_CLASS_BIND_END@@3PEAXEA 0000000000038480     WdfDriverEntry:classbind.obj
+ 0003:00000490       ?__KMDF_TYPE_INIT_START@@3U_MARKER_TYPE@@A 0000000000038490     WdfDriverEntry:inittypes.obj
+ 0003:000004a0       ?__KMDF_TYPE_INIT_END@@3PEAXEA 00000000000384a0     WdfDriverEntry:inittypes.obj
+ 0003:000004c0       WdfFunctions               00000000000384c0     WdfDriverEntry:stub.obj
+ 0003:00001120       typeWDF_IFR_HEADER         0000000000039120     WdfDriverEntry:stub.obj
+ 0003:00001148       WdfDriverGlobals           0000000000039148     WdfDriverEntry:stub.obj
+ 0003:00001368       __fastflag                 0000000000039368     ntstrsafe:stubs.obj
+ 0003:00001378       g_RzInfo_List              0000000000039378     rzinfo.obj
+ 0003:00001380       g_RzInfo_Lock              0000000000039380     rzinfo.obj
+ 0005:00000008       FilterEvtDeviceAdd         000000000003b008 f   filter.obj
+ 0005:00000258       FilterEvtDeviceContextCleanup 000000000003b258 f   filter.obj
+ 0006:00000008       DriverEntry                000000000003c008 f   filter.obj
+ 0006:00000164       __security_init_cookie     000000000003c164 f   BufferOverflowK:gs_support.obj
+ 0006:000001bc       __IMPORT_DESCRIPTOR_ntoskrnl 000000000003c1bc     ntoskrnl:ntoskrnl.exe
+ 0006:000001d0       __IMPORT_DESCRIPTOR_WDFLDR 000000000003c1d0     WdfLdr:WDFLDR.SYS
+ 0006:000001e4       __NULL_IMPORT_DESCRIPTOR   000000000003c1e4     ntoskrnl:ntoskrnl.exe
+
+ entry point at        0001:00023630
+
+ Static symbols
+
+ 0001:0000b58c       ControlDevice_EvtFileCreate 000000000001c58c f    CIL library: CIL module

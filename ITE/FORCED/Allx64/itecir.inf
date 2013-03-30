@@ -1,0 +1,334 @@
+;/*++
+;Abstract:
+;    INF file for installing the ITE CIR device
+;
+;
+;--*/
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%MSFT%
+DriverVer=07/13/2010,5.1.0000.7
+CatalogFile=ITECIR.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+IR_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+;[SourceDisksNames.x86]
+;1 = %DiskId1%,,,\i386
+
+;[SourceDisksNames.amd64]
+;1 = %DiskId1%,,,\amd64
+
+;[SourceDisksNames.ia64]
+;1 = %DiskId1%,,,\ia64
+
+[SourceDisksFiles]
+;CIRCoInst.dll  = 1,,
+itecir.sys  = 1,,
+
+[Manufacturer]
+%StdMfg%=Standard,NTx86, NTia64, NTamd64
+
+[Standard]
+%itecir.DeviceDesc%    = itecir_Device,    ACPI\ITE8704
+
+[Standard.NTx86]
+%itecir.DeviceDesc%    = itecir_Device,    ACPI\ITE8704
+;%itecir.DeviceDesc.EC.RTC% = itecir_EC_RTC_Device, ACPI\ITE8707
+%itecir.DeviceDesc.EC.PMC% = itecir_EC_PMC_Device, ACPI\ITE8709
+%itecir.DeviceDesc.EC% = itecir_EC_Device, ACPI\ITE8708
+%itecir.DeviceDesc.CHIP% = itecir_CHIP_Device, ACPI\ITE8710
+%itecir.DeviceDesc.EC2% = itecir_EC2_Device, ACPI\ITE8712
+%itecir.DeviceDesc.SIO2% = itecir_SIO2_Device, ACPI\ITE8713
+%itecir.DeviceDesc.EC2HP% = itecir_EC2_Device, ACPI\ITE8715
+
+[Standard.NTia64]
+%itecir.DeviceDesc%    = itecir_Device,    ACPI\ITE8704
+;%itecir.DeviceDesc.EC.RTC% = itecir_EC_RTC_Device, ACPI\ITE8707
+%itecir.DeviceDesc.EC.PMC% = itecir_EC_PMC_Device, ACPI\ITE8709
+%itecir.DeviceDesc.EC% = itecir_EC_Device, ACPI\ITE8708
+%itecir.DeviceDesc.CHIP% = itecir_CHIP_Device, ACPI\ITE8710
+%itecir.DeviceDesc.EC2% = itecir_EC2_Device, ACPI\ITE8712
+%itecir.DeviceDesc.SIO2% = itecir_SIO2_Device, ACPI\ITE8713
+%itecir.DeviceDesc.EC2HP% = itecir_EC2_Device, ACPI\ITE8715
+
+[Standard.NTamd64]
+%itecir.DeviceDesc%    = itecir_Device,    ACPI\ITE8704
+;%itecir.DeviceDesc.EC.RTC% = itecir_EC_RTC_Device, ACPI\ITE8707
+%itecir.DeviceDesc.EC.PMC% = itecir_EC_PMC_Device, ACPI\ITE8709
+%itecir.DeviceDesc.EC% = itecir_EC_Device, ACPI\ITE8708
+%itecir.DeviceDesc.CHIP% = itecir_CHIP_Device, ACPI\ITE8710
+%itecir.DeviceDesc.EC2% = itecir_EC2_Device, ACPI\ITE8712
+%itecir.DeviceDesc.SIO2% = itecir_SIO2_Device, ACPI\ITE8713
+%itecir.DeviceDesc.EC2HP% = itecir_EC2_Device, ACPI\ITE8715
+
+;-----------------------------------------------------
+;SIO
+;-----------------------------------------------------
+[itecir_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_SIO_Service_Inst
+
+[itecir_SIO_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_SIO_addreg
+
+[pnp_SIO_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000001
+
+[itecir_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_Device.NT.Wdf]
+KmdfService =  itecir, itecir_Device_WdfSection
+[itecir_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;SIO2
+;-----------------------------------------------------
+[itecir_SIO2_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_SIO2_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_SIO2_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_SIO2_Service_Inst
+
+[itecir_SIO2_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_SIO2_addreg
+
+[pnp_SIO2_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000007
+
+[itecir_SIO2_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_SIO2_Device.NT.Wdf]
+KmdfService =  itecir, itecir_SIO2_Device_WdfSection
+[itecir_SIO2_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;EC RTC
+;-----------------------------------------------------
+[itecir_EC_RTC_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_EC_RTC_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_EC_RTC_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_EC_RTC_Service_Inst
+
+[itecir_EC_RTC_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_EC_RTC_addreg
+
+[pnp_EC_RTC_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000002
+
+[itecir_EC_RTC_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_EC_RTC_Device.NT.Wdf]
+KmdfService =  itecir, itecir_EC_RTC_Device_WdfSection
+[itecir_EC_RTC_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;EC PMC
+;-----------------------------------------------------
+[itecir_EC_PMC_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_EC_PMC_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_EC_PMC_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_EC_PMC_Service_Inst
+
+[itecir_EC_PMC_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_EC_PMC_addreg
+
+[pnp_EC_PMC_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000003
+
+[itecir_EC_PMC_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_EC_PMC_Device.NT.Wdf]
+KmdfService =  itecir, itecir_EC_PMC_Device_WdfSection
+[itecir_EC_PMC_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;EC
+;-----------------------------------------------------
+[itecir_EC_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_EC_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_EC_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_EC_Service_Inst
+
+[itecir_EC_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_EC_addreg
+
+[pnp_EC_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000004
+
+[itecir_EC_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_EC_Device.NT.Wdf]
+KmdfService =  itecir, itecir_EC_Device_WdfSection
+[itecir_EC_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;IT8305 CHIP
+;-----------------------------------------------------
+[itecir_CHIP_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_CHIP_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_CHIP_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_CHIP_Service_Inst
+
+[itecir_CHIP_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_CHIP_addreg
+
+[pnp_CHIP_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000005
+
+[itecir_CHIP_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_CHIP_Device.NT.Wdf]
+KmdfService =  itecir, itecir_CHIP_Device_WdfSection
+[itecir_CHIP_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-----------------------------------------------------
+;EC2
+;-----------------------------------------------------
+[itecir_EC2_Device.NT]
+CopyFiles=Drivers_Dir
+
+[itecir_EC2_Device.NT.HW]
+AddReg=itecir_AddReg
+
+[itecir_EC2_Device.NT.Services]
+AddService = itecir,%SPSVCINST_ASSOCSERVICE%, itecir_EC2_Service_Inst
+
+[itecir_EC2_Service_Inst]
+DisplayName    = %itecir.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\itecir.sys
+LoadOrderGroup = Extended Base
+AddReg         = pnp_EC2_addreg
+
+[pnp_EC2_addreg]
+HKR, "Parameters","DriverReadWriteType",0x00010001,0x0000006
+
+[itecir_EC2_Device.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[itecir_EC2_Device.NT.Wdf]
+KmdfService =  itecir, itecir_EC2_Device_WdfSection
+[itecir_EC2_Device_WdfSection]
+KmdfLibraryVersion = 1.5
+
+;-------------------------------------------------------
+
+[itecir_AddReg]                            
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+[Drivers_Dir]
+itecir.sys
+
+[IR_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "CIRCoInst.dll,IRCoInstaller"
+
+[IR_CoInstaller_CopyFiles]
+;CIRCoInst.dll
+
+;-------------------------------------------------------
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+MSFT = "ITE Tech.Inc."
+StdMfg = "ITE Tech.Inc."
+DiskId1 = "ITECIR Installation Disk #1"
+itecir.DeviceDesc = "ITECIR Infrared Receiver"
+itecir.DeviceDesc.EC.PMC = "ITECIR Infrared Receiver (EC PMC)"
+itecir.DeviceDesc.EC.RTC = "ITECIR Infrared Receiver (EC RTC)"
+itecir.DeviceDesc.EC = "ITECIR Infrared Receiver (EC)"
+itecir.DeviceDesc.CHIP = "ITECIR Infrared Receiver (CHIP)"
+itecir.DeviceDesc.EC2 = "ITECIR Infrared Receiver (EC2)"
+itecir.DeviceDesc.SIO2 = "ITECIR Infrared Receiver (SIO2)"
+itecir.DeviceDesc.EC2HP = "ITE Infrared Transceiver"
+itecir.SVCDESC = "ITECIR Infrared Receiver"
+
+

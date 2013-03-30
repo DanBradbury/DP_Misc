@@ -1,0 +1,73 @@
+;/*++
+;
+;Copyright (c) Broadcom Corporation.  All rights reserved.
+;
+; x86 Vista Smart Card Reader Filter Install;
+;
+;--*/
+[Version]
+Signature="$Windows NT$"
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider="Broadcom"
+DriverVer=09/23/2008, 1.0.0.1
+CatalogFile=ccidfltv.cat
+
+[SourceDisksNames]
+1=%Distribution%,,,
+
+[SourceDisksFiles]
+ccidflt.sys = 1
+
+[Manufacturer]
+Broadcom=Broadcom
+
+[BROADCOM]
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5800&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5800&MI_02
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5801&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5801&MI_02
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5802&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5802&MI_02
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5803&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5803&MI_02
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5804&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5804&MI_02
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5805&MI_01
+%BRCMCCID.DeviceDesc% = BRCMCCID.Install,USB\VID_0A5C&PID_5805&MI_02
+
+[BRCMCCID.Install.NT]
+Include=usbccid.inf
+Needs=USBCCID.Install.NT
+CopyFiles=BRCMCCID.Install.CopyFiles
+
+[BRCMCCID.Install.CopyFiles]
+ccidflt.sys,,,2
+
+[BRCMCCID.Install.NT.Services]
+Include=usbccid.inf
+Needs=USBCCID.Install.NT.Services
+AddService = CCIDFILTER, , CCIDFILTER.AddService
+
+[CCIDFILTER.AddService]
+DisplayName = %CCIDFILTER.SvcDesc%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\ccidflt.SYS
+LoadOrderGroup = PnP Filter
+
+[BRCMCCID.Install.NT.HW]
+AddReg=CCIDFILTER_Filter_Reg
+
+[CCIDFILTER_Filter_Reg]
+HKR,,"UpperFilters",0x00010000,"CCIDFILTER"
+
+[DestinationDirs]
+BRCMCCID.Install.CopyFiles = 12
+
+[Strings]
+Broadcom = "Broadcom Corporation"
+Distribution = "Broadcom Driver Disk"
+BRCMCCID.DeviceDesc = "USB Smart Card Reader"
+CCIDFILTER.SvcDesc = "Broadcom Smart Card Reader Filter Driver"

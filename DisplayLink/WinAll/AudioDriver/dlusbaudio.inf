@@ -1,0 +1,589 @@
+;
+; DisplayLink USB Audio Adapter Driver
+;
+; Copyright (c) 2011 DisplayLink (UK) Ltd.
+
+;******************************************************************************
+; Version Section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+; 09/04/2012,1.26.0.0
+DriverVer=01/23/2013,7.1.44881.0
+Provider=%S_Provider%
+CatalogFile=%S_DriverName%.cat
+
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+
+
+;******************************************************************************
+; Manufacturer
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Models, ntamd64
+
+
+;******************************************************************************
+; Models sections
+;------------------------------------------------------------------------------
+[_Models]
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4300&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4301&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4302&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4303&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4304&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4305&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4306&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4307&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4308&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4309&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4310&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4311&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4312&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4313&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4314&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4315&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4316&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4317&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4318&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4319&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4320&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4321&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4322&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4323&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4324&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4325&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4326&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4327&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4328&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4329&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4330&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4331&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4332&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4333&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4334&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4335&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4336&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4337&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4338&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4339&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4340&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4341&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4342&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4343&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4344&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4345&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4346&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4347&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4348&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4349&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4350&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4351&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4352&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4353&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4354&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4355&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4356&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4357&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4358&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4359&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C300&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C301&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C302&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C303&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C304&MI_02
+
+
+[_Models.ntamd64]
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4300&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4301&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4302&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4303&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4304&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4305&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4306&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4307&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4308&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4309&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_430F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4310&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4311&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4312&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4313&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4314&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4315&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4316&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4317&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4318&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4319&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_431F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4320&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4321&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4322&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4323&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4324&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4325&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4326&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4327&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4328&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4329&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_432F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4330&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4331&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4332&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4333&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4334&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4335&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4336&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4337&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4338&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4339&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_433F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4340&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4341&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4342&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4343&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4344&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4345&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4346&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4347&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4348&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4349&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_434F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4350&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4351&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4352&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4353&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4354&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4355&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4356&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4357&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4358&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_4359&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435A&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435B&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435C&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435D&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435E&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_435F&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C300&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C301&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C302&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C303&MI_02
+%S_DeviceDesc%=_Install, USB\VID_17E9&PID_C304&MI_02
+
+
+;******************************************************************************
+; Install Sections x86
+;------------------------------------------------------------------------------
+[_Install.ntx86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, mssysfx.CopyFilesAndRegister
+CopyFiles=_CopyFiles_sys_x86
+AddReg=_KSAddReg,_KSAddReg_x86
+;AddProperty=_KSAddProperty
+
+[_Install.ntx86.HW]
+AddReg = _AddReg_HW, _AddReg_SD_OUT, _AddReg_SD_IN
+
+[_Install.ntx86.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService_x86, _EventLog_x86
+
+[_AddService_x86]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\%S_DriverName%.sys
+AddReg = _AddReg_MediaCategories
+
+[_EventLog_x86]
+AddReg=_EventLogAddReg_x86
+
+[_EventLogAddReg_x86]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%S_DriverName%.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+;******************************************************************************
+; Install Sections x64
+;------------------------------------------------------------------------------
+[_Install.ntamd64]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, mssysfx.CopyFilesAndRegister
+CopyFiles=_CopyFiles_sys_x64
+AddReg=_KSAddReg,_KSAddReg_x64
+;AddProperty=_KSAddProperty
+
+[_Install.ntamd64.HW]
+AddReg = _AddReg_HW, _AddReg_SD_OUT, _AddReg_SD_IN
+
+[_Install.ntamd64.Services]
+AddService = %S_ServiceName%, 0x00000002, _AddService_x64, _EventLog_x64
+
+[_AddService_x64]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\%S_DriverName%_x64.sys
+AddReg = _AddReg_MediaCategories
+
+[_EventLog_x64]
+AddReg=_EventLogAddReg_x64
+
+[_EventLogAddReg_x64]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\%S_DriverName%_x64.sys"
+HKR,,TypesSupported,  %REG_DWORD%, 7
+
+
+;******************************************************************************
+; Registry sections
+;------------------------------------------------------------------------------
+[_AddReg_HW]
+; enable workaround: swap CENTER and LFE channels
+HKR,,EnableSwapCenterLfeWorkaround,  %REG_DWORD%, 1
+
+
+; OUT sound devices setup (playback)
+[_AddReg_SD_OUT]
+; NOTE: All entries in this section are optional. If present, each setting overwrites the driver's default behavior.
+
+; sound device category GUID (overrides driver-internal default which is GUID.Speaker)
+;HKR, "sd_out_00", "PinCategoryGuid", %REG_SZ%, %GUID.Line%
+; custom name. NOTE: On Vista/W7 this does not work for KSNODETYPE_SPEAKER category.
+;HKR, "sd_out_00", "PinNameGuid",   %REG_SZ%, %GUID.CustomName1%   ; used on Vista/W7
+;HKR, "sd_out_00", "DisplayNameXP", %REG_SZ%, %TEXT.CustomName1%   ; used on XP only
+
+; sequence of subkeys that generates an array of jack description items, see also http://msdn.microsoft.com/en-us/library/dd316543(VS.85).aspx
+; NOTE: settings FirstChannel, ChannelCount and SpeakerPositions are mandatory, other settings are optional
+; item 0: L+R
+;HKR, "sd_out_00\jd_00", "FirstChannel", %REG_DWORD%, 0
+;HKR, "sd_out_00\jd_00", "ChannelCount", %REG_DWORD%, 2
+;HKR, "sd_out_00\jd_00", "SpeakerPositions", %REG_DWORD%, 0x00000003   ; SPEAKER_FRONT_LEFT|SPEAKER_FRONT_RIGHT  (see ksmedia.h)
+;HKR, "sd_out_00\jd_00", "ConnectionType", %REG_DWORD%, %eConnType3Point5mm%
+;HKR, "sd_out_00\jd_00", "GeoLocation", %REG_DWORD%, %eGeoLocRear%
+;HKR, "sd_out_00\jd_00", "GenLocation", %REG_DWORD%, %eGenLocPrimaryBox%
+;HKR, "sd_out_00\jd_00", "PortConnection", %REG_DWORD%, %ePortConnJack%
+;HKR, "sd_out_00\jd_00", "ColorR", %REG_DWORD%, 255
+;HKR, "sd_out_00\jd_00", "ColorG", %REG_DWORD%, 0
+;HKR, "sd_out_00\jd_00", "ColorB", %REG_DWORD%, 0
+; item 1: C+LFE
+;HKR, "sd_out_00\jd_01", "FirstChannel", %REG_DWORD%, 2
+;HKR, "sd_out_00\jd_01", "ChannelCount", %REG_DWORD%, 2
+;HKR, "sd_out_00\jd_01", "SpeakerPositions", %REG_DWORD%, 0x0000000C   ; SPEAKER_FRONT_CENTER|SPEAKER_LOW_FREQUENCY  (see ksmedia.h)
+;HKR, "sd_out_00\jd_01", "ConnectionType", %REG_DWORD%, %eConnType3Point5mm%
+;HKR, "sd_out_00\jd_01", "GeoLocation", %REG_DWORD%, %eGeoLocRear%
+;HKR, "sd_out_00\jd_01", "GenLocation", %REG_DWORD%, %eGenLocPrimaryBox%
+;HKR, "sd_out_00\jd_01", "PortConnection", %REG_DWORD%, %ePortConnJack%
+;HKR, "sd_out_00\jd_01", "ColorR", %REG_DWORD%, 0
+;HKR, "sd_out_00\jd_01", "ColorG", %REG_DWORD%, 255
+;HKR, "sd_out_00\jd_01", "ColorB", %REG_DWORD%, 0
+; item 2: RL+RR
+;HKR, "sd_out_00\jd_02", "FirstChannel", %REG_DWORD%, 4
+;HKR, "sd_out_00\jd_02", "ChannelCount", %REG_DWORD%, 2
+;HKR, "sd_out_00\jd_02", "SpeakerPositions", %REG_DWORD%, 0x00000030   ; SPEAKER_BACK_LEFT|SPEAKER_BACK_RIGHT  (see ksmedia.h)
+;HKR, "sd_out_00\jd_02", "ConnectionType", %REG_DWORD%, %eConnType3Point5mm%
+;HKR, "sd_out_00\jd_02", "GeoLocation", %REG_DWORD%, %eGeoLocRear%
+;HKR, "sd_out_00\jd_02", "GenLocation", %REG_DWORD%, %eGenLocPrimaryBox%
+;HKR, "sd_out_00\jd_02", "PortConnection", %REG_DWORD%, %ePortConnJack%
+;HKR, "sd_out_00\jd_02", "ColorR", %REG_DWORD%, 0
+;HKR, "sd_out_00\jd_02", "ColorG", %REG_DWORD%, 0
+;HKR, "sd_out_00\jd_02", "ColorB", %REG_DWORD%, 255
+
+
+; IN sound devices setup (record)
+[_AddReg_SD_IN]
+; NOTE: All entries in this section are optional. If present, each setting overwrites the driver's default behavior.
+
+; sound device category GUID (overrides driver-internal default which is GUID.Line)
+;HKR, "sd_in_00", "PinCategoryGuid", %REG_SZ%, %GUID.Line%
+; custom name. NOTE: On Vista/W7 this does not work for KSNODETYPE_SPEAKER category.
+;HKR, "sd_in_00", "PinNameGuid",   %REG_SZ%, %GUID.CustomName2%   ; used on Vista/W7
+;HKR, "sd_in_00", "DisplayNameXP", %REG_SZ%, %TEXT.CustomName2%   ; used on XP only
+
+; sequence of subkeys that generates an array of jack description items, see also http://msdn.microsoft.com/en-us/library/dd316543(VS.85).aspx
+; NOTE: settings FirstChannel, ChannelCount and SpeakerPositions are mandatory, other settings are optional
+; item 0: L+R
+;HKR, "sd_in_00\jd_00", "FirstChannel", %REG_DWORD%, 0
+;HKR, "sd_in_00\jd_00", "ChannelCount", %REG_DWORD%, 2
+;HKR, "sd_in_00\jd_00", "SpeakerPositions", %REG_DWORD%, 0x00000003   ; SPEAKER_FRONT_LEFT|SPEAKER_FRONT_RIGHT  (see ksmedia.h)
+;HKR, "sd_in_00\jd_00", "ConnectionType", %REG_DWORD%, %eConnType3Point5mm%
+;HKR, "sd_in_00\jd_00", "GeoLocation", %REG_DWORD%, %eGeoLocRear%
+;HKR, "sd_in_00\jd_00", "GenLocation", %REG_DWORD%, %eGenLocPrimaryBox%
+;HKR, "sd_in_00\jd_00", "PortConnection", %REG_DWORD%, %ePortConnJack%
+;HKR, "sd_in_00\jd_00", "ColorR", %REG_DWORD%, 0
+;HKR, "sd_in_00\jd_00", "ColorG", %REG_DWORD%, 128
+;HKR, "sd_in_00\jd_00", "ColorB", %REG_DWORD%, 128
+
+
+; sound device name strings
+[_AddReg_MediaCategories]
+; If custom names are to be used, register these below.
+; NOTE: This section should be empty if no custom names are used in [_AddReg_SD_OUT] or [_AddReg_SD_IN].
+;HKLM,%MediaCategories%\%GUID.CustomName1%, Name,    %REG_SZ%,     %TEXT.CustomName1%
+;HKLM,%MediaCategories%\%GUID.CustomName1%, Display, %REG_BINARY%, 00,00,00,00
+;HKLM,%MediaCategories%\%GUID.CustomName2%, Name,    %REG_SZ%,     %TEXT.CustomName2%
+;HKLM,%MediaCategories%\%GUID.CustomName2%, Display, %REG_BINARY%, 00,00,00,00
+
+
+
+;******************************************************************************
+; interface registration
+;------------------------------------------------------------------------------
+[_Install.ntx86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%
+[_Install.ntamd64.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%
+
+
+;******************************************************************************
+; make the driver available to the Multimedia system
+;------------------------------------------------------------------------------
+[_KSAddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\aux\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%S_WdmAudDescription%
+HKR,Drivers\midi\wdmaud.drv,Description,,%S_WdmAudDescription%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%S_WdmAudDescription%
+HKR,Drivers\aux\wdmaud.drv,Description,,%S_WdmAudDescription%
+
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+
+[_KSAddReg_x86]
+HKR,,Driver,,%S_DriverName%.sys
+
+[_KSAddReg_x64]
+HKR,,Driver,,%S_DriverName%_x64.sys
+
+
+;******************************************************************************
+; Add properties (Vista only)
+;------------------------------------------------------------------------------
+;[_KSAddProperty]
+; optionally, add an icon shown in Vista Audio CPL
+;DeviceBrandingIcon,,,,"%12%\%S_DriverName%,-200"
+
+;Place your URL here
+;DeviceVendorWebSite,,,,"http://www.displaylink.com/" 
+
+
+
+;******************************************************************************
+; Copy file sections
+;------------------------------------------------------------------------------
+[_CopyFiles_sys_x86]
+dlusbaudio.sys,,,0x00000004
+
+[_CopyFiles_sys_x64]
+dlusbaudio_x64.sys,,,0x00000004
+
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 12  ; %windir%\system32\drivers
+_CopyFiles_sys_x86 = 12
+_CopyFiles_sys_x64 = 12
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames.x86]
+1=%S_DiskName%,,0
+[SourceDisksNames.amd64]
+1=%S_DiskName%,,0
+
+[SourceDisksFiles.x86]
+dlusbaudio.sys=1
+[SourceDisksFiles.amd64]
+dlusbaudio_x64.sys=1
+
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+;
+; Non-Localizable Strings, DO NOT MODIFY!
+;
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSSTRING_Filter="{9B365890-165F-11D0-A195-0020AFD156E4}"
+KSNAME_Topology="Topology"
+
+;
+; These are sound device categories predefined by Windows.
+; This is a subset only, containing most commonly used categories.
+; See ks.inf, ksmedia.h and WDK docs for the full set of available category GUIDs.
+;
+; KSNODETYPE_SPEAKER, speaker icon
+GUID.Speaker="{DFF21CE1-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_DESKTOP_SPEAKER, speaker icon
+GUID.DesktopSpeaker="{DFF21CE4-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_HEADPHONES, headphone icon
+GUID.Headphones="{DFF21CE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_LINE_CONNECTOR, cinch cable icon
+GUID.Line="{DFF21FE3-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_SPDIF_INTERFACE, black box icon
+GUID.SPDIFInterface="{DFF21FE5-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_DIGITAL_AUDIO_INTERFACE, black box icon
+GUID.DigitalAudioInterface="{DFF21FE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_HEADSET, headset icon
+GUID.Headset="{DFF21DE2-F70F-11D0-B917-00A0C9223196}"
+; KSNODETYPE_MICROPHONE, microphone icon
+GUID.Microphone="{DFF21BE1-F70F-11D0-B917-00A0C9223196}"
+
+; enum EPcxConnectionType (see ksmedia.h)
+eConnTypeUnknown = 0
+eConnType3Point5mm = 1
+eConnTypeQuarter = 2
+eConnTypeAtapiInternal = 3
+eConnTypeRCA = 4
+eConnTypeOptical = 5
+eConnTypeOtherDigital = 6
+eConnTypeOtherAnalog = 7
+eConnTypeMultichannelAnalogDIN = 8
+eConnTypeXlrProfessional = 9
+eConnTypeRJ11Modem = 10
+eConnTypeCombination = 11
+
+; enum EPcxGeoLocation (see ksmedia.h)
+eGeoLocRear = 1
+eGeoLocFront = 2
+eGeoLocLeft = 3
+eGeoLocRight = 4
+eGeoLocTop = 5
+eGeoLocBottom = 6
+eGeoLocRearPanel = 7
+eGeoLocRiser = 8
+eGeoLocInsideMobileLid = 9
+eGeoLocDrivebay = 10
+eGeoLocHDMI = 11
+eGeoLocOutsideMobileLid = 12
+eGeoLocATAPI = 13
+
+; enum EPcxGenLocation (see ksmedia.h)
+eGenLocPrimaryBox = 0
+eGenLocInternal = 1
+eGenLocSeparate = 2
+eGenLocOther = 3
+
+; enum EPxcPortConnection (see ksmedia.h)
+ePortConnJack = 0
+ePortConnIntegratedDevice = 1
+ePortConnBothIntegratedAndJack = 2
+ePortConnUnknown = 3
+
+
+
+;
+; Localizable Strings, modify as required
+;
+; provider
+S_Provider="DisplayLink Corp."
+S_Mfg="DisplayLink"
+
+; disk name
+S_DiskName="DisplayLink USB Audio Adapter driver disk"
+
+S_WdmAudDescription="DisplayLink Audio Class Driver"
+S_TopologyDeviceName="DisplayLink Audio Class Mixer"
+
+
+; service name, should be set to x86 binary executable name without .sys extension
+S_ServiceName="dlusbaudio"
+
+; device description
+S_DeviceDesc = "DisplayLink USB Audio Adapter"
+
+; driver name
+S_DriverName="dlusbaudio"
+
+; define GUIDs and names used in [_AddReg_MediaCategories]
+GUID.CustomName1="{5A849531-B15B-49f8-8EB2-3F13ED3EF9E6}"
+TEXT.CustomName1="ELLA Line Out"
+
+GUID.CustomName2="{5A849532-B15B-49f8-8EB2-3F13ED3EF9E6}"
+TEXT.CustomName2="ELLA Line In"
+
+;;;;;;;;;;;;;;;;;;;;;; EOF ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

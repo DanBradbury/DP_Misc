@@ -1,0 +1,93 @@
+;
+; LgLcdSSDriver.inf
+;
+
+[Version]
+Signature   = "$Windows NT$"
+ClassGuid   = {997B5D8D-C442-4F2E-BAF3-9C8E671E9E21}
+Provider    = %Logi%
+DriverVer=12/06/2007, 2.02.094.0
+CatalogFile = LgLcdSSDriver.cat
+Class       = SideShow
+
+; =================== Manufacturer/Models sections ===================
+
+[Manufacturer]
+%Logi%                       =LgLCDDevice,NTx86,NTia64,NTamd64
+
+[LgLCDDevice.NTx86]
+%Logitech.DeviceDesc%        =Logitech_Install,UMB\LogitechSSDevice
+
+[LgLCDDevice.NTia64]
+%Logitech.DeviceDesc%        =Logitech_Install,UMB\LogitechSSDevice
+
+[LgLCDDevice.NTamd64]
+%Logitech.DeviceDesc%        =Logitech_Install,UMB\LogitechSSDevice
+
+; ====================================================================
+
+[Logitech_Install]
+CopyFiles   = UMDriverCopy
+AddProperty = DriverPropertiesSection
+
+[Logitech_Install.CoInstallers]
+AddReg      = WUDF_CoInstallers_AddReg
+CopyFiles   = UMDriverCopy
+
+[Logitech_Install.Wdf]
+UmdfService = LgLcdSSDriver, LgLcdSSDriver_Install
+UmdfServiceOrder = LgLcdSSDriver
+UmdfImpersonationLevel = Impersonation
+
+[Logitech_Install.Services]
+AddService  = WUDFRd, 0x000001fa, WUDFRD_ServiceInstall
+
+; =================== Driver Property section ===================
+
+[DriverPropertiesSection]
+DeviceIcon,,,,"%1%\LgLcdSSDriver.dll,-100"
+
+; =================== UMDF Service Install section ===================
+
+[WUDF_CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WUDFCoInstaller.dll"
+
+[LgLcdSSDriver_Install]
+UmdfLibraryVersion = 1.0.0
+ServiceBinary = "%12%\umdf\LgLcdSSDriver.dll"
+DriverCLSID = {AA5EE759-A47C-4c1b-9F11-234798ADAD04}
+
+[UMDriverCopy]
+LgLcdSSDriver.dll
+
+[DestinationDirs]
+UMDriverCopy=12,UMDF    ; copy to drivers\umdf
+
+[SourceDisksFiles]
+LgLcdSSDriver.dll=1
+
+[SourceDisksNames]
+1 = %MediaDescription%
+
+; =================== WUDFRd ===================
+
+[WUDFRD_ServiceInstall]
+ServiceType     = 0x1 ; = SERVICE_KERNEL_DRIVER
+StartType       = 0x3 ; = SERVICE_DEMAND_START
+ErrorControl    = 0x1 ; = SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\WUDFRd.sys
+
+;
+; =================== Strings ===================
+;
+
+[Strings]
+Logi                            = "Logitech Inc."
+MediaDescription                = "Logitech GamePanel SideShow Driver Installation Media"
+Logitech.DeviceDesc                 = "Logitech GamePanel SideShow Device"
+
+; Japanese
+[Strings.0411] 
+Logi                            = "Logicool Co. Ltd."
+MediaDescription                = "Logicool GamePanel SideShow Driver Installation Media"
+Logitech.DeviceDesc                 = "Logicool GamePanel SideShow Device"

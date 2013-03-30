@@ -1,0 +1,64 @@
+; wacomhidfiltertouch.inf
+;
+; Installation inf for wacomhidfilter.sys
+;
+; (c) Copyright 2006 Wacom Technology
+;
+
+
+[Version]
+signature = "$Windows NT$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%Wacom%
+CatalogFile=wacomhidftouch.cat
+DriverVer=08/26/2008,1.0.4.2
+
+[SourceDisksNames]
+1 = %Diskname%
+
+[SourceDisksFiles]
+wacomhidfilter.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%Wacom%=Wacom, NTamd64
+
+[Wacom]
+"Wacom USB Touch" = WHF_Install, USB\VID_056A&PID_0093&MI_01
+"Wacom Capacitive Touch" = WHF_Install, USB\VID_056A&PID_009A&MI_01
+
+[Wacom.NTamd64]
+"Wacom USB Touch" = WHF_Install, USB\VID_056A&PID_0093&MI_01
+"Wacom Capacitive Touch" = WHF_Install, USB\VID_056A&PID_009A&MI_01
+
+[WHF_Install.NT]
+CopyFiles = @wacomhidfilter.sys
+Include=input.inf
+Needs=HID_Inst.NT
+
+[WHF_Install.NT.HW]
+AddReg = WHF_AddReg
+Include=input.inf
+Needs=HID_Inst.NT.HW
+
+[WHF_AddReg] 
+HKR,,LowerFilters,0x00010008,wacomhidfilter
+
+[WHF_Install.NT.Services]
+AddService = wacomhidfilter, , WHF_Service_Inst
+Include=input.inf
+Needs=HID_Inst.NT.Services
+
+[WHF_Service_Inst]
+DisplayName    = "Wacom HID Filter"
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 0
+ServiceBinary  = %12%\wacomhidfilter.sys		
+
+[Strings]
+Wacom = "Wacom"
+Diskname = "Wacom Installer"

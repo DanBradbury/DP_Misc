@@ -1,0 +1,36 @@
+; Microsoft® Hardware Bluetooth® Driver INF for
+; Microsoft Transceiver v 3.0 for Bluetooth
+; Copyright © 2006 Microsoft Corporation
+
+[Version]
+Signature="$Windows NT$"
+Class=Bluetooth
+Provider=%Microsoft%
+CLASSGUID={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+CatalogFile.NT = trans64.cat
+DriverVer=10/25/2006,6.10.143.0
+
+[Manufacturer]
+%Microsoft%=Microsoft, NTamd64, NTamd64.6.0
+
+[Microsoft.NTamd64]
+%MicrosoftBluetoothXver3%= MSBthUsb, USB\Vid_045e&Pid_0708
+
+[Microsoft.NTamd64.6.0]
+%MicrosoftBluetoothXver3%= MSBthUsb, USB\Vid_045e&Pid_0708
+
+[MSBthUsb.NT]
+Include=bth.inf
+Needs=BthUsb.NT
+
+[MSBthUsb.NT.HW]
+Include=bth.inf
+Needs=BthUsb.NT.HW
+
+[MSBthUsb.NT.Services]
+Include=bth.inf
+Needs=BthUsb.NT.Services
+
+[Strings]
+Microsoft="Microsoft"
+MicrosoftBluetoothXver3="Microsoft Transceiver v 3.0 for Bluetooth"

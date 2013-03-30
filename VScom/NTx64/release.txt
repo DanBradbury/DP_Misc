@@ -1,0 +1,87 @@
+PCI Treiber for VScom Cards
+Version 3.03.13
+Date: 31.01.2010
+-  changes to meet Windows Port reordering
+
+Date 21.06.2007
+- Vista 64 WHQL
+- pnp problems with rebalance corrected
+- Support of Baudrates up to 3686400 for H and H2 cards (using TCR)
+
+
+Version 3.00.03
+Date 29.03.2007
+
+- new installation class for adapter
+- WHQL preparation and tests
+
+Version 6/3.00.02
+Date 07.12.2006
+- vsclean asks for elevated user credentials
+- changing of key protection rewised. Now works under Vista
+
+Version 3.00.01
+Date 11.09.2006
+- Support for 400ISI, 800ISI, 400H Express
+
+Version 3.00.00.01
+Date 18.05.2006
+- Corrected Inffiles for XP, 2000, 2003, AMD64, NT40
+- Win9x - support for name overwritting
+
+
+Version 3.00.00
+Date 05.05.2006
+
+- AMD64 Support
+- All Windows versions: For 800H,410H,210H,110H,110HV2 210HV2 the name displayed in device manger will be 
+  overwritten to show the right card type.
+- Support for PCI 800H Express and 400H Express
+- Windows NT: minor bugs fixed
+- Windows NT: only non-VS ports are displayed as other ports.
+
+
+Version 2.58.04
+Date 05.11.2004
+
+- All Windows Version: bug with initialisation fixed. This Problem was cased by frequently changing baudrate
+  and affected only L-Card series.
+
+------------------------------------------------------------
+Version 2.58.03
+Date:   21.07.2004
+
+
+- All windows version
+  It is possible to control the default settings of a port during installation.
+  Files vsserdef.cfg and vspardef.cfg can be used to set parameters for port
+  installation. For more read the comment in these files. Under Windows 9x sometimes it fails, 
+  when other installer was already registrated.
+
+- All windows versions
+  An API to configure VScom specific settings. More information on that will be provided along
+  with small SDK. 
+  !!! Attantion !!!:
+  VsLdCfg_PushToDevice is not implemented yet.
+
+
+------------------------------------------------------------
+
+Version 2.58.00
+Date:   29.04.2004
+
+-Windows 9x
+ standard settings allowed only 8 data bits. 
+ Porblem corrected
+
+-All windows Versions
+ when parity not set correctly at both ends of the channel, no data was sent to application.
+ In normal case data, if available, should be marked as bad and sent to applicactio as it is.
+ Problem corrected
+
+- Windows Nt
+  When working with vspptnt.sys (Mini-port parallel driver) changes of port settings require
+  reboot. This is due to Problems in parallel.sys (Microsoft)
+
+ 
+ 

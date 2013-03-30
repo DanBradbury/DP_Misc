@@ -1,0 +1,119 @@
+; Installation inf for the OLED USB Keyboard
+;
+; (c) Copyright 2008 Foxconn Technology Group
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%FOXCONN%
+DriverVer=05/04/2009,1.0.7.0
+CatalogFile=dkmgr.cat
+
+[Manufacturer]
+%MfgName%=FOXCONN, NTx86, NTia64, NTamd64
+
+[FOXCONN]
+%Foxconn.USBDeviceDesc%=OLED.Install,USB\VID_7903&PID_B5D2
+
+[FOXCONN.NTx86]
+%Foxconn.USBDeviceDesc%=OLED.Install.NTx86,USB\VID_7903&PID_B5D2
+
+[FOXCONN.NTia64]
+%Foxconn.USBDeviceDesc64%=OLED.Install.NTia64,USB\VID_7903&PID_B5D2
+
+[FOXCONN.NTamd64]
+%Foxconn.USBDeviceDesc64%=OLED.Install.NTamd64,USB\VID_7903&PID_B5D2
+
+[DestinationDirs]
+OLED.Files.Driver.NTx86 = 10,System32\Drivers
+OLED.Files.Driver.NTia64 = 10,System32\Drivers
+OLED.Files.Driver.NTamd64 = 10,System32\Drivers
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+dkmgr32.sys = 1
+dkmgr64.sys = 1
+
+[OLED.Install.NTx86]
+CopyFiles=OLED.Files.Driver.NTx86
+
+[OLED.Install.NTia64]
+CopyFiles=OLED.Files.Driver.NTia64
+
+[OLED.Install.NTamd64]
+CopyFiles=OLED.Files.Driver.NTamd64
+
+[OLED.Files.Driver.NTx86]
+dkmgr32.sys,,,%COPYFLG_NOSKIP%
+
+[OLED.Files.Driver.NTia64]
+dkmgr64.sys,,,%COPYFLG_NOSKIP%
+
+[OLED.Files.Driver.NTamd64]
+dkmgr64.sys,,,%COPYFLG_NOSKIP%
+
+[OLED.Install.NTx86.Services]
+Addservice = dkmgr, 0x00000002, OLED.AddService
+
+[OLED.Install.NTia64.Services]
+Addservice = dkmgr, 0x00000002, OLED.AddService.64
+
+[OLED.Install.NTamd64.Services]
+Addservice = dkmgr, 0x00000002, OLED.AddService.64
+
+[OLED.AddService]
+DisplayName    = %OLED.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\dkmgr32.sys
+AddReg         = OLED.AddReg
+LoadOrderGroup = Base
+
+[OLED.AddService.64]
+DisplayName    = %OLED.SvcDesc64%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\dkmgr64.sys
+AddReg         = OLED.AddReg64
+LoadOrderGroup = Base
+
+[OLED.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,dkmgr32.sys
+;HKR,"Parameters","MaximumTransferSize",0x10001,4096
+;HKR,"Parameters","DebugLevel",0x10001,2
+;HKR,"Parameters","OLEDEnable",0x10001,1
+
+[OLED.AddReg64]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,dkmgr64.sys
+;HKR,"Parameters","MaximumTransferSize",0x10001,4096
+;HKR,"Parameters","DebugLevel",0x10001,2
+;HKR,"Parameters","OLEDEnable",0x10001,1
+
+;注意格式：HKEY(根键缩写),Subkey(子键),Valuename(键值名),Type(键值类型),Value(键值)
+;HKCU -> HKEY_CURRENT_USER
+;HKCR -> HKEY_CLASSES_ROOT
+;HKLM -> HKEY_LOCAL_MACHINE
+;HKU -> HKEY_USERS
+;HKCC -> HKEY_CURRENT_CONFIG
+;HKDD -> HKEY_DYN_DATA
+
+;---------------------------------------------------------------;
+
+[Strings]
+REG_SZ = 0x00000000
+FOXCONN="Foxconn Technology Group"
+MfgName="Foxconn Technology Group"
+Disk_Description="OLED Installation Disk"
+Foxconn.USBDeviceDesc="dkmgr32.sys for Display Key Device Properties"
+OLED.SvcDesc="dkmgr32.sys for Display Key Device Properties"
+Foxconn.USBDeviceDesc64="dkmgr64.sys for Display Key Device Properties"
+OLED.SvcDesc64="dkmgr64.sys for Display Key Device Properties"
+COPYFLG_NOSKIP=2	; Do not allow user to skip file

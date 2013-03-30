@@ -1,0 +1,115 @@
+;/*++
+;
+;Copyright (c) Broadcom Corporation.  All rights reserved.
+;
+;Module Name:
+;
+;    WBDIDRV.INF
+;
+;Abstract:
+;    Installation inf for CV USB Driver
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=CVAULT
+ClassGuid={09E9A11D-CCB2-45ae-9BE8-65C263E60490}
+Provider=%BRCM%
+DriverVer=08/09/2012,6.1.7600.16385
+CatalogFile=WBDICVAULT.cat
+
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=CvaultClassReg     
+
+[CvaultClassReg]
+HKR,,ClassDesc,,%ClassName% 
+HKR,,Icon,,-5
+
+
+; ================= Device section =====================
+
+[Manufacturer]
+%MfgName%=Broadcom,NTx86
+
+; For Win2K
+[Broadcom]
+%USB\VID_0A5C&PID_5801.DeviceDesc%=wbdidrv.Dev, USB\VID_0A5C&PID_5801&REV_0101&MI_03
+%USB\VID_0A5C&PID_5802.DeviceDesc%=wbdidrv.Dev, USB\VID_0A5C&PID_5802&REV_0101&MI_03
+
+; For XP and later
+[Broadcom.NTx86]
+%USB\VID_0A5C&PID_5801.DeviceDesc%=wbdidrv.Dev, USB\VID_0A5C&PID_5801&REV_0101&MI_03
+%USB\VID_0A5C&PID_5802.DeviceDesc%=wbdidrv.Dev, USB\VID_0A5C&PID_5802&REV_0101&MI_03
+
+[wbdidrv.Dev.NT]
+CopyFiles=wbdidrv.Files.Ext
+
+;[Switch.Dev.NT]
+;;dummy section
+
+;[Switch.Dev.NT.Services]
+;AddService = , %SPSVCINST_ASSOCSERVICE%, 
+
+[wbdidrv.Dev.NT.Services]
+Addservice = wbdidrv, 2, wbdidrv.AddService
+
+[wbdidrv.AddService]
+DisplayName    = %wbdidrv.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\wbdidrv.sys
+AddReg         = wbdidrv.AddReg
+LoadOrderGroup = Base
+
+[wbdidrv.AddReg]
+HKR, Parameters\Wdf, VerboseOn,       0x00010001, 1
+HKR, Parameters\Wdf, VerifierOn,      0x00010001, 1
+HKR, Parameters\Wdf, DbgBreakOnError, 0x00010001, 1
+
+[wbdidrv.Files.Ext]
+wbdidrv.sys
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+wbdidrv.sys = 1
+WdfCoInstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+[DestinationDirs]
+DefaultDestDir = 12
+CoInstaller_CopyFiles = 11
+
+;-------------- WDF Coinstaller installation
+
+[wbdidrv.Dev.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[wbdidrv.Dev.NT.Wdf]
+KmdfService = wbdidrv, wbdidrv_wdfsect
+
+[wbdidrv_wdfsect]
+KmdfLibraryVersion = 1.9
+
+;---------------------------------------------------------------;
+
+[Strings]
+BRCM="Broadcom"
+MfgName="Broadcom Corporation"
+Disk_Description="Broadcom USH CV(wbdidrv) Installation Disk"
+USB\VID_0A5C&PID_5801.DeviceDesc="ControlVault WBDI Device"
+USB\VID_0A5C&PID_5802.DeviceDesc="ControlVault WBDI Device"
+wbdidrv.SvcDesc="Broadcom USH"
+ClassName = "ControlVault Device"

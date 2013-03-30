@@ -1,0 +1,82 @@
+; GzTpHid.inf
+; Installation file (.inf) for the GUNZE Touch Panel device.
+; (c) Copyright 2006 GUNZE Limited
+
+[Version]
+Signature = "$WINDOWS NT$"
+Provider = %Provider%
+Class = HIDClass
+ClassGuid = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+DriverVer = 11/12/2006,1.2.0.0
+CatalogFile = GzTpHid.cat
+
+[Manufacturer]
+%Provider% = GUNZE
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[GUNZE]
+;DisplayName     Section        DeviceID
+;-----------     ------------   -------------
+%GTouchScreen% = GzTpHidInst,	HID\WACF008&COL04
+
+[GzTpHidInst.NT]
+Needs = SER_TABLET.NT
+AddReg = GzTpHid.AddReg
+CopyFiles = GzTpHidInst.NT.Copy
+
+[GzTpHidInst.NT.Services]
+Needs = SER_TABLET.NT.Services
+AddService = GzTpHid,2,GzTpHid.Service
+
+[GzTpHidInst.NT.Copy]
+GzTpHid.sys
+
+[GzTpHid.Service]
+DisplayName = %GzTpHid.SvcDesc%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\GzTpHid.sys
+LoadOrderGroup = upper-filter
+
+[GzTpHid.AddReg]
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, AVERAGING, 0x00010001, 0
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, EnableSound, 0x00010001, 0
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Stabilization, 0x00010001, 5
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, TouchMode, 0x00010001, 0
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Liftoff, 0x00010001, 0
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Max XPixels, 0x00010001, 1024
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Max YPixels, 0x00010001, 768
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, CalTimeout, 0x00010001, 10
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, CalNum, 0x00010001,4
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, CalRatio, 0x00010001, 20
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4a4, 0x00010001, 0x00001fa3
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4b4, 0x00010001, 0xfffffea3
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4c4, 0x00010001, 0x00000066
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4d4, 0x00010001, 0x00028000
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4e4, 0x00010001, 0x0000006f
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4f4, 0x00010001, 0x00001934
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4g4, 0x00010001, 0x0000008e
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, Cal4h4, 0x00010001, 0xfff6c000
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\0, ComPortNum, 0x00010001, 1
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\1, ComPortNum, 0x00010001, 9
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\2, ComPortNum, 0x00010001, 9
+HKLM, System\\CurrentControlSet\\Services\\GzTpParam\\3, ComPortNum, 0x00010001, 9
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+GzTpHid.sys = 1,
+
+;------------------------------------------------------------
+[Strings]
+DiskId1 = "Touch Panel Installation Disk"
+Provider = "GUNZE"
+GzTpHid.SvcDesc = "Touch Panel Filter Driver"
+GTouchScreen="Touch Panel Driver"

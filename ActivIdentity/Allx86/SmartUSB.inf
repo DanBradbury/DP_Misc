@@ -1,0 +1,108 @@
+; SmartUSB.INF
+; Copyright (c) 2001-6 ActivCard (All rights reserved)
+
+[Version]
+catalogfile = SmartUSB.cat
+Signature="$Chicago$"
+Class=USB
+ClassGUID=   {36FC9E60-C465-11CF-8056-444553540000}
+Provider=%String0%
+DriverVer = 09/01/2006,1.0.4.0
+
+[SourceDisksNames]
+1 = %ID1%,,,;A:
+
+[SourceDisksFiles]
+SmartUSB.sys = 1,,
+akins.dll=1
+akpg.dll = 1,,
+akbus.sys = 1
+akpcsc.sys = 1
+
+; ================= Class section ====================
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+SmartUSB.Install.CopyFiles=10,system32\drivers
+CoCopyINF.CopyFiles = 11
+
+[Manufacturer]
+%String1%=SmartUSB
+
+[SmartUSB]
+; DisplayName       	Section          DeviceId
+; -----------       	-------          --------
+%SmartBIO.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0002
+%TokenUSB.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0003
+%SmartUSB.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0004
+
+; ================= INSTALL NT ================= 
+
+[SmartUSB.Install.NT]
+CopyFiles = SmartUSB.Install.CopyFiles
+CopyINF = akpcsc.inf,akbus.inf
+AddReg = SmartUSB.AddReg.NT
+DelFiles = Del_OldFiles
+
+[Del_OldFiles]
+USBBoot.sys
+Activkey.sys
+
+[SmartUSB.Install.CopyFiles]
+SmartUSB.sys,,,2
+akbus.sys,,,2
+akpcsc.sys,,,2
+
+[SmartUSB.Install.NT.CoInstallers]
+AddReg          = CoCopyINF.AddReg
+CopyFiles       = CoCopyINF.CopyFiles
+
+[CoCopyINF.AddReg]
+HKR,,CoInstallers32,0x10000,"akins.DLL,CoCopyINF"
+
+[CoCopyINF.CopyFiles]
+akins.dll,,,0x10
+akpg.dll
+
+[SmartUSB.Install.NT.Services]
+AddService = SmartUSB, 2, SmartUSB.Service, SmartUSB.EventLog
+DelService = UsbBoot, 0x00000200, ,
+DelService = ActivKey, 0x00000200, ,
+
+[SmartUSB.Service]
+DisplayName     = %SmartUSB.DeviceDesc%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\SmartUSB.sys
+
+[SmartUSB.AddReg.NT]
+;reg-root, [subkey], [value-entry-name], [flags], [value]
+HKLM,"SYSTEM\CurrentControlSet\Services\SmartUSB\Parameters", "Mode",65537, 0
+HKLM,"SYSTEM\CurrentControlSet\Services\SmartUSB\Parameters", "Boot",65537, 1
+
+
+[SmartUSB.EventLog]
+AddReg = SmartUSB.AddEventLog.reg
+
+[SmartUSB.AddEventLog.reg]
+;HKR,, EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\drivers\SmartUSB.sys"
+;HKR,, TypesSupported,   0x00010001, 7
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[SmartUSBCoInfo]
+; Used by the akins co-installer to figure out where the original media is
+; located .
+OriginalInfSourcePath = %1%
+
+; ================= Strings =====================
+
+[Strings]
+String0			= "ActivCard S.A."
+String1			= "ActivCard"
+SmartBIO.DeviceDesc	= "SmartReader-BIO"
+TokenUSB.DeviceDesc	= "ActivKey"
+SmartUSB.DeviceDesc	= "SmartReader-USB"
+ID1 = "ActivCard Smart USB Installation disk"
+RunOnce = "SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"

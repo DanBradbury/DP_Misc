@@ -1,0 +1,52 @@
+; Mosart Vendor INF File for USB HIDs
+;
+; (c) Copyright 2009 Mosart Semiconductor
+
+[Version]
+Signature	= "$Windows NT$"
+Provider	= %ProviderName%
+Class		= HIDClass
+CLASSGUID	= {745a17a0-74d3-11d0-b6fe-00a0c90f57da};
+DriverVer	= 09/15/2009,7.00.0000.2
+CatalogFile	= mamt.cat
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[SourceDisksNames]
+1=%SourceDisk%,,1
+
+[Manufacturer]
+%ManufacturerName% = Mosart_HID,NT.6.0,NTx86,NTamd64
+
+
+[Mosart_HID.NT.6.0]
+%HIDDevice1%	= HIDSelSusp1.NT.6.0, USB\VID_062A&PID_7100
+
+[Mosart_HID.NTx86]
+%HIDDevice1%	= HIDSelSusp1.NT.6.0, USB\VID_062A&PID_7100
+
+[Mosart_HID.NTamd64]
+%HIDDevice1%	= HIDSelSusp1.NT.6.0, USB\VID_062A&PID_7100
+
+[HIDSelSusp1.NT.6.0]
+include		= input.inf
+needs		= HID_SelSus_Inst.NT
+
+[HIDSelSusp1.NT.6.0.HW]
+include		= input.inf
+needs		= HID_SelSus_Inst.NT.HW
+
+[HIDSelSusp1.NT.6.0.Services]
+include		= input.inf
+needs		= HID_SelSus_Inst.NT.Services
+
+[Strings]
+ProviderName		= "Mosart"
+HIDDevice1		= "Mosart Multi-Touch Device"
+ManufacturerName 	= "Mosart Semiconductor"
+BthRadio1		= "Selective Suspend HID from Mosart Semiconductor"
+SourceDisk		= "Mosart Semiconductor source disk"
+
+
+

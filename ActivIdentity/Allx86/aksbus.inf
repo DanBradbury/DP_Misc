@@ -1,0 +1,109 @@
+;/*++
+;
+; Copyright (C) 2006 by ActivIdentity (All rights reserved)
+;
+;Module Name:
+;
+;    AKSBUS.INF
+;
+;Abstract:
+;    INF file for installing ActivIdentity Virtual Reader Enumerator driver
+;
+;--*/
+[Version]
+Signature="$CHICAGO$"
+Class=ActivKeySimBus
+ClassGuid={41AD5E8B-5CB0-4275-B829-EDA617114AE8}
+
+Provider=%MSFT%
+DriverVer=05/02/2007,1.0.3.0
+CatalogFile=aksbus.cat
+
+;------------------------------------------------------------------------------
+;  Class installation
+;------------------------------------------------------------------------------
+
+[ClassInstall32]
+AddReg=ClassInstall32AddReg
+CopyFiles=ClassInstall32CopyFiles
+
+[ClassInstall32AddReg]
+HKR,,,,%classname%
+HKR,,Installer32,,"akspg.dll,SampleClassInstaller"
+HKR,,EnumPropPages32,,akspg.dll
+HKR,,Icon,,102
+
+[ClassInstall32CopyFiles]
+akspg.dll,,,2
+
+;------------------------------------------------------------------------------
+;  Standard INF sections
+;------------------------------------------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+Drivers_Dir=10,System32\Drivers
+ClassInstall32CopyFiles=11
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+aksbus.sys  = 1,,
+akspg.dll = 1,,
+
+;*****************************************
+; Bus  Install Section
+;*****************************************
+
+[Manufacturer]
+%MSFT%=Standard
+
+[Standard]
+;
+; These are the ActivIdentity bus pnp ids
+;
+
+%Bus.DeviceDesc%=Bus_Device, ActivIdentityBus
+
+[Drivers_Dir]
+aksbus.sys
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; ================= INSTALL NT ================= 
+
+[Bus_Device.NT]
+CopyFiles=Drivers_Dir
+AddReg=Bus_Device.NT.AddReg
+
+[Bus_Device.NT.AddReg]
+
+[Bus_Device.NT.HW]
+AddReg=Bus_Device.NT.HW.AddReg
+
+[Bus_Device.NT.HW.AddReg]
+HKR,,VirtualReaderNumber,0x00010003,1
+
+;-------------- Service installation
+[Bus_Device.NT.Services]
+AddService = aksbus,%SPSVCINST_ASSOCSERVICE%, busenum_Service_Inst
+
+; -------------- busenum driver install sections
+[busenum_Service_Inst]
+DisplayName    = %busenum.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\aksbus.sys
+LoadOrderGroup = Extended Base
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+MSFT = "ActivIdentity"
+DiskId1 = "ActivIdentity Virtual Reader Enumerator Installation Disk #1"
+Bus.DeviceDesc = "ActivIdentity Virtual Reader Enumerator"
+busenum.SVCDESC = "ActivIdentity Virtual Reader Enumerator"
+classname = "ActivIdentity Virtual Reader Enumerator"

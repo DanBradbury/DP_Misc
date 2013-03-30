@@ -1,0 +1,198 @@
+; Copyright (c) 1997-2005 Vision Systems GmbH
+[Version]
+Signature="$Windows NT$"
+Class=MultiPortSerial
+ClassGuid={50906CB8-BA12-11D1-BF5D-0000F805F530}
+DriverVer=11/24/2008,3.03.00.012
+Provider=%VScom%
+CatalogFile=VScom.cat
+
+[DestinationDirs]
+DefaultDestDir=11
+DrvCopy.NTx86=12
+DllCopy.NTx86=11
+
+
+[Manufacturer]
+%VScom%=ManfSect
+
+[ManfSect]
+%VSC010L%=VScomInst,PCI\VEN_14D2&DEV_8001
+%VSC020L%=VScomInst,PCI\VEN_14D2&DEV_8002
+%VSC100L%=VScomInst,PCI\VEN_14D2&DEV_8010
+%VSC110L%=VScomInst,PCI\VEN_14D2&DEV_8011
+%VSC200L%=VScomInst,PCI\VEN_14D2&DEV_8020
+%VSC200IL%=VScomInst,PCI\VEN_14D2&DEV_8028
+%VSC210L%=VScomInst,PCI\VEN_14D2&DEV_8021
+%VSC400L%=VScomInst,PCI\VEN_14D2&DEV_8040
+%VSC410L%=VScomInst,PCI\VEN_14D2&DEV_8041
+%VSC420L%=VScomInst,PCI\VEN_14D2&DEV_8042
+%VSC430L%=VScomInst,PCI\VEN_14D2&DEV_8043
+%VSC800L%=VScomInst,PCI\VEN_14D2&DEV_8080
+%VSC400I%=VScomInst,PCI\VEN_14D2&DEV_8048
+%VSC800I%=VScomInst,PCI\VEN_14D2&DEV_8088
+%VSC010H%=VScomInst,PCI\VEN_14D2&DEV_A000
+%VSC100H%=VScomInst,PCI\VEN_14D2&DEV_A001
+%VSC200H%=VScomInst,PCI\VEN_14D2&DEV_A005
+%VSC400H%=VScomInst,PCI\VEN_14D2&DEV_A003
+%VSC400H1%=VScomInst,PCI\VEN_14D2&DEV_A004
+%VSC400EH%=VScomInst,PCI\VEN_14D2&DEV_A009
+%VSC800EH%=VScomInst,PCI\VEN_14D2&DEV_A007
+%VSC800EH1%=VScomInst,PCI\VEN_14D2&DEV_A008
+%VSCDUMMY%=VScomInst,PCI\VEN_14D2&DEV_FFFF
+%VSC010S%=VScomInst,PCI\VEN_10B5&DEV_1146
+%VSC020S%=VScomInst,PCI\VEN_10B5&DEV_1147
+%VSC200S%=VScomInst,PCI\VEN_10B5&DEV_1103
+%VSC210S%=VScomInst,PCI\VEN_10B5&DEV_1078
+%VSC400S%=VScomInst,PCI\VEN_10B5&DEV_1077
+%VSC800S%=VScomInst,PCI\VEN_10B5&DEV_1076
+%VSC011HEP1%=VScomInst,PCI\VEN_1415&DEV_8403
+%VSC021HEP2%=VScomInst,PCI\VEN_9710&DEV_9815
+%VSC010HV2%=VScomInst,PCI\VEN_14D2&DEV_E001
+%VSC100HV2%=VScomInst,PCI\VEN_14D2&DEV_E010
+%VSC200HV2%=VScomInst,PCI\VEN_14D2&DEV_E020
+%VSC100E%=VScomInst,PCI\VEN_14D2&DEV_A010
+%VSC100EF1%=VScomInst,PCI\VEN_14D2&DEV_A011
+%VSC200E%=VScomInst,PCI\VEN_14D2&DEV_A012
+%VSC400E%=VScomInst,PCI\VEN_14D2&DEV_A013
+%VSC800E%=VScomInst,PCI\VEN_14D2&DEV_A014
+%VSC100EN%=VScomInst,PCI\VEN_14D2&DEV_A015
+%VSC200Ei%=VScomInst,PCI\VEN_14D2&DEV_A016
+%VSC200EiSI%=VScomInst,PCI\VEN_14D2&DEV_A017
+
+
+
+[ControlFlags]
+
+;********************** Product specific add regs  *******************
+[VSAddReg.NTx86.HW]
+HKR,,Ver,,%VScomVersion%
+HKR,,ParPortMap,,"102"
+
+
+[VSComInst.NTx86.HW]
+AddReg=VSAddReg.NTx86.HW
+
+[VScomInst.NTx86]
+CopyFiles=DrvCopy.NTx86,DllCopy.NTx86
+AddReg=VSAddReg.NTx86
+LogConfig=VSIRQCfg
+
+
+[VScomInst.ntx86.Services]
+AddService = vscombus,0x00000002, VScomService,Enum_EventLogInstall
+
+[DrvCopy.NTx86]
+vsc2k.sys
+
+[DllCopy.NTx86]
+vsc2kui.dll
+
+[VSAddReg.NTx86]
+HKR,,EnumPropPages32,0,vsc2kui.dll
+
+[VSIRQCfg]
+ConfigPriority=Normal
+IRQConfig=LS:3,4,5,7,9,10,11,12,14,15
+
+
+[SERVICE_REG]
+HKR,,OSVERSION,0x00010001,1
+HKR,,A003A004,,%PCI800S1_4%
+HKR,,A003A000,,%PCI410S1_4%
+HKR,,A005A000,,%PCI210S1_2%
+HKR,,A001A000,,%PCI110S1_1%
+HKR,,A000A001,,%PCI110P1%
+HKR,,A000A005,,%PCI210P1%
+HKR,,A000A003,,%PCI410P1%
+HKR,,E010E001,,%PCI1102S1_1%
+HKR,,E020E001,,%PCI2102S1_2%
+HKR,,E001E010,,%PCI1102P1%
+HKR,,E001E020,,%PCI2102P1%
+
+
+[VScomService]
+DisplayName    = %VScomServiceName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_SYSTEM_START (this driver may do detection)
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\vsc2k.sys
+LoadOrderGroup = Extended base
+AddReg	        =SERVICE_REG
+
+[Enum_EventLogInstall]
+AddReg=EnumEventAdd
+
+[EnumEventAdd]
+HKR,,EventMessageFile,0x00020000,"%11%\IoLogMsg.dll;%12%\vsc2k.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+
+; ******************* Algemeiner Teil ***************************
+[SourceDisksNames]
+1=%VScomDisk%,,0
+
+[SourceDisksFiles]
+vsc2kui.dll=1
+vsc2k.sys=1
+
+[Strings]
+VScom="Vision Systems GmbH"
+VSC010L="VScom PCI010L controller"
+VSC020L="VScom PCI020L controller"
+VSC100L="VScom PCI100L controller"
+VSC110L="VScom PCI110L controller"
+VSC200L="VScom PCI200L controller"
+VSC200IL="VScom PCI200I[SI] controller"
+VSC210L="VScom PCI210L controller"
+VSC400L="VScom PCI400L controller"
+VSC410L="VScom PCI410L controller"
+VSC420L="VScom PCI420L controller"
+VSC430L="VScom PCI430L controller"
+VSC800L="VScom PCI800L controller"
+VSC400I="VScom PCI400I controller"
+VSC800I="VScom PCI800I controller"
+VSC010H="VScom PCI010H controller"
+VSC100H="VScom PCI100H controller"
+VSC200H="VScom PCI200H controller"
+VSC400H="VScom PCI400H controller"
+VSC400EH="VScom PCI400EH (express) controller"
+VSC800EH="VScom PCI800EH (express) controller. Ports 1-4"
+VSC800EH1="VScom PCI800EH (express) controller Ports 5-8"
+VSCDUMMY="VScom Dummy controller"
+VSC010S="VScom PCI010S controller"
+VSC020S="VScom PCI020S controller"
+VSC200S="VScom PCI200S controller"
+VSC210S="VScom PCI210S controller"
+VSC400S="VScom PCI400S controller"
+VSC800S="VScom PCI800S controller"
+VSC011HEP1="VScom PCI011H-EP1 controller"
+VSC021HEP2="VScom PCI021H-EP2 controller"
+VSC010HV2="VScom PCI010HV2 controller"
+VSC100HV2="VScom PCI100HV2 controller"
+VSC200HV2="VScom PCI200HV2 controller"
+VSC400H1="VScom PCI800H controller ports 5-8"
+PCI800S1_4="VScom PCI800H controller ports 1-4"
+PCI410S1_4="VScom PCI410H controller serial 1-4"
+PCI210S1_2="VScom PCI210H controller serial 1-2"
+PCI110S1_1="VScom PCI110H controller serial port"
+PCI110P1="VScom PCI110H controller parallel port"
+PCI210P1="VScom PCI210H controller parallel port"
+PCI410P1="VScom PCI410H controller parallel port"
+PCI1102S1_1="VScom PCI110H controller serial port"
+PCI2102S1_2="VScom PCI210H controller serial 1-2"
+PCI1102P1="VScom PCI110H controller parallel port"
+PCI2102P1="VScom PCI210H controller parallel port"
+VSC100EF1="VScom 100E PCIex Func 1"
+VSC100E="VScom 100E PCIex"
+VSC100EN="VScom 100E PCIex"
+VSC200E="VScom 200E PCIex"
+VSC400E="VScom 400E PCIex"
+VSC800E="VScom 800E PCIex"
+VSC200Ei="VScom 200Ei PCIex"
+VSC200EiSI="VScom 200Ei-SI PCIex"
+VSClassDesc="VScom Multi IO cards"
+VScomDisk="VScom Driver Disk"
+VScomVersion="3.03.00.012"
+VScomServiceName="VScom port enumerator"

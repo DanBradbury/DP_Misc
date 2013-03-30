@@ -1,0 +1,202 @@
+; VSXOMPRT.INF
+; Copyright (c) 1999-2005 Vision Systems GmbH
+
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGUID={4D36E978-E325-11CE-BFC1-08002BE10318}
+DriverVer=11/24/2008,3.03.00.012
+Provider=%Mfg%
+CatalogFile=VScomPrt.cat
+
+[DestinationDirs]
+DefaultDestDir=11
+ComDrvCopy.ntx86=12
+ComDllCopy.ntx86=11
+LptDrvCopy.ntx86=12
+LptDllCopy.ntx86=11
+
+[Manufacturer]
+%Mfg% = VSport
+
+[VSport]
+%Prod1%=ComPort,*VSCOM2K
+%Prod2%=LPTPort,*VSLPT2K
+
+;************************ Com-Port Windows 2000 *********************
+[ComPort.ntx86.CoInstallers]
+AddReg = ComPort.CoInstallers_AddReg
+CopyFiles=ComDllCopy.ntx86
+
+[ComPort.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"vss2kui.dll,CoInstallDevice"
+
+[ComPort.ntx86.HW]
+AddReg=ComPort.ntx86.HW.AddReg
+
+[ComPort.ntx86.HW.AddReg]
+HKR,,"UpperFilters",	0x00010000,	"serenum" 	;;MULTI_SZ
+HKLM,,Ver,,%VScomVersion%
+
+[ComPort.ntx86]
+CopyFiles=ComDrvCopy.ntx86,ComDllCopy.ntx86
+AddReg=ComAddReg.ntx86
+
+[ComDrvCopy.ntx86]
+vss2k.sys
+
+[ComDllCopy.ntx86]
+vss2kui.dll
+vsserdef.cfg
+
+
+[ComAddReg.ntx86]
+HKR,,EnumPropPages32,,"vss2kui.dll,EnumPropPages"
+
+
+[ComPort.ntx86.Services]
+AddService = vspciser, 0x00000002, ComPort_SrvInstall, ComPort_EventLogInstall
+AddService = Serenum,,Serenum_SrvInstall
+
+[ComPort_SrvInstall]
+DisplayName    = %VScomSerServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\vss2k.sys
+LoadOrderGroup = Extended base
+
+[Serenum_SrvInstall]
+DisplayName    = %SerenumServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\serenum.sys
+LoadOrderGroup = PNP Filter
+
+[ComPort_EventLogInstall]
+AddReg=ComRegEventAdd
+
+[ComRegEventAdd]
+HKR,,EventMessageFile,0x00020000,"%11%\IoLogMsg.dll;%12%\vss2k.sys"
+HKR,,TypesSupported,0x00010001,7
+
+;************************ LptPorts *********************************
+[LPTPort.ntx86.CoInstallers]
+AddReg = LPTPort.CoInstallers_AddReg
+CopyFiles=LptDllCopy.ntx86
+
+[LPTPort.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"vsp2kui.dll,CoInstallDevice"
+
+[LPTPort.ntx86]
+CopyFiles=LptDrvCopy.ntx86,LptDllCopy.ntx86
+AddReg=LptAddReg.ntx86
+
+
+[LptDrvCopy.ntx86]
+vsp2k.sys
+
+[LptDllCopy.ntx86]
+vsp2kui.dll
+vspardef.cfg
+
+
+[LptAddReg.ntx86]
+HKR,,EnumPropPages32,,"vsp2kui.dll,EnumPropPages"
+HKR,,PortSubClass,1,00
+
+[LPTPort.ntx86.HW]
+AddReg=LPTPort.ntx86.HW.AddReg
+
+
+[LPTPort.ntx86.HW.AddReg]
+HKLM,,Ver,,%VScomVersion%
+
+
+[LPTPort.ntx86.Services]
+AddService = vspcipar, 0x00000002, LPTClass_SrvInstall, LPTClass_EventLogInstall
+
+
+[LPTClass_SrvInstall]
+DisplayName    = %VScomClassServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\vsp2k.sys
+LoadOrderGroup = Extended base
+
+
+
+[LPTClass_EventLogInstall]
+AddReg=LPTClassEventAdd
+
+[LPTClassEventAdd]
+HKR,,EventMessageFile,0x00020000,"%11%\IoLogMsg.dll;%12%\vsp2k.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=%VScomDisk%,,1
+
+[SourceDisksFiles]
+vsp2k.sys=1
+vss2k.sys=1
+vsp2kui.dll=1
+vss2kui.dll=1
+vsserdef.cfg=1
+vspardef.cfg=1
+
+
+; User readable strings
+;----------------------------------------------------------
+
+[Strings]
+Mfg             = "Vision Systems GmbH"
+Prod1           = "VScom COM Port"
+Prod2           = "VScom LPT Class"
+VScomDisk       = "VScom Driver Disk"
+VScomSerServName= "VScom serial port"
+VScomClassServName= "VScom ParClass service"
+SerenumServName = "Serenum Filter Driver"
+VScomVersion	= "3.03.00.012"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

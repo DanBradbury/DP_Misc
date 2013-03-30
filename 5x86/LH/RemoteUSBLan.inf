@@ -1,0 +1,161 @@
+; Licensed to 
+;
+; Copyright (c) 2003-2005 Belcarra
+; Copyright (c) 2005-2006 BTC2005
+;
+; NOTICE: This software is licensed, not sold, Any modification of
+; this inf file to change the reference to a device or an operating
+; system is not permitted excepted as authorized in writing by
+; Belcarra.
+;
+
+; This package will install the:
+;
+;       RemoteControl USB LAN driver
+;
+; For use with:
+;
+;       Belcarra USBLAN Function Drivers
+;
+; This will enable an Embedded Device to communicate with Windows system
+; using TCP/IP.
+;
+; For more information on the Belcarra USBLAN Function and RemoteControl Host Drivers 
+; go to:
+;
+;       http://www.belcarra.com
+;
+; For licensing information to use the Belcarra USBLAN Function and Host
+; Drivers contact:
+;
+;       sales@belcarra.com
+;
+;
+
+
+[Version]
+Signature       = "$CHICAGO$"
+Class           = Net
+ClassGUID       = {4D36E972-E325-11CE-BFC1-08002BE10318}
+Provider        = %RemoteControl.Name%
+CatalogFile    = rcblan.cat
+DriverPackageType = PlugAndPlay
+DriverPackageDisplayName = "RemoteControl USBLAN"
+DriverVer       = 01/12/2007,02.03.02.317
+Compatible      = 1
+
+[Manufacturer]
+%RemoteControl.Manufacturer%  = RemoteControl, NTx86, NTia64, NTamd64
+
+
+;----------------------Windows XP and 2000 Specific----------------------------
+[BTCUsbLan.ndi.NT]
+Characteristics                         = 0x84
+BusType                                 = 15
+AddReg                                  = BTCUsbLan_AddReg_NT, BTCUSBLAN_Add_Reg_Common
+CopyFiles                               = BTCUsbLan_ndi_CopyFiles
+
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+;-----------------------------------------------------------------------------
+[BTCUsbLan_AddReg_NT]
+HKR, Ndi,                       Service,        0,  "RemoteControl USBLAN"
+HKR, Ndi\Interfaces,            UpperRange,     0,  "ndis5"
+HKR, Ndi\Interfaces,            LowerRange,     0,  "ethernet"
+
+
+[BTCUSBLAN_Add_Reg_Common]
+HKR, Ndi\params\HubPortName,    ParamDesc,      0, %HubPortName%
+HKR, Ndi\params\HubPortName,    type,           0, "edit"
+HKR, Ndi\params\HubPortName,    default,        0, ""
+
+
+
+;HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\USBLAN\RemoteControl,NetworkLIP,           0x00010003, 0xa9, 0xfe, 0x01, 0x01
+;HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\USBLAN\RemoteControl,NetworkMIP,           0x00010003, 0xa9, 0xfe, 0x01, 0xf0
+;HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\USBLAN\RemoteControl,NetworkSIP,           0x00010003, 0xa9, 0xfe, 0x00, 0x01
+;HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\USBLAN\RemoteControl,NetworkMask,          0x00010003, 0xff, 0xff, 0x00, 0x00
+
+HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\RemoteControl-USBLAN,NetworkLIP,           0x00010003, 0xa9, 0xfe, 0x01, 0x01
+HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\RemoteControl-USBLAN,NetworkMIP,           0x00010003, 0xa9, 0xfe, 0x01, 0xf0
+HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\RemoteControl-USBLAN,NetworkSIP,           0x00010003, 0xa9, 0xfe, 0x00, 0x01
+HKLM,SYSTEM\CURRENTCONTROLSET\SERVICES\RemoteControl-USBLAN,NetworkMask,          0x00010003, 0xff, 0xff, 0x00, 0x00
+
+
+
+[BTCUsbLan.ndi.NT.Services]
+AddService = %BTCUsbLan.Service.DispName%, 2, BTCUsbLan_AddService
+
+;---------------Common Varieables-----------------------------------------------------------
+
+ 
+
+[SourceDisksNames.x86]
+1=%RemoteControl.DriverDiskName%,,,i386\
+
+[SourceDisksNames.amd64]
+1=%RemoteControl.DriverDiskName%,,,amd64\
+
+[SourceDisksNames.ia64]
+1=%RemoteControl.DriverDiskName%,,,ia64\
+
+[SourceDisksFiles]
+rcblan.sys=1
+
+[DestinationDirs]
+BTCUsbLan_ndi_CopyFiles = 12 ; WINDOWS\SYSTEM32\DRIVERS
+
+[BTCUsbLan_ndi_CopyFiles]
+rcblan.sys
+
+
+[BTCUsbLan_AddService]
+DisplayName                             = %BTCUsbLan.Service.DispName%
+ServiceType                             = 1    ; SERVICE_KERNEL_DRIVER
+StartType                               = 3    ; SERVICE_AUTO_START
+ErrorControl                            = 1    ; NORMAL
+ServiceBinary                           = %12%\rcblan.sys
+LoadOrderGroup                          = NDIS
+
+
+
+
+;-----------------------------------------------------------------------------
+
+[strings]
+RemoteControl.Name                           = "RemoteControl"
+RemoteControl.Manufacturer                   = "RemoteControl"
+BTCUsbLan.DeviceDesc                    = "RemoteControl USB LAN LINK"
+BTCUsbLan.Service.DispName              = "RemoteControl-USBLAN"
+
+HubPortName                             = "USB Hub and Port Name"
+InterfaceCfg                            = "NDIS Interface Configuration"
+RemoteControl.DriverDiskName                 = "RemoteControl Installation Directory"
+
+;-----------------------------------------------------------------------------
+
+
+
+[RemoteControl]
+; Non-Composite: VID: 046d PID: c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB\VID_046d&PID_c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB2\VID_046d&PID_c11f
+
+[RemoteControl.NTx86]
+; Non-Composite: VID: 046d PID: c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB\VID_046d&PID_c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB2\VID_046d&PID_c11f
+
+[RemoteControl.NTia64]
+; Non-Composite: VID: 046d PID: c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB\VID_046d&PID_c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB2\VID_046d&PID_c11f
+
+[RemoteControl.NTamd64]
+; Non-Composite: VID: 046d PID: c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB\VID_046d&PID_c11f
+%BTCUsbLan.DeviceDesc% = BTCUsbLan.ndi, USB2\VID_046d&PID_c11f
+
+

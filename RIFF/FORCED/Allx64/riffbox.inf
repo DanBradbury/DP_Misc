@@ -1,0 +1,61 @@
+;
+;   Device installation file for 
+;   USB 2 COM port emulation
+;
+;
+;
+[Version] 
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%MFGNAME%
+DriverVer=20/02/2010,1.0.0000.0
+
+[Manufacturer] 
+%MFGNAME%=CDCDevice,NT,NTamd64
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[CDCDevice.NT]
+%USBSR0_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8004&REV_0100
+%USBSR1_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8002&REV_0100
+%USBSR1_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8002&REV_0101
+
+[CDCDevice.NTamd64]
+%USBSR0_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8004&REV_0100
+%USBSR1_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8002&REV_0100
+%USBSR1_DESCRIPTION%=DriverInstall,USB\VID_1EC4&PID_8002&REV_0101
+
+
+[DriverInstall.NT]
+CopyFiles=RiffBoxFiles
+AddReg=DriverInstall.NT.AddReg
+
+[DriverInstall.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,riffbox.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DestinationDirs]
+RiffBoxFiles=12
+DefaultDestDir = 12
+
+[RiffBoxFiles]
+riffbox.sys,,,0x20
+
+[DriverInstall.NT.Services]
+AddService=riffbox, 0x00000002, DriverServiceInst
+
+[DriverServiceInst]
+DisplayName		=%SERVICE%
+ServiceType		=1
+StartType		=3
+ErrorControl	=1
+ServiceBinary	=%12%\riffbox.sys 
+
+[Strings]
+MFGNAME = "RIFF BOX Limited (c), 2010"
+USBSR0_DESCRIPTION = "RIFF BOX Control Port"
+USBSR1_DESCRIPTION = "RIFF BOX Firmware Update Port"
+SERVICE = "RIFFBOX_2010"

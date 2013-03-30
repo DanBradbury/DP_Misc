@@ -1,0 +1,105 @@
+; EMSC.inf
+; 
+; Compal Common Driver
+; install information file.
+;
+; (C) Copyright 20079 Compal Electronics, INC.
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%CPL%
+CatalogFile=EMSC.cat
+DriverVer=06/22/2009, 1.0.0.1
+
+[DestinationDirs]
+EMSC.CopyFiles = 10,system32\drivers
+EMSCNT.CopyFiles = 12
+
+[Manufacturer]
+%CPL%=COMPAL, NTamd64
+
+[ControlFlags]
+ExcludeFromSelect = *CPL0002
+
+[COMPAL]
+%*CPL0002.DeviceDesc%=EMSC,*CPL0002
+
+[COMPAL.NTamd64]
+%*CPL0002.DeviceDesc%=EMSC,*CPL0002
+
+[SourceDisksNames]
+1=%INST_DISK_NAME%
+
+[SourceDisksFiles]
+EMSC.SYS = 1
+
+[EMSC]
+AddReg=EMSC.AddReg
+CopyFiles=EMSC.CopyFiles
+
+[EMSC.ntx86]
+CopyFiles=EMSC.CopyFiles
+
+
+[EMSC.HW]
+Addreg=EMSCHW.AddReg
+
+[EMSCHW.AddReg]
+HKR,,ConfigFlags,1,00,00,00,00
+
+[EMSC.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,EMSC.SYS
+HKR,,EnumPropPages,,"sysclass.dll,EnumPropPages"
+HKR,,EnumPropPages32,,"HDPPropPage.dll,HDPPropPageProvider"
+
+
+[EMSC.NT]
+AddReg=EMSC.AddReg
+CopyFiles=EMSCNT.CopyFiles
+
+[EMSC.NT.HW]
+AddReg=EMSC.NT.AddReg
+
+
+[EMSC.ntx86]
+AddReg=EMSC.AddReg
+CopyFiles=EMSCNT.CopyFiles
+
+[EMSC.ntx86.HW]
+AddReg=EMSC.NT.AddReg
+
+[EMSC.NT.AddReg] 
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GA;;;BA)(A;;GA;;;WD)(A;;GA;;;RC)"      ; Allow generic-all access to Built-in administrators and Local system 
+
+[EMSC.NT.Services]
+AddService=EMSC,2,EMSC_Service_Inst
+
+[EMSC.ntx86.Services]
+AddService=EMSC,2,EMSC_Service_Inst
+
+
+[EMSC_Service_Inst]
+DisplayName    = %EMSC.SvcDesc%
+ServiceType    = 1
+StartType      = 0
+ErrorControl   = 1
+ServiceBinary  = %12%\EMSC.SYS
+
+
+[EMSC.CopyFiles]
+EMSC.sys
+
+[EMSCNT.CopyFiles]
+EMSC.sys
+
+
+[strings]
+CPL                  = "COMPAL"
+*CPL0002.DeviceDesc  = "COMPAL Embedded System Control"
+EMSC.SvcDesc        = "COMPAL Embedded System Control"
+INST_DISK_NAME="COMPAL Embedded System Control"

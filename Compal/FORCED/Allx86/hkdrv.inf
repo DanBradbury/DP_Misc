@@ -1,0 +1,76 @@
+; EPOWER.Inf - install information file
+; Copyright 2001,2002 Derek Chen , Compal Electronic Inc. 
+
+[Version]
+Signature="$Chicago$"
+Class=System
+Provider=%COMPAL%
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+DriverVer=10/30/2002,1.0.0.2
+
+[Manufacturer]
+%COMPAL% = WDM.EPOWER
+
+[WDM.EPOWER]
+%EPOWER%=EPOWER.Install, *CMP0101
+
+[DestinationDirs]
+EPOWER.Files.Driver=10,System32\Drivers
+EPOWER.Files.Driver.NTx86=10,System32\Drivers
+
+[SourceDisksNames]
+1="EPOWER build directory",,,
+
+[SourceDisksFiles]
+
+
+[SourceDisksFiles.x86]
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Windows 98
+
+[EPOWER.Install]
+CopyFiles=EPOWER.Files.Driver
+AddReg=EPOWER.AddReg
+
+[EPOWER.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,hkdrv.sys
+
+[EPOWER.Files.Driver]
+hkdrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Windows 2000
+
+[EPOWER.Install.NTx86]
+CopyFiles=EPOWER.Files.Driver.NTx86
+
+[EPOWER.Files.Driver.NTx86]
+hkdrv.sys,,,%COPYFLG_NOSKIP%
+
+[EPOWER.Install.NTx86.Services]
+AddService = EPOWER, %SPSVCINST_ASSOCSERVICE%, EPOWER.Service
+
+[EPOWER.Service]
+DisplayName    = %EPOWER.ServiceName%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %10%\System32\Drivers\hkdrv.sys
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Strings
+
+[Strings]
+COMPAL="E-POWER"
+EPOWER="Compal E-POWER Driver"
+EPOWER.ServiceName="Compal E-POWER Driver"
+
+SPSVCINST_ASSOCSERVICE=0x00000002	; Driver service is associated with device being installed
+COPYFLG_NOSKIP=2	; Do not allow user to skip file
+SERVICE_KERNEL_DRIVER=1
+SERVICE_AUTO_START=2
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1

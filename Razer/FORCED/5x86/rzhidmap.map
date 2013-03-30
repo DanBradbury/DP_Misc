@@ -1,0 +1,54 @@
+ rzhidmap
+
+ Timestamp is 507fcbe4 (Thu Oct 18 17:29:08 2012)
+
+ Preferred load address is 00010000
+
+ Start         Length     Name                   Class
+ 0001:00000000 000000c0H .text                   CODE
+ 0002:00000000 00000020H .idata$5                DATA
+ 0002:00000020 0000001cH .rdata                  DATA
+ 0002:0000003c 0000006fH .rdata$debug            DATA
+ 0003:00000000 00000008H .data                   DATA
+ 0004:00000000 00000022H PAGE                    CODE
+ 0005:00000000 000000cdH INIT                    CODE
+ 0005:000000d0 00000028H .idata$2                CODE
+ 0005:000000f8 00000014H .idata$3                CODE
+ 0005:0000010c 00000020H .idata$4                CODE
+ 0005:0000012c 00000088H .idata$6                CODE
+ 0006:00000000 00000058H .rsrc$01                DATA
+ 0006:00000060 00000340H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___safe_se_handler_count   00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   00000000     <absolute>
+ 0001:00000005       _HidKmdfPassThrough@8      00011005 f   rzhidmapwdm:rzhidmap.obj
+ 0001:0000003a       _HidKmdfPowerPassThrough@8 0001103a f   rzhidmapwdm:rzhidmap.obj
+ 0001:00000079       @__security_check_cookie@4 00011079 f   BufferOverflowK:secchk.obj
+ 0001:0000008e       ___report_gsfailure        0001108e f   BufferOverflowK:gs_report.obj
+ 0001:000000ba       _HidRegisterMinidriver@4   000110ba f   hidclass:HIDCLASS.SYS
+ 0002:00000000       __imp__HidRegisterMinidriver@4 00012000     hidclass:HIDCLASS.SYS
+ 0002:00000004       \177HIDCLASS_NULL_THUNK_DATA 00012004     hidclass:HIDCLASS.SYS
+ 0002:00000008       __imp__PoCallDriver@8      00012008     ntoskrnl:ntoskrnl.exe
+ 0002:0000000c       __imp__PoStartNextPowerIrp@4 0001200c     ntoskrnl:ntoskrnl.exe
+ 0002:00000010       __imp__KeBugCheckEx@20     00012010     ntoskrnl:ntoskrnl.exe
+ 0002:00000014       __imp_@IofCallDriver@8     00012014     ntoskrnl:ntoskrnl.exe
+ 0002:00000018       __imp__KeTickCount         00012018     ntoskrnl:ntoskrnl.exe
+ 0002:00000018       _KeTickCount               00012018     ntoskrnl:ntoskrnl.exe
+ 0002:0000001c       \177ntoskrnl_NULL_THUNK_DATA 0001201c     ntoskrnl:ntoskrnl.exe
+ 0003:00000000       ___security_cookie         00013000     BufferOverflowK:gs_support.obj
+ 0003:00000004       ___security_cookie_complement 00013004     BufferOverflowK:gs_support.obj
+ 0004:00000005       _HidKmdfAddDevice@8        00014005 f   rzhidmapwdm:rzhidmap.obj
+ 0004:0000001f       _HidKmdfUnload@4           0001401f f   rzhidmapwdm:rzhidmap.obj
+ 0005:00000005       ___security_init_cookie    00015005 f   BufferOverflowK:gs_support.obj
+ 0005:0000003e       _GsDriverEntry@8           0001503e f   BufferOverflowK:gs_support.obj
+ 0005:00000053       _DriverEntry@8             00015053 f   rzhidmapwdm:rzhidmap.obj
+ 0005:000000d0       __IMPORT_DESCRIPTOR_ntoskrnl 000150d0     ntoskrnl:ntoskrnl.exe
+ 0005:000000e4       __IMPORT_DESCRIPTOR_HIDCLASS 000150e4     hidclass:HIDCLASS.SYS
+ 0005:000000f8       __NULL_IMPORT_DESCRIPTOR   000150f8     ntoskrnl:ntoskrnl.exe
+
+ entry point at        0005:0000003e
+
+ Static symbols
+

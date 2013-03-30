@@ -1,0 +1,143 @@
+; nuidfltr.inf
+;
+; HID Non-User Input Data filter driver INF for Windows 7
+;
+; Copyright (c) Microsoft Corporation. All rights reserved.
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%Microsoft%
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Class=HIDClass
+CatalogFile=nuidfltr.cat
+DriverVer=12/28/2012,9.3.161.0
+
+
+[DestinationDirs]
+DefaultDestDir   = 12
+NuidFltr_CoInstaller_CopyFiles = 11
+
+
+[Manufacturer]
+%Microsoft%   = MS.Mfg,NTAMD64.6.1,NTAMD64.6.2
+
+
+[MS.Mfg.NTAMD64.6.1]
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0059&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_006A&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_005F&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_005F&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0061&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0061&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0063&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0063&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0065&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0065&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0070&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0070&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0071&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0071&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0072&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0072&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0073&MI_01&COL02
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_0073&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_009F&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00B9&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E5&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E1&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_009D&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_009D&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_009E&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_009E&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E3&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E3&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E4&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00E4&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F1&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F1&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F2&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F2&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F9&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00F9&MI_01&COL03
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00FA&MI_01&COL01
+%DeviceDesc% = NuidFltr, HID\VID_045E&PID_00FA&MI_01&COL03
+
+[MS.Mfg.NTAMD64.6.2]
+
+[NuidFltr.NT]
+Include=hidserv.inf
+Needs=HIDSystemConsumer
+CopyFiles=NuidFltr.CopyFiles
+
+[NuidFltr.CopyFiles]
+nuidfltr.sys
+
+
+[NuidFltr.NT.Services]
+AddService = NuidFltr,  , NuidFltr_Service_Inst
+; Install the port driver and mouclass from keyboard.inf
+Include=hidserv.inf
+Needs=HIDSystemConsumer.Services
+
+
+[NuidFltr_Service_Inst]
+DisplayName    = %NuidFltr.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\NuidFltr.sys
+
+
+[NuidFltr.NT.HW]
+; Add the device upper filter
+AddReg = NuidFltr.HW.AddReg
+; run the directives need by the port driver
+Include=input.inf
+Needs=HID_Inst.HW
+
+[NuidFltr.HW.AddReg]
+HKR,,"UpperFilters",0x00010000,"NuidFltr"
+
+
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+NuidFltr.sys = 1,,
+wdfcoinstaller01011.dll=1,, ; make sure the number matches with SourceDisksNames
+
+;
+;--- NuidFltr Coinstaller installation ------
+;
+
+[NuidFltr.NT.CoInstallers]
+AddReg=NuidFltr_CoInstaller_AddReg
+CopyFiles=NuidFltr_CoInstaller_CopyFiles
+
+
+[NuidFltr_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01011.dll,WdfCoInstaller"
+
+[NuidFltr_CoInstaller_CopyFiles]
+wdfcoinstaller01011.dll
+
+
+[NuidFltr.NT.Wdf]
+KmdfService = NuidFltr, NuidFltr_wdfsect
+
+
+[NuidFltr_wdfsect]
+KmdfLibraryVersion = 1.11
+
+
+
+[Strings]
+
+Microsoft = "Microsoft"
+DiskId1 = "NUID CD"
+DeviceDesc = "HID Non-User Input Data Filter (KB 911895)"
+NuidFltr.SvcDesc="NUID filter driver"
+
+

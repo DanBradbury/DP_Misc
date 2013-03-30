@@ -1,0 +1,145 @@
+[Version]
+Signature   = "$Windows NT$"
+Class       = Infrared
+ClassGUID   = {6bdd1fc5-810f-11d0-BEC7-08002BE2092F}
+Provider    = %WW%
+LayoutFile  = layout.inf
+
+;[ClassInstall32.NT]
+;AddReg    = IrDAClass.NT.AddReg
+
+;[IrDAClass.NT.AddReg]
+;HKR, , ,                0, %DisplayClassName%
+;HKR, , EnumPropPages32, 0, "NetCfgx.dll,NetPropPageProvider"
+;HKR, , Icon,            0, "1401"
+;HKR, , Installer32,     0, "NetCfgx.dll,NetClassInstaller"
+
+[DestinationDirs]
+;
+;  Specify destination directories for groups of files.
+;  '12' indicates the Windows drivers directory.
+;
+DefaultDestDir=12
+Ser_CopyFiles=12
+
+[Manufacturer]
+%WW%=MS_Devices
+
+[MS_Devices]
+; DisplayName           Section       	DeviceID
+; -----------           -------       	--------
+%WW.DevDesc%      = WW,    	USB\VID_07D0&PID_4959
+
+[WW.NT]
+CopyFiles				= Ser_CopyFiles
+DelReg                = DelAdvancedTab.reg
+AddReg                = IRSIR.reg, WW.reg
+PromptForPort         = 1        ; This is handled by IRCLASS.DLL
+BusType               = 5
+Characteristics       = 0x84  ; NCF_PHYSICAL, NCF_HAS_UI
+
+[WW.NT.Services]
+AddService= KS-959, 2, IRSIR.AddService, common.EventLog
+
+;[WW.NT.CoInstallers]
+;AddReg                = IRSIR.CoInstallers.reg
+
+[SourceDisksNames]
+1="KS-959 Software CD",,,
+
+[Ser_CopyFiles]
+KS-959.sys
+
+[Serial.reg]
+HKR,  ,               SerialBased,0,    "0"
+
+[IRSIR.reg]
+HKR,  Ndi,            HelpText,   	0,    	%IRSIR.Help%
+HKR,  Ndi,            Service,    	0,    	"KS-959"
+HKR,  Ndi\Interfaces, UpperRange, 	0,    	"ndisirda"
+HKR,  Ndi\Interfaces, LowerRange, 	0,    	"nolower"
+HKR,  Ndi,            RequiredAll,   	0,    	"MS_IrDA"
+;HKR,  ,               EnumPropPages32,	,	"IRCLASS.dll,IrSIRPortPropPageProvider"
+
+[NO_DRV.reg]
+HKR,  Ndi\Interfaces, UpperRange, 	0,    	"noupper"
+HKR,  Ndi\Interfaces, LowerRange, 	0,    	"nolower"
+
+
+;[SerialIoWhack.reg]
+;HKR,,SerialIoResourcesIndex,0x10001,1
+
+;[Port.reg]
+;HKR,  ,               SerialBased,0,    "1"
+
+[WW.reg]
+HKR,,InfraredTransceiverType,0,"1"
+HKR,Ndi\params\MaxConnectList,ParamDesc,,%strMaxConnectSpeed%
+HKR,Ndi\params\MaxConnectList,type,,"enum"
+HKR,Ndi\params\MaxConnectList,default,,"57600"
+HKR,Ndi\params\MaxConnectList\enum,"115200",,"115200"
+HKR,Ndi\params\MaxConnectList\enum,"57600",,"57600"
+HKR,Ndi\params\MaxConnectList\enum,"38400",,"38400"
+HKR,Ndi\params\MaxConnectList\enum,"19200",,"19200"
+HKR,Ndi\params\MaxConnectList\enum,"9600",,"9600"
+;HKR,,InfraredTransceiverType,0,"1"
+;HKR,,MaxConnectList,0x00010000,"115200"
+;HKR,,MaxConnectList,0x00010008,"57600"
+;HKR,,MaxConnectList,0x00010008,"38400"
+;HKR,,MaxConnectList,0x00010008,"19200"
+;HKR,,MaxConnectList,0x00010008,"9600"
+
+[DelAdvancedTab.reg]
+HKR,Ndi\params
+
+;[IRSIR.CoInstallers.reg]
+;HKR,,CoInstallers32,0x00010000,"IRCLASS.dll,IrSIRClassCoInstaller"
+
+[IRSIR.AddService]
+DisplayName     = %IRSIR.DevDesc%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_DEMAND_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\KS-959.sys
+LoadOrderGroup  = NDIS
+
+;**************************************************************************
+; Do-nothing section used to avoid "Unknown hardware" installation prompts.
+[NO_DRV.NT]
+Characteristics = 0x11 ; NCF_VIRTUAL|NCF_NO_SERVICE
+AddReg=NO_DRV.reg
+
+[NO_DRV.NT.Services]
+AddService = , 2,,   ; null service install
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+
+[Strings]
+WW           = "Kingsun Technology Inc."
+
+IRSIR.DevDesc       = "Kingsun KS-959 USB Infrared Adapter"
+DisplayClassName    = "KS-959 USB Infrared Adapter"
+
+WW.DevDesc      = "Kingsun KS-959 USB Infrared Adapter"
+
+IRSIR.Help          = "This NDIS miniport driver installs as a network adapter."
+;InfraredTransceiver = "Infrared Transceiver"
+;SerialPort          = "Serial Port"
+strMaxConnectSpeed	= "Maximum Connection Speed"
+
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_DEMAND_START   = 3
+SERVICE_ERROR_NORMAL   = 1
+SERVICE_ERROR_CRITICAL = 3
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

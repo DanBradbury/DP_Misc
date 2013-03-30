@@ -1,0 +1,8 @@
+Unattended setup for Windows 2000 and XP.
+
+For unattended setup use system tools like sysprep and sysdiff and winnt32.
+This tools are provided by Microsoft.
+Additionally for those, that like only to preinstall drivers, we provide the tool
+vsust. To use this tool copy the installation directory from CD or floppy to your hard drive
+and execute vsust <your directory>. Shutdown the system, plug in the card and start the system.
+The Pnp installation can be finished only by pressing continue.

@@ -1,0 +1,302 @@
+; Portions Copyright (c) 1996-2001 National Semiconductor Corp.
+; Copyright (c) 1996-2001 Microsoft Corporation.
+; Copyright (c) 1996-2006 SMSC
+
+; This INF is designed for installation as part of the NT CD.  To change it to
+; floppy based install, comment out any lines ending with "; CD only"
+; and uncomment all lines ending with "; floppy only"
+
+[Version]
+Signature   = "$Windows NT$"
+Provider    = %SMC%
+Class       = Infrared
+ClassGUID   = {6bdd1fc5-810f-11d0-BEC7-08002BE2092F}
+DriverVer   = 05/11/2009, 6.2.6000.2
+CatalogFile = smscirda.cat
+
+[SourceDisksNames]		; floppy only
+1 = %MediaDescription%,,			; floppy only
+
+[SourceDisksFiles]		; floppy only
+smscirda.sys = 1		; floppy only
+
+[DestinationDirs]
+;
+;  Specify destination directories for groups of files.
+;  '12' indicates the Windows drivers directory.
+;  '17' indicates the Windows Inf directory.
+;
+DefaultDestDir=12
+
+[SMC_CopySys]
+;
+;  This section lists the source and destination names of files that need
+;  to be copied to the user's drive.  The destination directory is given
+;  in the [DestinationDirs] section above.
+;
+smscirda.sys,,,2 ; Do not Skip File
+
+[ControlFlags]
+ExcludeFromSelect= *SMCF010
+ExcludeFromSelect= *SMCF020
+ExcludeFromSelect= *SMCF030
+
+
+[Manufacturer]
+;
+;  Specify a name and devices section for each supported manufacturer that
+;  makes products of this class.
+;
+
+;x86 device section(s)
+%SMC% = SMC_Devices
+
+[SMC_Devices]
+;
+;  This section describes the devices of this class made by a particular
+;  manufacturer which are supported on the x86 processor architecture
+;  The first descriptor, delimited by '%', is a symbolic string whose actual
+;  value is given in the [Strings] section below.
+;
+%SMCF010.DeviceDesc% = SMCF010_ndi,   *SMCF010    ; Generic SMC driver
+%SMCF020.DeviceDesc% = SMCF020_ndi,   *SMCF020    ; ATI
+%SMCF030.DeviceDesc% = SMCF030_ndi,   *SMCF030    ; Toshiba 
+
+[SMCF010_ndi]
+DelReg      = SMC_DelReg
+AddReg      = SMC_AddReg,*SMCF010_AddReg,Dongle_Addreg,Speed_Addreg,Mode_Addreg,Turn_Addreg,Help_AddReg
+BusType     = 14
+Characteristics = 0x84  ; NCF_PHYSICAL | NCF_HAS_UI
+CopyFiles   = SMC_CopySys
+
+[SMCF020_ndi]
+DelReg      = SMC_DelReg
+AddReg      = SMC_AddReg,*SMCF010_AddReg,Dongle_Addreg,Speed_Addreg,Mode_Addreg,Turn_Addreg,Help_AddReg,ForceDRQ_Addreg
+BusType     = 14
+Characteristics = 0x84  ; NCF_PHYSICAL | NCF_HAS_UI
+CopyFiles   = SMC_CopySys
+
+[SMCF030_ndi]
+DelReg      = SMC_DelReg
+AddReg      = SMC_AddReg,*SMCF030_AddReg,Speed_Addreg,Mode_Addreg,Turn_Addreg,Help_AddReg  ;don't display Xceiver choices
+BusType     = 14
+Characteristics = 0x84  ; NCF_PHYSICAL | NCF_HAS_UI
+CopyFiles   = SMC_CopySys
+
+[SMCF010_ndi.Services]
+AddService= SMSCIRDA, 2, SMCIRDA.AddService, common.EventLog
+
+[SMCF020_ndi.Services]
+AddService= SMSCIRDA, 2, SMCIRDA.AddService, common.EventLog
+
+[SMCF030_ndi.Services]
+AddService= SMSCIRDA, 2, SMCIRDA.AddService, common.EventLog
+
+[SMC_AddReg]
+; Interfaces
+HKR, Ndi,            Service,       0, %SERVICESTATION%
+HKR, NDI\Interfaces, DefUpper,      0, ndisirda
+HKR, NDI\Interfaces, UpperRange,    0, ndisirda
+HKR, Ndi\Interfaces, DefLower,      0, nolower
+HKR, Ndi\Interfaces, LowerRange,    0, nolower
+HKR, Ndi,            RequiredAll,   0, %MS_INTERFACE%
+
+
+[*SMCF010_AddReg]
+HKR,,BoardType,0,"3"
+HKR,NDI\params\Dongle_A_Type,default,,%SMCF010_DONGLE_A% 
+HKR,NDI\params\MaxConnectRate,default,,%SMCF010_MAX_CONNECT%
+HKR,NDI\params\Xceiver_Turn,default,,%SMCF010_XCEIVER%
+HKR,NDI\params\TurnaroundTime,default,,%SMCF010_TURN%
+
+HKR,,Dongle_A_Type,0,%SMCF010_DONGLE_A%   		; do this to force the value into the main registry key 
+HKR,,MaxConnectRate,0,%SMCF010_MAX_CONNECT%
+HKR,,Xceiver_Turn,0,%SMCF010_XCEIVER%
+HKR,,TurnaroundTime,0,%SMCF010_TURN%
+
+
+[*SMCF030_AddReg]
+HKR,,BoardType,0,"3"
+HKR,NDI\params\MaxConnectRate,default,,%SMCF030_MAX_CONNECT%
+HKR,NDI\params\Xceiver_Turn,default,,%SMCF030_XCEIVER%
+HKR,NDI\params\TurnaroundTime,default,,%SMCF030_TURN%
+
+HKR,,Dongle_A_Type,0,%SMCF030_DONGLE_A% 					;hardwired for HP transceiver
+HKR,,MaxConnectRate,0,%SMCF030_MAX_CONNECT% ; do this to force the value into the main registry key 
+HKR,,Xceiver_Turn,0,%SMCF030_XCEIVER%
+HKR,,TurnaroundTime,0,%SMCF030_TURN%
+
+[Dongle_Addreg]
+;
+; These entries allow the user to select the Configuration Register
+; from the dialog box AFTER INSTALLATION (under the 'Advanced' options).
+; The user's selection is recorded in the registry and then read out
+; by the smscirda.sys driver at boot time.
+;
+
+HKR,NDI\params\Dongle_A_Type,ParamDesc,,%Dongle_A%
+HKR,NDI\params\Dongle_A_Type,flag,1,20,00,00,00
+HKR,NDI\params\Dongle_A_Type,type,,enum
+HKR,NDI\params\Dongle_A_Type\enum,"0",,%DongleType_0%
+HKR,NDI\params\Dongle_A_Type\enum,"1",,%DongleType_1%
+HKR,NDI\params\Dongle_A_Type\enum,"2",,%DongleType_2%
+HKR,NDI\params\Dongle_A_Type\enum,"3",,%DongleType_3%
+HKR,NDI\params\Dongle_A_Type\enum,"4",,%DongleType_4%
+
+
+[Speed_Addreg]
+;
+; These entries allow the user to select the Configuration Register
+; from dialog box AFTER INSTALLATION (under the 'Advanced' options).
+; The user's selection is recorded in the registry and then read out
+; by the smscirda.sys driver at boot time.
+;
+
+HKR,NDI\params\MaxConnectRate,ParamDesc,,%MaxConnectRate%
+HKR,NDI\params\MaxConnectRate,type,,enum
+HKR,NDI\params\MaxConnectRate\enum,"4000000",,%MaxConnectRate_6%
+HKR,NDI\params\MaxConnectRate\enum,"1152000",,%MaxConnectRate_5%
+HKR,NDI\params\MaxConnectRate\enum,"115200",,%MaxConnectRate_4%
+HKR,NDI\params\MaxConnectRate\enum,"57600",,%MaxConnectRate_3%
+HKR,NDI\params\MaxConnectRate\enum,"38400",,%MaxConnectRate_2%
+HKR,NDI\params\MaxConnectRate\enum,"19200",,%MaxConnectRate_1%
+HKR,NDI\params\MaxConnectRate\enum,"9600",,%MaxConnectRate_0%
+
+[Mode_Addreg]
+;
+; These entries allow the user to select the Configuration Register
+; from the dialog box AFTER INSTALLATION (under the 'Advanced' options).
+; The user's selection is recorded in the registry and then read out
+; by the smcirda.sys driver at boot time.
+;
+
+HKR,NDI\params\Xceiver_Turn,ParamDesc,,%Xceiver_Turn%
+HKR,NDI\params\Xceiver_Turn,type,,enum
+HKR,NDI\params\Xceiver_Turn\enum,"0",,%HD_200%
+HKR,NDI\params\Xceiver_Turn\enum,"1",,%HD_300%
+HKR,NDI\params\Xceiver_Turn\enum,"2",,%FD_300%
+
+[Turn_Addreg]
+;
+; These entries allow the user to select the Configuration Register
+; from dialog box AFTER INSTALLATION (under the 'Advanced' options).
+; The user's selection is recorded in the registry and then read out
+; by the smscirda.sys driver at boot time.
+;
+
+HKR,NDI\params\TurnaroundTime,ParamDesc,,%TurnaroundTime%
+HKR,NDI\params\TurnaroundTime,type,,enum
+HKR,NDI\params\TurnaroundTime\enum,"10000",,%TurnaroundTime_3%
+HKR,NDI\params\TurnaroundTime\enum,"5000",,%TurnaroundTime_2%
+HKR,NDI\params\TurnaroundTime\enum,"1000",,%TurnaroundTime_1%
+HKR,NDI\params\TurnaroundTime\enum,"500",,%TurnaroundTime_0%
+
+[ForceDRQ_Addreg]
+HKR,,RxForceDrq,0,"1"    ; Only for ATI chipset.
+
+[Help_Addreg]
+HKR,NDI,HelpText,0,%IRMINI_HELP%
+
+[SMC_DelReg]
+HKR,,EnumPropPages32
+HKR,NDI\params\MaxSpeed
+HKR,NDI\params\MinTurnTime
+HKR,NDI\params\RxSel
+HKR,,AceTimer
+HKR,,AceTxTimer
+HKR,,DmaSingleMode
+HKR,,Dongle_A_Type
+HKR,,DuplexMode
+HKR,,Environment
+HKR,,MaxConnectRate
+HKR,,MaxSpeed
+HKR,,MinTurnTime
+HKR,,RxSel
+HKR,,RxForceDrq
+HKR,,ShowNegotiationFrames
+HKR,,SmcIrdaOptions
+HKR,,SpeedEnable
+HKR,,StuffFifo
+HKR,,TurnaroundTime
+HKR,,Xceiver_Turn
+HKR,NDI\params\MaxConnectRate	
+HKR,NDI\params\Dongle_A_Type
+HKR,NDI\params\Xceiver_Turn
+HKR,NDI\params\TurnaroundTime
+
+
+[SMCIRDA.AddService]
+DisplayName	    = %SMCIRDA.ServiceDesc%
+ServiceType	    = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType	    = 3 ; %SERVICE_DEMAND_START%
+ErrorControl	= 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\SMSCirda.sys        ;12=drivers directory
+LoadOrderGroup	= NDIS
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+
+
+[Strings]
+;
+;  This section defines symbolic string constants for use in the rest
+;  of the .inf script.  You should create and use symbols for all
+;  translatable strings in order to make localization easier.
+;  Also, spaces within strings elsewhere in the script confuse infedit.exe;
+;  so use symbolic constants for any multi-word strings.
+;
+MediaDescription = "IrDA miniport install disk"
+
+IRMINI_HELP="The IrDA infrared port.  It can be used to establish wireless serial and network links to other computers."
+SMCIRDA.ServiceDesc="SMSC Infrared Device Driver"
+SMCF010.DeviceDesc="SMSC Fast Infrared Driver"
+SMCF020.DeviceDesc="SMSC Fast Infrared Driver"
+SMCF030.DeviceDesc="SMSC Fast Infrared Driver(IR module:HP)"
+
+V_CLASSNAME="Infrared adapters"
+
+SMC="SMSC"
+SERVICESTATION = "SMSCIRDA"
+MS_INTERFACE = "MS_IrDA"
+
+SMCF010_DONGLE_A = "0"
+SMCF010_MAX_CONNECT = "4000000"
+SMCF010_TURN = "1000"
+SMCF010_XCEIVER = "0"
+Dongle_A="Infrared Transceiver Type"
+SMCF030_DONGLE_A = "2"
+SMCF030_MAX_CONNECT = "4000000"
+SMCF030_TURN = "1000"
+SMCF030_XCEIVER = "0"
+
+
+DongleType_0="AUTO [Default]"
+DongleType_1="TEMIC"
+DongleType_2="HP"
+DongleType_3="Sharp"
+DongleType_4="VISHAY"
+
+MaxConnectRate_6 ="4 Mbps"
+MaxConnectRate_5 ="1.152 Mbps"
+MaxConnectRate_4 =" 115.2 kbps"
+MaxConnectRate_3 ="  57.6 kbps"
+MaxConnectRate_2 ="  38.4 kbps"
+MaxConnectRate_1 ="  19.2 kbps"
+MaxConnectRate_0 ="   9.6 kbps"
+
+TurnaroundTime_3 = "10.0 ms"
+TurnaroundTime_2 = " 5.0 ms"
+TurnaroundTime_1 = " 1.0 ms [Default]"
+TurnaroundTime_0 = " 0.5 ms"
+
+MaxConnectRate="Maxiumum Connect Rate"
+TurnaroundTime="Minimum Turnaround Time"
+Xceiver_Turn="Transceiver Turnaround Mode"
+HD_200="Mode 1:HD200 [Default]"
+HD_300="Mode 2:HD300"
+FD_300="Mode 3:FD300"

@@ -1,0 +1,243 @@
+; wacmoumonitor.inf
+; Installation inf for wacmoumonitor.sys
+; (c) Copyright 2008 Wacom Technology
+
+[Version]
+Signature="$Windows NT$"
+Class=Mouse
+ClassGUID={4D36E96F-E325-11CE-BFC1-08002BE10318}
+Provider=%WACOM%
+CatalogFile=wacmoumonitor.cat
+DriverVer=09/17/2008,1.00.0003.2
+
+[SourceDisksNames]
+1=%Diskname%
+
+[SourceDisksFiles]
+wacmoumonitor.sys = 1
+
+[DestinationDirs]
+wacmoumonitor.CopyFiles = 12
+
+[Manufacturer]
+%WACOM% = WACOM,NTx86,NTamd64
+
+[WACOM]
+;XP and up only
+
+[WACOM.NTx86]
+;------------------  Pro Tablets --------------------------------------------
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0020&Col01		;GD405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0021&Col01		;GD608
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0022&Col01		;GD912
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0023&Col01		;GD1212
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0024&Col01		;GD1218
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0041&Col01		;XD405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0042&Col01		;XD608
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0043&Col01		;XD912
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0044&Col01		;XD1212
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0045&Col01		;XD1218
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0010&Col01		;ET405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0011&Col01		;ETII405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0012&Col01		;ETII507
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B0&Col01		;PTZ430
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B1&Col01		;PTZ630
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B2&Col01		;PTZ930
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B3&Col01		;PTZ1230
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B4&Col01		;PTZ1231W
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B5&Col01		;PTZ631W
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B7&Col01		;PTZ431W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_003F&Col01		;DTZ2100
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0035&Col01		;PL800
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_003F&Col01		;DTZ2100
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C5&Col01		;DTZ2001W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C6&Col01		;DTZ1201W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C7&MI_00&Col01	;DTU1931
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00B8&Col01		;PTK406
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00B9&Col01		;PTK609
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00BA&Col01		;PTK813
+
+;------------------  Consumer Tablets --------------------------------------------
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0013&Col01		;ETIII405
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0014&Col01		;ETIII608
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0015&Col01		;CTE440
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0016&Col01		;CTE640
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0017&Col01		;CTE450
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0018&Col01		;CTE650
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0019&Col01		;BAMBOO1 Med
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0065&Col01		;MTE450
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0062&Col01		;CTF420
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0063&Col01		;CTF220
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0064&Col01		;CTF221
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0069&Col01		;CTF430
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0037&Col01		;PL700
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0038&Col01		;PL510
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0039&Col01		;PL710
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C0&Col01		;PL720
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C2&Col01		;PL720A
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C4&Col01		;PL521
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0060&Col01		;MFT405
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0061&Col01		;MFT203
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_003A&Col01		;DTI520
+
+[WACOM.NTamd64]
+;------------------  Pro Tablets --------------------------------------------
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0020&Col01		;GD405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0021&Col01		;GD608
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0022&Col01		;GD912
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0023&Col01		;GD1212
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0024&Col01		;GD1218
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0041&Col01		;XD405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0042&Col01		;XD608
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0043&Col01		;XD912
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0044&Col01		;XD1212
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0045&Col01		;XD1218
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0010&Col01		;ET405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0011&Col01		;ETII405
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0012&Col01		;ETII507
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B0&Col01		;PTZ430
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B1&Col01		;PTZ630
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B2&Col01		;PTZ930
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B3&Col01		;PTZ1230
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B4&Col01		;PTZ1231W
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B5&Col01		;PTZ631W
+%WacFilter% = wacmoumonitor.mode0, HID\VID_056A&PID_00B7&Col01		;PTZ431W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_003F&Col01		;DTZ2100
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_0035&Col01		;PL800
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_003F&Col01		;DTZ2100
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C5&Col01		;DTZ2001W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C6&Col01		;DTZ1201W
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00C7&MI_00&Col01	;DTU1931
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00B8&Col01		;PTK406
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00B9&Col01		;PTK609
+%WacFilter% = wacmoumonitor.pro, HID\VID_056A&PID_00BA&Col01		;PTK813
+
+;------------------  Consumer Tablets --------------------------------------------
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0013&Col01		;ETIII405
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0014&Col01		;ETIII608
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0015&Col01		;CTE440
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0016&Col01		;CTE640
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0017&Col01		;CTE450
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0018&Col01		;CTE650
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0019&Col01		;BAMBOO1 Med
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0065&Col01		;MTE450
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0062&Col01		;CTF420
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0063&Col01		;CTF220
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0064&Col01		;CTF221
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0069&Col01		;CTF430
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0037&Col01		;PL700
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0038&Col01		;PL510
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0039&Col01		;PL710
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C0&Col01		;PL720
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C2&Col01		;PL720A
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_00C4&Col01		;PL521
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0060&Col01		;MFT405
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_0061&Col01		;MFT203
+%WacFilter% = wacmoumonitor.con, HID\VID_056A&PID_003A&Col01		;DTI520
+
+[wacmoumonitor.pro.NT]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT
+CopyFiles = wacmoumonitor.CopyFiles
+
+[wacmoumonitor.con.NT]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT
+CopyFiles = wacmoumonitor.CopyFiles
+
+[wacmoumonitor.mode0.NT]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT
+CopyFiles = wacmoumonitor.CopyFiles
+
+[wacmoumonitor.pro.NT.Services]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.Services
+AddService = wacmoumonitor, ,wacmoumonitor_Service_Inst
+
+[wacmoumonitor.con.NT.Services]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.Services
+AddService = wacmoumonitor, ,wacmoumonitor_Service_Inst
+
+[wacmoumonitor.mode0.NT.Services]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.Services
+AddService = wacmoumonitor, ,wacmoumonitor_Service_Inst
+
+[wacmoumonitor.pro.NT.HW]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.HW
+AddReg = wacmoumonitor.pro.AddReg
+
+[wacmoumonitor.con.NT.HW]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.HW
+AddReg = wacmoumonitor.con.AddReg
+
+[wacmoumonitor.mode0.NT.HW]
+Include = msmouse.inf
+Needs = HID_Mouse_Inst.NT.HW
+AddReg = wacmoumonitor.mode0.AddReg
+
+[wacmoumonitor.CopyFiles]
+wacmoumonitor.sys
+
+[wacmoumonitor_Service_Inst]
+DisplayName    = %WacFilter.Desc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_IGNORE%
+LoadOrderGroup = Pointer Port
+ServiceBinary  = %12%\wacmoumonitor.sys
+
+[wacmoumonitor.pro.AddReg]
+HKR,,"UpperFilters",%REG_MULTI_SZ%,"wacmoumonitor"
+HKR,,"TabletType",%REG_DWORD%,%WACOM_PRO%
+HKR,,"SelectiveSuspendEnabled",%REG_DWORD%,%SELECTIVE_SUSPEND_ON%
+
+[wacmoumonitor.con.AddReg]
+HKR,,"UpperFilters",%REG_MULTI_SZ%,"wacmoumonitor"
+HKR,,"TabletType",%REG_DWORD%,%WACOM_CON%
+HKR,,"SelectiveSuspendEnabled",%REG_DWORD%,%SELECTIVE_SUSPEND_ON%
+
+[wacmoumonitor.mode0.AddReg]
+HKR,,"UpperFilters",%REG_MULTI_SZ%,"wacmoumonitor"
+HKR,,"TabletType",%REG_DWORD%,%WACOM_PRO%
+HKR,,"SelectiveSuspendEnabled",%REG_DWORD%,%SELECTIVE_SUSPEND_ON%
+HKR,,"ExtraFeatureId",%REG_DWORD%,%SET_TABLET_MODE%
+HKR,,"ExtraFeatureValue",%REG_DWORD%,%RECOGNITION_MODE%
+
+[Strings]
+;  *******Localizable Strings*******
+WACOM							= "Wacom Technology"
+WacFilter			= "Wacom Mouse Monitor"
+WacFilter.Desc = "Wacom Mode Helper"
+Diskname="Wacom Installer"
+
+;  *******Non Localizable Strings*******
+SERVICE_BOOT_START   = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START   = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED     = 0x4
+
+SERVICE_KERNEL_DRIVER = 0x1
+
+SERVICE_ERROR_IGNORE   = 0x0
+SERVICE_ERROR_NORMAL   = 0x1
+SERVICE_ERROR_SEVERE   = 0x2
+SERVICE_ERROR_CRITICAL = 0x3
+
+SELECTIVE_SUSPEND_ON	= 0x1
+RECOGNITION_MODE	= 0x0
+SET_TABLET_MODE		= 0x4
+
+REG_EXPAND_SZ = 0x00020000
+REG_DWORD     = 0x00010001
+REG_MULTI_SZ  = 0x00010000
+REG_BINARY    = 0x00000001
+REG_SZ        = 0x00000000
+
+WACOM_PRO			= 0x1
+WACOM_CON			= 0x2

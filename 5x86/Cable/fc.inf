@@ -1,0 +1,129 @@
+; FC.inf
+
+[Version]
+signature="$CHICAGO$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%FTDI%
+DriverVer=04/16/2004,1.00.2154
+
+[SourceDisksNames]
+1=%DriversDisk%,,,
+
+[SourceDisksFiles]
+ftcomms.vxd = 1
+ftserial.sys = 1
+ftserui.dll = 1
+ftdibus.sys = 1
+fcunin.exe = 1
+fcunin.ini = 1
+fcun2k.ini = 1
+
+[DestinationDirs]
+FtdiBus.Copy1 = 11
+FtdiBus.Copy2 = 17
+FtdiBus.NT.Copy = 10,system32\drivers
+FtdiBus.NT.Copy2 = 11
+
+[Manufacturer]
+%Ftdi%=FtdiHw
+
+[FtdiHw]
+%USB\VID_0403&PID_6001.DeviceDesc%=FtdiBus,USB\VID_0403&PID_6001
+
+[ControlFlags]
+ExcludeFromSelect=USB\VID_0403&PID_6001
+
+[FtdiBus]
+CopyFiles=FtdiBus.Copy1,FtdiBus.Copy2
+AddReg=FtdiBus.AddReg, FtdiBusUnInst.Reg
+RemoveDevice=FtdiBus.RemDev
+
+[FtdiBus.HW]
+AddReg=FtdiBus.AddReg.HW
+
+[FtdiBus.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ftserial.sys
+
+[FtdiBus.AddReg.HW]
+
+[FtdiBus.Copy1]
+ftcomms.vxd
+ftserial.sys
+ftserui.dll
+fcunin.exe
+fcunin.ini
+
+[FtdiBus.Copy2]
+FCSP.inf
+FC.inf
+
+[FtdiBus.RemDev]
+DelFiles=FtdiBus.Delfiles
+DELKEY=HKLM,%WINUN%\FighterCable
+
+[FtdiBusUnInst.Reg]
+HKLM,%WINUN%,"FighterCable"
+HKLM,%WINUN%\FighterCable , "UninstallString",,"%11%\fcunin.exe %11%\fcunin.ini"
+HKLM,%WINUN%\FighterCable , "DisplayName",,"SphereGSM Fighter Cable Driver"
+
+[FtdiBus.DelFiles]
+FTCOMMS.VXD
+FTSERIAL.SYS
+FTPORTS.INF
+FTDICOM.INF
+ftserui.dll
+fcunin.exe
+fcunin.ini
+FCSP.inf
+FC.inf
+
+;---------------------------------------------------------------
+; For Win2K/XP
+;
+[FtdiBus.NT]
+CopyFiles=FtdiBus.NT.Copy,FtdiBus.NT.Copy2
+AddReg=FtdiBus.NT.AddReg,FtdiBusUnInst.NT.Reg
+
+[FtdiBus.NT.Services]
+AddService = FTDIBUS, 0x00000002, FtdiBus_AddService
+
+[FtdiBus_AddService]
+DisplayName    = %FtdiBus.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\ftdibus.sys
+LoadOrderGroup = Base
+AddReg         = FtdiBus_AddService.AddReg
+
+[FtdiBus.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ftdibus.sys
+
+[FtdiBus_AddService.AddReg]
+HKR,Parameters,"MaximumTransferSize",0x10001,4096
+HKR,Parameters,"DebugLevel",0x10001,2
+HKR,Parameters,"RetryResetCount",0x10001,200
+
+[FtdiBus.NT.Copy]
+ftdibus.sys
+
+[FtdiBus.NT.Copy2]
+fcunin.exe
+fcun2k.ini
+
+[FtdiBusUnInst.NT.Reg]
+HKLM,%WINUN%,"FighterCable"
+HKLM,%WINUN%\FighterCable , "UninstallString",,"%11%\fcunin.exe %11%\fcun2k.ini"
+HKLM,%WINUN%\FighterCable , "DisplayName",,"SphereGSM Fighter Cable Driver"
+
+;---------------------------------------------------------------
+
+[Strings]
+Ftdi="SphereGSM"
+DriversDisk="SphereGSM Fighter Cable Drivers Disk"
+USB\VID_0403&PID_6001.DeviceDesc="Fighter USB Composite Device"
+WINUN="Software\Microsoft\Windows\CurrentVersion\Uninstall"
+FtdiBus.SvcDesc="SphereGSM Fighter Serial Converter Driver"

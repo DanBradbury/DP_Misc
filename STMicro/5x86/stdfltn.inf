@@ -1,0 +1,86 @@
+;
+; stdfltn.inf
+;
+; Installation inf for the disk filter driver for the Accelerometer.
+;
+; Copyright (c) 2008 ST Microelectronics
+;
+
+[Version]
+CatalogFile=stdfltn.cat
+Signature = "$Windows NT$"
+Class     = DiskDrive
+ClassGUID = {4d36e967-e325-11ce-bfc1-08002be10318}
+Provider  = %STM%
+DriverVer = 01/06/2010,1.00.00.03
+
+
+;
+; General installation section
+;
+[DefaultInstall]
+CopyFiles = STDFLT.CopyFiles
+
+[DefaultInstall.NT]
+CopyFiles = @stdfltn.sys
+;Addreg    = stdflt.AddReg
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[STDFLT.CopyFiles]
+stdfltn.sys
+
+;[stdflt.AddReg]
+;HKLM, System\CurrentControlSet\Control\Class\{4d36e967-e325-11ce-bfc1-08002be10318}, UpperFilters, 0x00010008, stdflt
+
+
+;
+; Service installation section
+;
+[DefaultInstall.Services]
+AddService = stdflt, , stdflt.Service.Install
+
+
+[DefaultInstall.NT.Services]
+AddService = stdflt, , stdflt.Service.Install
+
+
+[DefaultInstall.NT.Services]
+AddService = stdflt, , stdflt.Service.Install
+
+[stdflt.Service.Install]
+DisplayName    = %service_desc%
+ServiceType    = 1
+StartType      = 0
+ErrorControl   = 1
+ServiceBinary  = %12%\stdfltn.sys
+LoadOrderGroup = "PnP Filter"
+
+[SourceDisksFiles]
+stdfltn.sys=1
+
+; Win2000
+
+[SourceDisksNames]
+1 = %diskid1%,
+
+; WinXP and later
+
+[SourceDisksNames.x86]
+1 = %diskid1%,
+
+[SourceDisksNames.ia64]
+1 = %diskid1%,
+
+[SourceDisksNames.amd64]
+1 = %diskid1%,
+
+;
+; Localizable Strings
+;
+[Strings]
+STM = "ST Microelectronics"
+service_desc = "Disk Filter Driver for Accelerometer"
+diskid1      = "ST Microelectronics Installation Disk (stdflt)"
+

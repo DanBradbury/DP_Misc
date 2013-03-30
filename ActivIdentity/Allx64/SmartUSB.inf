@@ -1,0 +1,63 @@
+; SmartUSB.INF
+; Copyright (c) 2001-7 ActivCard (All rights reserved)
+; For Windows Vista
+
+[Version]
+catalogfile = SmartUSB.cat
+Signature="$Chicago$"
+Class = SmartCardReader
+ClassGuid = {50dd5230-ba8a-11d1-bf5d-0000f805f530} 
+Provider=%String1%
+DriverVer = 01/31/2007,1.0.5.0
+
+[SourceDisksNames]
+1 = %ID1%,,,
+
+[SourceDisksFiles]
+SmartUSB.sys = 1,,
+
+; ================= Class section ====================
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+SmartUSB.Install.CopyFiles=10,system32\drivers
+
+[Manufacturer]
+%String1%=SmartUSB,NTamd64
+
+[SmartUSB.NTamd64]
+; DisplayName       	Section          DeviceId
+; -----------       	-------          --------
+%SmartBIO.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0002
+%TokenUSB.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0003
+%SmartUSB.DeviceDesc% = SmartUSB.Install, USB\VID_09C3&PID_0004
+
+; ================= INSTALL NT ================= 
+[SmartUSB.Install.NT]
+CopyFiles	= SmartUSB.Install.CopyFiles
+AddReg = SmartUSB.AddReg.NT
+
+[SmartUSB.AddReg.NT]
+;reg-root, [subkey], [value-entry-name], [flags]        , [value]
+HKLM, System\CurrentControlSet\Services\SCardSvr,Start,0x00010001,2
+
+[SmartUSB.Install.CopyFiles]
+SmartUSB.sys,,,2
+
+[SmartUSB.Install.NT.Services]
+AddService = SmartUSB, 2, SmartUSB.Service
+
+[SmartUSB.Service]
+DisplayName     = %SmartUSB.DeviceDesc%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %10%\system32\drivers\SmartUSB.sys
+
+; ================= Strings =====================
+
+[Strings]
+String1			= "ActivCard"
+SmartBIO.DeviceDesc	= "SmartReader-BIO"
+TokenUSB.DeviceDesc	= "ActivKey"
+SmartUSB.DeviceDesc	= "SmartReader-USB"
+ID1 = "ActivCard Smart USB Installation disk"

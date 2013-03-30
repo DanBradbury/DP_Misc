@@ -1,0 +1,112 @@
+; HOTKEY.INF -- This file contains descriptions for Panasonic Hotkey.SYS driver
+;             based on SCSI.INF file
+;
+; (c) Copyright 1999, Matsushita Electric Industrial Co.,Ltd.
+;
+[version]
+signature="$Windows NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+CatalogFile=hotkey.cat
+Provider=%PRODUCT_COMPANY%
+DriverVer=08/03/2001, 5.0.6.0
+
+[Manufacturer]
+%PRODUCT_COMPANY%=HOTKEYDEVICES
+
+[HOTKEYDEVICES]
+%PRODUCT_DESC% = HOTKEY_Install, *MAT0012, *MAT0011
+
+[HOTKEY_Install]
+CopyFiles=HOTKEY.copy.files,HOTKEY.copy.files3
+AddReg=Hotkey.AddReg
+Reboot=1
+
+[Hotkey.AddReg]
+HKR,,NTMPDriver,,hotkey.sys
+HKR,,DevLoader,,*ntkern
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,Hotkey,,"%11%\hkeyman.exe"
+HKLM,Software\Microsoft\Windows\CurrentVersion\RunServices,Hotkey,,"%11%\hkeyman.exe"
+
+[HOTKEY_Install.Services]
+AddService=HOTKEY, 0x00000002, HOTKEY_Service_Inst
+
+[HOTKEY_Service_Inst]
+DisplayName    = %PRODUCT_SYSDISPNAME%
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 2 ; SERVICE_AUTO_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %11%\HOTKEY.SYS
+LoadOrderGroup = Base
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Disk lay out information, used by the CopyFiles lists
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; This is the source disk identifiers the number at the
+; beginning maps to the SourceDisksFiles first parameter
+
+[SourceDisksNames]
+1="%PRODUCT_DESC% %SOURCEDISK_DESC%",,,
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; SourceDisksFiles -
+; this must have ALL file names in any copyfiles section
+; so that the default copyfile error callback dialog (browse,skip)
+; can use the SourceDisksNames strings above to help find the file
+; -- this infomation can also be put in a layout.inf
+;
+; filename_on_source = diskid,subdir,size,checksum,spare,spare
+; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[SourceDisksFiles]
+HOTKEY.SYS = 1,,,,,
+HOTKEY.INF = 1,,,,,
+HKEYMAN.EXE = 1,,,,,
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Targetdirectories predefined for [DestinationDirs] section
+;   parameter number one  
+;     00 = null, use only the second parameter for a path
+;     11 = windows system directory
+;     12 = windows drivers directory
+;     ...
+;
+
+[DestinationDirs]
+;
+; a default if a particular copyfiles section
+;
+; DefaultDestDir=LDID[,subdir]  ; not used in this sample
+
+;
+; Copy directory
+;
+HOTKEY.copy.files=11     ; System
+HOTKEY.copy.files3=11     ; exe
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; CopyFiles lists
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[HOTKEY.copy.files]
+HOTKEY.SYS,,,
+[HOTKEY.copy.files3]
+HKEYMAN.EXE,,,
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Strings replace variable in percents above
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Strings]
+PRODUCT_COMPANY     = "Panasonic"
+PRODUCT_DESC        = "Hotkey Driver for Panasonic Notebook"
+PRODUCT_SYSDISPNAME = "Panasonic Hotkey Driver"
+SOURCEDISK_DESC     = "Source Disk #1"

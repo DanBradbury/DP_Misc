@@ -1,0 +1,36 @@
+===============================================================================
+Populate the ACPI table with the following in the BIOS (or firmware). 
+The actual syntax and pin mapping is platform dependent.
+-------------------------------------------------------------------------------
+// This is the recommended name complies with the Microsoft naming convention.
+Driver name: ACPI\BCM4751 
+
+// This was what we've been using since the early stage of development.
+Driver name: ACPI\BCMGNSS 
+
+Device(GPSD)        // GPS
+{
+    Name(_HID, GPS_HID)
+    Name(_CRS, ResourceTemplate ()
+    {
+        // Baudrate=115K, Rx/TxBufSize=32, Parity=None,
+        UARTSerialBus(0xFC,,,, FlowControlHardware, 115200,32,32,,"\\_SB.UAR2") 
+
+        // nRESET or RST_N pin
+        // Should be always HIGH even when computer is off
+        // Connect to battery if possible
+        GpioIo( Exclusive, PullUp, , , ,   "\\_SB.GPIO", ) {ACPI_GPIO_U3}     
+
+        // POWER_ON or REGPU pin
+        // Should be LOW by default
+        GpioIo( Exclusive, PullDown, , , , "\\_SB.GPIO", ) {ACPI_GPIO_U2}
+    }
+}
+-------------------------------------------------------------------------------
+Install the UART driver and GPIO driver for the above devices.
+Ensure that in "Device Manager" exists an unknown device with hardware ID
+"ACPI/BCM4751" or "ACPI/BCMGNSS" or "ACPI/BRCMGPS"
+-------------------------------------------------------------------------------
+WARNING: If you don't have the above, then prepare the target platform as such
+and try to install again.
+===============================================================================

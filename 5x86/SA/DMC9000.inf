@@ -1,0 +1,109 @@
+; DMC9000.inf
+;
+; Installation file (.inf) for the DMC9000 device.
+;
+; (c) Copyright 2001 SALT International 
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%SALT%
+ClassGUID={4D36E96F-E325-11CE-BFC1-08002BE10318}
+Class=Mouse
+;CatalogFile=DMC9000.cat
+DriverVer=03/28/2001
+
+[DestinationDirs]
+DefaultDestDir   = 12
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%SALT%   = SALT.Mfg
+
+[SALT.Mfg]
+%SALT.DeviceDesc0% = DMC9000, SERENUM\DCO9000
+
+
+;
+; General installation section
+;
+
+[DMC9000]
+AddReg=DMC9000.AddReg
+; Copy the driver over
+CopyFiles=DMC9000.CopyFiles
+
+[DMC9000.AddReg]
+
+
+;
+; File sections
+;
+
+[DMC9000.CopyFiles]
+DMC9000.sys
+
+
+;
+; Service Installation
+;
+
+[DMC9000.Services]
+AddService = DMC9000, 0x00000002 , DMC9000_Service_Inst, DMC9000_EventLog_Inst
+; Install mouclass.sys from msmouse.inf
+Include=msmouse.inf
+Needs=MouClass.Services
+
+[DMC9000_Service_Inst]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = Pointer Port
+ServiceBinary  = %12%\DMC9000.sys
+
+
+[DMC9000_EventLog_Inst]
+AddReg = DMC9000_EventLog_AddReg
+
+[DMC9000_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\DMC9000.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+
+
+;
+; Source file information
+;
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+; Files for disk SALT International Installation Disk #1 (Mouse)
+DMC9000.sys = 1,,
+
+
+[Strings]
+
+;
+; Non-Localizable Strings
+;
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+;
+; Localizable Strings
+;
+
+SALT.DeviceDesc0 = "PenMount DMC9000 and DMC9100"
+DiskId1 = "SALT International Installation Disk #1 (Mouse)"
+SALT = "SALT International"

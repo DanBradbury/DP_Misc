@@ -1,0 +1,93 @@
+; wacomvthid.INF
+; Installation inf for wacomvthid.sys
+; Copyright (c) 2007 Wacom Technology
+
+[Version]
+signature="$WINDOWS NT$"
+Class=HIDClass
+ClassGuid={745A17A0-74D3-11D0-B6FE-00A0C90F57DA}
+Provider=%WACOM%
+CatalogFile=wacomvthid.cat
+DriverVer=05/19/2009,1.04.0002.0
+
+[SourceDisksNames]
+1=%Diskname%
+
+[SourceDisksFiles]
+wacomvthid.sys = 1
+
+[DestinationDirs]
+wacomvthid.CopyFiles = 12
+
+[Manufacturer]
+%WACOM% = WACOM,NTamd64
+
+[WACOM]
+%WacomVTHid%      = wacomvthid, ROOT\WACOMVTHID
+%WacomVTOut%      = wacomvtOut, HID\WACOMVTHID&Col01
+
+[WACOM.NTamd64]
+%WacomVTHid%      = WacomVTHid, ROOT\WACOMVTHID
+%WacomVTOut%      = wacomvtOut, HID\WACOMVTHID&Col01
+
+[WacomVTHid.NT]
+CopyFiles = WacomVTHid.CopyFiles
+
+[WacomVTHid.NT.Services]
+AddService = WacomVTHid,0x00000002,WacomVTHid_Service_Inst,
+
+[WacomVTHid.NT.HW]
+AddReg = WacomVTHid.AddReg
+
+[WacomVTHid.CopyFiles]
+WacomVTHid.sys
+
+[WacomVTHid_Service_Inst]
+DisplayName   = %WacomVTHid.Desc%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_IGNORE%
+ServiceBinary = %12%\WacomVTHid.sys
+
+[WacomVTHid.AddReg]
+
+[WacomVTOut.NT]
+AddReg = WacomVTHid.AddReg
+
+[WacomVKOut.NT.HW]
+AddReg = WacomVKOut.Security
+
+[WacomVKOut.Security]
+HKR,,DeviceCharacteristics,0x10001,0x100
+HKR,,Security,,%Security%
+
+
+;================================================================
+[Strings]
+;  *******Localizable Strings*******
+WACOM          = "Wacom"
+WacomVTHid      = "Virtual Touch Driver"
+WacomVTOut      = "Virtual Touch Interface"
+WacomVTHid.Desc = "Virtual Touch Driver"
+Diskname       = "Wacom Installer"
+Security	= "D:P(A;;GA;;;SY)"
+
+;  *******Non Localizable Strings*******
+SERVICE_BOOT_START   = 0x0
+SERVICE_SYSTEM_START = 0x1
+SERVICE_AUTO_START   = 0x2
+SERVICE_DEMAND_START = 0x3
+SERVICE_DISABLED     = 0x4
+
+SERVICE_KERNEL_DRIVER = 0x1
+
+SERVICE_ERROR_IGNORE   = 0x0
+SERVICE_ERROR_NORMAL   = 0x1
+SERVICE_ERROR_SEVERE   = 0x2
+SERVICE_ERROR_CRITICAL = 0x3
+
+REG_EXPAND_SZ = 0x00020000
+REG_DWORD     = 0x00010001
+REG_MULTI_SZ  = 0x00010000
+REG_BINARY    = 0x00000001
+REG_SZ        = 0x00000000

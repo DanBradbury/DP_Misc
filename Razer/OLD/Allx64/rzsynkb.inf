@@ -1,0 +1,124 @@
+; Copyright: (c) 2010 Razer USA Ltd. All rights reserved
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = Keyboard
+ClassGuid   = {4D36E96B-E325-11CE-BFC1-08002BE10318}
+Provider    = %Razer%
+DriverVer=07/14/2011,6.1.7600.16385
+CatalogFile = RzSynKbd.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%Razer%=Standard,NTAMD64
+
+[Standard]
+%Razer0015.DeviceDesc%=Razer, HID\Vid_1532&Pid_0015&MI_01
+%Razer0019.DeviceDesc%=Razer, HID\Vid_1532&Pid_0019&MI_01&Col01
+%Razer001A.DeviceDesc%=Razer, HID\Vid_1532&Pid_001A&MI_00
+%Razer001F.DeviceDesc%=Razer, HID\Vid_1532&Pid_001F&MI_01
+%Razer001F.DeviceDesc%=Razer, HID\Vid_1532&Pid_001F&MI_01&Col01
+%Razer0020.DeviceDesc%=Razer, HID\Vid_1532&Pid_0020&MI_01
+%Razer0021.DeviceDesc%=Razer, HID\Vid_1532&Pid_0021&MI_01
+%Razer0021.DeviceDesc%=Razer, HID\Vid_1532&Pid_0021&MI_01&Col01
+%Razer0022.DeviceDesc%=Razer, HID\Vid_1532&Pid_0022&MI_01
+%Razer0023.DeviceDesc%=Razer, HID\Vid_1532&Pid_0023&MI_00
+%Razer010D.DeviceDesc%=Razer, HID\Vid_1532&Pid_010D&MI_00
+%Razer010E.DeviceDesc%=Razer, HID\Vid_1532&Pid_010E&MI_00
+%Razer010F.DeviceDesc%=Razer, HID\Vid_1532&Pid_010F&MI_00
+%Razer0110.DeviceDesc%=Razer, HID\Vid_1532&Pid_0110&MI_00
+%Razer0111.DeviceDesc%=Razer, HID\Vid_1532&Pid_0111&MI_00
+
+[Standard.NTAMD64]
+%Razer0015.DeviceDesc%=Razer, HID\Vid_1532&Pid_0015&MI_01
+%Razer0019.DeviceDesc%=Razer, HID\Vid_1532&Pid_0019&MI_01&Col01
+%Razer001A.DeviceDesc%=Razer, HID\Vid_1532&Pid_001A&MI_00
+%Razer001F.DeviceDesc%=Razer, HID\Vid_1532&Pid_001F&MI_01
+%Razer001F.DeviceDesc%=Razer, HID\Vid_1532&Pid_001F&MI_01&Col01
+%Razer0020.DeviceDesc%=Razer, HID\Vid_1532&Pid_0020&MI_01
+%Razer0021.DeviceDesc%=Razer, HID\Vid_1532&Pid_0021&MI_01
+%Razer0021.DeviceDesc%=Razer, HID\Vid_1532&Pid_0021&MI_01&Col01
+%Razer0022.DeviceDesc%=Razer, HID\Vid_1532&Pid_0022&MI_01
+%Razer0023.DeviceDesc%=Razer, HID\Vid_1532&Pid_0023&MI_00
+%Razer010D.DeviceDesc%=Razer, HID\Vid_1532&Pid_010D&MI_00
+%Razer010E.DeviceDesc%=Razer, HID\Vid_1532&Pid_010E&MI_00
+%Razer010F.DeviceDesc%=Razer, HID\Vid_1532&Pid_010F&MI_00
+%Razer0110.DeviceDesc%=Razer, HID\Vid_1532&Pid_0110&MI_00
+%Razer0111.DeviceDesc%=Razer, HID\Vid_1532&Pid_0111&MI_00
+
+[Razer.NT]  
+Include = keyboard.inf
+Needs = HID_Keyboard_Inst.NT
+CopyFiles = Razer.NT.Copy
+
+[Razer.NT.Copy]
+RzSynapse.sys
+
+[Razer.NT.HW]
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT.HW
+AddReg = Razer.NT.HW.AddReg
+
+[Razer.NT.HW.AddReg]  
+HKR,,"UpperFilters",0x00010000,"RzSynapse"
+
+[Razer.NT.Services]
+AddService      = RzSynapse,, Razer_Service_Inst 
+Include=keyboard.inf
+Needs=HID_Keyboard_Inst.NT.Services
+
+[Razer_Service_Inst]
+DisplayName     = %Razer.SvcDesc%                            
+ServiceType     = 1                  ; SERVICE_KERNEL_DRIVER
+StartType       = 3                  ; SERVICE_DEMAND_START
+ErrorControl    = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\RzSynapse.sys                            
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+RzSynapse.sys    = 1,,
+
+[DestinationDirs]
+Razer_CoInstaller_CopyFiles = 11
+
+[Razer.NT.CoInstallers]
+AddReg          = Razer_CoInstaller_AddReg
+CopyFiles       = Razer_CoInstaller_CopyFiles
+
+[Razer_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+[Razer_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll
+
+[SourceDisksFiles]
+WdfCoInstaller01009.dll=1
+
+[Razer.NT.Wdf]
+KmdfService              = RzSynapse,  RzSynapse_wdfsect
+
+[RzSynapse_wdfsect]
+KmdfLibraryVersion       = 1.9
+
+[Strings]
+Razer                    = "Razer USA Ltd"
+DiskId1                  = "Razer Installer"
+Razer.SvcDesc            = "Razer Driver"
+Razer0015.DeviceDesc     = "Razer Naga"
+Razer0019.DeviceDesc     = "Razer Spectre"
+Razer001A.DeviceDesc     = "Razer Marauder"
+Razer001F.DeviceDesc     = "Razer Naga Epic"
+Razer0020.DeviceDesc     = "Razer Abyssus 1800"
+Razer0021.DeviceDesc     = "Razer Naga Epic Dock"
+Razer0022.DeviceDesc     = "Razer TRON Mouse"
+Razer0023.DeviceDesc     = "Razer TRON Keyboard"
+Razer010D.DeviceDesc     = "Razer BlackWidow Ultimate"
+Razer010E.DeviceDesc     = "Razer BlackWidow"
+Razer010F.DeviceDesc     = "Razer Anansi"
+Razer0110.DeviceDesc     = "Razer Cyclosa"
+Razer0111.DeviceDesc     = "Razer Nostromo"
+

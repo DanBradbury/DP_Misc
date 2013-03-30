@@ -1,0 +1,415 @@
+;
+;
+;Copyright (c) 2009-2010 SteelSeries Corporation All rights Reserved
+;
+;Module Name:
+;
+;    SAlphamHID.INF
+;
+;Abstract:
+;    INF file for installing HID SteelSeries devices
+;
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%STEEL%
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Class=HIDClass
+DriverVer=11/03/2012, 2.3.0001.4
+CatalogFile=SAlphamHid.cat
+
+[DestinationDirs]
+DefaultDestDir   = 12
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%STEEL%   = SALPHAMDEV,ntx86,ntia64,ntamd64
+
+[SALPHAMDEV]
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_02       ;
+
+[SALPHAMDEV.ntx86]
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_02       ;
+
+[SALPHAMDEV.ntamd64]
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_02       ;
+
+[SALPHAMDEV.ntia64]
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_0100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1100&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1361&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1362&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1364&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1366&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136b&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1369&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1311&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136D&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1374&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1376&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1330&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1332&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_02       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_136F&MI_03       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_00       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_01       ;
+%DeviceDesc% = SAlphamHid,USB\Vid_1038&Pid_1200&MI_02       ;
+
+[Controlflags]
+
+;
+; General installation section
+;
+
+[SAlphamHid.ntx86]
+; perform port related actions from input.inf
+Include=input.inf
+Needs=HID_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamHid.CopyFiles.ntx86
+AddReg = SAlphamHid.AddReg
+DelReg = SAlphamHid.DelReg
+
+[SAlphamHid.ntamd64]
+; perform port related actions from input.inf
+Include=input.inf
+Needs=HID_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamHid.CopyFiles.ntamd64
+AddReg = SAlphamHid.AddReg
+DelReg = SAlphamHid.DelReg
+
+
+[SAlphamHid.ntia64]
+; perform port related actions from input.inf
+Include=input.inf
+Needs=HID_Inst
+
+; Copy the driver over
+CopyFiles=SAlphamHid.CopyFiles.ntia64
+AddReg = SAlphamHid.AddReg
+DelReg = SAlphamHid.DelReg
+
+[SAlphamHid.CopyFiles.ntx86]
+SAlpham.sys
+
+[SAlphamHid.CopyFiles.ntamd64]
+SAlpham64.sys
+
+[SAlphamHid.CopyFiles.ntia64]
+SAlpham64i.sys
+
+[SAlphamHid.AddReg]
+
+[SAlphamHid.DelReg]
+
+;
+; Service Installation
+;
+
+[SAlphamHid.ntx86.Services]
+AddService = SAlphamHid,  , SAlphamHid_Service_Inst.ntx86
+; Install the port driver and mouclass from input.inf
+Include=input.inf
+Needs=HID_Inst.NT.Services
+
+[SAlphamHid.ntamd64.Services]
+AddService = SAlphamHid,  , SAlphamHid_Service_Inst.ntamd64
+; Install the port driver and mouclass from input.inf
+Include=input.inf
+Needs=HID_Inst.NT.Services
+
+[SAlphamHid.ntia64.Services]
+AddService = SAlphamHid,  , SAlphamHid_Service_Inst.ntia64
+; Install the port driver and mouclass from input.inf
+Include=input.inf
+Needs=HID_Inst.NT.Services
+
+[SAlphamHid.ntx86.HW]
+; Add the device lower filter
+AddReg = SAlphamHid.HW.AddReg
+
+; run the directives need by the port driver
+Include=input.inf
+Needs=HID_Inst.NT.HW
+
+[SAlphamHid.ntamd64.HW]
+; Add the device lower filter
+AddReg = SAlphamHid.HW.AddReg
+
+; run the directives need by the port driver
+Include=input.inf
+Needs=HID_Inst.NT.HW
+
+[SAlphamHid.ntia64.HW]
+; Add the device lower filter
+AddReg = SAlphamHid.HW.AddReg
+
+; run the directives need by the port driver
+Include=input.inf
+Needs=HID_Inst.NT.HW
+
+[SAlphamHid_Service_Inst.ntx86]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlpham.sys
+
+[SAlphamHid_Service_Inst.ntamd64]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlpham64.sys
+
+[SAlphamHid_Service_Inst.ntia64]
+DisplayName    = %SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = extended base
+ServiceBinary  = %12%\SAlpham64i.sys
+
+[SAlphamHid.HW.AddReg]
+HKR,,"LowerFilters",0x00010000,"SAlphamHid"
+
+;
+; Source file information
+;
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+SAlpham.sys = 1,,
+SAlpham64.sys = 1,,
+SAlpham64i.sys = 1,,
+
+[Strings]
+
+;
+; Non-Localizable Strings
+;
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+;
+; Localizable Strings
+;
+
+STEEL = "SteelSeries"
+DiskId1 = "SteelSeries HID Device Installation Disk #1"
+DeviceDesc = "SteelSeries HID Device"
+SvcDesc = "SteelHIDSvc"

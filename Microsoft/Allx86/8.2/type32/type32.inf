@@ -1,0 +1,546 @@
+;
+; type32.inf
+;
+; Installs support for Microsoft Keyboard devices
+;
+; Copyright (c) 2000-2010 Microsoft Corporation
+;
+
+[Version]
+CatalogFile.NT= type32.cat   ;Digital Signing
+Signature="$Windows NT$"     ;All Platforms 
+Class=Keyboard
+ClassGUID={4d36e96b-e325-11ce-bfc1-08002be10318}
+Provider=Microsoft
+LayoutFile=layout.inf
+DriverVer=05/18/2011, 8.20.409.0
+
+[Manufacturer]
+%Microsoft%=MsMfg, NT.6.0
+
+[SourceDisksNames]
+1 = %IntelliTypeProCD%
+
+
+; =================== Microsoft ===========================
+
+[MsMfg]
+
+
+;========= Microsoft USB Internet Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_002D&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_002D&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_005F&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_005F&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0061&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0061&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0063&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0063&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0065&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0065&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0070&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0070&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0071&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0071&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0072&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0072&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0073&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0073&MI_00
+
+;========= Microsoft Wireless Optical Desktop for Bluetooth Keyboard (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007b&Col01.DeviceDesc%=MicrosoftKBD_Dev,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007b&Col01
+
+;========= Microsoft Wireless Optical Desktop for Bluetooth Keyboard (106/109) (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007f&Col01.DeviceDesc%=MicrosoftKBD_Dev_109,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007f&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_008A&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_008A&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_008B&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_008B&MI_00
+
+;========= Microsoft Keyboard Elite for Bluetooth (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0099&Col01.DeviceDesc%=MicrosoftKBD_Dev,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0099&Col01
+
+;========= Microsoft Keyboard Elite for Bluetooth (106/109) (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&009A&Col01.DeviceDesc%=MicrosoftKBD_Dev_109,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&009A&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_009D&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_009D&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_009E&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_009E&MI_00
+
+;========= Microsoft USB Digital Media Pro Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00B0&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00B0&MI_00
+
+;========= Microsoft USB Digital Media Pro Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00B1&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00B1&MI_00
+
+;========= Microsoft USB Digital Media Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00B4&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00B4&MI_00
+
+;========= Microsoft USB Digital Media Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00B5&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00B5&MI_00
+
+;========= Microsoft USB Keyboard with Fingerprint Reader (IntelliType Pro)
+%HID\VID_045E&PID_00BB&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00BB&MI_00
+
+;========= Microsoft USB Keyboard with Fingerprint Reader (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00BC&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00BC&MI_00
+
+;========= Microsoft USB Comfort Curve Keyboard 2000 (IntelliType Pro)
+%HID\VID_045E&PID_00DD&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00DD&MI_00
+
+;========= Microsoft USB Comfort Curve Keyboard 2000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00DE&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00DE&MI_00
+
+;========= Microsoft USB Natural Ergonomic Keyboard 4000 (IntelliType Pro)
+%HID\VID_045E&PID_00DB&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00DB&MI_00
+
+;========= Microsoft USB Natural Ergonomic Keyboard 4000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00DC&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00DC&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00E3&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00E3&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00E4&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00E4&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00F1&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00F1&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00F2&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00F2&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00F9&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_00F9&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00FA&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_00FA&MI_00
+
+;========= Microsoft Wireless Entertainment Keyboard 8000 (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0703&Col01.DeviceDesc%=MicrosoftKBD_Dev,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0703&Col01
+%HID\Vid_045E&Pid_0715.DeviceDesc%=MicrosoftKBD_Dev, HID\Vid_045E&Pid_0715&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 8000 (106/109) (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0704&Col01.DeviceDesc%=MicrosoftKBD_Dev_109,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0704&Col01
+%HID\Vid_045E&Pid_0716.DeviceDesc%=MicrosoftKBD_Dev_109, HID\Vid_045E&Pid_0716&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 7000 (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0705&Col01.DeviceDesc%=MicrosoftKBD_Dev,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0705&Col01
+%HID\Vid_045E&Pid_0717.DeviceDesc%=MicrosoftKBD_Dev, HID\Vid_045E&Pid_0717&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 7000 (106/109) (IntelliType Pro)
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0706&Col01.DeviceDesc%=MicrosoftKBD_Dev_109,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0706&Col01
+%HID\Vid_045E&Pid_0718.DeviceDesc%=MicrosoftKBD_Dev_109, HID\Vid_045E&Pid_0718&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_071D&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_071D&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_071E&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_071E&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 (IntelliType Pro)
+%HID\VID_045E&PID_0730&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0730&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0731&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0731&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 OEM (IntelliType Pro)
+%HID\VID_045E&PID_0732&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0732&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 OEM (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0733&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0733&MI_00
+
+;========= Microsoft SideWinder X6 Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_074B&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_074B&MI_00
+
+;========= Microsoft SideWinder X6 Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_074C&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_074C&MI_00
+
+;========= Microsoft Wired Keyboard 600 (IntelliType Pro)
+%HID\VID_045E&PID_0750&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0750&MI_00
+
+;========= Microsoft Wired Keyboard 600 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0751&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0751&MI_00
+
+;========= Microsoft Wired Keyboard 400 (IntelliType Pro)
+%HID\VID_045E&PID_0752.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0752
+
+;========= Microsoft Wired Keyboard 400 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0753.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0753
+
+;========= Microsoft Mercury Receiver for 104 keyboard 0x745(IntelliType Pro)
+%HID\VID_045E&PID_0745&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0745&MI_00
+
+;========= Microsoft Mercury Receiver for (106/109) keyboard 0x746(IntelliType Pro)
+%HID\VID_045E&PID_0746&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0746&MI_00
+
+;========= Microsoft SideWinder X4 Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_0768&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0768&MI_00
+
+;========= Microsoft SideWinder X4 Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0769&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0769&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_0773&MI_00.DeviceDesc%=MicrosoftKBD_Dev,HID\VID_045E&PID_0773&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0774&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109,HID\VID_045E&PID_0774&MI_00
+
+
+; =================== Section for Windows Vista ===========================
+
+[MsMfg.NT.6.0]
+
+
+;========= Microsoft USB Internet Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_002D&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_002D&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_005F&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_005F&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0061&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0061&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0063&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0063&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless Optical Mouse
+%HID\VID_045E&PID_0065&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0065&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0070&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0070&MI_00
+
+;========= Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0071&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0071&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0072&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0072&MI_00
+
+;========= Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro) - with Wireless IntelliMouse Explorer
+%HID\VID_045E&PID_0073&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0073&MI_00
+
+;========= Microsoft Wireless Optical Desktop for Bluetooth Keyboard (IntelliType Pro)
+%HID\vid_045e&pid_007B&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\vid_045e&pid_007B&Col01		; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007b&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007b&Col01
+
+;========= Microsoft Wireless Optical Desktop for Bluetooth Keyboard (106/109) (IntelliType Pro)
+%HID\vid_045e&pid_007F&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\vid_045e&pid_007F&Col01	; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007f&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007f&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_008A&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_008A&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_008B&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_008B&MI_00
+
+;========= Microsoft Keyboard Elite for Bluetooth (IntelliType Pro)
+%HID\vid_045e&pid_0099&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\vid_045e&pid_0099&Col01		; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0099&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0099&Col01
+
+;========= Microsoft Keyboard Elite for Bluetooth (106/109) (IntelliType Pro)
+%HID\vid_045e&pid_009A&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\vid_045e&pid_009A&Col01	; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&009A&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&009A&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_009D&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_009D&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_009E&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_009E&MI_00
+
+;========= Microsoft USB Digital Media Pro Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00B0&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00B0&MI_00
+
+;========= Microsoft USB Digital Media Pro Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00B1&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00B1&MI_00
+
+;========= Microsoft USB Digital Media Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00B4&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00B4&MI_00
+
+;========= Microsoft USB Digital Media Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00B5&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00B5&MI_00
+
+;========= Microsoft USB Keyboard with Fingerprint Reader (IntelliType Pro)
+%HID\VID_045E&PID_00BB&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00BB&MI_00
+
+;========= Microsoft USB Keyboard with Fingerprint Reader (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00BC&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00BC&MI_00
+
+;========= Microsoft USB Comfort Curve Keyboard 2000 (IntelliType Pro)
+%HID\VID_045E&PID_00DD&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00DD&MI_00
+
+;========= Microsoft USB Comfort Curve Keyboard 2000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00DE&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00DE&MI_00
+
+;========= Microsoft USB Natural Ergonomic Keyboard 4000 (IntelliType Pro)
+%HID\VID_045E&PID_00DB&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00DB&MI_00
+
+;========= Microsoft USB Natural Ergonomic Keyboard 4000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00DC&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00DC&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00E3&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00E3&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00E4&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00E4&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00F1&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00F1&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00F2&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00F2&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_00F9&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_00F9&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_00FA&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_00FA&MI_00
+
+;========= Microsoft Wireless Entertainment Keyboard 8000 (IntelliType Pro)
+%HID\vid_045e&pid_0703&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\vid_045e&pid_0703&Col01		; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0703&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0703&Col01
+%HID\Vid_045E&Pid_0715.DeviceDesc%=MicrosoftKBD_Dev_Vista, HID\Vid_045E&Pid_0715&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 8000 (106/109) (IntelliType Pro)
+%HID\vid_045e&pid_0704&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\vid_045e&pid_0704&Col01	; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0704&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0704&Col01
+%HID\Vid_045E&Pid_0716.DeviceDesc%=MicrosoftKBD_Dev_109_Vista, HID\Vid_045E&Pid_0716&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 7000 (IntelliType Pro)
+%HID\vid_045e&pid_0705&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\vid_045e&pid_0705&Col01		; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0705&Col01.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0705&Col01
+%HID\Vid_045E&Pid_0717.DeviceDesc%=MicrosoftKBD_Dev_Vista, HID\Vid_045E&Pid_0717&Col01
+
+;========= Microsoft Wireless Entertainment Keyboard 7000 (106/109) (IntelliType Pro)
+%HID\vid_045e&pid_0706&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\vid_045e&pid_0706&Col01	; HWID of device in BT mode on Toshiba BT stack
+%HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0706&Col01.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0706&Col01
+%HID\Vid_045E&Pid_0718.DeviceDesc%=MicrosoftKBD_Dev_109_Vista, HID\Vid_045E&Pid_0718&Col01
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_071D&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_071D&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_071E&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_071E&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 (IntelliType Pro)
+%HID\VID_045E&PID_0730&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0730&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0731&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0731&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 OEM (IntelliType Pro)
+%HID\VID_045E&PID_0732&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0732&MI_00
+
+;========= Microsoft Digital Media Keyboard 3000 OEM (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0733&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0733&MI_00
+
+;========= Microsoft SideWinder X6 Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_074B&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_074B&MI_00
+
+;========= Microsoft SideWinder X6 Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_074C&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_074C&MI_00
+
+;========= Microsoft Wired Keyboard 600 (IntelliType Pro)
+%HID\VID_045E&PID_0750&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0750&MI_00
+
+;========= Microsoft Wired Keyboard 600 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0751&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0751&MI_00
+
+;========= Microsoft Wired Keyboard 400 (IntelliType Pro)
+%HID\VID_045E&PID_0752.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0752
+
+;========= Microsoft Wired Keyboard 400 (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0753.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0753
+
+;========= Microsoft Mercury Receiver for 104 keyboard 0x745(IntelliType Pro)
+%HID\VID_045E&PID_0745&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0745&MI_00
+
+;========= Microsoft Mercury Receiver for (106/109) keyboard 0x746(IntelliType Pro)
+%HID\VID_045E&PID_0746&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0746&MI_00
+
+;========= Microsoft SideWinder X4 Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_0768&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0768&MI_00
+
+;========= Microsoft SideWinder X4 Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0769&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0769&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)
+%HID\VID_045E&PID_0773&MI_00.DeviceDesc%=MicrosoftKBD_Dev_Vista,HID\VID_045E&PID_0773&MI_00
+
+;========= Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)
+%HID\VID_045E&PID_0774&MI_00.DeviceDesc%=MicrosoftKBD_Dev_109_Vista,HID\VID_045E&PID_0774&MI_00
+
+
+; ========= Install section for USB Keyboard Devices ============
+
+[MicrosoftKBD_Dev.NT]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT
+
+[MicrosoftKBD_Dev.NT.Services]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.Services
+
+[MicrosoftKBD_Dev.NT.HW]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.HW
+
+[MicrosoftKBD_Dev_Vista.NT]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT
+
+[MicrosoftKBD_Dev_Vista.NT.Services]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.Services
+
+[MicrosoftKBD_Dev_Vista.NT.HW]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.HW
+
+
+;========== used for USB 109 layout ==========
+
+[MicrosoftKBD_Dev_109.NT]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT,HID_106_Keyboard_Inst.NT
+
+; This section must not use the needs for the 106 section in keyboard.inf
+; This creates recursion on Win2k, which is not allowed in INFs.
+
+[MicrosoftKBD_Dev_109.NT.Services]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.Services
+
+[MicrosoftKBD_Dev_109.NT.HW]
+Include = keyboard.inf
+Needs	= HID_106_Keyboard_Inst.NT.HW
+
+[MicrosoftKBD_Dev_109_Vista.NT]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT,HID_106_Keyboard_Inst.NT
+
+; This section must not use the needs for the 106 section in keyboard.inf
+; This creates recursion on Win2k, which is not allowed in INFs.
+
+[MicrosoftKBD_Dev_109_Vista.NT.Services]
+Include = keyboard.inf
+Needs	= HID_Keyboard_Inst.NT.Services
+
+[MicrosoftKBD_Dev_109_Vista.NT.HW]
+Include = keyboard.inf
+Needs	= HID_106_Keyboard_Inst.NT.HW
+
+
+; ======================== Strings ==========================
+
+[Strings]
+
+Microsoft="Microsoft"
+IntelliTypeProCD="Microsoft IntelliType Pro CD"
+DeviceDesc="Microsoft Keyboard IntelliType Pro Driver"
+
+
+HID\VID_045E&PID_002D&MI_00.DeviceDesc = "Microsoft USB Internet Keyboard (IntelliType Pro)"
+
+; with Wireless Optical Mouse
+HID\VID_045E&PID_005F&MI_00.DeviceDesc = "Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0061&MI_00.DeviceDesc = "Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro)"
+HID\VID_045E&PID_0063&MI_00.DeviceDesc = "Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0065&MI_00.DeviceDesc = "Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro)"
+
+; with WIME
+HID\VID_045E&PID_0070&MI_00.DeviceDesc = "Microsoft USB Wireless MultiMedia Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0071&MI_00.DeviceDesc = "Microsoft USB Wireless MultiMedia Keyboard (106/109) (IntelliType Pro)"
+HID\VID_045E&PID_0072&MI_00.DeviceDesc = "Microsoft USB Wireless Natural MultiMedia Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0073&MI_00.DeviceDesc = "Microsoft USB Wireless Natural MultiMedia Keyboard (106/109) (IntelliType Pro)"
+
+HID\vid_045e&pid_007B&Col01.DeviceDesc = "Microsoft Wireless Optical Desktop for Bluetooth Keyboard (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007b&Col01.DeviceDesc = "Microsoft Wireless Optical Desktop for Bluetooth Keyboard (IntelliType Pro)"
+HID\vid_045e&pid_007F&Col01.DeviceDesc = "Microsoft Wireless Optical Desktop for Bluetooth Keyboard (106/109) (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0001045e_PID&007f&Col01.DeviceDesc = "Microsoft Wireless Optical Desktop for Bluetooth Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_008A&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_008B&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\vid_045e&pid_0099&Col01.DeviceDesc = "Microsoft Keyboard Elite for Bluetooth (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0099&Col01.DeviceDesc = "Microsoft Keyboard Elite for Bluetooth (IntelliType Pro)"
+HID\vid_045e&pid_009A&Col01.DeviceDesc = "Microsoft Keyboard Elite for Bluetooth (106/109) (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&009A&Col01.DeviceDesc = "Microsoft Keyboard Elite for Bluetooth (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_009D&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_009E&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_00B0&MI_00.DeviceDesc = "Microsoft USB Digital Media Pro Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_00B1&MI_00.DeviceDesc = "Microsoft USB Digital Media Pro Keyboard (106/109) (IntelliType Pro)"
+HID\VID_045E&PID_00B4&MI_00.DeviceDesc = "Microsoft USB Digital Media Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_00B5&MI_00.DeviceDesc = "Microsoft USB Digital Media Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_00BB&MI_00.DeviceDesc = "Microsoft USB Keyboard with Fingerprint Reader (IntelliType Pro)"
+HID\VID_045E&PID_00BC&MI_00.DeviceDesc = "Microsoft USB Keyboard with Fingerprint Reader (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_00DD&MI_00.DeviceDesc = "Microsoft USB Comfort Curve Keyboard 2000 (IntelliType Pro)"
+HID\VID_045E&PID_00DE&MI_00.DeviceDesc = "Microsoft USB Comfort Curve Keyboard 2000 (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_00DB&MI_00.DeviceDesc = "Microsoft USB Natural Ergonomic Keyboard 4000 (IntelliType Pro)"
+HID\VID_045E&PID_00DC&MI_00.DeviceDesc = "Microsoft USB Natural Ergonomic Keyboard 4000 (106/109) (IntelliType Pro)"
+
+HID\Vid_045E&Pid_00E3&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\Vid_045E&Pid_00E4&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\Vid_045E&Pid_00F1&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\Vid_045E&Pid_00F2&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\Vid_045E&Pid_00F9&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\Vid_045E&Pid_00FA&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\vid_045e&pid_0703&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0703&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (IntelliType Pro)"
+HID\Vid_045E&Pid_0715.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (IntelliType Pro)"
+
+HID\vid_045e&pid_0704&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (106/109) (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0704&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (106/109) (IntelliType Pro)"
+HID\Vid_045E&Pid_0716.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 8000 (106/109) (IntelliType Pro)"
+
+HID\vid_045e&pid_0705&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0705&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (IntelliType Pro)"
+HID\Vid_045E&Pid_0717.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (IntelliType Pro)"
+
+HID\vid_045e&pid_0706&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (106/109) (IntelliType Pro)"
+HID\{00001124-0000-1000-8000-00805f9b34fb}_VID&0002045e_PID&0706&Col01.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (106/109) (IntelliType Pro)"
+HID\Vid_045E&Pid_0718.DeviceDesc = "Microsoft Wireless Entertainment Keyboard 7000 (106/109) (IntelliType Pro)"
+
+HID\Vid_045E&Pid_071D&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+
+HID\Vid_045E&Pid_071E&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0730&MI_00.DeviceDesc = "Microsoft Digital Media Keyboard 3000 (IntelliType Pro)"
+HID\VID_045E&PID_0731&MI_00.DeviceDesc = "Microsoft Digital Media Keyboard 3000 (106/109) (IntelliType Pro)"
+HID\VID_045E&PID_0732&MI_00.DeviceDesc = "Microsoft Digital Media Keyboard 3000 (IntelliType Pro)"
+HID\VID_045E&PID_0733&MI_00.DeviceDesc = "Microsoft Digital Media Keyboard 3000 (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_074B&MI_00.DeviceDesc = "Microsoft SideWinder X6 Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_074C&MI_00.DeviceDesc = "Microsoft SideWinder X6 Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0750&MI_00.DeviceDesc = "Microsoft Wired Keyboard 600 (IntelliType Pro)"
+HID\VID_045E&PID_0751&MI_00.DeviceDesc = "Microsoft Wired Keyboard 600 (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0752.DeviceDesc = "Microsoft Wired Keyboard 400 (IntelliType Pro)"
+HID\VID_045E&PID_0753.DeviceDesc = "Microsoft Wired Keyboard 400 (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0745&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0746&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0768&MI_00.DeviceDesc = "Microsoft SideWinder X4 Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0769&MI_00.DeviceDesc = "Microsoft SideWinder X4 Keyboard (106/109) (IntelliType Pro)"
+
+HID\VID_045E&PID_0773&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (IntelliType Pro)"
+HID\VID_045E&PID_0774&MI_00.DeviceDesc = "Microsoft USB Dual Receiver Wireless Keyboard (106/109) (IntelliType Pro)"

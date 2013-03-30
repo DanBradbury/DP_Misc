@@ -1,0 +1,118 @@
+;/*++
+;Abstract:
+;    INF file for installing the Fintek CIR device
+;
+;
+;--*/
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%FINTEK%
+CatalogFile = FintekCIR_Vistax64.cat
+DriverVer=12/21/2010,6.0.6000.16385
+
+
+[Manufacturer]
+%StdMfg%=DeviceList,NTx86,NTamd64
+
+[DestinationDirs]
+DefaultDestDir= 12
+IR_CoInstaller_CopyFiles = 11
+
+[SourceDisksFiles]
+FintekCIR.sys=1,,
+CIRCoInst.dll =1,,
+WdfCoInstaller01009.dll=1
+
+
+[SourceDisksNames.x86]
+1=%DiskId1%,,,
+
+[SourceDisksNames.amd64]
+1=%DiskId1%,,,
+
+
+
+
+
+[DeviceList]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+
+[DeviceList.NTx86]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+
+[DeviceList.NTamd64]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+
+
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+
+[DriverCopyFiles]
+FintekCIR.sys
+
+
+
+[DriverInstall.NT.Services]
+AddService = FintekCIR,%SPSVCINST_ASSOCSERVICE%,DriverService
+
+
+[DriverService]
+DisplayName    = %FintekCIR.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\FintekCIR.sys
+LoadOrderGroup = Extended Base
+
+
+[DriverInstall.NT.hw]
+AddReg=DriverHwAddReg
+
+
+[DriverHwAddReg]
+HKR,,DeviceCharacteristics,0x10001,0x0100        	; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      	; Allow generic-all access to Built-in administrators and Local system 
+
+
+
+;
+;--- DriverInstall Coinstaller installation ------
+;
+[DriverInstall.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[IR_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+HKR,,CoInstallers32,0x00010008, "CIRCoInst.dll,IRCoInstaller"
+
+[IR_CoInstaller_CopyFiles]
+CIRCoInst.dll
+WdfCoInstaller01009.dll
+
+
+[DriverInstall.NT.WdfSection]
+USE_WDF_DYNAMIC
+COMPONENTS = WdfDynam
+
+
+[DriverInstall.NT.Wdf]
+KmdfService =  FintekCIR, FintekCIR_Device_WdfSection
+[FintekCIR_Device_WdfSection]
+KmdfLibraryVersion = 1.9
+
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+FINTEK = "FINTEK"
+StdMfg = "Fintek Devices"
+DiskId1 = "Fintek Installation Disk"
+FintekCIR.DeviceDesc = "Fintek eHome Transceiver"
+FintekCIR.SVCDESC = "Fintek eHome Transceiver"
+
+

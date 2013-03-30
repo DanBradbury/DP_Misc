@@ -1,0 +1,145 @@
+;/*++
+;
+; Copyright (c) 2004 ActivCard (All rights reserved)
+;
+;Module Name:
+;
+;    AKBUS.INF
+;
+;Abstract:
+;    INF file for installing ActivCard Virtual Reader Enumerator driver
+;
+;--*/
+[Version]
+Signature="$CHICAGO$"
+Class=ActivKeyBus
+ClassGuid={084ABEA7-3EE1-4917-AA78-7670D1E625E1}
+
+Provider=%MSFT%
+DriverVer=03/24/2006,1.0.2.0
+CatalogFile=akbus.cat
+
+;------------------------------------------------------------------------------
+;  Class installation
+;------------------------------------------------------------------------------
+
+[ClassInstall32]
+AddReg=ClassInstall32AddReg
+CopyFiles=ClassInstall32CopyFiles
+
+[ClassInstall32AddReg]
+HKR,,,,%classname%
+HKR,,Installer32,,"akpg.dll,SampleClassInstaller"
+HKR,,EnumPropPages32,,akpg.dll
+HKR,,Icon,,101
+
+[ClassInstall32CopyFiles]
+akpg.dll,,,2
+
+[ClassInstall]
+AddReg=ClassInstallAddReg
+CopyFiles=ClassInstallCopyFiles
+
+[ClassInstallAddReg]
+HKR,,,,%classname%
+HKR,,EnumPropPages,,akpg98.dll
+HKR,,Icon,,102
+
+[ClassInstallCopyFiles]
+akpg98.dll,,,2
+
+;------------------------------------------------------------------------------
+;  Standard INF sections
+;------------------------------------------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+Drivers_Dir=10,System32\Drivers
+ClassInstallCopyFiles=11
+ClassInstall32CopyFiles=11
+Inst98.CopyFiles=11
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+akbus.sys  = 1,,
+akpg.dll = 1,,
+akpg98.dll = 1,,
+akins32.dll= 1,,
+
+;*****************************************
+; Bus  Install Section
+;*****************************************
+
+[Manufacturer]
+%MSFT%=Standard
+
+[Standard]
+;
+; These are the ActivCard bus pnp ids
+;
+
+%Bus.DeviceDesc%=Bus_Device, ActivCardBus
+
+[Drivers_Dir]
+akbus.sys
+
+; ================= INSTALL 98 ================= 
+
+[Inst98.CopyFiles]
+akins32.dll
+akpg98.dll
+
+[Bus_Device]
+CopyFiles=Drivers_Dir,Inst98.CopyFiles
+AddReg=Bus_Device.AddReg
+
+[Bus_Device.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,akbus.sys
+
+[Bus_Device.hw]
+AddReg=Bus_Device.Hw.AddReg
+
+[Bus_Device.Hw.AddReg]
+HKR,,VirtualReaderNumber,1,1,0,0,0
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+; ================= INSTALL NT ================= 
+
+[Bus_Device.NT]
+CopyFiles=Drivers_Dir
+AddReg=Bus_Device.NT.AddReg
+
+[Bus_Device.NT.AddReg]
+
+[Bus_Device.NT.HW]
+AddReg=Bus_Device.NT.HW.AddReg
+
+[Bus_Device.NT.HW.AddReg]
+HKR,,VirtualReaderNumber,0x00010003,1
+
+;-------------- Service installation
+[Bus_Device.NT.Services]
+AddService = akbus,%SPSVCINST_ASSOCSERVICE%, busenum_Service_Inst
+
+; -------------- busenum driver install sections
+[busenum_Service_Inst]
+DisplayName    = %busenum.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\akbus.sys
+LoadOrderGroup = Extended Base
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+MSFT = "ActivCard"
+DiskId1 = "ActivCard Virtual Reader Enumerator Installation Disk #1"
+Bus.DeviceDesc = "ActivCard Virtual Reader Enumerator"
+busenum.SVCDESC = "ActivCard Virtual Reader Enumerator"
+classname = "ActivCard Virtual Reader Enumerator"

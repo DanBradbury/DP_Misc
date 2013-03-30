@@ -1,0 +1,207 @@
+; VSXOMPRT.INF
+; Copyright (c) 1999-2005 Vision Systems GmbH
+
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGUID={4D36E978-E325-11CE-BFC1-08002BE10318}
+DriverVer=02/14/2010,3.03.00.015
+Provider=%Mfg%
+CatalogFile=VScomPrt.cat
+
+[DestinationDirs]
+DefaultDestDir=11
+ComDrvCopy.NTamd64=12
+ComDllCopy.NTamd64=11
+LptDrvCopy.NTamd64=12
+LptDllCopy.NTamd64=11
+
+[Manufacturer]
+%Mfg% = VSport,NTamd64
+
+[VSport.NTamd64]
+%Prod1%=ComPort,*VSCOMA64
+%Prod2%=LPTPort,*VSLPTA64
+
+;************************ Com-Port Windows 2000 *********************
+[ComPort.NTamd64.CoInstallers]
+AddReg = ComPort.CoInstallers_AddReg
+CopyFiles=ComDllCopy.NTamd64
+
+[ComPort.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"vssa64ui.dll,CoInstallDevice"
+
+[ComPort.NTamd64.HW]
+AddReg=ComPort.NTamd64.HW.AddReg
+
+[ComPort.NTamd64.HW.AddReg]
+HKR,,"UpperFilters",	0x00010000,	"serenum" 	;;MULTI_SZ
+HKLM,,Ver,,%VScomVersion%
+
+[ComPort.NTamd64]
+CopyFiles=ComDrvCopy.NTamd64,ComDllCopy.NTamd64
+AddReg=ComAddReg.NTamd64
+
+[ComDrvCopy.NTamd64]
+vssa64.sys
+
+[ComDllCopy.NTamd64]
+vssa64ui.dll
+vsserdef.cfg
+
+
+[ComAddReg.NTamd64]
+HKR,,EnumPropPages32,,"vssa64ui.dll,EnumPropPages"
+
+
+[ComPort.NTamd64.Services]
+AddService = vspciser, 0x00000002, ComPort_SrvInstall, ComPort_EventLogInstall
+AddService = Serenum,,Serenum_SrvInstall
+
+[ComPort_SrvInstall]
+DisplayName    = %VScomSerServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\vssa64.sys
+LoadOrderGroup = Extended base
+
+[Serenum_SrvInstall]
+DisplayName    = %SerenumServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\serenum.sys
+LoadOrderGroup = PNP Filter
+
+[ComPort_EventLogInstall]
+AddReg=ComRegEventAdd
+
+[ComRegEventAdd]
+HKR,,EventMessageFile,0x00020000,"%11%\IoLogMsg.dll;%12%\vssa64.sys"
+HKR,,TypesSupported,0x00010001,7
+
+;************************ LptPorts *********************************
+[LPTPort.NTamd64.CoInstallers]
+AddReg = LPTPort.CoInstallers_AddReg
+CopyFiles=LptDllCopy.NTamd64
+
+[LPTPort.CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"vspa64ui.dll,CoInstallDevice"
+
+[LPTPort.NTamd64]
+CopyFiles=LptDrvCopy.NTamd64,LptDllCopy.NTamd64
+AddReg=LptAddReg.NTamd64
+
+
+[LptDrvCopy.NTamd64]
+vspa64.sys
+
+[LptDllCopy.NTamd64]
+vspa64ui.dll
+vspardef.cfg
+
+
+[LptAddReg.NTamd64]
+HKR,,EnumPropPages32,,"vspa64ui.dll,EnumPropPages"
+HKR,,PortSubClass,1,00
+
+[LPTPort.NTamd64.HW]
+AddReg=LPTPort.NTamd64.HW.AddReg
+
+
+[LPTPort.NTamd64.HW.AddReg]
+HKLM,,Ver,,%VScomVersion%
+
+
+[LPTPort.NTamd64.Services]
+AddService = vspcipar, 0x00000002, LPTClass_SrvInstall, LPTClass_EventLogInstall
+
+
+[LPTClass_SrvInstall]
+DisplayName    = %VScomClassServName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 0               ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\vspa64.sys
+LoadOrderGroup = Extended base
+
+
+
+[LPTClass_EventLogInstall]
+AddReg=LPTClassEventAdd
+
+[LPTClassEventAdd]
+HKR,,EventMessageFile,0x00020000,"%11%\IoLogMsg.dll;%12%\vspa64.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=%VScomDisk%,,1
+
+[SourceDisksFiles]
+vspa64.sys=1
+vssa64.sys=1
+vspa64ui.dll=1
+vssa64ui.dll=1
+vsserdef.cfg=1
+vspardef.cfg=1
+
+
+; User readable strings
+;----------------------------------------------------------
+
+[Strings]
+Mfg             = "Vision Systems GmbH"
+Prod1           = "VScom COM Port"
+Prod2           = "VScom LPT Class"
+VScomDisk       = "VScom Driver Disk"
+VScomSerServName= "VScom serial port"
+VScomClassServName= "VScom ParClass service"
+SerenumServName = "Serenum Filter Driver"
+VScomVersion	= "3.03.00.015"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

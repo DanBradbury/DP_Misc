@@ -1,0 +1,80 @@
+
+;==============================================================================
+; Flter2K.inf for Win2K
+; Copyright (c) 2007 WayTech Inc.
+;==============================================================================
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = %Provider%
+DriverVer   = 04/03/2007,1.0
+CatalogFile = ElanFltr.cat
+;LayoutFile = layout.Inf
+
+[SourceDisksNames]
+99=%DiskName%,,
+
+[SourceDisksFiles]
+ElanFltr.sys = 99
+
+[DestinationDirs]
+DefaultDestDir    = 12
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Manufacturer]
+%Provider%    = WayTechUSB
+
+[WayTechUSB]
+%DEVICENAME% = HidInstElan,USB\VID_0566&PID_3015&MI_00
+%DEVICENAME% = HidInstElan,USB\VID_0566&PID_3015&MI_01
+%DEVICENAME% = HidInstElan,USB\VID_04F3&PID_0118&MI_00
+%DEVICENAME% = HidInstElan,USB\VID_04f3&PID_0118&MI_01
+
+; ---------------------------------------------------------       
+[HidInstElan]
+Include     = input.inf
+Needs       = HID_Inst.NT
+Copyfiles   = CopyUSBFilter
+
+[CopyUSBFilter]
+ElanFltr.sys
+
+[HidInstElan.HW]
+AddReg = Filter.AddReg.HW
+
+[Filter.AddReg.HW]
+HKR,,"LowerFilters",%REG_MULTI_SZ%,"ElanFltr"
+
+[HidInstElan.Services]
+Include     = input.inf
+Needs       = HID_Inst.NT.Services
+AddService  = ElanFltr,,ElanFltr_Service_Inst
+
+
+; ---------------------------------------------------------       
+[ElanFltr_Service_Inst]
+DisplayName     = %SvcDispName%
+ServiceType     = %SERVICE_KERNEL_DRIVER%
+StartType       = %SERVICE_DEMAND_START%
+ErrorControl    = %SERVICE_ERROR_IGNORE%
+ServiceBinary   = %10%\System32\Drivers\ElanFltr.sys
+LoadOrderGroup  = Extended Base
+
+; ---------------------------------------------------------       
+[Strings]
+Provider    = "WayTech"
+DiskName    = "Driver Disk"
+SvcDispName = "Pro Gaming Keyboard"
+DEVICENAME  = "Pro Gaming Keyboard"
+
+
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 0x00000001
+SERVICE_DEMAND_START   = 0x00000003
+SERVICE_ERROR_IGNORE   = 0x00000000
+REG_MULTI_SZ           = 0x00010000
+

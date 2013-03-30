@@ -1,0 +1,103 @@
+; TN33_MultiFn.inf
+; Installation inf for the TN33_MultiFn
+;
+; Copyright (C) 2009 TOPPAN FORMS CO.,LTD. All rights reserved.
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class = USB
+ClassGuid = {36fc9e60-c465-11cf-8056-444553540000}
+Provider=%TF_NFC%
+DriverVer=03/08/2010,32.3.0.4
+CatalogFile=TN33_MultiFn.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+TN33_MultiFn.sys  = 1,,
+
+;*****************************************
+; NFC Multi Fucntion   Install Section
+;*****************************************
+
+[Manufacturer]
+%StdMfg%=Standard,NTx86,NTamd64
+
+[Standard]
+%NfcMultiFn.DeviceDesc%=NfcMultiFn_Device, USB\VID_04CC&PID_2533
+
+; For XP and later (For x86)
+[Standard.NTx86]
+%NfcMultiFn.DeviceDesc%=NfcMultiFn_Device, USB\VID_04CC&PID_2533
+
+; For XP and later (For x64)
+[Standard.NTamd64]
+%NfcMultiFn.DeviceDesc%=NfcMultiFn_Device, USB\VID_04CC&PID_2533
+
+[NfcMultiFn_Device.NT]
+CopyFiles=Drivers_Dir
+
+[NfcMultiFn_Device.NT.HW]
+AddReg=NfcMultiFn_Device.NT.AddReg
+
+[NfcMultiFn_Device.NT.AddReg]
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      ; Allow generic-all access to Built-in administrators and Local system
+
+[Drivers_Dir]
+TN33_MultiFn.sys
+
+
+;-------------- Service installation
+[NfcMultiFn_Device.NT.Services]
+AddService = TN33statbus,%SPSVCINST_ASSOCSERVICE%, Statbus_Service_Inst
+
+; -------------- statbus driver install sections
+[Statbus_Service_Inst]
+DisplayName    = %TN33statbus.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\TN33_MultiFn.sys
+LoadOrderGroup = Extended Base
+
+
+;
+;--- NfcMultiFn_Device WDF Coinstaller installation ------
+;
+[DestinationDirs]
+NfcMultiFn_Device_CoInstaller_CopyFiles = 11
+
+[NfcMultiFn_Device.NT.CoInstallers]
+AddReg=NfcMultiFn_Device_CoInstaller_AddReg
+CopyFiles=NfcMultiFn_Device_CoInstaller_CopyFiles
+
+[NfcMultiFn_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01009.dll,WdfCoInstaller"
+
+[NfcMultiFn_Device_CoInstaller_CopyFiles]
+wdfcoinstaller01009.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01009.dll=1 ; make sure the number matches with SourceDisksNames
+
+[NfcMultiFn_Device.NT.Wdf]
+KmdfService = TN33statbus, statbus_wdfsect
+
+[statbus_wdfsect]
+KmdfLibraryVersion = 1.9
+
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+TF_NFC = "TOPPAN FORMS CO.,LTD."
+StdMfg = "TOPPAN FORMS CO.,LTD."
+DiskId1 = "NFC Bus installer"
+NfcMultiFn.DeviceDesc = "TN33_NFC"
+TN33statbus.SVCDESC = "TN33_NFC"

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XMLDATA>
+  <Submission SubmissionID="743327">
+    <Category CategoryName="Unclassified">
+      <Driver FolderName="driver001">
+        <Language LanguageName="English">
+          <PackageCreationLocation FolderName="C:\Cygnal\CP2101\WIN" />
+        </Language>
+      </Driver>
+    </Category>
+  </Submission>
+</XMLDATA>

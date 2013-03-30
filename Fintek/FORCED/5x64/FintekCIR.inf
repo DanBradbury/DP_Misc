@@ -1,0 +1,181 @@
+;/*++
+;Abstract:
+;    INF file for installing the Fintek CIR device
+;
+;
+;--*/
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%FINTEK%
+LayoutFile=layout.inf
+CatalogFile = FintekCIR_WinXP_64.cat
+DriverVer=12/21/2010,6.0.6000.16385
+
+
+
+
+[SourceDisksFiles]
+FintekCIR.sys= 99
+hidkmdf.sys= 99
+
+
+[SourceDisksNames]
+99 = %DiskId1%,,,""
+
+
+
+[DestinationDirs]
+CopySystemSysFiles = 12
+CopyFunctionDriver = 12      
+CopyFilterDriver = 12     
+CopyFilesDLL = 11
+
+
+
+[Manufacturer]
+%StdMfg%=DeviceList,NTx86,NTamd64
+
+
+[DeviceList]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+%customCollection%    = customCollection.Inst, HID_DEVICE_UP:FF00_U:0001
+
+[DeviceList.NTx86]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+%customCollection%    = customCollection.Inst, HID_DEVICE_UP:FF00_U:0001
+
+[DeviceList.NTamd64]
+%FintekCIR.DeviceDesc%=DriverInstall,ACPI\FIT0002,*FIT0002
+%customCollection%    = customCollection.Inst, HID_DEVICE_UP:FF00_U:0001
+
+
+
+[DriverInstall.NT]
+CopyFiles= CopySystemSysFiles, CopyFunctionDriver, CopyFilterDriver, CopyFilesDLL
+
+;
+;AddReg = DriverHwAddReg
+;
+[DriverInstall.NT.hw]
+AddReg = DriverHwAddReg_Parameters.AddReg
+AddReg = DriverHwAddReg
+
+[DriverInstall.NT.Services]
+AddService = hidkmdf,,hidkmdf_Service_Inst
+AddService = FintekCIR,%SPSVCINST_ASSOCSERVICE%,DriverService
+
+[CopyFunctionDriver]
+hidkmdf.sys
+
+[DriverHwAddReg_Parameters.AddReg]
+HKR,,"UpperFilters",0x00010000,"hidkmdf"
+
+
+[hidkmdf_Service_Inst]
+DisplayName    = %hidkmdf.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\hidkmdf.sys
+LoadOrderGroup = PNP Filter
+
+
+
+[DriverHwAddReg]
+HKR,,DeviceCharacteristics,0x10001,0x0100        	; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;BA)(A;;GA;;;SY)"      	; Allow generic-all access to Built-in administrators and Local system 
+
+
+
+
+
+
+
+;===============================================================
+;   Sections common to all OS versions
+;===============================================================
+
+[CopySystemSysFiles]
+HidClass.sys,,,0x00000010    ;COPYFLG_NO_OVERWRITE (for win2k)
+HidParse.sys,,,0x00000010    ;COPYFLG_NO_OVERWRITE (for win2k)
+
+
+[CopyFunctionDriver]
+FintekCIR.sys
+
+
+[CopyFilesDLL]
+Hid.dll,,,0x00000010    ;COPYFLG_NO_OVERWRITE (for win2k)
+
+
+[DriverService]
+DisplayName    = %FintekCIR.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\FintekCIR.sys
+
+
+
+;===============================================================
+;   Custom Collection install section
+; - Only a Null service is installed.
+;===============================================================
+[customCollection.Inst.NT]
+; NULL section
+
+[customCollection.Inst.NT.HW]
+AddReg = customCollection.Inst.AddReg.NT.HW
+
+[customCollection.Inst.AddReg.NT.HW]
+HKR,,"SelectiveSuspendEnabled",0x00000001,0x1
+
+[customCollection.Inst.NT.Services]
+AddService = ,0x00000002,   ; NULL Service
+
+
+;================================================================
+;--- WDF Coinstaller installation ------
+;
+
+[DestinationDirs]
+IR_CoInstaller_CopyFiles = 11
+
+[DriverInstall.NT.CoInstallers]
+AddReg=IR_CoInstaller_AddReg
+CopyFiles=IR_CoInstaller_CopyFiles
+
+[IR_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01009.dll,WdfCoInstaller"
+
+
+[IR_CoInstaller_CopyFiles]
+WdfCoInstaller01009.dll,,,0x00000010    ;COPYFLG_NO_OVERWRITE (for win2k)
+
+
+
+[DriverInstall.NT.Wdf]
+KmdfService =  FintekCIR, FintekCIR_Device_WdfSection
+[FintekCIR_Device_WdfSection]
+KmdfLibraryVersion = 1.9
+
+
+
+
+
+
+
+
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+FINTEK = "FINTEK"
+StdMfg = "Fintek Devices"
+DiskId1 = "Fintek Installation Disk"
+FintekCIR.DeviceDesc = "Fintek eHome Transceiver"
+FintekCIR.SVCDESC = "Fintek eHome Transceiver"
+customCollection = "HID Minidriver Collection for Fintek CIR"
+hidkmdf.SVCDESC= "Filter Driver Service for HID-KMDF Interface layer"
+DISK_NAME      = "HID CIR Device Install Disk"

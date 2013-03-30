@@ -1,0 +1,198 @@
+ rzjoystk
+
+ Timestamp is 507fcbfd (Thu Oct 18 17:29:33 2012)
+
+ Preferred load address is 0000000000010000
+
+ Start         Length     Name                   Class
+ 0001:00000000 000023b4H .text                   CODE
+ 0001:000023c0 00000000H .text$s                 CODE
+ 0002:00000000 00000058H .idata$5                DATA
+ 0002:00000060 00000b7bH .rdata                  DATA
+ 0002:00000bdc 00000072H .rdata$debug            DATA
+ 0002:00000c50 0000014cH .xdata                  DATA
+ 0003:00000000 000001f0H .data                   DATA
+ 0003:000001f0 00000010H .kmdfclassbind$a        DATA
+ 0003:00000200 00000008H .kmdfclassbind$c        DATA
+ 0003:00000208 00000008H .kmdfclassbind$d        DATA
+ 0003:00000210 00000010H .kmdftypeinit$a         DATA
+ 0003:00000220 00000008H .kmdftypeinit$c         DATA
+ 0003:00000240 00000ebcH .bss                    DATA
+ 0004:00000000 000001b0H .pdata                  DATA
+ 0005:00000000 00000676H PAGE                    CODE
+ 0006:00000000 000001a5H INIT                    CODE
+ 0006:000001a8 00000028H .idata$2                CODE
+ 0006:000001d0 00000014H .idata$3                CODE
+ 0006:000001e8 00000058H .idata$4                CODE
+ 0006:00000240 000000e0H .idata$6                CODE
+ 0007:00000000 00000058H .rsrc$01                DATA
+ 0007:00000060 00000330H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0000:00000000       ___safe_se_handler_count   0000000000000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   0000000000000000     <absolute>
+ 0001:00000008       RtlUnicodeStringPrintf     0000000000011008 f i rzjoystkwdf:driver.obj
+ 0001:00000088       DeviceContextCleanup       0000000000011088 f   rzjoystkwdf:driver.obj
+ 0001:000000cc       TraceEvents                00000000000110cc f   rzjoystkwdf:driver.obj
+ 0001:000000d8       HidFx2EvtInternalDeviceControl 00000000000110d8 f   rzjoystkwdf:hid.obj
+ 0001:000003d8       VHIDEvtWdmPreprocessMnQueryId 00000000000113d8 f   rzjoystkwdf:hid.obj
+ 0001:000004ac       HidFx2GetDeviceAttributes  00000000000114ac f   rzjoystkwdf:hid.obj
+ 0001:000005cc       HidFx2EvtTimerFunction     00000000000115cc f   rzjoystkwdf:hid.obj
+ 0001:00000704       HidFx2SendIdleNotification 0000000000011704 f   rzjoystkwdf:hid.obj
+ 0001:00000864       ControlDevice_Create       0000000000011864 f   rzjoystkwdf:hid.obj
+ 0001:00000b28       ControlDevice_EvtInternalIoDeviceControl 0000000000011b28 f   rzjoystkwdf:hid.obj
+ 0001:00000d34       ControlDevice_EvtFileClose 0000000000011d34 f   rzjoystkwdf:hid.obj
+ 0001:00000d34       _invalid_parameter         0000000000011d34 f   ntstrsafe:invargk.obj
+ 0001:00000d40       HidFx2EvtDeviceD0Entry     0000000000011d40 f   rzjoystkwdf:usb.obj
+ 0001:00000d8c       DbgDevicePowerString       0000000000011d8c f   rzjoystkwdf:usb.obj
+ 0001:00000e00       ?FxStubDriverUnloadCommon@@YAXXZ 0000000000011e00 f   WdfDriverEntry:stub.obj
+ 0001:00000e34       FxStubDriverMiniportUnload 0000000000011e34 f   WdfDriverEntry:stub.obj
+ 0001:00000e40       FxStubDriverUnload         0000000000011e40 f   WdfDriverEntry:stub.obj
+ 0001:00000e70       FxDriverEntryWorker        0000000000011e70 f   WdfDriverEntry:stub.obj
+ 0001:00000f98       FxDriverEntry              0000000000011f98 f   WdfDriverEntry:stub.obj
+ 0001:00000fc8       ?FxStubUnbindClasses@@YAXPEAU_WDF_BIND_INFO@@@Z 0000000000011fc8 f   WdfDriverEntry:classbind.obj
+ 0001:00001048       ?FxStubBindClasses@@YAJPEAU_WDF_BIND_INFO@@@Z 0000000000012048 f   WdfDriverEntry:classbind.obj
+ 0001:000010d4       ?FxStubInitTypes@@YAXXZ    00000000000120d4 f   WdfDriverEntry:inittypes.obj
+ 0001:00001150       __security_check_cookie    0000000000012150 f   BufferOverflowK:amdsecgs.obj
+ 0001:00001178       __report_gsfailure         0000000000012178 f   BufferOverflowK:gs_report.obj
+ 0001:000011a6       WdfVersionUnbind           00000000000121a6 f   WdfLdr:WDFLDR.SYS
+ 0001:000011b2       WdfVersionBind             00000000000121b2 f   WdfLdr:WDFLDR.SYS
+ 0001:000011be       WdfVersionBindClass        00000000000121be f   WdfLdr:WDFLDR.SYS
+ 0001:000011ca       WdfVersionUnbindClass      00000000000121ca f   WdfLdr:WDFLDR.SYS
+ 0001:000011d8       RtlWideCharArrayVPrintfWorker 00000000000121d8 f   ntstrsafe:ntstrsafe.obj
+ 0001:00001230       RtlUnicodeStringValidateWorker 0000000000012230 f   ntstrsafe:ntstrsafe.obj
+ 0001:00001288       RtlUnicodeStringValidateDestWorker 0000000000012288 f   ntstrsafe:ntstrsafe.obj
+ 0001:0000130c       _vsnwprintf_l              000000000001230c f   ntstrsafe:vsnwprnt.obj
+ 0001:000013f0       _vsnwprintf                00000000000123f0 f   ntstrsafe:vsnwprnt.obj
+ 0001:00001420       memset                     0000000000012420 f   ntstrsafe:memset.obj
+ 0001:00001510       _flsbuf                    0000000000012510 f   ntstrsafe:_flsbuf.obj
+ 0001:00001650       _woutput_l                 0000000000012650 f   ntstrsafe:woutput.obj
+ 0001:00001f00       __GSHandlerCheckCommon     0000000000012f00 f   ntstrsafe:gshandler.obj
+ 0001:00001f6c       __GSHandlerCheck           0000000000012f6c f   ntstrsafe:gshandler.obj
+ 0001:00001f90       _get_printf_count_output   0000000000012f90 f   ntstrsafe:printfcount.obj
+ 0001:00001fb0       _fputwc_nolock             0000000000012fb0 f   ntstrsafe:fputwc.obj
+ 0001:00001ffc       mbtowc                     0000000000012ffc f   ntstrsafe:_mbtowc.obj
+ 0001:00002054       _flswbuf                   0000000000013054 f   ntstrsafe:_flswbuf.obj
+ 0001:00002064       RtlAnsiCharToUnicodeChar   0000000000013064 f   ntoskrnl:ntoskrnl.exe
+ 0001:00002080       memmove                    0000000000013080     ntoskrnl:memcpy.obj
+ 0001:00002080       memcpy                     0000000000013080 f   ntoskrnl:memcpy.obj
+ 0002:00000000       __imp_WdfVersionBind       0000000000014000     WdfLdr:WDFLDR.SYS
+ 0002:00000008       __imp_WdfVersionUnbindClass 0000000000014008     WdfLdr:WDFLDR.SYS
+ 0002:00000010       __imp_WdfVersionBindClass  0000000000014010     WdfLdr:WDFLDR.SYS
+ 0002:00000018       __imp_WdfVersionUnbind     0000000000014018     WdfLdr:WDFLDR.SYS
+ 0002:00000020       \177WDFLDR_NULL_THUNK_DATA 0000000000014020     WdfLdr:WDFLDR.SYS
+ 0002:00000028       __imp_RtlCopyUnicodeString 0000000000014028     wdmsec:ntoskrnl.exe
+ 0002:00000030       __imp_ExAllocatePoolWithTag 0000000000014030     ntoskrnl:ntoskrnl.exe
+ 0002:00000038       __imp_IofCompleteRequest   0000000000014038     ntoskrnl:ntoskrnl.exe
+ 0002:00000040       __imp_KeBugCheckEx         0000000000014040     ntoskrnl:ntoskrnl.exe
+ 0002:00000048       __imp_RtlAnsiCharToUnicodeChar 0000000000014048     ntoskrnl:ntoskrnl.exe
+ 0002:00000050       \177ntoskrnl_NULL_THUNK_DATA 0000000000014050     wdmsec:ntoskrnl.exe
+ 0002:00000080       ??_C@_1BI@BJCKEEDJ@?$AAK?$AAm?$AAd?$AAf?$AAL?$AAi?$AAb?$AAr?$AAa?$AAr?$AAy?$AA?$AA@ 0000000000014080     WdfDriverEntry:stub.obj
+ 0002:000000a0       SDDL_DEVOBJ_KERNEL_ONLY_buffer 00000000000140a0     wdmsec:iosddl.obj
+ 0002:000000a8       SDDL_DEVOBJ_KERNEL_ONLY    00000000000140a8     wdmsec:iosddl.obj
+ 0002:000000b8       SDDL_DEVOBJ_SYS_ALL_buffer 00000000000140b8     wdmsec:iosddl.obj
+ 0002:000000d8       SDDL_DEVOBJ_SYS_ALL        00000000000140d8     wdmsec:iosddl.obj
+ 0002:000000e8       SDDL_DEVOBJ_SYS_ALL_ADM_ALL_buffer 00000000000140e8     wdmsec:iosddl.obj
+ 0002:00000120       SDDL_DEVOBJ_SYS_ALL_ADM_ALL 0000000000014120     wdmsec:iosddl.obj
+ 0002:00000130       SDDL_DEVOBJ_SYS_ALL_ADM_RX_buffer 0000000000014130     wdmsec:iosddl.obj
+ 0002:00000170       SDDL_DEVOBJ_SYS_ALL_ADM_RX 0000000000014170     wdmsec:iosddl.obj
+ 0002:00000180       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_buffer 0000000000014180     wdmsec:iosddl.obj
+ 0002:000001d8       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R 00000000000141d8     wdmsec:iosddl.obj
+ 0002:000001f0       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_RES_R_buffer 00000000000141f0     wdmsec:iosddl.obj
+ 0002:00000260       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_R_RES_R 0000000000014260     wdmsec:iosddl.obj
+ 0002:00000270       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RW_RES_R_buffer 0000000000014270     wdmsec:iosddl.obj
+ 0002:000002e8       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RW_RES_R 00000000000142e8     wdmsec:iosddl.obj
+ 0002:00000300       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX_buffer 0000000000014300     wdmsec:iosddl.obj
+ 0002:00000380       SDDL_DEVOBJ_SYS_ALL_ADM_RWX_WORLD_RWX_RES_RWX 0000000000014380     wdmsec:iosddl.obj
+ 0002:00000390       ??_C@_1O@CEDCILHN@?$AA?$CI?$AAn?$AAu?$AAl?$AAl?$AA?$CJ?$AA?$AA@ 0000000000014390     ntstrsafe:output.obj
+ 0002:000003a0       ??_C@_06OJHGLDPL@?$CInull?$CJ?$AA@ 00000000000143a0     ntstrsafe:output.obj
+ 0002:000003b0       __lookuptable              00000000000143b0     ntstrsafe:output.obj
+ 0002:00000410       ??_C@_0BI@PPIGACEH@CONTROLDEVICE_EXTENSION?$AA@ 0000000000014410     rzjoystkwdf:driver.obj
+ 0002:00000428       ??_C@_0BG@BHLCMCCL@FILE_OBJECT_EXTENSION?$AA@ 0000000000014428     rzjoystkwdf:driver.obj
+ 0002:00000440       ??_C@_0BB@IDLDKCCN@DEVICE_EXTENSION?$AA@ 0000000000014440     rzjoystkwdf:driver.obj
+ 0002:00000458       ??_C@_08BCOPPEJE@17?329?332?$AA@ 0000000000014458     rzjoystkwdf:driver.obj
+ 0002:00000468       ??_C@_0M@EEOMDDBI@Oct?518?52012?$AA@ 0000000000014468     rzjoystkwdf:driver.obj
+ 0002:00000478       ??_C@_0CF@OLODDPCH@HIDUSBFX2?5Driver?5Sample?5Built?5?$CFs@ 0000000000014478     rzjoystkwdf:driver.obj
+ 0002:000004a0       ??_C@_0CJ@BDKIOEAA@WdfDriverCreate?5failed?5with?5stat@ 00000000000144a0     rzjoystkwdf:driver.obj
+ 0002:000004d0       ??_C@_0BL@CFICIMPJ@HidFx2EvtDeviceAdd?5called?6?$AA@ 00000000000144d0     rzjoystkwdf:driver.obj
+ 0002:000004f0       ??_C@_0EA@HEBFJACN@WdfDeviceInitAssignWdmIrpPreproc@ 00000000000144f0     rzjoystkwdf:driver.obj
+ 0002:00000530       ??_C@_0CO@JPBECLEG@WdfDeviceCreate?5failed?5with?5stat@ 0000000000014530     rzjoystkwdf:driver.obj
+ 0002:00000560       ??_C@_0BO@MEAIOFOK@WdfIoQueueCreate?5failed?50x?$CFx?6?$AA@ 0000000000014560     rzjoystkwdf:driver.obj
+ 0002:00000580       ??_C@_0CD@FEIPOKPM@WdfTimerCreate?5failed?5status?30x?$CF@ 0000000000014580     rzjoystkwdf:driver.obj
+ 0002:000005b0       ??_C@_1GE@BOEJAAPL@?$AA?$HL?$AA6?$AA4?$AAF?$AA9?$AA9?$AAA?$AA8?$AA1?$AA?9?$AAD?$AA6?$AA0?$AA4?$AA?9?$AA4?$AA2?$AA3?$AA5?$AA?9?$AA9?$AAB?$AA6?$AAF?$AA?9?$AA7?$AAC?$AAD?$AAB?$AAD?$AA3?$AA7@ 00000000000145b0     rzjoystkwdf:driver.obj
+ 0002:00000620       ??_C@_1GE@GPCGJKCK@?$AA?$HL?$AAF?$AAE?$AA5?$AA7?$AA2?$AA8?$AA3?$AA1?$AA?9?$AAC?$AA5?$AAD?$AA3?$AA?9?$AA4?$AA5?$AA5?$AA8?$AA?9?$AAA?$AAA?$AA9?$AA0?$AA?9?$AA2?$AA7?$AA0?$AAF?$AA6?$AAB?$AAD@ 0000000000014620     rzjoystkwdf:driver.obj
+ 0002:00000688       ??_C@_1CG@ODMNFOFA@?$AA?2?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AA?2?$AAR?$AAz?$AAJ?$AAo?$AAy?$AA_?$AA?$CF?$AA0?$AA4?$AAx?$AA?$AA@ 0000000000014688     rzjoystkwdf:driver.obj
+ 0002:000006b0       ??_C@_1CO@OEMPAMAE@?$AA?2?$AAD?$AAo?$AAs?$AAD?$AAe?$AAv?$AAi?$AAc?$AAe?$AAs?$AA?2?$AAR?$AAz?$AAJ?$AAo?$AAy?$AA_?$AA?$CF?$AA0?$AA4?$AAx?$AA?$AA@ 00000000000146b0     rzjoystkwdf:driver.obj
+ 0002:000006e0       G_DefaultReportDescriptor  00000000000146e0     rzjoystkwdf:hid.obj
+ 0002:00000778       G_DefaultHidDescriptor     0000000000014778     rzjoystkwdf:hid.obj
+ 0002:00000788       ??_C@_0DF@OHDCPGAA@WdfRequestForwardToIoQueue?5faile@ 0000000000014788     rzjoystkwdf:hid.obj
+ 0002:000007c0       ??_C@_0CP@PCNCCEHO@SendIdleNotification?5failed?5with@ 00000000000147c0     rzjoystkwdf:hid.obj
+ 0002:000007f0       ??_C@_1BK@OAJPCPN@?$AAH?$AAI?$AAD?$AA?2?$AAV?$AAH?$AAi?$AAd?$AAj?$AAs?$AA?$AA?$AA?$AA?$AA?$AA@ 00000000000147f0     rzjoystkwdf:hid.obj
+ 0002:00000810       ??_C@_0BO@EPKDBIHA@Irp?9?$DOUserBuffer?5is?5NULL?50x?$CFx?6?$AA@ 0000000000014810     rzjoystkwdf:hid.obj
+ 0002:00000830       ??_C@_0BO@LBPAGODA@HidFx2GetHidDescriptor?5Entry?6?$AA@ 0000000000014830     rzjoystkwdf:hid.obj
+ 0002:00000850       ??_C@_0CM@CCGEACOB@WdfRequestRetrieveOutputMemory?5f@ 0000000000014850     rzjoystkwdf:hid.obj
+ 0002:00000880       ??_C@_0CF@MNKLKHJC@WdfMemoryCopyFromBuffer?5failed?50@ 0000000000014880     rzjoystkwdf:hid.obj
+ 0002:000008a8       ??_C@_0CE@IPKGELIO@HidFx2GetHidDescriptor?5Exit?5?$DN?50x@ 00000000000148a8     rzjoystkwdf:hid.obj
+ 0002:000008d0       ??_C@_0CB@EHGOLEDL@HidFx2GetReportDescriptor?5Entry?6@ 00000000000148d0     rzjoystkwdf:hid.obj
+ 0002:000008f8       ??_C@_0CH@MKPCEFEA@HidFx2GetReportDescriptor?5Exit?5?$DN@ 00000000000148f8     rzjoystkwdf:hid.obj
+ 0002:00000920       ??_C@_0CB@GPCBCJJC@HidFx2GetDeviceAttributes?5Entry?6@ 0000000000014920     rzjoystkwdf:hid.obj
+ 0002:00000948       ??_C@_0CM@BEPCNOGM@WdfRequestRetrieveOutputBuffer?5f@ 0000000000014948     rzjoystkwdf:hid.obj
+ 0002:00000978       ??_C@_0CH@CIFOLJPE@HidFx2GetDeviceAttributes?5Exit?5?$DN@ 0000000000014978     rzjoystkwdf:hid.obj
+ 0002:000009a0       ??_C@_0DJ@DFDNNJJM@WdfRequestRetrieveOutputBuffer?5f@ 00000000000149a0     rzjoystkwdf:hid.obj
+ 0002:000009e0       ??_C@_0CL@OPJHCPBH@WdfIoQueueRetrieveNextRequest?5st@ 00000000000149e0     rzjoystkwdf:hid.obj
+ 0002:00000a10       ??_C@_0CG@FLBKADHH@HidFx2EvtDevicePrepareHardware?5E@ 0000000000014a10     rzjoystkwdf:usb.obj
+ 0002:00000a38       ??_C@_0DC@ILEIKOBP@HidFx2EvtDevicePrepareHardware?5E@ 0000000000014a38     rzjoystkwdf:usb.obj
+ 0002:00000a70       ??_C@_0CP@KPONOOEL@HidFx2EvtDeviceD0Entry?5Enter?5?9?5c@ 0000000000014a70     rzjoystkwdf:usb.obj
+ 0002:00000aa0       ??_C@_0CL@MGKINBNC@HidFx2EvtDeviceD0Exit?5Enter?9?5mov@ 0000000000014aa0     rzjoystkwdf:usb.obj
+ 0002:00000ad0       ??_C@_0BM@MHCAFEOD@HidFx2EvtDeviceD0Exit?5Exit?6?$AA@ 0000000000014ad0     rzjoystkwdf:usb.obj
+ 0002:00000af0       ??_C@_0BG@EJENIEHD@WdfPowerDeviceInvalid?$AA@ 0000000000014af0     rzjoystkwdf:usb.obj
+ 0002:00000b08       ??_C@_0BB@JNMNEDNH@WdfPowerDeviceD0?$AA@ 0000000000014b08     rzjoystkwdf:usb.obj
+ 0002:00000b20       ??_C@_0BB@IENGHCJG@WdfPowerDeviceD1?$AA@ 0000000000014b20     rzjoystkwdf:usb.obj
+ 0002:00000b38       ??_C@_0BB@KPPLCBFF@WdfPowerDeviceD2?$AA@ 0000000000014b38     rzjoystkwdf:usb.obj
+ 0002:00000b50       ??_C@_0BB@LGOABABE@WdfPowerDeviceD3?$AA@ 0000000000014b50     rzjoystkwdf:usb.obj
+ 0002:00000b68       ??_C@_0BG@MIIDEGIC@WdfPowerDeviceD3Final?$AA@ 0000000000014b68     rzjoystkwdf:usb.obj
+ 0002:00000b80       ??_C@_0CE@MIJNLMPJ@WdfPowerDevicePrepareForHibernat@ 0000000000014b80     rzjoystkwdf:usb.obj
+ 0002:00000ba8       ??_C@_0BD@ODMBHIPK@PowerDeviceMaximum?$AA@ 0000000000014ba8     rzjoystkwdf:usb.obj
+ 0002:00000bc0       ??_C@_0BL@IAKKBILP@UnKnown?5Device?5Power?5State?$AA@ 0000000000014bc0     rzjoystkwdf:usb.obj
+ 0003:00000000       HotPatchBuffer             0000000000015000     hotpatch.obj
+ 0003:00000130       __security_cookie          0000000000015130     BufferOverflowK:gs_support.obj
+ 0003:00000138       __security_cookie_complement 0000000000015138     BufferOverflowK:gs_support.obj
+ 0003:00000140       __nullstring               0000000000015140     ntstrsafe:output.obj
+ 0003:00000148       __wnullstring              0000000000015148     ntstrsafe:output.obj
+ 0003:00000150       _fltused                   0000000000015150     ntstrsafe:stubs.obj
+ 0003:00000154       _ldused                    0000000000015154     ntstrsafe:stubs.obj
+ 0003:00000158       __mb_cur_max               0000000000015158     ntstrsafe:nlsdata1.obj
+ 0003:0000015c       __decimal_point            000000000001515c     ntstrsafe:nlsdata1.obj
+ 0003:00000160       __decimal_point_length     0000000000015160     ntstrsafe:nlsdata1.obj
+ 0003:00000168       _WDF_DEVICE_EXTENSION_TYPE_INFO 0000000000015168     rzjoystkwdf:driver.obj
+ 0003:00000190       _WDF_FILE_OBJECT_EXTENSION_TYPE_INFO 0000000000015190     rzjoystkwdf:driver.obj
+ 0003:000001b8       _WDF_CONTROLDEVICE_EXTENSION_TYPE_INFO 00000000000151b8     rzjoystkwdf:driver.obj
+ 0003:000001e0       readReport                 00000000000151e0     rzjoystkwdf:hid.obj
+ 0003:000001f0       ?__KMDF_CLASS_BIND_START@@3U_MARKER_TYPE@@A 00000000000151f0     WdfDriverEntry:classbind.obj
+ 0003:00000200       ?__KMDF_CLASS_BIND_END@@3PEAXEA 0000000000015200     WdfDriverEntry:classbind.obj
+ 0003:00000210       ?__KMDF_TYPE_INIT_START@@3U_MARKER_TYPE@@A 0000000000015210     WdfDriverEntry:inittypes.obj
+ 0003:00000220       ?__KMDF_TYPE_INIT_END@@3PEAXEA 0000000000015220     WdfDriverEntry:inittypes.obj
+ 0003:00000240       WdfFunctions               0000000000015240     WdfDriverEntry:stub.obj
+ 0003:00000ea0       typeWDF_IFR_HEADER         0000000000015ea0     WdfDriverEntry:stub.obj
+ 0003:00000ec8       WdfDriverGlobals           0000000000015ec8     WdfDriverEntry:stub.obj
+ 0003:000010e8       __fastflag                 00000000000160e8     ntstrsafe:stubs.obj
+ 0003:000010f8       errno                      00000000000160f8     <common>
+ 0005:00000008       HidFx2EvtDeviceAdd         0000000000018008 f   rzjoystkwdf:driver.obj
+ 0005:000005bc       HidFx2EvtDriverContextCleanup 00000000000185bc f   rzjoystkwdf:driver.obj
+ 0005:000005c8       HidFx2EvtDevicePrepareHardware 00000000000185c8 f   rzjoystkwdf:usb.obj
+ 0005:00000620       HidFx2EvtDeviceD0Exit      0000000000018620 f   rzjoystkwdf:usb.obj
+ 0006:00000008       DriverEntry                0000000000019008 f   rzjoystkwdf:driver.obj
+ 0006:00000150       __security_init_cookie     0000000000019150 f   BufferOverflowK:gs_support.obj
+ 0006:000001a8       __IMPORT_DESCRIPTOR_ntoskrnl 00000000000191a8     wdmsec:ntoskrnl.exe
+ 0006:000001bc       __IMPORT_DESCRIPTOR_WDFLDR 00000000000191bc     WdfLdr:WDFLDR.SYS
+ 0006:000001d0       __NULL_IMPORT_DESCRIPTOR   00000000000191d0     wdmsec:ntoskrnl.exe
+
+ entry point at        0001:00000f98
+
+ Static symbols
+
+ 0001:00000d1c       ControlDevice_EvtFileCreate 0000000000011d1c f    CIL library: CIL module
+ 0001:00001520       write_char                 0000000000012520 f   ntstrsafe:woutput.obj
+ 0001:00001570       write_multi_char           0000000000012570 f   ntstrsafe:woutput.obj
+ 0001:000015c8       write_string               00000000000125c8 f   ntstrsafe:woutput.obj

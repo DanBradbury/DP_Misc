@@ -1,0 +1,91 @@
+;
+; bcmccid.inf - Install the Microsoft USBCCID user-mode driver and disable ‘sleep’ call in the Win7 SC stack 
+;
+
+[Version]
+Signature="$Windows NT$"
+Class=SmartCardReader
+ClassGuid={50DD5230-BA8A-11D1-BF5D-0000F805F530}
+Provider=%Mfg%
+DriverVer=08/09/2012,22.19.17.973
+CatalogFile=bcmccid64.cat
+
+[Manufacturer]
+%Mfg%=Broadcom,NTamd64
+
+[Broadcom.NTamd64]
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5800&REV_0101&MI_01
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5801&REV_0101&MI_01
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5802&REV_0101&MI_01
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5804&REV_0101&MI_02
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5805&REV_0101&MI_02
+
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5800&REV_0101&MI_02
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5801&REV_0101&MI_02
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5802&REV_0101&MI_02
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5804&REV_0101&MI_03
+%DeviceName% = BCMUSBCCID_Install, USB\VID_0A5C&PID_5805&REV_0101&MI_03
+
+; =================== UMDF Usbccid Device ==================================
+
+[BCMUSBCCID_Install.NT]
+Include=wudfusbcciddriver.inf,WINUSB.INF
+Needs=Usbccid_Install.NT,WINUSB.NT
+
+[BCMUSBCCID_Install.NT.hw]
+AddReg=BCM_Device_AddReg
+Include=wudfusbcciddriver.inf
+Needs=Usbccid_Install.NT.hw
+
+[BCMUSBCCID_Install.NT.Services]
+;Include=wudfusbcciddriver.inf
+;Needs=Usbccid_Install.NT.Services
+AddService=WUDFRd,0x000001fa,WUDFRD_ServiceInstall  ; flag 0x2 sets this as the service for the device
+AddService=WinUsb,0x000001f8,WinUsb_ServiceInstall  ; this service is installed because its a filter.
+
+[BCMUSBCCID_Install.NT.CoInstallers]
+Include=wudfusbcciddriver.inf
+Needs=Usbccid_Install.NT.CoInstallers
+
+[BCMUSBCCID_Install.NT.Wdf]
+KmdfService = WINUSB, WinUsb_Install
+UmdfService=WUDFUsbccidDriver, WUDFUsbccidDriver_Install
+UmdfServiceOrder=WUDFUsbccidDriver
+UmdfDispatcher=WinUsb
+UmdfKernelModeClientPolicy=AllowKernelModeClients
+
+; ==============================================================
+
+[WUDFRD_ServiceInstall]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\WUDFRd.sys
+
+[WinUsb_ServiceInstall]
+DisplayName     = %WinUsb_Service_DisplayName%
+ServiceType     = 1
+StartType       = 3
+ErrorControl    = 1
+ServiceBinary   = %12%\WinUSB.sys
+LoadOrderGroup  = Base
+
+[BCM_Device_AddReg]
+HKR,"WudfUsbccidDriver","DeviceFlags",0x00010001,0x00000004
+
+[WinUsb_Install]
+KmdfLibraryVersion = 1.0
+
+[WUDFUsbccidDriver_Install]
+UmdfLibraryVersion=1.9.0
+DriverCLSID="{5EB949F2-78C6-443b-9964-07588EB151C6}"
+ServiceBinary="%12%\UMDF\WUDFUsbccidDriver.dll"
+
+
+; =================== Generic ==================================
+
+[Strings]
+Mfg="Broadcom"
+DeviceName="Broadcom Usbccid Smartcard Reader (WUDF)"
+WinUsb_Service_DisplayName="WinUSB Driver"
+WUDFClassName="WUDF Smartcard"

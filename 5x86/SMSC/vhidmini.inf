@@ -1,0 +1,186 @@
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%strSMSC%
+CatalogFile=vhidmini.cat
+LayoutFile=layout.inf
+DriverVer=06/14/2005,1.00.0000.0
+
+;
+;   Layout.inf (etc.) list all files shipped with the operating system so the 
+;   source description sections are only needed if other files are needed.
+;   
+;   In order to use IHV drivers, the SourceDisksNames section must list the 
+;   disk(s) containing the drivers and the SourceDisksFiles section must list 
+;   which disk number each file to be copied is found on.
+;   Disk number 99 is used to avoid a conflict with the disk numbers defined 
+;   in layout.inf
+;
+;   Files used in a driver installation need to be digitally signed otherwise 
+;   installation may fail.  See documentation elsewhere in the DDK regarding 
+;   driver signing.
+;
+; [SourceDisksNames]
+; 99=%DiskId%,,
+;
+; [SourceDisksFiles]
+; vhidmini.sys = 99
+
+[DestinationDirs]
+CopyFilesSYS = 12     ; should it be 10 to take care of 98 stuff??????
+CopyFilesDLL = 11     ; %SystemRoot%\system or system32 - 98 or Win2000
+CopyFilesSYS_98 = 10, system32/drivers
+
+[Manufacturer]
+%strSMSC%=SMSC_HID
+
+[SMSC_HID]
+%VHidMini%    = VHidMini.Inst, {D49F883C-6486-400a-8C22-1A9EF48577E4}\HID_DEVICE
+%VHidDevice%  = VHidDevice.Inst,  HID\MyVirtualHidDevice
+
+[ControlFlags]
+ExcludeFromSelect  = HID\MyVirtualHidDevice
+
+;===============================================================
+;   VHidMini (Root Enumerated Hid Device) install section
+;===============================================================
+[VHidMini.Inst]
+CopyFiles = CopyFilesSYS_98, CopyFilesDLL
+AddReg    = VHidMini_98me.AddReg
+
+[VHidMini.Inst.NT]
+CopyFiles = CopyFilesSYS, CopyFilesDLL
+
+[VHidMini.Inst.NT.HW]
+AddReg = VHidMini_Parameters.AddReg 
+
+[VHidMini.Inst.NT.Services]
+AddService = vhidmini,0x00000002,vhidmini_Service_Inst,
+
+[CopyFilesSYS]
+vhidmini.sys
+HidClass.sys
+HidParse.sys
+
+
+[CopyFilesSYS_98]
+vhidmini.sys
+HidClass.sys
+HidParse.sys
+
+[CopyFilesDLL]
+Hid.dll
+
+[VHidMini_Parameters.AddReg]
+HKR,,"ReadFromRegistry",%REG_DWORD%, 0x00000001
+HKR,,"MyReportDescriptor",%REG_BINARY%,\
+    \ ; Consumer Controls
+        0x05,   0x0c,       \ ; Usage Page (Consumer Controls),
+        0x09,   0x01,       \ ; Usage (Consumer Control),
+        0xA1,   0x01,       \ ; Collection (Application),
+        0x85,   0x01,       \ ;  Report Id (1)
+        0x19,   0x00,       \ ;  Usage Minimum (0),
+        0x2a,   0x3c, 0x02, \ ;  Usage Maximum (23c)  
+        0x15,   0x00,       \ ;  Logical Minimum (0),
+        0x26,   0x3c, 0x02, \ ;  Logical Maximum (23c)  
+        0x95,   0x01,       \ ;  Report Count (1),
+        0x75,   0x10,       \ ;  Report Size (16),
+        0x81,   0x00,       \ ;  Input (Data, Array), 
+        0xC0,               \ ; End Collection 
+    \ ; MS Vendor controls
+        0x06,   0xbc, 0xff, \ ; Usage Page (Vendor 0xffbc),
+        0x09,   0x88,       \ ; Usage (88),
+        0xa1,   0x01,       \ ; Collection (Application),
+        0x85,   0x02,       \ ;  Report Id (2)
+        0x19,   0x01,       \ ;  Usage Minimum (0x01),
+        0x29,   0xff,       \ ;  Usage Maximum (0xff),
+        0x15,   0x00,       \ ;  Logical Minimum (0),
+        0x25,   0x01,       \ ;  Logical Maximum(1),
+        0x95,   0x01,       \ ;  Report Count (1),
+        0x75,   0x08,       \ ;  Report Size (8),
+        0x81,   0x00,       \ ;  Input (Data, Array), 
+        0xc0,               \ ; End Collection
+    \ ; Standby button
+        0x05,   0x01,       \ ; Usage Page (Generic Desktop),
+        0x09,   0x80,       \ ; Usage (System Control),
+        0xa1,   0x01,       \ ; Collection (Application),
+        0x85,   0x03,       \ ;  Report Id (3)
+        0x19,   0x81,       \ ;  Usage Minimum (0x81),
+        0x29,   0x83,       \ ;  Usage Maximum (0x83),
+        0x25,   0x01,       \ ;  Logical Maximum(1),
+        0x75,   0x01,       \ ;  Report Size (1),
+        0x95,   0x03,       \ ;  Report Count (3),
+        0x81,   0x02,       \ ;  Input
+        0x75,   0x01,       \ ;  Report Size (1),   
+        0x95,   0x05,       \ ;  Report Count (5),
+        0x81,   0x01,       \ ;  Input (Constant),
+        0xC0,               \ ; End Collection
+    \ ; Keyboard
+        0x05,   0x01,       \ ; Usage Page (Generic Desktop),
+        0x09,   0x06,       \ ; Usage (Keyboard),
+        0xA1,   0x01,       \ ; Collection (Application),
+        0x85,   0x04,       \ ;  Report Id (4)
+        0x05,   0x07,       \ ;  usage page key codes
+        0x19,   0xe0,       \ ;  usage min left control
+        0x29,   0xe8,       \ ;  usage max keyboard right gui
+        0x75,   0x01,       \ ;  report size 1
+        0x95,   0x08,       \ ;  report count 8
+        0x81,   0x02,       \ ;  input (Variable)
+        0x19,   0x00,       \ ;  usage min 0
+        0x29,   0x90,       \ ;  usage max 91
+        0x26,   0xff, 0x00, \ ;  logical max 0xff
+        0x75,   0x08,       \ ;  report size 8
+        0x95,   0x01,       \ ;  report count 1
+        0x81,   0x00,       \ ;  Input (Data, Array),
+        0xC0                \ ; End Collection
+
+[VHidMini_98me.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,"vhidmini.sys"
+
+[vhidmini_Service_Inst]
+DisplayName    = %VHidMini%
+ServiceType    = %SERVICE_KERNEL_DRIVER% 
+StartType      = %SERVICE_DEMAND_START% 
+ErrorControl   = %SERVICE_ERROR_IGNORE% 
+ServiceBinary  = %12%\vhidmini.sys 
+
+;===============================================================
+;   VHidDevice (Virtual Hid Device) install section
+; - Only a Null service is installed.
+;===============================================================
+[VHidDevice.Inst]
+
+[VHidDevice.Inst.NT]
+
+[VHidDevice.Inst.NT.Services]
+AddService = ,0x00000002,   ; NULL Service
+
+
+;================================================================
+[Strings] 
+;  *******Localizable Strings******* 
+strSMSC	       = "SMSC" 
+VHidMini       = "SMSC Root Enumerated Hid Device" 
+VHidDevice     = "SMSC Hid Device" 
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START     = 0x0 
+SERVICE_SYSTEM_START   = 0x1 
+SERVICE_AUTO_START     = 0x2 
+SERVICE_DEMAND_START   = 0x3 
+SERVICE_DISABLED       = 0x4 
+
+SERVICE_KERNEL_DRIVER  = 0x1 
+SERVICE_ERROR_IGNORE   = 0x0 
+SERVICE_ERROR_NORMAL   = 0x1 
+SERVICE_ERROR_SEVERE   = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ          = 0x00020000 
+REG_DWORD              = 0x00010001 
+REG_MULTI_SZ           = 0x00010000
+REG_BINARY             = 0x00000001
+REG_SZ                 = 0x00000000

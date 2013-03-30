@@ -1,0 +1,137 @@
+;
+; lgSSQVGA.inf
+;
+
+[Version]
+Signature   = "$Windows NT$"
+ClassGuid   = {997B5D8D-C442-4F2E-BAF3-9C8E671E9E21}
+Provider    = %Logi%
+DriverVer=07/01/2009, 3.03.107.0
+CatalogFile = lgLcdSS.cat
+Class       = SideShow
+
+; =================== Manufacturer/Models sections ===================
+
+[Manufacturer]
+%Logi%                           = LgLcdDisplays,NTx86,NTia64,NTamd64
+
+[LgLcdDisplays.NTx86]
+%Device.QVGADeviceDesc%          = QVGADevice_Install,UMB\lgSSQVGA
+%Device.BWDeviceDesc%            = BWDevice_Install,UMB\lgSSBW
+
+[LgLcdDisplays.NTia64]
+%Device.QVGADeviceDesc%          = QVGADevice_Install,UMB\lgSSQVGA
+%Device.BWDeviceDesc%            = BWDevice_Install,UMB\lgSSBW
+
+[LgLcdDisplays.NTamd64]
+%Device.QVGADeviceDesc%          = QVGADevice_Install,UMB\lgSSQVGA
+%Device.BWDeviceDesc%            = BWDevice_Install,UMB\lgSSBW
+
+; ========================= QVGA ======================================
+
+[QVGADevice_Install]
+CopyFiles   = QVGA_UMDriverCopy
+AddProperty = QVGA_DriverPropertiesSection
+
+[QVGADevice_Install.CoInstallers]
+AddReg      = WUDF_CoInstallers_AddReg
+CopyFiles   = QVGA_UMDriverCopy
+
+[QVGADevice_Install.Wdf]
+UmdfService = lgSSQVGA, lgSSQVGA_Install
+UmdfServiceOrder = lgSSQVGA
+UmdfImpersonationLevel = Impersonation
+
+[QVGADevice_Install.Services]
+AddService  = WUDFRd, 0x000001fa, WUDFRD_ServiceInstall
+
+; ========================== BW =======================================
+
+[BWDevice_Install]
+CopyFiles   = BW_UMDriverCopy
+AddProperty = BW_DriverPropertiesSection
+
+[BWDevice_Install.CoInstallers]
+AddReg      = WUDF_CoInstallers_AddReg
+CopyFiles   = BW_UMDriverCopy
+
+[BWDevice_Install.Wdf]
+UmdfService = lgSSBW, lgSSBW_Install
+UmdfServiceOrder = lgSSBW
+UmdfImpersonationLevel = Impersonation
+
+[BWDevice_Install.Services]
+AddService  = WUDFRd, 0x000001fa, WUDFRD_ServiceInstall
+
+
+; =================== Driver Property section ===================
+
+[QVGADriverPropertiesSection]
+DeviceIcon,,,,"%1%\lgSSQVGA.dll,-100"
+
+[BWDriverPropertiesSection]
+DeviceIcon,,,,"%1%\lgSSBW.dll,-100"
+
+; =================== UMDF Service Install section ===================
+
+[WUDF_CoInstallers_AddReg]
+HKR,,CoInstallers32,0x00010000,"WUDFCoInstaller.dll"
+
+[lgSSQVGA_Install]
+UmdfLibraryVersion = 1.0.0
+ServiceBinary = "%12%\umdf\lgSSQVGA.dll"
+DriverCLSID = {fa6691b8-86ec-454a-b93c-cf810c205e93}
+
+[lgSSBW_Install]
+UmdfLibraryVersion = 1.0.0
+ServiceBinary = "%12%\umdf\lgSSBW.dll"
+DriverCLSID = {8af36387-a509-4a03-9e69-96e8e4ef823f}
+
+[QVGA_UMDriverCopy]
+lgSSQVGA.dll
+
+[BW_UMDriverCopy]
+lgSSBW.dll
+
+[DestinationDirs]
+QVGA_UMDriverCopy=12,UMDF    ; copy to drivers\umdf
+BW_UMDriverCopy=12,UMDF    ; copy to drivers\umdf
+
+
+[SourceDisksFiles]
+lgSSQVGA.dll=1
+lgSSBW.dll=1
+
+[SourceDisksNames]
+1 = %MediaDescription%
+
+; =================== WUDFRd ===================
+
+[WUDFRD_ServiceInstall]
+ServiceType     = %SERVICE_KERNEL_DRIVER%
+StartType       = %SERVICE_DEMAND_START%
+ErrorControl    = %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\WUDFRd.sys
+
+;
+; =================== Strings ===================
+;
+
+[Strings]
+Logi                            = "Logitech"
+MediaDescription                = "Logitech LCD Manager Disk"
+Device.QVGADeviceDesc           = "Windows SideShow Driver for Logitech QVGA devices"
+Device.BWDeviceDesc             = "Windows SideShow Driver for Logitech monochrome devices"
+
+REG_DWORD                       = 0x00010001
+SERVICE_BOOT_START              = 0x0
+SERVICE_SYSTEM_START            = 0x1
+SERVICE_AUTO_START              = 0x2
+SERVICE_DEMAND_START            = 0x3
+SERVICE_DISABLED                = 0x4
+SERVICE_KERNEL_DRIVER           = 0x1
+SERVICE_ERROR_IGNORE            = 0x0
+SERVICE_ERROR_NORMAL            = 0x1
+SERVICE_ERROR_SEVERE            = 0x2
+SERVICE_ERROR_CRITICAL          = 0x3
+

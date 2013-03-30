@@ -1,0 +1,106 @@
+; Installation inf for the OLED USB Keyboard
+;
+; (c) Copyright 2008 Foxconn Technology Group
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=System
+ClassGUID={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%FOXCONN%
+DriverVer=11/06/2008,1.0.7.0
+CatalogFile=dkmgrd.cat
+
+[Manufacturer]
+%MfgName%=FOXCONN, NTx86, NTamd64
+
+[FOXCONN]
+%Foxconn.USBDeviceDesc%=OLEDKBD.Install,*IO\OLEDKBD
+
+[FOXCONN.NTx86]
+%Foxconn.USBDeviceDesc%=OLEDKBD.Install.NTx86,*IO\OLEDKBD
+
+[FOXCONN.NTamd64]
+%Foxconn.USBDeviceDesc64%=OLEDKBD.Install.NTamd64,*IO\OLEDKBD
+
+[DestinationDirs]
+OLEDKBD.Files.Driver.NTx86 = 10,System32\Drivers
+OLEDKBD.Files.Driver.NTamd64 = 10,System32\Drivers
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+dkmgrd32.sys = 1
+dkmgrd64.sys = 1
+
+[OLEDKBD.Install.NTx86]
+CopyFiles=OLEDKBD.Files.Driver.NTx86
+
+[OLEDKBD.Install.NTamd64]
+CopyFiles=OLEDKBD.Files.Driver.NTamd64
+
+[OLEDKBD.Files.Driver.NTx86]
+dkmgrd.sys,dkmgrd32.sys,,%COPYFLG_NOSKIP%
+
+[OLEDKBD.Files.Driver.NTamd64]
+dkmgrd.sys,dkmgrd64.sys,,%COPYFLG_NOSKIP%
+
+[OLEDKBD.Install.NTx86.Services]
+Addservice = dkmgrd, 0x00000002, OLEDKBD.AddService
+
+[OLEDKBD.Install.NTamd64.Services]
+Addservice = dkmgrd, 0x00000002, OLEDKBD.AddService.64
+
+[OLEDKBD.AddService]
+DisplayName    = %OLEDKBD.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\dkmgrd.sys
+AddReg         = OLEDKBD.AddReg
+LoadOrderGroup = Base
+
+[OLEDKBD.AddService.64]
+DisplayName    = %OLEDKBD.SvcDesc64%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\dkmgrd.sys
+AddReg         = OLEDKBD.AddReg64
+LoadOrderGroup = Base
+
+[OLEDKBD.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,dkmgrd.sys
+;HKR,"Parameters","MaximumTransferSize",0x10001,4096
+;HKR,"Parameters","DebugLevel",0x10001,2
+;HKR,"Parameters","OLEDEnable",0x10001,1
+
+[OLEDKBD.AddReg64]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,dkmgrd.sys
+;HKR,"Parameters","MaximumTransferSize",0x10001,4096
+;HKR,"Parameters","DebugLevel",0x10001,2
+;HKR,"Parameters","OLEDEnable",0x10001,1
+
+;注意格式：HKEY(根键缩写),Subkey(子键),Valuename(键值名),Type(键值类型),Value(键值)
+;HKCU -> HKEY_CURRENT_USER
+;HKCR -> HKEY_CLASSES_ROOT
+;HKLM -> HKEY_LOCAL_MACHINE
+;HKU -> HKEY_USERS
+;HKCC -> HKEY_CURRENT_CONFIG
+;HKDD -> HKEY_DYN_DATA
+
+;---------------------------------------------------------------;
+
+[Strings]
+REG_SZ = 0x00000000
+FOXCONN="Foxconn Technology Group"
+MfgName="Foxconn Technology Group"
+Disk_Description="OLED Installation Disk"
+Foxconn.USBDeviceDesc="OLED keyboard filter driver"
+OLEDKBD.SvcDesc="OLED keyboard filter driver"
+Foxconn.USBDeviceDesc64="OLED keyboard filter driver"
+OLEDKBD.SvcDesc64="OLED keyboard filter driver"
+COPYFLG_NOSKIP=2	; Do not allow user to skip file

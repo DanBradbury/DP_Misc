@@ -1,0 +1,137 @@
+;
+; accelern.inf
+;
+; Installation inf for the Accelerometer sensor driver.
+;
+; Copyright (c) 2010 ST Microelectronics
+;
+
+[Version]
+CatalogFile=accelern.cat
+Signature="$Windows NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%STM%
+DriverVer=07/21/2010,1.00.00.09
+
+
+[DestinationDirs]
+DefaultDestDir = 12
+CoInstaller_CopyFiles = 11
+StdFltn_CopyFiles = 16422,STMicroelectronics\AccelerometerP11\stdcfltn
+
+; ================= Device Install section =====================
+
+[Manufacturer]
+%STM%=MSFT,NTx86, NTia64, NTamd64
+
+[DefaultInstall]
+CopyFiles=Acceler.CopyFiles
+
+; For Win2K
+[MSFT]
+%Acceler.DRVDESC%=Acceler_Inst.NTx86,root\Acceler,*SMO8800
+
+; For XP and later
+[MSFT.NTx86]
+%Acceler.DRVDESC%=Acceler_Inst.NTx86,root\Acceler,*SMO8800
+
+[MSFT.NTia64]
+%Acceler.DRVDESC%=Acceler_Inst,root\Acceler,*SMO8800
+
+[MSFT.NTamd64]
+%Acceler.DRVDESC%=Acceler_Inst.NTamd64,root\Acceler,*SMO8800
+
+[Acceler_Inst.NT]
+CopyFiles=Acceler.CopyFiles
+
+[Acceler_Inst.NTx86]
+CopyFiles=Acceler.CopyFiles
+
+[Acceler_Inst.NTamd64]
+CopyFiles=Acceler.CopyFiles
+
+[Acceler.CopyFiles]
+Accelern.sys
+
+[DefaultInstall.Services]
+AddService=Acceler,0x00000002,Acceler_Service
+
+[Acceler_Inst.NT.Services]
+AddService=Acceler,0x00000002,Acceler_Service
+
+[Acceler_Inst.NTx86.Services]
+AddService=Acceler,0x00000002,Acceler_Service
+
+[Acceler_Inst.NTamd64.Services]
+AddService=Acceler,0x00000002,Acceler_Service
+
+;Uncomment following lines if your device can only work with factory default settings
+;[Acceler.NT.FactDef]
+;ConfigPriority=HARDRECONFIG
+;IOConfig=300-303(3ff::)  ; 10 bit decode ranging from 300 - 303
+
+;-------------- Coinstaller installation
+[Acceler_Inst.NTx86.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+CopyFiles=StdFltn_CopyFiles
+
+[Acceler_Inst.NTamd64.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+CopyFiles=StdFltn_CopyFiles
+
+[CoInstaller_CopyFiles]
+accelernco01.dll
+difxapi.dll,difxapi.dll,,0x00000010
+
+[StdFltn_CopyFiles]
+stdcfltn.cab
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000,"accelernco01.dll,AccelernCoInstaller"
+
+[CoInstallerInfo]
+; info for the co-installer
+; used to find the original media location
+OriginalInfSourcePath = %1%
+
+[Acceler_Service]
+DisplayName    = %Acceler.SVCDESC%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Accelern.sys
+AddReg = Acceler_Reg
+
+[Acceler_Reg]
+HKLM,"System\CurrentControlSet\Services\Acceler",InterruptEnable,0x00010001 ,0
+HKLM,"System\CurrentControlSet\Services\Acceler",FixedIRQ,0x00010001 ,23
+
+[SourceDisksFiles]
+Accelern.sys=1
+accelernco01.dll=1
+difxapi.dll=1
+stdcfltn.cab=1
+
+[SourceDisksNames.x86]
+1 = %DISK_NAME%,
+
+;[SourceDisksNames.NTx86]
+;1 = %DISK_NAME%,
+
+[SourceDisksNames.ia64]
+1 = %DISK_NAME%,,,\ia64
+
+[SourceDisksNames.amd64]
+1 = %DISK_NAME%,
+
+[Strings]
+STM= "ST Microelectronics"
+MfgName = "ST Microelectronics"
+ClassName = "Accelerometer"
+Acceler.SVCDESC = "Accelerometer Service"
+Acceler.DRVDESC = "ST Micro Accelerometer"
+DISK_NAME = "Accelerometer Install Disk"
+

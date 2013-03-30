@@ -1,0 +1,577 @@
+; dc3du.inf
+;
+; Device Center Device Detection filter Driver INF
+;
+; Copyright (c) Microsoft Corporation. All rights reserved.
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%Microsoft%
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+Class=USB
+CatalogFile=dc3du.cat
+DriverVer=01/09/2013,9.3.166.0
+
+
+[DestinationDirs]
+DefaultDestDir   = 12
+dc3d_CoInstaller_CopyFiles = 11
+
+[Manufacturer]
+%Microsoft%   = MS.Mfg,NTAMD64.6.1
+
+
+[MS.Mfg.NTAMD64.6.1]
+%DeviceDesc% = dc3d, USB\VID_045E&PID_005F
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0061
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0063
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0065
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0070
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0071
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0072
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0073
+%DeviceDesc% = dc3d, USB\VID_045E&PID_008A
+%DeviceDesc% = dc3d, USB\VID_045E&PID_008B
+%DeviceDesc% = dc3d, USB\VID_045E&PID_009D
+%DeviceDesc% = dc3d, USB\VID_045E&PID_009E
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00E3
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00E4
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00F1
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00F2
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00F9
+%DeviceDesc% = dc3d, USB\VID_045E&PID_00FA
+%DeviceDesc% = dc3d, USB\VID_045E&PID_071D
+%DeviceDesc% = dc3d, USB\VID_045E&PID_071E
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0745
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0746
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0748
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0773
+%DeviceDesc% = dc3d, USB\VID_045E&PID_0774
+%DeviceDesc% = dc3d, USB\VID_045E&PID_07B1
+%DeviceDesc% = dc3d, USB\VID_045E&PID_07B2
+%DeviceDesc% = dc3d, USB\VID_045E&PID_07B3
+
+[dc3d.NT]
+Include=usb.inf
+Needs=Composite.Dev.NT
+
+CopyFiles=dc3d.CopyFiles
+
+
+[dc3d.CopyFiles]
+dc3d.sys
+
+
+[dc3d.NT.Services]
+AddService = usbccgp, 0x00000002, CommonClassParent.AddService
+AddService = dc3d,, dc3d_Service_Inst
+
+[CommonClassParent.AddService]
+DisplayName    = %GenericParent.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\usbccgp.sys
+LoadOrderGroup = Base
+
+[dc3d_Service_Inst]
+DisplayName    = %dc3d.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ServiceBinary  = %12%\dc3d.sys
+AddReg         = dc3d_Service_AddReg
+
+
+[dc3d.NT.HW]
+AddReg = dc3d.HW.AddReg
+
+
+[dc3d.HW.AddReg]
+HKR,,"UpperFilters",0x00010000,"dc3d"
+
+; DeviceOverrides
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_005F&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0061&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0063&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0065&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0070&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0071&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0072&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0073&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_008A&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_008A&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_008B&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_008B&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_008C&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_009D&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_009D&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_009E&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_009E&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_009F&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00B9&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E1&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E3&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E3&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E4&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E4&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00E5&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F1&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F1&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F2&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F2&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F9&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00F9&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00FA&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_00FA&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_071D&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_071D&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_071E&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_071E&MI_01&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_071F&Col02\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0745&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0745&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0746&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0746&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0748&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0748&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0773&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0773&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0774&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_0774&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B1&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B1&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B2&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B2&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B3&MI_00\LocationPaths\*,"Removable",0x00010001,1
+HKLM,SYSTEM\CurrentControlSet\Control\DeviceOverrides\HID#VID_045E&PID_07B3&MI_01&Col01\LocationPaths\*,"Removable",0x00010001,1
+
+; Static device overrides
+
+
+[dc3d_Service_AddReg]
+
+; Receivers info
+HKR,Parameters\Receivers\PID_005F,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0061,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0063,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0065,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0070,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0071,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0072,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0073,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_008A,"FirmwareType",0x00010001,1
+HKR,Parameters\Receivers\PID_008B,"FirmwareType",0x00010001,1
+HKR,Parameters\Receivers\PID_008C,"FirmwareType",0x00010001,2
+HKR,Parameters\Receivers\PID_009D,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_009E,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_009F,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00B9,"FirmwareType",0x00010001,2
+HKR,Parameters\Receivers\PID_00E1,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00E3,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00E4,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00E5,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00F1,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00F2,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00F9,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_00FA,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_071D,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_071E,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_071F,"FirmwareType",0x00010001,3
+HKR,Parameters\Receivers\PID_0745,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_0746,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_0748,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_0773,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_0774,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_07B1,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_07B2,"FirmwareType",0x00010001,4
+HKR,Parameters\Receivers\PID_07B3,"FirmwareType",0x00010001,4
+
+; Model ID
+HKR,Parameters\ModelIdsMap\0002,"ModelId",0x00000000,"{ADA7BD42-FDBB-4299-9491-632C79B4C329}"		; Wireless Optical Mouse 5000
+HKR,Parameters\ModelIdsMap\0003,"ModelId",0x00000000,"{C70CB84C-5044-432b-8B64-4390E8BEEDB5}"		; Wireless Optical Mouse 2.0
+HKR,Parameters\ModelIdsMap\0006,"ModelId",0x00000000,"{9997920D-41D3-4090-88BF-1ADAA389A4B7}"		; Wireless Natural MultiMedia Keyboard
+HKR,Parameters\ModelIdsMap\0007,"ModelId",0x00000000,"{69555D9B-0609-4c53-93FD-7F564A82821B}"		; Wireless Natural MultiMedia Keyboard 109
+HKR,Parameters\ModelIdsMap\000E,"ModelId",0x00000000,"{9D4EDA0E-2EB0-4472-8CA1-9AD2B1F18790}"		; Wireless Keyboard 3000
+HKR,Parameters\ModelIdsMap\000F,"ModelId",0x00000000,"{B294C9B3-DE11-4BF3-9903-E71AC37402F3}"		; Wireless Keyboard 3000 109
+HKR,Parameters\ModelIdsMap\0013,"ModelId",0x00000000,"{8540870A-777F-4d8f-AC6F-DC637E1D37B2}"		; Wireless Optical Mouse 2000
+HKR,Parameters\ModelIdsMap\0015,"ModelId",0x00000000,"{02F769F2-5641-4a83-AC05-354EBFA46A42}"		; Wireless Mobile Mouse 3000
+HKR,Parameters\ModelIdsMap\0030,"ModelId",0x00000000,"{9B2B5435-0C88-45cc-9ABB-4E08E47F00C4}"		; Wireless Notebook Optical Mouse 4000
+HKR,Parameters\ModelIdsMap\0033,"ModelId",0x00000000,"{A93B575D-804C-4843-861B-9500C0FE45EB}"		; Wireless Laser Mouse 5000
+HKR,Parameters\ModelIdsMap\0034,"ModelId",0x00000000,"{8F4D9E71-D28B-4fae-ADE8-9CEEE232BF1F}"		; Natural Wireless Laser Mouse 6000
+HKR,Parameters\ModelIdsMap\0035,"ModelId",0x00000000,"{AE6267D1-3E55-4d7b-A2CB-4EFC511FB975}"		; Wireless Laser Mouse 7000
+HKR,Parameters\ModelIdsMap\0036,"ModelId",0x00000000,"{26176CB7-6EE5-4406-8D2E-0F6E92F94923}"		; Wireless Laser Keyboard 6000 v2.0
+HKR,Parameters\ModelIdsMap\0037,"ModelId",0x00000000,"{A1FCA801-53A6-41C2-B9E0-F52645AF6D18}"		; Wireless Laser Keyboard 6000 v2.0 109
+HKR,Parameters\ModelIdsMap\0038,"ModelId",0x00000000,"{05649B79-3309-4c95-B1E5-10F76B8B893F}"		; Natural Wireless Ergonomic Keyboard 7000
+HKR,Parameters\ModelIdsMap\0039,"ModelId",0x00000000,"{419FDB20-FC66-4AD3-8366-8F7D53852CE0}"		; Natural Wireless Ergonomic Keyboard 7000 109
+HKR,Parameters\ModelIdsMap\003A,"ModelId",0x00000000,"{C09894A0-5140-4961-8FDE-D611529D8715}"		; Natural Wireless Laser Mouse 7000
+HKR,Parameters\ModelIdsMap\003E,"ModelId",0x00000000,"{763216D8-9175-41fa-A042-66588B5B9E0E}"		; Wireless Laser Keyboard 7000
+HKR,Parameters\ModelIdsMap\003F,"ModelId",0x00000000,"{07C77324-9A07-4E25-B263-35F0ED742C38}"		; Wireless Laser Keyboard 7000 109
+HKR,Parameters\ModelIdsMap\0042,"ModelId",0x00000000,"{99C08AFA-4D4B-4d34-A3E0-4527A549443C}"		; Wireless Optical Desktop for MAC
+HKR,Parameters\ModelIdsMap\0043,"ModelId",0x00000000,"{1752E6A5-4B68-4915-9A03-A5DFF97C8972}"		; Wireless Optical Desktop for MAC 109
+HKR,Parameters\ModelIdsMap\0060,"ModelId",0x00000000,"{D830E531-BF70-4e21-8182-904F95EAE3CD}"		; Wireless Laser Mouse 6000 v2.0
+HKR,Parameters\ModelIdsMap\0062,"ModelId",0x00000000,"{FB7D9F2B-E74A-48e0-8345-EFBBEDE21DE1}"		; Wireless Keyboard 1000
+HKR,Parameters\ModelIdsMap\0063,"ModelId",0x00000000,"{FF7A0268-038B-44B4-A302-4D512D0FFD3D}"		; Wireless Keyboard 1000 109
+HKR,Parameters\ModelIdsMap\0064,"ModelId",0x00000000,"{8B46EA7F-1015-42c6-A5D2-81691A8587A8}"		; Wireless Keyboard 6000 v3.0
+HKR,Parameters\ModelIdsMap\0065,"ModelId",0x00000000,"{F6555E62-06D9-412A-9A75-FC05346C2350}"		; Wireless Keyboard 6000 v3.0 109
+HKR,Parameters\ModelIdsMap\0100,"ModelId",0x00000000,"{56F7D9FE-240B-4127-8EDB-5A238037A20F}"		; Explorer Mouse
+HKR,Parameters\ModelIdsMap\0101,"ModelId",0x00000000,"{54DA5348-6E83-46ea-9837-958038330B45}"		; Explorer Mini Mouse
+HKR,Parameters\ModelIdsMap\0103,"ModelId",0x00000000,"{25F20A83-4435-4704-996A-C5D0A3FFE49E}"		; Wireless Mouse 5000
+HKR,Parameters\ModelIdsMap\0104,"ModelId",0x00000000,"{95E86891-B29E-4ada-82BD-40B377A9E528}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\1,"ModelId",0x00000000,"{C7CF08D9-A523-4988-88D8-5795409F1013}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\2,"ModelId",0x00000000,"{F13BE82E-7ABE-4064-A94D-231CFDD39216}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\3,"ModelId",0x00000000,"{B0C479F6-1C41-4545-9A2C-0ACACFF926F6}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\4,"ModelId",0x00000000,"{F9ED685F-C442-451E-BCAF-A36DB0DA7006}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\5,"ModelId",0x00000000,"{E8425535-E2E1-4D8D-B4E4-D1148012570A}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0104\Color\6,"ModelId",0x00000000,"{74BF1266-DD14-414C-802A-F9852C96F8FA}"		; Wireless Mobile Mouse 6000
+HKR,Parameters\ModelIdsMap\0105,"ModelId",0x00000000,"{01371402-6065-466d-8A1E-E51997C573AE}"		; Wireless Keyboard 3000 v2.0 109
+HKR,Parameters\ModelIdsMap\0106,"ModelId",0x00000000,"{2A632B83-F92D-4596-B80A-F17BA46C81BC}"		; Wireless Keyboard 3000 v2.0
+HKR,Parameters\ModelIdsMap\0107,"ModelId",0x00000000,"{2BAB5E18-23E0-4a8d-B69E-CA8E422A04FC}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\1,"ModelId",0x00000000,"{EACA1AB6-70FA-4fd8-B130-8C2505509AD5}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\10,"ModelId",0x00000000,"{119F3334-BF7E-4651-A292-8BF3B1448B7C}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\11,"ModelId",0x00000000,"{7BA116D9-509B-45E0-A1BA-9E6E73CE2F97}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\12,"ModelId",0x00000000,"{C9B201AB-877C-475B-9CC5-A131B116B6DA}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\13,"ModelId",0x00000000,"{25463811-E961-4C0F-8988-020E8AF409A1}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\14,"ModelId",0x00000000,"{8FB4A1C5-EE69-4E72-ACB9-6E8FD69E2B84}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\15,"ModelId",0x00000000,"{274C782E-1098-4CE0-AA9A-856AAFAF1BA0}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\2,"ModelId",0x00000000,"{D92EE4D9-A7DC-4724-9EC6-B939867940EA}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\3,"ModelId",0x00000000,"{78CFA793-393A-4642-9375-9ADB36772EFF}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\4,"ModelId",0x00000000,"{FC75A324-3698-46f1-A615-EEEF040E4E2C}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\5,"ModelId",0x00000000,"{99AB1154-5565-4669-B538-22E2B6276D49}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\6,"ModelId",0x00000000,"{36562CE3-1E75-46A1-B66E-399A7A2CC54A}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\7,"ModelId",0x00000000,"{2066B960-A92C-4505-92F1-C0F6520E03B5}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\8,"ModelId",0x00000000,"{5FE5F1DB-D6C2-44F8-BF89-19D76E48206E}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0107\Color\9,"ModelId",0x00000000,"{AD85CA03-E956-4C1A-9163-F662DAB8FF4A}"		; Wireless Mobile Mouse 4000
+HKR,Parameters\ModelIdsMap\0108,"ModelId",0x00000000,"{1841AA73-00B4-4375-A9FD-4B4CFC6F468C}"		; Wireless Comfort Keyboard 5000 109
+HKR,Parameters\ModelIdsMap\0109,"ModelId",0x00000000,"{C1A6C3C3-EE83-43e3-AA11-17BFBE31D88B}"		; Wireless Comfort Keyboard 5000
+HKR,Parameters\ModelIdsMap\010B,"ModelId",0x00000000,"{567EA66B-DF17-43EC-B6CF-6D7E7F1846B6}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010B\Color\1,"ModelId",0x00000000,"{59083DD5-8ECC-4701-83FF-A0C2F2E61198}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010B\Color\2,"ModelId",0x00000000,"{64A267C2-088C-4325-B9B2-5F6A6ECB5CCC}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010B\Color\3,"ModelId",0x00000000,"{D6D250D0-232A-42BA-ADF2-A65A0BE5D9B1}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010B\Color\4,"ModelId",0x00000000,"{6F760C54-F0EA-4D41-9871-98931C5691EA}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010B\Color\5,"ModelId",0x00000000,"{6F908669-4062-4D18-9E29-8FEDE40E49B3}"		; Wireless Arc Keyboard
+HKR,Parameters\ModelIdsMap\010C,"ModelId",0x00000000,"{A5185720-E799-40c3-B19E-917015F86625}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010C\Color\1,"ModelId",0x00000000,"{F7E325AC-B736-4D36-85BE-DCFB44A786E4}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010C\Color\2,"ModelId",0x00000000,"{77920FF4-4A5E-4F04-B9D5-86C4D4498066}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010C\Color\3,"ModelId",0x00000000,"{87E715F9-2FED-4574-8022-41257BA1081C}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010C\Color\4,"ModelId",0x00000000,"{6F97B9B4-C4BC-4F16-835A-41795E0C4DEE}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010C\Color\5,"ModelId",0x00000000,"{B0A6778D-E559-4326-B8DF-C58C493D5CCC}"		; Wireless Arc Keyboard 109
+HKR,Parameters\ModelIdsMap\010D,"ModelId",0x00000000,"{6762B1BC-5B31-4919-866C-4B6C9561E745}"		; Wireless Mouse 2000
+HKR,Parameters\ModelIdsMap\010D\Color\1,"ModelId",0x00000000,"{7986AE87-3899-4bf0-9F32-38FE0BC69FE1}"		; Wireless Mouse 2000
+HKR,Parameters\ModelIdsMap\010E,"ModelId",0x00000000,"{0A5F6C5A-0AF3-4EE9-AFAD-37B6C0418DC2}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\1,"ModelId",0x00000000,"{0BF57D83-C739-45c4-A9E0-C80AED20953C}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\10,"ModelId",0x00000000,"{F7B0FBEB-D971-46DD-979B-E52A03C67B7B}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\11,"ModelId",0x00000000,"{B52BCDD7-DB6D-4B53-8CEB-2007EA13839B}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\12,"ModelId",0x00000000,"{A5275807-DDFC-41DC-90A6-5FF7ADF08746}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\13,"ModelId",0x00000000,"{E64ED73C-FFF3-45AC-BDFF-A2FB95901109}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\14,"ModelId",0x00000000,"{71A1D19A-9AD8-4110-8E99-967E5601C6CF}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\15,"ModelId",0x00000000,"{478B750C-DDAE-4CCD-8248-3C9AAEDBE94E}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\16,"ModelId",0x00000000,"{B0D72D21-A908-44F1-B8C5-B169DDF9AFD3}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\17,"ModelId",0x00000000,"{12D3868B-D3DE-4C64-B842-5C0DEC0C39EE}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\18,"ModelId",0x00000000,"{A6D70B55-9313-4788-9222-B54195EAFDEA}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\19,"ModelId",0x00000000,"{47B7618B-84F6-44A4-8614-8FEE426E69BE}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\2,"ModelId",0x00000000,"{6D057538-3F6E-4c14-8F09-00C02B532354}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\20,"ModelId",0x00000000,"{CBC42BEA-913E-410F-9BE5-6042839D9532}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\21,"ModelId",0x00000000,"{B43A12E1-0488-4317-AF15-8B641AD6C72B}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\22,"ModelId",0x00000000,"{20E93108-DD54-4199-A769-8633067ADA23}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\23,"ModelId",0x00000000,"{366FFECC-AC8D-4270-BD1D-573D61819E94}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\24,"ModelId",0x00000000,"{3DAE4127-8299-4D38-8148-94D2ADC03FE1}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\25,"ModelId",0x00000000,"{4CC5FC6F-E34B-443A-8555-8571E6E81A37}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\26,"ModelId",0x00000000,"{F2F06A33-6C61-4299-85FF-DFDB048B3178}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\27,"ModelId",0x00000000,"{EF9B0A9F-A5D7-4F7E-841E-AA8F443A06ED}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\28,"ModelId",0x00000000,"{23C5E41D-B5CA-403B-BD23-C86466B4F3A5}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\29,"ModelId",0x00000000,"{41390ABD-D415-4DB1-BA94-205044E6171C}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\3,"ModelId",0x00000000,"{C0228AE7-A8A7-482a-8D82-79A0A54841E4}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\30,"ModelId",0x00000000,"{E49112CC-931C-40EA-8B52-F9B5F676F100}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\31,"ModelId",0x00000000,"{9A05CD94-3481-4476-B222-539E340B2340}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\32,"ModelId",0x00000000,"{012A08E0-D3E3-46A4-99CB-6572409EE1FA}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\33,"ModelId",0x00000000,"{C67C985E-F22B-4EDF-9632-4878FD16E30A}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\34,"ModelId",0x00000000,"{AC1BEB02-1A71-48E4-9463-022782047CCE}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\35,"ModelId",0x00000000,"{9B4D5831-8871-4B96-A11A-44BE1686064F}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\36,"ModelId",0x00000000,"{F178EA71-2F5D-4575-9760-04B0F9957739}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\37,"ModelId",0x00000000,"{45525F11-2CE6-4889-B9FC-6657DCD30D51}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\38,"ModelId",0x00000000,"{01919C16-AC76-4F96-9978-8746CAF9585E}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\39,"ModelId",0x00000000,"{FC6F04F2-8A84-43C2-AE13-E71017C870D9}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\4,"ModelId",0x00000000,"{EA995F5D-5F3B-488f-96AB-4876CA5B35A7}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\40,"ModelId",0x00000000,"{448EF78D-08BD-4C64-B689-E04FB7D567DA}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\41,"ModelId",0x00000000,"{C2428411-13BD-4614-96ED-F6ED0EDFDB5C}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\42,"ModelId",0x00000000,"{DF5CA4B0-DA28-4A1B-961A-EF9242A0C6E7}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\43,"ModelId",0x00000000,"{60C2A2E5-FC08-4CA4-91CD-50FCECF2019E}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\44,"ModelId",0x00000000,"{42851356-B809-4684-AACE-83C897C1AFB3}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\45,"ModelId",0x00000000,"{E5B62583-0754-41D1-928E-1614DDBF11AB}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\46,"ModelId",0x00000000,"{65980FC6-2CA2-4353-9E70-74AB64F751AE}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\47,"ModelId",0x00000000,"{3A80B080-1FC6-4B9A-8D01-817404E239D6}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\48,"ModelId",0x00000000,"{081E503E-8ED6-4D2A-A004-2762BE9E7A18}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\49,"ModelId",0x00000000,"{50558C0B-E3A5-4AE5-83C4-A670DF5D9464}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\5,"ModelId",0x00000000,"{2B189F4E-6F97-44DD-B0FB-8CCBB5CFD5EF}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\50,"ModelId",0x00000000,"{E4266DC8-94B6-4717-921C-6992650C7DCF}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\51,"ModelId",0x00000000,"{F4510DA1-9F91-45F5-BC6F-FC7062E2BF80}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\52,"ModelId",0x00000000,"{7625B27B-C879-42F4-A9EC-4368BB18BCA9}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\53,"ModelId",0x00000000,"{7BFD060D-7C63-47DB-9C10-0B6869705F98}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\54,"ModelId",0x00000000,"{1ADAB66D-2055-426E-9C74-87B66FEC333D}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\55,"ModelId",0x00000000,"{23078B7E-6D0B-4B2A-97A5-DFF7E506EBEA}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\56,"ModelId",0x00000000,"{A635B616-C2DF-4AA9-85F3-341FAD0AFAC4}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\57,"ModelId",0x00000000,"{5ED2BDE4-1D4F-49DC-A707-D84A46995139}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\58,"ModelId",0x00000000,"{8BC5EC65-5151-4BD4-9531-8A8E2A676887}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\59,"ModelId",0x00000000,"{65A9B922-CADA-493D-BBB8-CDF4EA740D29}"  	; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\6,"ModelId",0x00000000,"{0E580DE0-87AC-4CA7-A756-D5AB1577CB05}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\7,"ModelId",0x00000000,"{A5206326-9538-461B-A610-24B8FDEAD51F}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\8,"ModelId",0x00000000,"{4F122BCF-7849-4833-9962-36F57E4FCBA4}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010E\Color\9,"ModelId",0x00000000,"{7F1612CF-27E1-4D7F-A72F-08255EFEA8C3}"		; Wireless Mobile Mouse 3500
+HKR,Parameters\ModelIdsMap\010F,"ModelId",0x00000000,"{2F9483EB-3EEB-4722-BB10-B7A5F6CEA424}"		; Wireless Mobile Mouse 1000
+HKR,Parameters\ModelIdsMap\010F\Color\1,"ModelId",0x00000000,"{340C8900-C902-46E6-B69A-3C3D61AC905E}"		; Wireless Mobile Mouse 1000
+HKR,Parameters\ModelIdsMap\0110,"ModelId",0x00000000,"{96239EA9-0A1D-42D1-A378-FECDDA0141F2}"		; Wireless Mobile Mouse 3000 v2.0
+HKR,Parameters\ModelIdsMap\0110\Color\1,"ModelId",0x00000000,"{605E9EAF-D3C4-4FB6-AF49-384B57FFF2F7}"		; Wireless Mobile Mouse 3000 v2.0
+HKR,Parameters\ModelIdsMap\0114,"ModelId",0x00000000,"{E1D00E52-5A56-4951-9E37-AFBD4FAF624B}"		; Touch Mouse
+HKR,Parameters\ModelIdsMap\0114\Color\1,"ModelId",0x00000000,"{4499A711-6E3F-4953-A078-0129CD00514B}"		; Touch Mouse
+HKR,Parameters\ModelIdsMap\0114\Color\2,"ModelId",0x00000000,"{F699C867-1395-4836-A2FF-755450451E3C}"		; Touch Mouse
+HKR,Parameters\ModelIdsMap\0114\Color\3,"ModelId",0x00000000,"{A53E06AA-5905-46D5-B220-FEE5A85E6048}"		; Touch Mouse
+HKR,Parameters\ModelIdsMap\0115,"ModelId",0x00000000,"{1E76BC50-0155-492F-A90E-5F464C9F188D}"		; Wireless Keyboard 2000 v2.0 109
+HKR,Parameters\ModelIdsMap\0115\Color\1,"ModelId",0x00000000,"{684E65DD-0394-4CDA-B8D7-992714B9981A}"		; Wireless Keyboard 2000 v2.0 109
+HKR,Parameters\ModelIdsMap\0116,"ModelId",0x00000000,"{F6B802AF-1D92-47C3-A851-91578155B5CE}"		; Wireless Keyboard 2000 v2.0
+HKR,Parameters\ModelIdsMap\0116\Color\1,"ModelId",0x00000000,"{032094E1-71C2-40A8-9F2A-9ECC59451411}"		; Wireless Keyboard 2000 v2.0
+HKR,Parameters\ModelIdsMap\0117,"ModelId",0x00000000,"{D064DFE7-2513-4D37-BDDF-44543A762F62}"		; Sculpt Mobile Mouse
+HKR,Parameters\ModelIdsMap\0118,"ModelId",0x00000000,"{2BAB5E18-23E0-4a8d-B69E-CA8E422A04FC}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\1,"ModelId",0x00000000,"{EACA1AB6-70FA-4fd8-B130-8C2505509AD5}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\10,"ModelId",0x00000000,"{119F3334-BF7E-4651-A292-8BF3B1448B7C}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\11,"ModelId",0x00000000,"{7BA116D9-509B-45E0-A1BA-9E6E73CE2F97}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\12,"ModelId",0x00000000,"{C9B201AB-877C-475B-9CC5-A131B116B6DA}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\13,"ModelId",0x00000000,"{25463811-E961-4C0F-8988-020E8AF409A1}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\14,"ModelId",0x00000000,"{8FB4A1C5-EE69-4E72-ACB9-6E8FD69E2B84}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\15,"ModelId",0x00000000,"{274C782E-1098-4CE0-AA9A-856AAFAF1BA0}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\2,"ModelId",0x00000000,"{D92EE4D9-A7DC-4724-9EC6-B939867940EA}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\3,"ModelId",0x00000000,"{78CFA793-393A-4642-9375-9ADB36772EFF}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\4,"ModelId",0x00000000,"{FC75A324-3698-46f1-A615-EEEF040E4E2C}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\5,"ModelId",0x00000000,"{99AB1154-5565-4669-B538-22E2B6276D49}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\6,"ModelId",0x00000000,"{36562CE3-1E75-46A1-B66E-399A7A2CC54A}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\7,"ModelId",0x00000000,"{2066B960-A92C-4505-92F1-C0F6520E03B5}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\8,"ModelId",0x00000000,"{5FE5F1DB-D6C2-44F8-BF89-19D76E48206E}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0118\Color\9,"ModelId",0x00000000,"{AD85CA03-E956-4C1A-9163-F662DAB8FF4A}"		; Wireless Mobile Mouse 4000(revised)
+HKR,Parameters\ModelIdsMap\0119,"ModelId",0x00000000,"{0A5F6C5A-0AF3-4EE9-AFAD-37B6C0418DC2}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\1,"ModelId",0x00000000,"{0BF57D83-C739-45c4-A9E0-C80AED20953C}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\10,"ModelId",0x00000000,"{F7B0FBEB-D971-46DD-979B-E52A03C67B7B}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\11,"ModelId",0x00000000,"{B52BCDD7-DB6D-4B53-8CEB-2007EA13839B}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\12,"ModelId",0x00000000,"{A5275807-DDFC-41DC-90A6-5FF7ADF08746}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\13,"ModelId",0x00000000,"{E64ED73C-FFF3-45AC-BDFF-A2FB95901109}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\14,"ModelId",0x00000000,"{71A1D19A-9AD8-4110-8E99-967E5601C6CF}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\15,"ModelId",0x00000000,"{478B750C-DDAE-4CCD-8248-3C9AAEDBE94E}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\16,"ModelId",0x00000000,"{B0D72D21-A908-44F1-B8C5-B169DDF9AFD3}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\17,"ModelId",0x00000000,"{12D3868B-D3DE-4C64-B842-5C0DEC0C39EE}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\18,"ModelId",0x00000000,"{A6D70B55-9313-4788-9222-B54195EAFDEA}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\19,"ModelId",0x00000000,"{47B7618B-84F6-44A4-8614-8FEE426E69BE}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\2,"ModelId",0x00000000,"{6D057538-3F6E-4c14-8F09-00C02B532354}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\20,"ModelId",0x00000000,"{CBC42BEA-913E-410F-9BE5-6042839D9532}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\21,"ModelId",0x00000000,"{B43A12E1-0488-4317-AF15-8B641AD6C72B}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\22,"ModelId",0x00000000,"{20E93108-DD54-4199-A769-8633067ADA23}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\23,"ModelId",0x00000000,"{366FFECC-AC8D-4270-BD1D-573D61819E94}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\24,"ModelId",0x00000000,"{3DAE4127-8299-4D38-8148-94D2ADC03FE1}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\25,"ModelId",0x00000000,"{4CC5FC6F-E34B-443A-8555-8571E6E81A37}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\26,"ModelId",0x00000000,"{F2F06A33-6C61-4299-85FF-DFDB048B3178}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\27,"ModelId",0x00000000,"{EF9B0A9F-A5D7-4F7E-841E-AA8F443A06ED}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\28,"ModelId",0x00000000,"{23C5E41D-B5CA-403B-BD23-C86466B4F3A5}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\29,"ModelId",0x00000000,"{41390ABD-D415-4DB1-BA94-205044E6171C}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\3,"ModelId",0x00000000,"{C0228AE7-A8A7-482a-8D82-79A0A54841E4}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\30,"ModelId",0x00000000,"{E49112CC-931C-40EA-8B52-F9B5F676F100}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\31,"ModelId",0x00000000,"{9A05CD94-3481-4476-B222-539E340B2340}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\32,"ModelId",0x00000000,"{012A08E0-D3E3-46A4-99CB-6572409EE1FA}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\33,"ModelId",0x00000000,"{C67C985E-F22B-4EDF-9632-4878FD16E30A}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\34,"ModelId",0x00000000,"{AC1BEB02-1A71-48E4-9463-022782047CCE}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\35,"ModelId",0x00000000,"{9B4D5831-8871-4B96-A11A-44BE1686064F}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\36,"ModelId",0x00000000,"{F178EA71-2F5D-4575-9760-04B0F9957739}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\37,"ModelId",0x00000000,"{45525F11-2CE6-4889-B9FC-6657DCD30D51}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\38,"ModelId",0x00000000,"{01919C16-AC76-4F96-9978-8746CAF9585E}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\39,"ModelId",0x00000000,"{FC6F04F2-8A84-43C2-AE13-E71017C870D9}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\4,"ModelId",0x00000000,"{EA995F5D-5F3B-488f-96AB-4876CA5B35A7}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\40,"ModelId",0x00000000,"{448EF78D-08BD-4C64-B689-E04FB7D567DA}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\41,"ModelId",0x00000000,"{C2428411-13BD-4614-96ED-F6ED0EDFDB5C}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\42,"ModelId",0x00000000,"{DF5CA4B0-DA28-4A1B-961A-EF9242A0C6E7}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\43,"ModelId",0x00000000,"{60C2A2E5-FC08-4CA4-91CD-50FCECF2019E}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\44,"ModelId",0x00000000,"{42851356-B809-4684-AACE-83C897C1AFB3}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\45,"ModelId",0x00000000,"{E5B62583-0754-41D1-928E-1614DDBF11AB}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\46,"ModelId",0x00000000,"{65980FC6-2CA2-4353-9E70-74AB64F751AE}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\47,"ModelId",0x00000000,"{3A80B080-1FC6-4B9A-8D01-817404E239D6}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\48,"ModelId",0x00000000,"{081E503E-8ED6-4D2A-A004-2762BE9E7A18}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\49,"ModelId",0x00000000,"{50558C0B-E3A5-4AE5-83C4-A670DF5D9464}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\5,"ModelId",0x00000000,"{2B189F4E-6F97-44DD-B0FB-8CCBB5CFD5EF}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\50,"ModelId",0x00000000,"{E4266DC8-94B6-4717-921C-6992650C7DCF}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\51,"ModelId",0x00000000,"{F4510DA1-9F91-45F5-BC6F-FC7062E2BF80}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\52,"ModelId",0x00000000,"{7625B27B-C879-42F4-A9EC-4368BB18BCA9}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\53,"ModelId",0x00000000,"{7BFD060D-7C63-47DB-9C10-0B6869705F98}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\54,"ModelId",0x00000000,"{1ADAB66D-2055-426E-9C74-87B66FEC333D}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\55,"ModelId",0x00000000,"{23078B7E-6D0B-4B2A-97A5-DFF7E506EBEA}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\56,"ModelId",0x00000000,"{A635B616-C2DF-4AA9-85F3-341FAD0AFAC4}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\57,"ModelId",0x00000000,"{5ED2BDE4-1D4F-49DC-A707-D84A46995139}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\58,"ModelId",0x00000000,"{8BC5EC65-5151-4BD4-9531-8A8E2A676887}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\59,"ModelId",0x00000000,"{65A9B922-CADA-493D-BBB8-CDF4EA740D29}"  	; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\6,"ModelId",0x00000000,"{0E580DE0-87AC-4CA7-A756-D5AB1577CB05}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\7,"ModelId",0x00000000,"{A5206326-9538-461B-A610-24B8FDEAD51F}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\8,"ModelId",0x00000000,"{4F122BCF-7849-4833-9962-36F57E4FCBA4}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\0119\Color\9,"ModelId",0x00000000,"{7F1612CF-27E1-4D7F-A72F-08255EFEA8C3}"		; Wireless Mobile Mouse 3500(revised)
+HKR,Parameters\ModelIdsMap\011A,"ModelId",0x00000000,"{2F9483EB-3EEB-4722-BB10-B7A5F6CEA424}"		; Wireless Mobile Mouse 1000(revised)
+HKR,Parameters\ModelIdsMap\011A\Color\1,"ModelId",0x00000000,"{340C8900-C902-46E6-B69A-3C3D61AC905E}"		; Wireless Mobile Mouse 1000(revised)
+HKR,Parameters\ModelIdsMap\0180,"ModelId",0x00000000,"{D7C20029-3487-459f-836A-35A0D577F901}"		; SideWinder X8 Mouse
+HKR,Parameters\ModelIdsMap\0181,"ModelId",0x00000000,"{0A5F6C5A-0AF3-4EE9-AFAD-37B6C0418DC1}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\1,"ModelId",0x00000000,"{719E87D0-1C50-416B-B105-1E38FA9928A4}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\2,"ModelId",0x00000000,"{CEC4D4FE-5F96-4ACB-9D1D-0617A56F82AB}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\3,"ModelId",0x00000000,"{E670B3B8-F5C0-4501-94F8-56AC0F301FAC}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\4,"ModelId",0x00000000,"{66B8A172-302A-4134-8081-F5263983A887}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\5,"ModelId",0x00000000,"{EADE9E08-5562-49E5-BCC9-414B4D090636}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\6,"ModelId",0x00000000,"{E06027BD-9B0B-4C46-8ECE-B17B58038450}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\7,"ModelId",0x00000000,"{8614549E-1E7A-4731-B81C-2E7A6E4D8D8A}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0181\Color\8,"ModelId",0x00000000,"{15DC85E1-7493-4660-A6E4-52FA9F46249F}"		; Arc Touch Mouse
+HKR,Parameters\ModelIdsMap\0182,"ModelId",0x00000000,"{8589F04B-6ADD-4919-9BFE-01EAFA49BC6E}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\1,"ModelId",0x00000000,"{454BF74D-9B7D-4D79-B3A1-055A392B7D8F}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\2,"ModelId",0x00000000,"{1A17B7A7-9460-44AE-A6E7-C2A265ADF003}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\3,"ModelId",0x00000000,"{2F4361E8-95D2-424B-820A-A2A02297F355}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\4,"ModelId",0x00000000,"{818D4474-6305-4F95-8481-31F5FC69F16B}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\5,"ModelId",0x00000000,"{DECBA9D1-DDF8-468C-A526-F6555EAB9B8B}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\6,"ModelId",0x00000000,"{9E997395-372F-479F-B698-05C5145C2B1F}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0182\Color\7,"ModelId",0x00000000,"{350A3904-1450-4BDE-A1A3-D92FC6AD57C8}"		; Explorer Touch Mouse
+HKR,Parameters\ModelIdsMap\0183,"ModelId",0x00000000,"{8742B6DB-9FFB-4B8C-834C-A936565AFF46}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\1,"ModelId",0x00000000,"{5ACFEF99-2F23-46A5-A8B7-A7BD211197F7}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\2,"ModelId",0x00000000,"{971532A4-65A6-4B83-ABD8-7EA851B7F05E}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\3,"ModelId",0x00000000,"{0BD81785-3939-47E2-A842-474403953451}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\4,"ModelId",0x00000000,"{C99C33D4-32D8-45E5-BF1D-CB49F9A7CC65}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\5,"ModelId",0x00000000,"{962D18BF-5CB8-4ED2-ABD1-4722A6A2B425}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\6,"ModelId",0x00000000,"{4A992F72-23C4-410B-AC03-719F42DCB544}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\0183\Color\7,"ModelId",0x00000000,"{81C3463D-82BF-4A24-AC11-E8572E37765F}"		; Explorer Touch Mouse V2
+HKR,Parameters\ModelIdsMap\F000,"ModelId",0x00000000,"{54DC276D-DB45-4D04-8F0A-F7D55E85DD98}"		; Wireless Keyboard 800
+HKR,Parameters\ModelIdsMap\F001,"ModelId",0x00000000,"{D491B933-059A-4181-B481-3A4F9E97DF67}"		; Wireless Keyboard 800 109
+HKR,Parameters\ModelIdsMap\F002,"ModelId",0x00000000,"{CC08AC07-372B-4268-96AD-5457804A8BD0}"		; Wireless Mouse 1000
+HKR,Parameters\ModelIdsMap\F002\Color\1,"ModelId",0x00000000,"{604B8560-1796-40C9-822F-02B07A45E13D}"		; Wireless Mouse 1000
+HKR,Parameters\ModelIdsMap\F003,"ModelId",0x00000000,"{A53811FA-D73A-4A2D-8324-2043C798F43D}"		; Microsoft Sculpt Comfort Keyboard 109
+HKR,Parameters\ModelIdsMap\F004,"ModelId",0x00000000,"{F82B4C05-3B47-4C67-A084-0ADB66A2882A}"		; Microsoft Sculpt Comfort Keyboard
+
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+[SourceDisksFiles]
+dc3d.sys = 1,,
+WdfCoInstaller01011.dll=1,,
+
+;
+;--- DC3D Coinstaller installation ------
+;
+
+[dc3d.NT.CoInstallers]
+AddReg=dc3d_CoInstaller_AddReg
+CopyFiles=dc3d_CoInstaller_CopyFiles
+
+[dc3d_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[dc3d_CoInstaller_CopyFiles]
+WdfCoInstaller01011.dll
+
+[dc3d.NT.Wdf]
+KmdfService = dc3d, dc3d_wdfsect
+
+[dc3d_wdfsect]
+KmdfLibraryVersion = 1.11
+
+
+[Strings]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0404]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0407]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0408]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0409]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.040A]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.040C]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0410]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0411]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0412]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0416]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0804]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
+
+[Strings.0816]
+Microsoft = "Microsoft"
+DiskId1 = "DC3D CD"
+DeviceDesc = "Microsoft Mouse and Keyboard Detection Driver (USB)"
+dc3d.SvcDesc = "MS Hardware Device Detection Driver (USB)"
+GenericParent.SvcDesc="Microsoft USB Generic Parent Driver"
+
